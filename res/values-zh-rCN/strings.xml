@@ -48,6 +48,7 @@
 
     <!-- message box -->
     <string name="message_box_nav_title">留言箱</string>
+    <string name="messagebox_message_search_editText_hint">搜索</string>
 
     <!-- settings tab content activity -->
     <string name="settings_tab7nav_title">设置</string>

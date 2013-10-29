@@ -70,6 +70,8 @@
     <!-- message box -->
     <string name="title_activity_messagebox" translatable="false">MessageboxActivity</string>
     <string name="message_box_nav_title">Message box</string>
+    <string name="messagebox_message_search_editText_hint">search</string>
+    <string name="message_leaver_avatar_imageview_contentdescription" translatable="false">message leaver avatar image view</string>
 
     <!-- settings tab content activity -->
     <string name="title_activity_settings_tab_content" translatable="false">SettingsTabContentActivity</string>
