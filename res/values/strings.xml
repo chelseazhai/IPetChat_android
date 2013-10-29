@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- iPetChat project name -->
+    <string name="app_name">IPetChat</string>
+
+    <!-- iPetChat tab activity -->
+    <string name="title_activity_ipet_chat_tab" translatable="false">IPetChatTabActivity</string>
+
+    <!-- home tab content activity -->
+    <string name="title_activity_home_tab_content" translatable="false">HomeTabContentActivity</string>
+    <string name="home_tab_title">Home</string>
+    <string name="home_nav_title">Sego Pet</string>
+
+    <!-- home tab info content view -->
+    <string name="pet_avatar_imageview_contentdescription" translatable="false">pet avatar image view</string>
+    <string name="pet_sex_imageview_contentdescription" translatable="false">pet sex image view</string>
+    <string name="pet_nickname_textView_hint">Nickname: </string>
+    <string name="pet_breed_prefix">Breed: </string>
+    <string name="pet_age_format">Age: %d months</string>
+    <string name="pet_height_format">Height: %dcm</string>
+    <string name="pet_weight_format">Weight: %dkg</string>
+    <string name="pet_district_prefix">District: </string>
+    <string name="pet_placeUsed2Go_prefix">Place used to go: </string>
+    <string name="pet_location_button_title">Location</string>
+
+    <!-- home tab map content view -->
+    <string name="pet_info_button_title">Info</string>
+
+    <!-- sports and health tab content activity -->
+    <string name="title_activity_sports_health_tab_content" translatable="false">SportsHealthTabContentActivity</string>
+    <string name="sports_health_tab7nav_title">SportsHealth</string>
+
+    <!-- community tab content activity -->
+    <string name="title_activity_community_tab_content" translatable="false">CommunityTabContentActivity</string>
+    <string name="community_tab7nav_title">Community</string>
+    <string name="pet_community_info_item_icon_imageview_contentdescription" translatable="false">pet community info item icon image view</string>
+    <string name="pet_community_info_item_detailindicator_imageview_contentdescription" translatable="false">pet community info item detail indicator image view</string>
+
+    <string-array name="community_info_array">
+        <item>Pet stars</item>
+        <item>Pets nearby</item>
+        <item>Concern</item>
+        <item>Message box</item>
+    </string-array>
+
+    <string name="pet_mood_textview_tag" translatable="false">101</string>
+
+    <!-- pet stars -->
+    <string name="title_activity_pet_stars" translatable="false">PetStarsActivity</string>
+    <string name="petstars_nav_title">Pet Stars</string>
+    <string name="petstar_avatar_imageview_contentdescription" translatable="false">pet star avatar image view</string>
+    <string name="petstar_detail_button_title">more</string>
+
+    <!-- pets nearby -->
+    <string name="title_activity_pets_nearby" translatable="false">PetsNearbyActivity</string>
+    <string name="pets_nearby_nav_title">Pets nearby</string>
+    <string name="pet_nearby_avatar_imageview_contentdescription" translatable="false">pet nearby avatar image view</string>
+    <string name="pet_nearby_sex_imageview_contentdescription" translatable="false">pet nearby sex image view</string>
+    <string name="pet_nearby_distance_format">Within %dm</string>
+    <string name="pet_nearby_detailindicator_imageview_contentdescription" translatable="false">pet nearby detail indicator image view</string>
+
+    <!-- my concern -->
+    <string name="title_activity_my_concern" translatable="false">MyConcernActivity</string>
+    <string name="my_concern_nav_title">My concern</string>
+    <string name="my_concern_pet_search_editText_hint">search with name or phonetics</string>
+    <string name="my_concern_pet_avatar_imageview_contentdescription" translatable="false">my concern pet avatar image view</string>
+    <string name="my_concern_pet_sex_imageview_contentdescription" translatable="false">my concern pet image view</string>
+
+    <!-- message box -->
+    <string name="title_activity_messagebox" translatable="false">MessageboxActivity</string>
+    <string name="message_box_nav_title">Message box</string>
+
+    <!-- settings tab content activity -->
+    <string name="title_activity_settings_tab_content" translatable="false">SettingsTabContentActivity</string>
+    <string name="settings_tab7nav_title">Settings</string>
+    <string name="setting_item_detailindicator_imageview_contentdescription" translatable="false">setting item detail indicator image view</string>
+
+    <string-array name="settings_array">
+        <item>pet info</item>
+        <item>photos</item>
+        <item>account</item>
+        <item>blacklist</item>
+        <item>pet device bind</item>
+    </string-array>
+
+    <string name="account_logout_button_title">Logout</string>
+
+    <!-- others -->
+    <string name="title_activity_pet_info_setting" translatable="false">PetInfoSettingActivity</string>
+    <string name="title_activity_photos_setting" translatable="false">PhotosSettingActivity</string>
+    <string name="title_activity_pet_device_bind" translatable="false">PetDeviceBindActivity</string>
+    <string name="title_activity_account_setting4_first" translatable="false">AccountSetting4FirstActivity</string>
+    <string name="title_activity_account_setting4_switch" translatable="false">AccountSetting4SwitchActivity</string>
+    <string name="title_activity_account_login" translatable="false">AccountLoginActivity</string>
+    <string name="title_activity_account_register" translatable="false">AccountRegisterActivity</string>
+    <string name="title_activity_account_reset_pwd" translatable="false">AccountResetPWDActivity</string>
+    <string name="title_activity_account_info_setting" translatable="false">AccountInfoSettingActivity</string>
+    <string name="title_activity_black_list" translatable="false">BlackListActivity</string>
+
+</resources>

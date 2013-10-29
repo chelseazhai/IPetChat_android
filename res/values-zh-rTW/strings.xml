@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- iPetChat project name -->
+    <string name="app_name">赛果宠物</string>
+
+    <!-- home tab content activity -->
+    <string name="home_tab_title">首页</string>
+    <string name="home_nav_title">赛果宠物</string>
+
+    <!-- home tab info content view -->
+    <string name="pet_nickname_textView_hint">昵称：</string>
+    <string name="pet_breed_prefix">品种：</string>
+    <string name="pet_age_format">年龄：%d个月</string>
+    <string name="pet_height_format">身高：%d厘米</string>
+    <string name="pet_weight_format">体重：%d公斤</string>
+    <string name="pet_district_prefix">地区：</string>
+    <string name="pet_placeUsed2Go_prefix">常去玩的地方：</string>
+    <string name="pet_location_button_title">定位</string>
+
+    <!-- home tab map content view -->
+    <string name="pet_info_button_title">宠物信息</string>
+
+    <!-- sports and health tab content activity -->
+    <string name="sports_health_tab7nav_title">运动健康</string>
+
+    <!-- community tab content activity -->
+    <string name="community_tab7nav_title">社区</string>
+
+    <string-array name="community_info_array">
+        <item>宠物之星推荐</item>
+        <item>附近的宠物</item>
+        <item>我的关注</item>
+        <item>留言箱</item>
+    </string-array>
+
+    <!-- pet stars -->
+    <string name="petstars_nav_title">宠物之星</string>
+    <string name="petstar_detail_button_title">了解更多</string>
+
+    <!-- pets nearby -->
+    <string name="pets_nearby_nav_title">附近的宠物</string>
+    <string name="pet_nearby_distance_format">%d米以内</string>
+
+    <!-- my concern -->
+    <string name="my_concern_nav_title">我的关注</string>
+    <string name="my_concern_pet_search_editText_hint">按名字或则拼音搜索</string>
+
+    <!-- message box -->
+    <string name="message_box_nav_title">留言箱</string>
+
+    <!-- settings tab content activity -->
+    <string name="settings_tab7nav_title">设置</string>
+
+    <string-array name="settings_array">
+        <item>宠物档案</item>
+        <item>相册</item>
+        <item>账号</item>
+        <item>黑名单管理</item>
+        <item>绑定硬件设备</item>
+    </string-array>
+
+    <string name="account_logout_button_title">退出登录</string>
+
+</resources>

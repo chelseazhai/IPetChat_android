@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tab7tabcontent.HomeTabContentActivity" >
+
+    <include
+        android:id="@+id/pet_info_viewGroup"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/home_tab_info_content_view_layout" />
+
+    <ViewStub
+        android:id="@+id/pet_location_viewStub"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout="@layout/home_tab_location_content_view_layout" />
+
+</FrameLayout>

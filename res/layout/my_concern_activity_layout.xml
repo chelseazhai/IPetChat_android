@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".petcommunity.MyConcernActivity" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/middle_gray" >
+
+        <EditText
+            android:id="@+id/my_concern_pet_search_editText"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/my_concern_pet_search_edittext_bg"
+            android:drawableLeft="@drawable/ic_action_search"
+            android:ellipsize="end"
+            android:hint="@string/my_concern_pet_search_editText_hint"
+            android:inputType="text"
+            android:maxLength="14"
+            android:singleLine="true"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ListView
+            android:id="@+id/my_concern_pet_listView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:fadingEdge="none"
+            android:headerDividersEnabled="false"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none" >
+        </ListView>
+    </FrameLayout>
+
+</LinearLayout>

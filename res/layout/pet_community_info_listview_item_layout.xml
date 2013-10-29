@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pet_community_info_item_bg"
+    android:paddingBottom="10dp"
+    android:paddingLeft="18dp"
+    android:paddingRight="8dp"
+    android:paddingTop="10dp" >
+
+    <ImageView
+        android:id="@+id/pet_community_info_item_icon_imageView"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/pet_community_info_item_icon_imageview_contentdescription" />
+
+    <ImageView
+        android:id="@+id/pet_community_info_item_detailInfoIndicator_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/pet_community_info_item_detailindicator_imageview_contentdescription"
+        android:src="@drawable/img_listview_item_detail_large_indicator" />
+
+    <TextView
+        android:id="@+id/pet_community_info_item_title_textView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@id/pet_community_info_item_detailInfoIndicator_imageView"
+        android:layout_toRightOf="@id/pet_community_info_item_icon_imageView"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18sp" />
+
+</RelativeLayout>

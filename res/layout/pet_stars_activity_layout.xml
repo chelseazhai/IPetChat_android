@@ -1,0 +1,24 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".petcommunity.PetStarsActivity" >
+
+    <ListView
+        android:id="@+id/petStars_listView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:dividerHeight="4dp"
+        android:fadingEdge="none"
+        android:headerDividersEnabled="false"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" >
+    </ListView>
+
+</FrameLayout>

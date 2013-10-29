@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- black transparent color -->
+
+
+    <!-- pure color -->
+    <color name="light_dark_green">#21c007</color>
+    <color name="cyan_blue">#63bdf6</color>
+    <color name="middle_gray">#aaaaab</color>
+    <color name="light_middle_gray">#bcbcbd</color>
+    <color name="light_light_middle_gray">#cacacb</color>
+    <color name="light_gray">#d6d6d6</color>
+    <color name="gainsboro">#dcdcdc</color>
+    <color name="light_light_gray">#efeff0</color>
+
+</resources>
