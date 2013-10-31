@@ -6,8 +6,13 @@ import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -29,6 +34,9 @@ public class SportsHealthTabContentActivity extends IPetChatNavigationActivity {
 	// pet info tableRow data keys
 	private static final String PET_INFO_LABEL_KEY = "pet_info_label_key";
 	private static final String PET_INFO_VALUE_KEY = "pet_info_value_key";
+
+	// pet sports info history segment view
+	private View _mPetSportsInfoHistorySegmentView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -153,8 +161,69 @@ public class SportsHealthTabContentActivity extends IPetChatNavigationActivity {
 
 		}
 
+		// set pet sports info segment radioGroup
+		((RadioGroup) findViewById(R.id.pet_sportsInfo_segment_radioGroup))
+				.setOnCheckedChangeListener(new PetSportsInfoSegmentRadioGroupOnCheckedChangeListener());
+
+		// get pet sports score progress
+		int _petSportsScoreProgress = JSONUtils.getIntegerFromJSONObject(
+				demo_pet_JSONInfo, "sportsScore");
+
+		// set pet sports score
+		((ProgressBar) findViewById(R.id.pet_sportsScore_progressBar))
+				.setProgress(_petSportsScoreProgress);
+		((TextView) findViewById(R.id.pet_sportsScore_textView)).setText(""
+				+ _petSportsScoreProgress);
+
 		//
 		//
+	}
+
+	// inner class
+	// pet sports info segment radioGroup on checked change listener
+	class PetSportsInfoSegmentRadioGroupOnCheckedChangeListener implements
+			OnCheckedChangeListener {
+
+		@Override
+		public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+			// get pet today's sports info view
+			View _petTodaySportsInfoView = findViewById(R.id.pet_sportsInfo_todaySegment_viewGroup);
+
+			// check checked segment item radioButton id
+			switch (checkedId) {
+			case R.id.pet_sportsInfo_today_segment_radio:
+				// show pet today sports info view if needed
+				if (View.VISIBLE != _petTodaySportsInfoView.getVisibility()) {
+					_petTodaySportsInfoView.setVisibility(View.VISIBLE);
+				}
+
+				// hide pet history sports info view
+				_mPetSportsInfoHistorySegmentView.setVisibility(View.GONE);
+				break;
+
+			case R.id.pet_sportsInfo_history_segment_radio:
+			default:
+				// hide pet today sports info view
+				_petTodaySportsInfoView.setVisibility(View.GONE);
+
+				// show pet history sports info view if needed
+				if (null == _mPetSportsInfoHistorySegmentView) {
+					// inflate pet history sports info viewStub
+					_mPetSportsInfoHistorySegmentView = ((ViewStub) findViewById(R.id.pet_sportsInfo_historySegment_viewStub))
+							.inflate();
+
+					//
+				} else {
+					if (View.VISIBLE != _mPetSportsInfoHistorySegmentView
+							.getVisibility()) {
+						_mPetSportsInfoHistorySegmentView
+								.setVisibility(View.VISIBLE);
+					}
+				}
+				break;
+			}
+		}
+
 	}
 
 }
