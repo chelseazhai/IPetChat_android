@@ -9,7 +9,6 @@
     <string name="home_nav_title">赛果宠物</string>
 
     <!-- home tab info content view -->
-    <string name="pet_nickname_textView_hint">昵称：</string>
     <string name="pet_breed_prefix">品种：</string>
     <string name="pet_age_format">年龄：%d个月</string>
     <string name="pet_height_format">身高：%d厘米</string>
@@ -23,6 +22,15 @@
 
     <!-- sports and health tab content activity -->
     <string name="sports_health_tab7nav_title">运动健康</string>
+    <string name="pet_breed_label">品种</string>
+    <string name="pet_age_label">年龄</string>
+    <string name="pet_age_value_format">%d个月</string>
+    <string name="pet_height_label">身高</string>
+    <string name="pet_height_value_format">%d厘米</string>
+    <string name="pet_weight_label">体重</string>
+    <string name="pet_weight_value_format">%d公斤</string>
+    <string name="pet_sportsinfo_today_segment_title">今天</string>
+    <string name="pet_sportsinfo_history_segment_title">历史</string>
 
     <!-- community tab content activity -->
     <string name="community_tab7nav_title">社区</string>

@@ -56,11 +56,8 @@ public class HomeTabContentActivity extends IPetChatNavigationActivity {
 				.setImageResource(demo_pet_avatar);
 
 		// set pet nickname
-		((TextView) findViewById(R.id.pet_nickname_textView))
-				.setText(getResources().getString(
-						R.string.pet_nickname_textView_hint)
-						+ JSONUtils.getStringFromJSONObject(demo_pet_JSONInfo,
-								"nickname"));
+		((TextView) findViewById(R.id.pet_nickname_textView)).setText(JSONUtils
+				.getStringFromJSONObject(demo_pet_JSONInfo, "nickname"));
 
 		// set pet sex
 		((ImageView) findViewById(R.id.pet_sex_imageView))
@@ -97,22 +94,26 @@ public class HomeTabContentActivity extends IPetChatNavigationActivity {
 				.add(getResources().getString(R.string.pet_breed_prefix)
 						+ JSONUtils.getStringFromJSONObject(demo_pet_JSONInfo,
 								"breed"));
+
 		// age
 		_petOtherInfoList.add(String.format(
 				getResources().getString(R.string.pet_age_format),
 				JSONUtils.getIntegerFromJSONObject(demo_pet_JSONInfo, "age")));
+
 		// height
 		_petOtherInfoList
 				.add(String.format(
 						getResources().getString(R.string.pet_height_format),
 						JSONUtils.getIntegerFromJSONObject(demo_pet_JSONInfo,
 								"height")));
+
 		// weight
 		_petOtherInfoList
 				.add(String.format(
 						getResources().getString(R.string.pet_weight_format),
 						JSONUtils.getIntegerFromJSONObject(demo_pet_JSONInfo,
 								"weight")));
+
 		// district
 		_petOtherInfoList.add(getResources().getString(
 				R.string.pet_district_prefix)

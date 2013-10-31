@@ -40,21 +40,20 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical" >
+                android:layout_weight="1" >
 
                 <TextView
                     android:id="@+id/pet_nickname_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/pet_sex_imageView"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@id/pet_nickname_textView"
                     android:contentDescription="@string/pet_sex_imageview_contentdescription" />
@@ -63,15 +62,14 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginTop="6dp"
-                android:layout_weight="1.6"
-                android:gravity="center_vertical" >
+                android:layout_weight="1" >
 
                 <TextView
                     android:id="@+id/pet_deviceBattery_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:text="" />
 
@@ -82,7 +80,7 @@
                     android:layout_height="fill_parent"
                     android:layout_toLeftOf="@id/pet_deviceBattery_textView"
                     android:max="100"
-                    android:progressDrawable="@drawable/device_battery_progressbar_progress" />
+                    android:progressDrawable="@drawable/device_battery_progressbar_layer" />
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
@@ -117,7 +115,7 @@
             android:layout_height="fill_parent"
             android:layout_toLeftOf="@id/pet_sportsScore_textView"
             android:max="100"
-            android:progressDrawable="@drawable/pet_sports_score_progressbar_progress" />
+            android:progressDrawable="@drawable/pet_sports_score_progressbar_layer" />
     </RelativeLayout>
 
     <ListView
