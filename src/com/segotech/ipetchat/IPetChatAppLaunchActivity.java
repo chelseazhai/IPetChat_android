@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import com.richitec.commontoolkit.activityextension.AppLaunchActivity;
-import com.segotech.ipetchat.tab7tabcontent.IPetChatTabActivity;
+import com.segotech.ipetchat.account.AccountSetting4FirstActivity;
 
 public class IPetChatAppLaunchActivity extends AppLaunchActivity {
 
@@ -16,8 +16,11 @@ public class IPetChatAppLaunchActivity extends AppLaunchActivity {
 
 	@Override
 	public Intent intentActivity() {
-		// go to iPetChat tab activity
-		return new Intent(this, IPetChatTabActivity.class);
+		// // go to iPetChat tab activity
+		// return new Intent(this, IPetChatTabActivity.class);
+
+		// go to account setting for first activity
+		return new Intent(this, AccountSetting4FirstActivity.class);
 	}
 
 	@Override

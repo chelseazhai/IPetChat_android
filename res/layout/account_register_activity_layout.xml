@@ -1,7 +1,25 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".account.AccountRegisterActivity" >
 
-</RelativeLayout>
+    <include
+        android:id="@+id/account_register_step1_linearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/account_register_activity_step1_layout" />
+
+    <ViewStub
+        android:id="@+id/account_register_step2_viewStub"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/account_register_activity_step2_layout" />
+
+    <ViewStub
+        android:id="@+id/account_register_step3_viewStub"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/account_register_activity_step3_layout" />
+
+</FrameLayout>
