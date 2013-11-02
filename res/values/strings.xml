@@ -17,8 +17,8 @@
     <string name="pet_sex_imageview_contentdescription" translatable="false">pet sex image view</string>
     <string name="pet_breed_prefix">Breed: </string>
     <string name="pet_age_format">Age: %d months</string>
-    <string name="pet_height_format">Height: %dcm</string>
-    <string name="pet_weight_format">Weight: %dkg</string>
+    <string name="pet_height_format">Height: %.2fcm</string>
+    <string name="pet_weight_format">Weight: %.2fkg</string>
     <string name="pet_district_prefix">District: </string>
     <string name="pet_placeUsed2Go_prefix">Place used to go: </string>
     <string name="pet_location_button_title">Location</string>
@@ -33,9 +33,9 @@
     <string name="pet_age_label">Age</string>
     <string name="pet_age_value_format">%d months</string>
     <string name="pet_height_label">Height</string>
-    <string name="pet_height_value_format">%dcm</string>
+    <string name="pet_height_value_format">%.2fcm</string>
     <string name="pet_weight_label">Weight</string>
-    <string name="pet_weight_value_format">%dkg</string>
+    <string name="pet_weight_value_format">%.2fkg</string>
     <string name="pet_sportsinfo_today_segment_title">Today</string>
     <string name="pet_sportsinfo_history_segment_title">History</string>
 

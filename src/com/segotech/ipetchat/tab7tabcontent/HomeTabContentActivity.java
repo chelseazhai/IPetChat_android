@@ -27,7 +27,7 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 	// test data
 	// test by ares
 	private final JSONObject demo_pet_JSONInfo = JSONUtils
-			.toJSONObject("{\"avatar\":1, \"nickname\":\"乐乐\", \"sex\":1, \"deviceBattery\":85, \"sportsScore\":90, \"breed\":\"金毛\", \"age\":24, \"height\":50, \"weight\":25, \"district\":\"江苏南京\", \"placeUsed2Go\":\"玄武湖公园\"}");
+			.toJSONObject("{\"avatar\":1, \"nickname\":\"乐乐\", \"sex\":1, \"deviceBattery\":85, \"sportsScore\":90, \"breed\":\"金毛\", \"age\":24, \"height\":50.0, \"weight\":25.0, \"district\":\"江苏南京\", \"placeUsed2Go\":\"玄武湖公园\"}");
 	private final int demo_pet_avatar = R.drawable.img_demo_pet;
 
 	// pet location view
@@ -104,14 +104,14 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 		_petOtherInfoList
 				.add(String.format(
 						getResources().getString(R.string.pet_height_format),
-						JSONUtils.getIntegerFromJSONObject(demo_pet_JSONInfo,
+						JSONUtils.getDoubleFromJSONObject(demo_pet_JSONInfo,
 								"height")));
 
 		// weight
 		_petOtherInfoList
 				.add(String.format(
 						getResources().getString(R.string.pet_weight_format),
-						JSONUtils.getIntegerFromJSONObject(demo_pet_JSONInfo,
+						JSONUtils.getDoubleFromJSONObject(demo_pet_JSONInfo,
 								"weight")));
 
 		// district

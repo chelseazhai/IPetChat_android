@@ -11,8 +11,8 @@
     <!-- home tab info content view -->
     <string name="pet_breed_prefix">品种：</string>
     <string name="pet_age_format">年龄：%d个月</string>
-    <string name="pet_height_format">身高：%d厘米</string>
-    <string name="pet_weight_format">体重：%d公斤</string>
+    <string name="pet_height_format">身高：%.2f厘米</string>
+    <string name="pet_weight_format">体重：%.2f公斤</string>
     <string name="pet_district_prefix">地区：</string>
     <string name="pet_placeUsed2Go_prefix">常去玩的地方：</string>
     <string name="pet_location_button_title">定位</string>
@@ -26,9 +26,9 @@
     <string name="pet_age_label">年龄</string>
     <string name="pet_age_value_format">%d个月</string>
     <string name="pet_height_label">身高</string>
-    <string name="pet_height_value_format">%d厘米</string>
+    <string name="pet_height_value_format">%.2f厘米</string>
     <string name="pet_weight_label">体重</string>
-    <string name="pet_weight_value_format">%d公斤</string>
+    <string name="pet_weight_value_format">%.2f公斤</string>
     <string name="pet_sportsinfo_today_segment_title">今天</string>
     <string name="pet_sportsinfo_history_segment_title">历史</string>
 
