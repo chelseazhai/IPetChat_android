@@ -11,11 +11,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.richitec.commontoolkit.activityextension.NavigationActivity;
 import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
+import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 
-public class MessageboxActivity extends NavigationActivity {
+public class MessageboxActivity extends IPetChatNavigationActivity {
 
 	// test data
 	// test by ares

@@ -18,9 +18,10 @@ import android.widget.TextView;
 
 import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
-import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
 
-public class SportsHealthTabContentActivity extends IPetChatNavigationActivity {
+public class SportsHealthTabContentActivity extends
+		IPetChatRootNavigationActivity {
 
 	private static final String LOG_TAG = SportsHealthTabContentActivity.class
 			.getCanonicalName();

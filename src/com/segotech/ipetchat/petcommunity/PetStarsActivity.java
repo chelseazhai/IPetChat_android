@@ -13,11 +13,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
 
-import com.richitec.commontoolkit.activityextension.NavigationActivity;
 import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
+import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 
-public class PetStarsActivity extends NavigationActivity {
+public class PetStarsActivity extends IPetChatNavigationActivity {
 
 	// test data
 	// test by ares

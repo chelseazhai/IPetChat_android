@@ -20,13 +20,13 @@ import android.widget.TextView;
 
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
 import com.segotech.ipetchat.R;
-import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
 import com.segotech.ipetchat.petcommunity.MessageboxActivity;
 import com.segotech.ipetchat.petcommunity.MyConcernActivity;
 import com.segotech.ipetchat.petcommunity.PetStarsActivity;
 import com.segotech.ipetchat.petcommunity.PetsNearbyActivity;
 
-public class CommunityTabContentActivity extends IPetChatNavigationActivity {
+public class CommunityTabContentActivity extends IPetChatRootNavigationActivity {
 
 	// pet community info item icon resource id array
 	private final int[] PET_COMMUNITY_INFO_ICONS = new int[] {

@@ -18,9 +18,9 @@ import android.widget.TextView;
 
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
 import com.segotech.ipetchat.R;
-import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
 
-public class SettingsTabContentActivity extends IPetChatNavigationActivity {
+public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

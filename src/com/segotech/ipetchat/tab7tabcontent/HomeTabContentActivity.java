@@ -20,9 +20,9 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
-import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
 
-public class HomeTabContentActivity extends IPetChatNavigationActivity {
+public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 
 	// test data
 	// test by ares

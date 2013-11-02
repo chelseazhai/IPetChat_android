@@ -15,7 +15,6 @@ import android.view.MotionEvent;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-import com.richitec.commontoolkit.activityextension.NavigationActivity;
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
 import com.richitec.commontoolkit.customcomponent.CTToast;
 import com.richitec.commontoolkit.customcomponent.ListViewQuickAlphabetBar;
@@ -23,8 +22,9 @@ import com.richitec.commontoolkit.customcomponent.ListViewQuickAlphabetBar.OnTou
 import com.richitec.commontoolkit.utils.JSONUtils;
 import com.richitec.commontoolkit.utils.PinyinUtils;
 import com.segotech.ipetchat.R;
+import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 
-public class MyConcernActivity extends NavigationActivity {
+public class MyConcernActivity extends IPetChatNavigationActivity {
 
 	// test data
 	// test by ares
