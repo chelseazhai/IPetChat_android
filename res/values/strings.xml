@@ -4,6 +4,34 @@
     <!-- iPetChat project name -->
     <string name="app_name">IPetChat</string>
 
+    <!-- account setting -->
+    <!-- account setting for first enter -->
+    <string name="title_activity_account_setting4_first" translatable="false">AccountSetting4FirstActivity</string>
+    <string name="application_launch_imageview_contentdescription" translatable="false">application launch image view</string>
+    <string name="account_register_button_title">Register</string>
+    <string name="account_login_button_title">Login</string>
+
+    <!-- account register -->
+    <string name="title_activity_account_register" translatable="false">AccountRegisterActivity</string>
+    <string name="account_register_nav_title_text">Account Register</string>
+    <!-- step 1 -->
+    <string name="register_step1_textView_text">Step1</string>
+    <string name="register_step1_description">Input phone number to retrieve verification code</string>
+    <string name="registerPhone_editText_hint">Input register phone number</string>
+    <string name="get_verificationCode_btn_title">Get Verification Code</string>
+    <string name="register_step1_comment">(Your phone number is used for authentication only, we assure that we won\'t send junk message to you.)</string>
+    <!-- step 2 -->
+    <string name="register_step2_textView_text">Step2</string>
+    <string name="register_step2_description">Input verification code and press \'Next\' to verify</string>
+    <string name="verificationCode_verify_editText_hint">Input verification code</string>
+    <string name="verify_verificationCode_btn_title">Next</string>
+    <!-- step3 -->
+    <string name="register_step3_textView_text">Step3</string>
+    <string name="register_step3_description">Input password and confirmation to finish the register</string>
+    <string name="pwd_editText_hint">Input password</string>
+    <string name="confirmationPwd_editText_hint">Input confirmation password</string>
+    <string name="register_finish_btn_title">Finish Register</string>
+
     <!-- iPetChat tab activity -->
     <string name="title_activity_ipet_chat_tab" translatable="false">IPetChatTabActivity</string>
 
@@ -134,10 +162,8 @@
     <string name="title_activity_pet_info_setting" translatable="false">PetInfoSettingActivity</string>
     <string name="title_activity_photos_setting" translatable="false">PhotosSettingActivity</string>
     <string name="title_activity_pet_device_bind" translatable="false">PetDeviceBindActivity</string>
-    <string name="title_activity_account_setting4_first" translatable="false">AccountSetting4FirstActivity</string>
     <string name="title_activity_account_setting4_switch" translatable="false">AccountSetting4SwitchActivity</string>
     <string name="title_activity_account_login" translatable="false">AccountLoginActivity</string>
-    <string name="title_activity_account_register" translatable="false">AccountRegisterActivity</string>
     <string name="title_activity_account_reset_pwd" translatable="false">AccountResetPWDActivity</string>
     <string name="title_activity_account_info_setting" translatable="false">AccountInfoSettingActivity</string>
     <string name="title_activity_black_list" translatable="false">BlackListActivity</string>

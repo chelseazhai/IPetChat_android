@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- pet chat remote background server url -->
+    <string name="server_url" translatable="false">http://www.segopet.com/segopet</string>
+
+    <!-- account register -->
+    <string name="get_registerPhone_verification_code_url" translatable="false">/login/home_!getyanzhengma.action</string>
+    <string name="verify_verificationCode_url" translatable="false">/user/checkPhoneCode</string>
+    <string name="account_register_url" translatable="false">/user/regUser</string>
+
+</resources>
