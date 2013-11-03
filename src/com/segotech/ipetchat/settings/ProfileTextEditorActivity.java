@@ -42,15 +42,18 @@ public class ProfileTextEditorActivity extends IPetChatNavigationActivity implem
                 break;
             case GlobalConstant.EditType.EDIT_AGE:
                 setTitle(R.string.age_setting);
-                editText.setInputType(InputType.TYPE_NUMBER_VARIATION_NORMAL);
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
+                break;
+            case GlobalConstant.EditType.EDIT_COLOR:
+                setTitle(R.string.color_setting);
                 break;
             case GlobalConstant.EditType.EDIT_HEIGHT:
                 setTitle(R.string.height_setting);
-                editText.setInputType(InputType.TYPE_NUMBER_VARIATION_NORMAL);
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
                 break;
             case GlobalConstant.EditType.EDIT_WEIGHT:
                 setTitle(R.string.weight_setting);
-                editText.setInputType(InputType.TYPE_NUMBER_VARIATION_NORMAL);
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
                 break;
             case GlobalConstant.EditType.EDIT_AREA:
                 setTitle(R.string.area_setting);

@@ -11,6 +11,9 @@ public class GlobalConstant {
         public static final int EDIT_WEIGHT = 6;
         public static final int EDIT_AREA = 7;
         public static final int EDIT_PLAY_PLACE = 8;
+        public static final int CAPTURE_PHOTO = 9;
+        public static final int SELECT_PHOTO = 10;
+        public static final int CROP_IMAGE = 11;
 
     }
 

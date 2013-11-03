@@ -66,13 +66,6 @@
     <string name="account">账号</string>
     <string name="blacklist_manage">黑名单管理</string>
     <string name="bind_device">绑定硬件设备</string>
-    <string-array name="settings_array">
-        <item>@string/pet_profile</item>
-        <item>@string/gallery</item>
-        <item>@string/account</item>
-        <item>@string/blacklist_manage</item>
-        <item>@string/bind_device</item>
-    </string-array>
 
     <string name="account_logout_button_title">退出登录</string>
 
@@ -87,8 +80,29 @@
     <string name="ok">确定</string>
     <string name="nickname_setting">昵称设置</string>
     <string name="age_setting">年龄设置</string>
+    <string name="color_setting">颜色设置</string>
     <string name="height_setting">身高设置</string>
     <string name="weight_setting">体重设置</string>
     <string name="area_setting">地区设置</string>
     <string name="play_place_setting">常玩的地方</string>
+    <string name="capture_photo">拍照</string>
+    <string name="upload">本地上传</string>
+    <string name="select_photo">选择照片</string>
+    <string name="photo_taken_failed">请重新获取照片</string>
+    <string name="cancel">取消</string>
+    <!-- Breed -->
+    <string name="golden_retriever">黄金猎犬</string>
+    <string name="husky">哈士奇</string>
+    <string name="teddy">贵宾（泰迪）</string>
+    <string name="samoyed">萨摩耶</string>
+    <string name="pomeranian">博美</string>
+    <string name="schnauzer">雪纳瑞</string>
+    <string name="rough_collie">苏格兰牧羊犬</string>
+    <string name="chow">松狮</string>
+    <string name="pekingese">京巴</string>
+    <string name="other_dog">其它犬种</string>
+
+    <!-- Sex -->
+    <string name="male">公</string>
+    <string name="female">母</string>
 </resources>

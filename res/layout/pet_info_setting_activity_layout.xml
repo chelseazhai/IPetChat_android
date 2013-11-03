@@ -179,4 +179,10 @@
             android:layout_height="match_parent"
             android:layout_width="60dp" />
     </LinearLayout>
+    <ViewStub
+        android:id="@+id/upload_image_dlg"
+        android:visibility="gone"
+        android:layout="@layout/layout_upload_image_dlg"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
 </RelativeLayout>

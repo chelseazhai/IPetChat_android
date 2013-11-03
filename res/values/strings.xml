@@ -91,13 +91,6 @@
     <string name="account">Account</string>
     <string name="blacklist_manage">Black List</string>
     <string name="bind_device">Bind Device</string>
-    <string-array name="settings_array">
-        <item>@string/pet_profile</item>
-        <item>@string/gallery</item>
-        <item>@string/account</item>
-        <item>@string/blacklist_manage</item>
-        <item>@string/bind_device</item>
-    </string-array>
 
     <string name="account_logout_button_title">Logout</string>
 
@@ -112,10 +105,31 @@
     <string name="ok">OK</string>
     <string name="nickname_setting">Nickname</string>
     <string name="age_setting">Age</string>
+    <string name="color_setting">Color</string>
     <string name="height_setting">Height</string>
     <string name="weight_setting">Weight</string>
     <string name="area_setting">Area</string>
     <string name="play_place_setting">Place Often to Play</string>
+    <string name="capture_photo">Capture Photo</string>
+    <string name="upload">Upload</string>
+    <string name="select_photo">Select Photo</string>
+    <string name="cancel">Cancel</string>
+    <!-- Breed -->
+    <string name="golden_retriever">Golden Retriever</string>
+    <string name="husky">Husky</string>
+    <string name="teddy">Teddy</string>
+    <string name="samoyed">Samoyed</string>
+    <string name="pomeranian">Pomeranian</string>
+    <string name="schnauzer">Schnauzer</string>
+    <string name="rough_collie">Rough Collie</string>
+    <string name="chow">Chow</string>
+    <string name="pekingese">Pekingese</string>
+    <string name="other_dog">Other Dog</string>
+
+    <!-- Sex -->
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
     <!-- others -->
     <string name="title_activity_pet_info_setting" translatable="false">PetInfoSettingActivity</string>
     <string name="title_activity_photos_setting" translatable="false">PhotosSettingActivity</string>

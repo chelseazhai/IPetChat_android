@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dog_breed">
+        <item>@string/golden_retriever</item>
+        <item>@string/husky</item>
+        <item>@string/teddy</item>
+        <item>@string/samoyed</item>
+        <item>@string/pomeranian</item>
+        <item>@string/schnauzer</item>
+        <item>@string/rough_collie</item>
+        <item>@string/chow</item>
+        <item>@string/pekingese</item>
+        <item>@string/other_dog</item>
+    </string-array>
+
+    <string-array name="settings_array">
+        <item>@string/pet_profile</item>
+        <item>@string/gallery</item>
+        <item>@string/account</item>
+        <item>@string/blacklist_manage</item>
+        <item>@string/bind_device</item>
+    </string-array>
+
+    <string-array name="sex">
+        <item>@string/male</item>
+        <item>@string/female</item>
+    </string-array>
+</resources>

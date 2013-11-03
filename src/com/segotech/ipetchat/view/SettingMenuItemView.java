@@ -15,7 +15,7 @@ import com.segotech.ipetchat.R;
 public class SettingMenuItemView extends RelativeLayout {
     private String title;
     private String status;
-
+    private String value = "";
     public SettingMenuItemView(Context context) {
         super(context);
         init(context, null);
@@ -67,13 +67,21 @@ public class SettingMenuItemView extends RelativeLayout {
         statusTV.setText(status);
     }
 
-    public void setValue(String value) {
+    public void setValueText(String value) {
         TextView valueTv = (TextView) findViewById(R.id.value);
         valueTv.setText(value);
     }
 
-    public String getValue() {
+    public String getValueText() {
         TextView valueTv = (TextView) findViewById(R.id.value);
         return valueTv.getText().toString().trim();
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }
