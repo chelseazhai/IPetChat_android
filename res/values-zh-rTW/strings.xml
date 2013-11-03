@@ -61,14 +61,34 @@
     <!-- settings tab content activity -->
     <string name="settings_tab7nav_title">设置</string>
 
+    <string name="pet_profile">宠物档案</string>
+    <string name="gallery">相册</string>
+    <string name="account">账号</string>
+    <string name="blacklist_manage">黑名单管理</string>
+    <string name="bind_device">绑定硬件设备</string>
     <string-array name="settings_array">
-        <item>宠物档案</item>
-        <item>相册</item>
-        <item>账号</item>
-        <item>黑名单管理</item>
-        <item>绑定硬件设备</item>
+        <item>@string/pet_profile</item>
+        <item>@string/gallery</item>
+        <item>@string/account</item>
+        <item>@string/blacklist_manage</item>
+        <item>@string/bind_device</item>
     </string-array>
 
     <string name="account_logout_button_title">退出登录</string>
 
+    <!-- Pet ProfileItemSelectActivity -->
+    <string name="avatar">头像</string>
+    <string name="sex">性别</string>
+    <string name="not_set">未设置</string>
+    <string name="nickname">昵称</string>
+    <string name="color">颜色</string>
+    <string name="back">返回</string>
+    <string name="save">保存</string>
+    <string name="ok">确定</string>
+    <string name="nickname_setting">昵称设置</string>
+    <string name="age_setting">年龄设置</string>
+    <string name="height_setting">身高设置</string>
+    <string name="weight_setting">体重设置</string>
+    <string name="area_setting">地区设置</string>
+    <string name="play_place_setting">常玩的地方</string>
 </resources>

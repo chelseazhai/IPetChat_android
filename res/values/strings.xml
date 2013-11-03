@@ -86,16 +86,36 @@
     <string name="settings_tab7nav_title">Settings</string>
     <string name="setting_item_detailindicator_imageview_contentdescription" translatable="false">setting item detail indicator image view</string>
 
+    <string name="pet_profile">Pet Profile</string>
+    <string name="gallery">Photo Gallery</string>
+    <string name="account">Account</string>
+    <string name="blacklist_manage">Black List</string>
+    <string name="bind_device">Bind Device</string>
     <string-array name="settings_array">
-        <item>pet info</item>
-        <item>photos</item>
-        <item>account</item>
-        <item>blacklist</item>
-        <item>pet device bind</item>
+        <item>@string/pet_profile</item>
+        <item>@string/gallery</item>
+        <item>@string/account</item>
+        <item>@string/blacklist_manage</item>
+        <item>@string/bind_device</item>
     </string-array>
 
     <string name="account_logout_button_title">Logout</string>
 
+    <!-- Pet ProfileItemSelectActivity -->
+    <string name="avatar">Avatar</string>
+    <string name="sex">Sex</string>
+    <string name="not_set">Not Set</string>
+    <string name="nickname">Nickname</string>
+    <string name="color">Color</string>
+    <string name="back">Back</string>
+    <string name="save">Save</string>
+    <string name="ok">OK</string>
+    <string name="nickname_setting">Nickname</string>
+    <string name="age_setting">Age</string>
+    <string name="height_setting">Height</string>
+    <string name="weight_setting">Weight</string>
+    <string name="area_setting">Area</string>
+    <string name="play_place_setting">Place Often to Play</string>
     <!-- others -->
     <string name="title_activity_pet_info_setting" translatable="false">PetInfoSettingActivity</string>
     <string name="title_activity_photos_setting" translatable="false">PhotosSettingActivity</string>
@@ -107,5 +127,4 @@
     <string name="title_activity_account_reset_pwd" translatable="false">AccountResetPWDActivity</string>
     <string name="title_activity_account_info_setting" translatable="false">AccountInfoSettingActivity</string>
     <string name="title_activity_black_list" translatable="false">BlackListActivity</string>
-
 </resources>
