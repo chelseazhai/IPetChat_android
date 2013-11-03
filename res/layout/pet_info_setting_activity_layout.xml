@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content" />
 
-                <ImageView
+                <com.segotech.ipetchat.view.NetLoadImageView
                     android:id="@+id/pet_avatar_imageView"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.constants.GlobalConstant;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.view.NetLoadImageView;
 import com.segotech.ipetchat.view.SettingMenuItemView;
 
 import java.io.FileNotFoundException;
@@ -31,7 +32,7 @@ public class PetInfoSettingActivity extends IPetChatNavigationActivity implement
     private SettingMenuItemView settingArea;
     private SettingMenuItemView settingPlayArea;
 
-    private ImageView avatarView;
+    private NetLoadImageView avatarView;
 
     private View uploadImageDlg;
 
@@ -75,7 +76,7 @@ public class PetInfoSettingActivity extends IPetChatNavigationActivity implement
         View saveButton = findViewById(R.id.save);
         saveButton.setOnClickListener(this);
 
-        avatarView = (ImageView) findViewById(R.id.pet_avatar_imageView);
+        avatarView = (NetLoadImageView) findViewById(R.id.pet_avatar_imageView);
         avatarView.setOnClickListener(this);
 
     }
@@ -250,26 +251,12 @@ public class PetInfoSettingActivity extends IPetChatNavigationActivity implement
 
                 case GlobalConstant.RequestCode.CAPTURE_PHOTO:
                 case GlobalConstant.RequestCode.SELECT_PHOTO:
-//                    Bundle extras = data.getExtras();
-
-//                    tmpBitmap = (Bitmap) extras.get("data");
                     Uri uri = data.getData();
                     if (uri == null) {
                         Toast.makeText(this, R.string.photo_taken_failed, Toast.LENGTH_SHORT).show();
                         return;
                     }
                     cropPhoto(uri, 500);
-//                    ContentResolver cr = this.getContentResolver();
-//                    try {
-//                        tmpBitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-//                        avatarView.setImageBitmap(tmpBitmap);
-//                        uploadImageDlg.setVisibility(View.GONE);
-//                    } catch (FileNotFoundException e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(this, R.string.photo_taken_failed, Toast.LENGTH_SHORT).show();
-//                    }
-
-
                     break;
 
                 case GlobalConstant.RequestCode.CROP_IMAGE:
