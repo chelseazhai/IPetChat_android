@@ -14,12 +14,12 @@
         android:id="@+id/account_register_step2_viewStub"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        layout="@layout/account_register_activity_step2_layout" />
+        android:layout="@layout/account_register_activity_step2_layout" />
 
     <ViewStub
         android:id="@+id/account_register_step3_viewStub"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        layout="@layout/account_register_activity_step3_layout" />
+        android:layout="@layout/account_register_activity_step3_layout" />
 
 </FrameLayout>
