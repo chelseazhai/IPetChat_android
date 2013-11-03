@@ -1,7 +1,188 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ipet="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings.PetInfoSettingActivity" >
+    android:background="@color/light_light_gray"
+    >
 
+    <ScrollView
+        android:layout_above="@+id/bottom"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:text="@string/avatar"
+                    android:textSize="20sp"
+                    android:layout_toLeftOf="@+id/pet_avatar_imageView"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+
+                <com.segotech.ipetchat.view.NetLoadImageView
+                    android:id="@+id/pet_avatar_imageView"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/add_avatar"
+                    android:layout_height="80dp"
+                    android:layout_width="80dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginBottom="30dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <com.segotech.ipetchat.view.SettingMenuItemView
+                    android:id="@+id/setting_sex"
+                    android:layout_width="match_parent"
+                    android:clickable="true"
+                    android:background="@drawable/setting_top_item_bg"
+                    ipet:title="@string/sex"
+                    ipet:status="@string/not_set"
+                    android:layout_margin="1dp"
+                    android:layout_height="40dp" />
+
+                <com.segotech.ipetchat.view.SettingMenuItemView
+                    android:id="@+id/setting_nickname"
+                    android:layout_width="match_parent"
+                    android:clickable="true"
+                    android:background="@drawable/setting_bottom_item_bg"
+                    ipet:title="@string/nickname"
+                    ipet:status="@string/not_set"
+                    android:layout_margin="1dp"
+                    android:layout_height="40dp" />
+
+                <View
+                    android:layout_height="4dp"
+                    android:layout_width="match_parent"
+                    android:background="@android:color/transparent" />
+
+                <com.segotech.ipetchat.view.SettingMenuItemView
+                    android:id="@+id/setting_breed"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/setting_top_item_bg"
+                    ipet:title="@string/pet_breed_label"
+                    ipet:status="@string/not_set"
+                    android:layout_margin="1dp"
+                    android:layout_height="40dp" />
+
+                <com.segotech.ipetchat.view.SettingMenuItemView
+                    android:id="@+id/setting_age"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/setting_mid_item_bg"
+                    ipet:title="@string/pet_age_label"
+                    ipet:status="@string/not_set"
+                    android:layout_margin="1dp"
+                    android:layout_height="40dp" />
+
+                <com.segotech.ipetchat.view.SettingMenuItemView
+                    android:id="@+id/setting_color"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/setting_mid_item_bg"
+                    ipet:title="@string/color"
+                    ipet:status="@string/not_set"
+                    android:layout_margin="1dp"
+                    android:layout_height="40dp" />
+
+                <com.segotech.ipetchat.view.SettingMenuItemView
+                    android:id="@+id/setting_height"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/setting_mid_item_bg"
+                    ipet:title="@string/pet_height_label"
+                    ipet:status="@string/not_set"
+                    android:layout_margin="1dp"
+                    android:layout_height="40dp" />
+
+                <com.segotech.ipetchat.view.SettingMenuItemView
+                    android:id="@+id/setting_weight"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/setting_bottom_item_bg"
+                    ipet:title="@string/pet_weight_label"
+                    ipet:status="@string/not_set"
+                    android:layout_margin="1dp"
+                    android:layout_height="40dp" />
+
+                <View
+                    android:layout_height="4dp"
+                    android:layout_width="match_parent"
+                    android:background="@android:color/transparent" />
+
+                <com.segotech.ipetchat.view.SettingMenuItemView
+                    android:id="@+id/setting_area"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/setting_top_item_bg"
+                    ipet:title="@string/pet_district_prefix"
+                    ipet:status="@string/not_set"
+                    android:layout_margin="1dp"
+                    android:layout_height="40dp" />
+
+                <com.segotech.ipetchat.view.SettingMenuItemView
+                    android:id="@+id/setting_play_area"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/setting_bottom_item_bg"
+                    ipet:title="@string/pet_placeUsed2Go_prefix"
+                    ipet:status="@string/not_set"
+                    android:layout_margin="1dp"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/dark_gray"
+        android:gravity="center_vertical"
+        android:layout_height="50dp"
+        android:layout_width="match_parent">
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/img_logo"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+        <View
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp" />
+        <TextView
+            android:id="@+id/save"
+            android:text="@string/save"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:layout_height="match_parent"
+            android:layout_width="60dp" />
+    </LinearLayout>
+    <ViewStub
+        android:id="@+id/upload_image_dlg"
+        android:visibility="gone"
+        android:layout="@layout/layout_upload_image_dlg"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
 </RelativeLayout>

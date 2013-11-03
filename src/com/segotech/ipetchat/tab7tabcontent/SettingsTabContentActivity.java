@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
+import com.segotech.ipetchat.settings.PetInfoSettingActivity;
 
 public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 
@@ -110,7 +112,12 @@ public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// TODO Auto-generated method stub
-
+            Map<String, Object> map = (Map<String, Object>) parent.getItemAtPosition(position);
+            String menuItem = (String) map.get(SettingsAdapter.SETTING_ITEM_TITLE);
+            if (getString(R.string.pet_profile).equals(menuItem)) {
+                Intent intent = new Intent(SettingsTabContentActivity.this, PetInfoSettingActivity.class);
+                startActivity(intent);
+            }
 		}
 
 	}
