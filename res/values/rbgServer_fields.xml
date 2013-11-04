@@ -10,4 +10,9 @@
     <string name="rbgServer_userRegPassword" translatable="false">password</string>
     <string name="rbgServer_userRegConfirmationPwd" translatable="false">password1</string>
 
+    <!-- account login -->
+    <string name="rbgServer_userLoginName" translatable="false">loginName</string>
+    <string name="rbgServer_userLoginPwd" translatable="false">loginPwd</string>
+    <string name="rbgServer_loginReq_resp_userkey" translatable="false">userkey</string>
+
 </resources>

@@ -41,7 +41,7 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 		setContentView(R.layout.account_register_activity_layout);
 
 		// set title
-		setTitle(R.string.account_register_nav_title_text);
+		setTitle(R.string.account_register_nav_title);
 
 		// set get register phone verification code button on click listener
 		((Button) findViewById(R.id.get_verificationCode_btn))

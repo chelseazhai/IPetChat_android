@@ -12,13 +12,13 @@
         android:layout_weight="1" >
 
         <ImageView
-            android:id="@+id/application_launch_imageView"
+            android:id="@+id/application_icon_imageView"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:contentDescription="@string/application_launch_imageview_contentdescription"
+            android:contentDescription="@string/application_icon_imageview_contentdescription"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/img_application_icon" />
     </FrameLayout>
 
     <RelativeLayout

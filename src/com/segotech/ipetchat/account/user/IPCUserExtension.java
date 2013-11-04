@@ -52,4 +52,9 @@ public class IPCUserExtension {
 		PET_INFO
 	}
 
+	// common user local storage attributes
+	public static enum ComUserLocalStorageAttributes {
+		LOGIN_USERNAME, LOGIN_PASSWORD, REMEMBER_LOGIN_PASSWORD, AUTO_LOGIN
+	}
+
 }

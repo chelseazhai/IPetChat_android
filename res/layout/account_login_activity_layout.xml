@@ -1,7 +1,75 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     tools:context=".account.AccountLoginActivity" >
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/account_login_form_bg"
+        android:orientation="vertical"
+        android:paddingBottom="55dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="40dp" >
+
+        <EditText
+            android:id="@+id/login_name_editText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="@string/login_name_editText_hint"
+            android:inputType="phone" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/login_pwd_editText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:hint="@string/login_pwd_editText_hint"
+            android:inputType="textPassword" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/remember_pwd_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remember_pwd_textView_text"
+                android:textColor="@color/dim_gray" />
+
+            <ToggleButton
+                android:id="@+id/remember_pwd_toggleBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:textOff="@string/remeber_pwd_toggleBtn_off"
+                android:textOn="@string/remeber_pwd_toggleBtn_on" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/login_confirm_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/plane_gray_btn_bg"
+            android:text="@string/login_confirm_btn_title"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</FrameLayout>

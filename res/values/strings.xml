@@ -7,13 +7,13 @@
     <!-- account setting -->
     <!-- account setting for first enter -->
     <string name="title_activity_account_setting4_first" translatable="false">AccountSetting4FirstActivity</string>
-    <string name="application_launch_imageview_contentdescription" translatable="false">application launch image view</string>
+    <string name="application_icon_imageview_contentdescription" translatable="false">application icon image view</string>
     <string name="account_register_button_title">Register</string>
     <string name="account_login_button_title">Login</string>
 
     <!-- account register -->
     <string name="title_activity_account_register" translatable="false">AccountRegisterActivity</string>
-    <string name="account_register_nav_title_text">Account Register</string>
+    <string name="account_register_nav_title">Account Register</string>
     <!-- step 1 -->
     <string name="register_step1_textView_text">Step1</string>
     <string name="register_step1_description">Input phone number to retrieve verification code</string>
@@ -31,6 +31,16 @@
     <string name="pwd_editText_hint">Input password</string>
     <string name="confirmationPwd_editText_hint">Input confirmation password</string>
     <string name="register_finish_btn_title">Finish Register</string>
+
+    <!-- account login -->
+    <string name="title_activity_account_login" translatable="false">AccountLoginActivity</string>
+    <string name="account_login_nav_title">Account Login</string>
+    <string name="login_name_editText_hint">Please input your registered phone number</string>
+    <string name="login_pwd_editText_hint">Please input the account password</string>
+    <string name="remember_pwd_textView_text">RememberPwd</string>
+    <string name="remeber_pwd_toggleBtn_on">On</string>
+    <string name="remeber_pwd_toggleBtn_off">Off</string>
+    <string name="login_confirm_btn_title">Login</string>
 
     <!-- iPetChat tab activity -->
     <string name="title_activity_ipet_chat_tab" translatable="false">IPetChatTabActivity</string>
@@ -129,7 +139,6 @@
     <string name="title_activity_photos_setting" translatable="false">PhotosSettingActivity</string>
     <string name="title_activity_pet_device_bind" translatable="false">PetDeviceBindActivity</string>
     <string name="title_activity_account_setting4_switch" translatable="false">AccountSetting4SwitchActivity</string>
-    <string name="title_activity_account_login" translatable="false">AccountLoginActivity</string>
     <string name="title_activity_account_reset_pwd" translatable="false">AccountResetPWDActivity</string>
     <string name="title_activity_account_info_setting" translatable="false">AccountInfoSettingActivity</string>
     <string name="title_activity_black_list" translatable="false">BlackListActivity</string>

@@ -17,4 +17,10 @@
     <string name="toast_accountRegister_timeout">注册超时，请重新注册</string>
     <string name="toast_accountRegister_successful">注册成功，请及时登录来享受赛果宠物</string>
 
+    <!-- account login -->
+    <string name="toast_login_userName_null">登录手机号码不能为空</string>
+    <string name="toast_login_password_null">登录密码不能为空</string>
+    <string name="toast_userAccount_reset_successful">账户设置成功</string>
+    <string name="toast_login_userName6Pwd_wrong">登录手机号码或者密码错误</string>
+
 </resources>
