@@ -12,4 +12,7 @@
     <!-- account login -->
     <string name="user_login_url" translatable="false">/login/home_!denglu.action</string>
 
+    <!-- pet info -->
+    <string name="get_allPetsInfo_url">/login/home_!getpets.action</string>
+
 </resources>

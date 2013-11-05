@@ -1,16 +1,27 @@
 package com.segotech.ipetchat.tab7tabcontent;
 
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 import com.richitec.commontoolkit.customcomponent.CTTabSpecIndicator;
+import com.richitec.commontoolkit.utils.HttpUtils;
+import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
+import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
+import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import com.segotech.ipetchat.R;
 
 @SuppressWarnings("deprecation")
 public class IPetChatTabActivity extends TabActivity {
+
+	private static final String LOG_TAG = IPetChatTabActivity.class
+			.getCanonicalName();
 
 	// tab widget item content array
 	private final int[][] TAB_WIDGETITEM_CONTENTS = new int[][] {
@@ -95,8 +106,44 @@ public class IPetChatTabActivity extends TabActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
+		// get user all pets info
+		// send get user all pets info post http request
+		HttpUtils.postSignatureRequest(
+				getResources().getString(R.string.server_url)
+						+ getResources()
+								.getString(R.string.get_allPetsInfo_url),
+				PostRequestFormat.URLENCODED, null, null,
+				HttpRequestType.ASYNCHRONOUS,
+				new GetAllPetsInfoHttpRequestListener());
+
 		super.onResume();
+	}
+
+	// inner class
+	// get user all pets info http request listener
+	class GetAllPetsInfoHttpRequestListener extends OnHttpRequestListener {
+
+		@Override
+		public void onFinished(HttpRequest request, HttpResponse response) {
+			// get http response entity string
+			String _respEntityString = HttpUtils
+					.getHttpResponseEntityString(response);
+
+			Log.d(LOG_TAG,
+					"get user all pets info http response entity string = "
+							+ _respEntityString);
+
+			//
+		}
+
+		@Override
+		public void onFailed(HttpRequest request, HttpResponse response) {
+			Log.e(LOG_TAG,
+					"get user all pets info failed, send get user all pets info post request failed");
+
+			//
+		}
+
 	}
 
 }
