@@ -54,7 +54,7 @@ public class IPCUserExtension {
 
 	// common user local storage attributes
 	public static enum ComUserLocalStorageAttributes {
-		LOGIN_USERNAME, LOGIN_PASSWORD, REMEMBER_LOGIN_PASSWORD, AUTO_LOGIN
+		LOGIN_USERNAME, LOGIN_USERKEY, AUTO_LOGIN
 	}
 
 }

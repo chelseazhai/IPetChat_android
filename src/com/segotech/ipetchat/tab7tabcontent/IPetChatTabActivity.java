@@ -93,4 +93,10 @@ public class IPetChatTabActivity extends TabActivity {
 		_tabHost.setCurrentTab(_mCurrentTabIndex);
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
 }

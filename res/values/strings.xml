@@ -37,9 +37,7 @@
     <string name="account_login_nav_title">Account Login</string>
     <string name="login_name_editText_hint">Please input your registered phone number</string>
     <string name="login_pwd_editText_hint">Please input the account password</string>
-    <string name="remember_pwd_textView_text">RememberPwd</string>
-    <string name="remeber_pwd_toggleBtn_on">On</string>
-    <string name="remeber_pwd_toggleBtn_off">Off</string>
+    <string name="forget_pwd_btn_title">Forget Pwd</string>
     <string name="login_confirm_btn_title">Login</string>
 
     <!-- iPetChat tab activity -->

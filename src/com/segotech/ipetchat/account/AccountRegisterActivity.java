@@ -21,6 +21,7 @@ import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
 import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import com.richitec.commontoolkit.utils.JSONUtils;
+import com.richitec.commontoolkit.utils.StringUtils;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 
@@ -106,11 +107,6 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 			// get http response entity string
 			String _respEntityString = HttpUtils
 					.getHttpResponseEntityString(response);
-
-			// test by ares
-			Log.d(LOG_TAG,
-					"get register phone verification code http request response entity string"
-							+ _respEntityString);
 
 			// get http response entity string json object result and userKey
 			String _result = JSONUtils.getStringFromJSONObject(JSONUtils
@@ -239,11 +235,6 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 			// get http response entity string
 			String _respEntityString = HttpUtils
 					.getHttpResponseEntityString(response);
-
-			// test by ares
-			Log.d(LOG_TAG,
-					"verify verification code http request response entity string"
-							+ _respEntityString);
 
 			// get http response entity string json object result and userKey
 			String _result = JSONUtils.getStringFromJSONObject(JSONUtils
@@ -378,11 +369,11 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 			_finishRegisterParam.put(
 					getResources()
 							.getString(R.string.rbgServer_userRegPassword),
-					_password);
+					StringUtils.md5(_password));
 			_finishRegisterParam.put(
 					getResources().getString(
 							R.string.rbgServer_userRegConfirmationPwd),
-					_confirmationPwd);
+					StringUtils.md5(_confirmationPwd));
 
 			// send finish register post http request
 			HttpUtils.postRequest(getResources().getString(R.string.server_url)
@@ -403,11 +394,6 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 			String _respEntityString = HttpUtils
 					.getHttpResponseEntityString(response);
 
-			// test by ares
-			Log.d(LOG_TAG,
-					"register finish http request response entity string"
-							+ _respEntityString);
-
 			// get http response entity string json object result and userKey
 			String _result = JSONUtils.getStringFromJSONObject(JSONUtils
 					.toJSONObject(_respEntityString),
@@ -420,8 +406,9 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 				case 0:
 					Log.d(LOG_TAG, "register finish successful");
 
-					// pop account setting activity
-					popActivity();
+					// pop account register activity and go to account login
+					// activity
+					popActivityWithResult(RESULT_OK, null);
 
 					Toast.makeText(AccountRegisterActivity.this,
 							R.string.toast_accountRegister_successful,

@@ -20,7 +20,7 @@
     <!-- account login -->
     <string name="toast_login_userName_null">登录手机号码不能为空</string>
     <string name="toast_login_password_null">登录密码不能为空</string>
-    <string name="toast_userAccount_reset_successful">账户设置成功</string>
-    <string name="toast_login_userName6Pwd_wrong">登录手机号码或者密码错误</string>
+    <string name="toast_login_user_notExisted">此用户不存在，请先注册</string>
+    <string name="toast_login_user_loginPwd_wrong">用户登录密码错误</string>
 
 </resources>

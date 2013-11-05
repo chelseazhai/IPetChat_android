@@ -6,10 +6,10 @@
 
     <!-- account register -->
     <string name="get_registerPhone_verification_code_url" translatable="false">/login/home_!getyanzhengma.action</string>
-    <string name="verify_verificationCode_url" translatable="false">/user/checkPhoneCode</string>
-    <string name="account_register_url" translatable="false">/user/regUser</string>
+    <string name="verify_verificationCode_url" translatable="false">/login/home_!yanzheng.action</string>
+    <string name="account_register_url" translatable="false">/login/home_!zhuce.action</string>
 
     <!-- account login -->
-    <string name="user_login_url" translatable="false">/user/login</string>
+    <string name="user_login_url" translatable="false">/login/home_!denglu.action</string>
 
 </resources>

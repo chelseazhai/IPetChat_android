@@ -13,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
@@ -43,20 +42,15 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 		// set title
 		setTitle(R.string.account_login_nav_title);
 
-		// auto complete login user name, password and remember login user pwd
-		// toggle buton
+		// auto complete login user name
 		((EditText) findViewById(R.id.login_name_editText))
 				.setText(DataStorageUtils
 						.getString(ComUserLocalStorageAttributes.LOGIN_USERNAME
 								.name()));
-		((EditText) findViewById(R.id.login_pwd_editText))
-				.setText(DataStorageUtils
-						.getString(ComUserLocalStorageAttributes.LOGIN_PASSWORD
-								.name()));
-		((ToggleButton) findViewById(R.id.remember_pwd_toggleBtn))
-				.setChecked(DataStorageUtils
-						.getBoolean(ComUserLocalStorageAttributes.REMEMBER_LOGIN_PASSWORD
-								.name()));
+
+		// set forget user login password button on click listener
+		((Button) findViewById(R.id.forget_pwd_btn))
+				.setOnClickListener(new ForgetPwdBtnOnClickListener());
 
 		// set user login confirm button on click listener
 		((Button) findViewById(R.id.login_confirm_btn))
@@ -71,6 +65,18 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 	}
 
 	// inner class
+	// forget user login password button on click listener
+	class ForgetPwdBtnOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			// test by ares
+			Log.d(LOG_TAG,
+					"forget user login password button on click listener");
+		}
+
+	}
+
 	// user login confirm button on click listener
 	class LoginConfirmBtnOnClickListener implements OnClickListener {
 
@@ -129,10 +135,6 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 			String _respEntityString = HttpUtils
 					.getHttpResponseEntityString(response);
 
-			// test by ares
-			Log.d(LOG_TAG, "user login http request response entity string"
-					+ _respEntityString);
-
 			// get http response entity string json object result and userKey
 			String _result = JSONUtils.getStringFromJSONObject(JSONUtils
 					.toJSONObject(_respEntityString),
@@ -143,14 +145,9 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 			if (null != _result) {
 				switch (Integer.parseInt(_result)) {
 				case 0:
-					// get login user name, password, remember login user pwd
-					// flag and response userKey
+					// get login user name and response userKey
 					String _loginName = ((EditText) findViewById(R.id.login_name_editText))
 							.getText().toString();
-					String _loginPwd = ((EditText) findViewById(R.id.login_pwd_editText))
-							.getText().toString();
-					boolean _isRememberLoginPwd = ((ToggleButton) findViewById(R.id.remember_pwd_toggleBtn))
-							.isChecked();
 					String _responseLoginUserKey = JSONUtils
 							.getStringFromJSONObject(
 									JSONUtils.toJSONObject(_respEntityString),
@@ -160,7 +157,7 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 
 					// save user bean and add to user manager
 					UserManager.getInstance().setUser(
-							new UserBean(_loginName, _loginPwd,
+							new UserBean(_loginName, null,
 									_responseLoginUserKey));
 
 					// add to data storage
@@ -168,66 +165,28 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 							.putObject(
 									ComUserLocalStorageAttributes.LOGIN_USERNAME
 											.name(), _loginName);
-					DataStorageUtils
-							.putObject(
-									ComUserLocalStorageAttributes.LOGIN_PASSWORD
-											.name(),
-									_isRememberLoginPwd ? _loginPwd : "");
-					DataStorageUtils
-							.putObject(
-									ComUserLocalStorageAttributes.REMEMBER_LOGIN_PASSWORD
-											.name(), _isRememberLoginPwd);
-					// DataStorageUtils
-					// .putObject(
-					// IMeetingAppLaunchActivity.LOGIN_USERKEY_STORAGE_KEY,
-					// _responseLoginUserKey);
-					//
-					// // check goto activity
-					// if (AppAccountStatus.ESTABLISHING ==
-					// _mCurrentAppAccountStatus) {
-					// Log.d(LOG_TAG, "login successful");
-					//
-					// // check remember user login password flag
-					// if (_isRememberLoginPwd) {
-					// // update main activity class name from storage
-					// DataStorageUtils
-					// .putObject(
-					// IMeetingAppLaunchActivity.MAINACTIVITY_STORAGE_KEY,
-					// TalkingGroupHistoryListActivity.class
-					// .getName());
-					// }
-					//
-					// // go to talking group history list activity
-					// finish();
-					// startActivity(new Intent(AccountSettingActivity.this,
-					// TalkingGroupHistoryListActivity.class));
-					//
-					// Toast.makeText(AccountSettingActivity.this,
-					// R.string.toast_login_successful,
-					// Toast.LENGTH_LONG).show();
-					// } else {
-					// Log.d(LOG_TAG, "user account reset successful");
-					//
-					// // set my talking group history list activity need to
-					// // refresh
-					// TalkingGroupHistoryListActivity.TALKINGGROUP_HISTORYLIST_NEED2REFRESH
-					// = true;
-					//
-					// // pop to setting activity
-					// popActivity();
-					//
-					// Toast.makeText(AccountSettingActivity.this,
-					// R.string.toast_userAccount_reset_successful,
-					// Toast.LENGTH_SHORT).show();
-					// }
+					DataStorageUtils.putObject(
+							ComUserLocalStorageAttributes.LOGIN_USERKEY.name(),
+							_responseLoginUserKey);
+
+					// pop account login activity and go to iPetChat tab
+					// activity
+					popActivityWithResult(RESULT_OK, null);
 					break;
 
 				case 1:
-					Log.d(LOG_TAG,
-							"login failed, user name or password is wrong");
+					Log.d(LOG_TAG, "login failed, user not existed");
 
 					Toast.makeText(AccountLoginActivity.this,
-							R.string.toast_login_userName6Pwd_wrong,
+							R.string.toast_login_user_notExisted,
+							Toast.LENGTH_SHORT).show();
+					break;
+
+				case 2:
+					Log.d(LOG_TAG, "login failed, user login password is wrong");
+
+					Toast.makeText(AccountLoginActivity.this,
+							R.string.toast_login_user_loginPwd_wrong,
 							Toast.LENGTH_SHORT).show();
 					break;
 
