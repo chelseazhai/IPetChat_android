@@ -3,9 +3,9 @@ package com.segotech.ipetchat.tab7tabcontent;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
-
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewStub;
@@ -18,17 +18,23 @@ import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
-import com.richitec.commontoolkit.utils.JSONUtils;
+import com.richitec.commontoolkit.user.UserManager;
 import com.segotech.ipetchat.R;
+import com.segotech.ipetchat.account.pet.PetBean;
+import com.segotech.ipetchat.account.pet.PetSex;
+import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
 
 public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 
-	// test data
-	// test by ares
-	private final JSONObject demo_pet_JSONInfo = JSONUtils
-			.toJSONObject("{\"avatar\":1, \"nickname\":\"乐乐\", \"sex\":1, \"deviceBattery\":85, \"sportsScore\":90, \"breed\":\"金毛\", \"age\":24, \"height\":50.0, \"weight\":25.0, \"district\":\"江苏南京\", \"placeUsed2Go\":\"玄武湖公园\"}");
-	private final int demo_pet_avatar = R.drawable.img_demo_pet;
+	private static final String LOG_TAG = HomeTabContentActivity.class
+			.getCanonicalName();
+
+	// // test data
+	// // test by ares
+	// private final JSONObject demo_pet_JSONInfo = JSONUtils
+	// .toJSONObject("{\"avatar\":1, \"nickname\":\"乐乐\", \"sex\":1, \"deviceBattery\":85, \"sportsScore\":90, \"breed\":\"金毛\", \"age\":24, \"height\":50.0, \"weight\":25.0, \"district\":\"江苏南京\", \"placeUsed2Go\":\"玄武湖公园\"}");
+	// private final int demo_pet_avatar = R.drawable.img_demo_pet;
 
 	// pet location view
 	private View _mPetLocationView;
@@ -49,88 +55,6 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 
 		// set title
 		setTitle(R.string.home_nav_title);
-
-		// test by ares
-		// set pet avatar
-		((ImageView) findViewById(R.id.pet_avatar_imageView))
-				.setImageResource(demo_pet_avatar);
-
-		// set pet nickname
-		((TextView) findViewById(R.id.pet_nickname_textView)).setText(JSONUtils
-				.getStringFromJSONObject(demo_pet_JSONInfo, "nickname"));
-
-		// set pet sex
-		((ImageView) findViewById(R.id.pet_sex_imageView))
-				.setImageResource(0 == JSONUtils.getIntegerFromJSONObject(
-						demo_pet_JSONInfo, "sex") ? R.drawable.img_male
-						: R.drawable.img_female);
-
-		// get pet device battery progress
-		int _petDeviceBatteryProgress = JSONUtils.getIntegerFromJSONObject(
-				demo_pet_JSONInfo, "deviceBattery");
-
-		// set pet device battery
-		((ProgressBar) findViewById(R.id.pet_deviceBattery_progressBar))
-				.setProgress(_petDeviceBatteryProgress);
-		((TextView) findViewById(R.id.pet_deviceBattery_textView))
-				.setText(String.format("%d%%", _petDeviceBatteryProgress));
-
-		// get pet sports score progress
-		int _petSportsScoreProgress = JSONUtils.getIntegerFromJSONObject(
-				demo_pet_JSONInfo, "sportsScore");
-
-		// set pet sports score
-		((ProgressBar) findViewById(R.id.pet_sportsScore_progressBar))
-				.setProgress(_petSportsScoreProgress);
-		((TextView) findViewById(R.id.pet_sportsScore_textView)).setText(""
-				+ _petSportsScoreProgress);
-
-		// define pet other info list
-		List<String> _petOtherInfoList = new ArrayList<String>();
-
-		// set them
-		// breed
-		_petOtherInfoList
-				.add(getResources().getString(R.string.pet_breed_prefix)
-						+ JSONUtils.getStringFromJSONObject(demo_pet_JSONInfo,
-								"breed"));
-
-		// age
-		_petOtherInfoList.add(String.format(
-				getResources().getString(R.string.pet_age_format),
-				JSONUtils.getIntegerFromJSONObject(demo_pet_JSONInfo, "age")));
-
-		// height
-		_petOtherInfoList
-				.add(String.format(
-						getResources().getString(R.string.pet_height_format),
-						JSONUtils.getDoubleFromJSONObject(demo_pet_JSONInfo,
-								"height")));
-
-		// weight
-		_petOtherInfoList
-				.add(String.format(
-						getResources().getString(R.string.pet_weight_format),
-						JSONUtils.getDoubleFromJSONObject(demo_pet_JSONInfo,
-								"weight")));
-
-		// district
-		_petOtherInfoList.add(getResources().getString(
-				R.string.pet_district_prefix)
-				+ JSONUtils.getStringFromJSONObject(demo_pet_JSONInfo,
-						"district"));
-
-		// place used to go
-		_petOtherInfoList.add(getResources().getString(
-				R.string.pet_placeUsed2Go_prefix)
-				+ JSONUtils.getStringFromJSONObject(demo_pet_JSONInfo,
-						"placeUsed2Go"));
-
-		// set pet info listView adapter
-		((ListView) findViewById(R.id.pet_info_listView))
-				.setAdapter(new ArrayAdapter<String>(this,
-						R.layout.pet_info_listview_item_layout,
-						_petOtherInfoList));
 
 		// bind pet location button on click listener
 		((Button) findViewById(R.id.pet_location_button))
@@ -170,6 +94,90 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+
+		// get user pet info
+		PetBean _petInfo = IPCUserExtension.getUserPetInfo(UserManager
+				.getInstance().getUser());
+
+		Log.d(LOG_TAG, "my pet info = " + _petInfo);
+
+		// check user pet info
+		if (null != _petInfo) {
+			// set pet avatar
+			((ImageView) findViewById(R.id.pet_avatar_imageView))
+					.setImageBitmap(BitmapFactory.decodeByteArray(
+							_petInfo.getAvatar(), 0,
+							_petInfo.getAvatar().length));
+
+			// set pet nickname
+			((TextView) findViewById(R.id.pet_nickname_textView))
+					.setText(_petInfo.getNickname());
+
+			// set pet sex
+			((ImageView) findViewById(R.id.pet_sex_imageView))
+					.setImageResource(PetSex.MALE == _petInfo.getSex() ? R.drawable.img_male
+							: R.drawable.img_female);
+
+			// test by ares
+			// get pet device battery progress
+			int _petDeviceBatteryProgress = 86;
+
+			// set pet device battery
+			((ProgressBar) findViewById(R.id.pet_deviceBattery_progressBar))
+					.setProgress(_petDeviceBatteryProgress);
+			((TextView) findViewById(R.id.pet_deviceBattery_textView))
+					.setText(String.format("%d%%", _petDeviceBatteryProgress));
+
+			// test by ares
+			// get pet sports score progress
+			int _petSportsScoreProgress = 95;
+
+			// set pet sports score
+			((ProgressBar) findViewById(R.id.pet_sportsScore_progressBar))
+					.setProgress(_petSportsScoreProgress);
+			((TextView) findViewById(R.id.pet_sportsScore_textView)).setText(""
+					+ _petSportsScoreProgress);
+
+			// define pet other info list
+			List<String> _petOtherInfoList = new ArrayList<String>();
+
+			// set them
+			// breed
+			_petOtherInfoList.add(getResources().getString(
+					R.string.pet_breed_prefix)
+					+ _petInfo.getBreed());
+
+			// age
+			_petOtherInfoList.add(String.format(
+					getResources().getString(R.string.pet_age_format),
+					_petInfo.getAge()));
+
+			// height
+			_petOtherInfoList.add(String.format(
+					getResources().getString(R.string.pet_height_format),
+					_petInfo.getHeight()));
+
+			// weight
+			_petOtherInfoList.add(String.format(
+					getResources().getString(R.string.pet_weight_format),
+					_petInfo.getWeight()));
+
+			// district
+			_petOtherInfoList.add(getResources().getString(
+					R.string.pet_district_prefix)
+					+ _petInfo.getDistrict());
+
+			// place used to go
+			_petOtherInfoList.add(getResources().getString(
+					R.string.pet_placeUsed2Go_prefix)
+					+ _petInfo.getPlaceUsed2Go());
+
+			// set pet info listView adapter
+			((ListView) findViewById(R.id.pet_info_listView))
+					.setAdapter(new ArrayAdapter<String>(this,
+							R.layout.pet_info_listview_item_layout,
+							_petOtherInfoList));
+		}
 
 		// autoNavi mapView pause
 		if (null != _mAutoNaviMapView) {

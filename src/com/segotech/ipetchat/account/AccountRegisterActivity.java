@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
+import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -104,13 +105,12 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFinished(HttpRequest request, HttpResponse response) {
-			// get http response entity string
-			String _respEntityString = HttpUtils
-					.getHttpResponseEntityString(response);
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
 
 			// get http response entity string json object result and userKey
-			String _result = JSONUtils.getStringFromJSONObject(JSONUtils
-					.toJSONObject(_respEntityString),
+			String _result = JSONUtils.getStringFromJSONObject(_respJsonData,
 					getResources()
 							.getString(R.string.rbgServer_req_resp_result));
 
@@ -232,13 +232,12 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFinished(HttpRequest request, HttpResponse response) {
-			// get http response entity string
-			String _respEntityString = HttpUtils
-					.getHttpResponseEntityString(response);
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
 
 			// get http response entity string json object result and userKey
-			String _result = JSONUtils.getStringFromJSONObject(JSONUtils
-					.toJSONObject(_respEntityString),
+			String _result = JSONUtils.getStringFromJSONObject(_respJsonData,
 					getResources()
 							.getString(R.string.rbgServer_req_resp_result));
 
@@ -390,13 +389,12 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFinished(HttpRequest request, HttpResponse response) {
-			// get http response entity string
-			String _respEntityString = HttpUtils
-					.getHttpResponseEntityString(response);
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
 
 			// get http response entity string json object result and userKey
-			String _result = JSONUtils.getStringFromJSONObject(JSONUtils
-					.toJSONObject(_respEntityString),
+			String _result = JSONUtils.getStringFromJSONObject(_respJsonData,
 					getResources()
 							.getString(R.string.rbgServer_req_resp_result));
 

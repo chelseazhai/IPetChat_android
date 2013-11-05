@@ -11,21 +11,21 @@ public class IPCUserExtension {
 			.getCanonicalName();
 
 	// set pet chat user pet info
-	public static void setUserNickname(UserBean user, PetBean petInfo) {
+	public static void setUserPetInfo(UserBean user, PetBean petInfo) {
 		// check user bean
 		if (null != user) {
-			// set pet chat user extension attribute
+			// set pet chat user extension attribute pet info
 			user.getExtension().put(IPCUserExtAttributes.PET_INFO.name(),
 					petInfo);
 		} else {
 			Log.e(LOG_TAG,
-					"Set pet chat user extension attribute error, user = "
+					"Set pet chat user extension attribute pet info error, user = "
 							+ user);
 		}
 	}
 
 	// get pet chat user pet info
-	public static PetBean getUserNickname(UserBean user) {
+	public static PetBean getUserPetInfo(UserBean user) {
 		PetBean _ret = null;
 
 		// check user bean
@@ -34,7 +34,7 @@ public class IPCUserExtension {
 					IPCUserExtAttributes.PET_INFO.name());
 		} else {
 			Log.e(LOG_TAG,
-					"Get pet chat user extension attribute error, user = "
+					"Get pet chat user extension attribute pet info error, user = "
 							+ user);
 		}
 

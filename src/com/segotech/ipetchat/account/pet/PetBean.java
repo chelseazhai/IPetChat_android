@@ -14,12 +14,16 @@ public class PetBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 3288951473132588097L;
 
+	// pet id
+	private Long id;
+	// pet avatar
+	private byte[] avatar;
 	// pet nickname
 	private String nickname;
 	// pet sex
 	private PetSex sex;
 	// pet breed
-	private String breed;
+	private PetBreed breed;
 	// pet age
 	private Integer age;
 	// pet height
@@ -33,16 +37,15 @@ public class PetBean implements Serializable {
 
 	// PetBean constructor
 	public PetBean() {
-		super();
-
-		// init sex
-		sex = PetSex.MALE;
+		// nothing to do
 	}
 
-	public PetBean(String nickname, PetSex sex, String breed, Integer age,
-			Float height, Float weight, String district, String placeUsed2Go) {
-		// set nickname, sex, breed, age, height, weight, district and place
+	public PetBean(Long id, String nickname, PetSex sex, PetBreed breed,
+			Integer age, Float height, Float weight, String district,
+			String placeUsed2Go) {
+		// set id, nickname, sex, breed, age, height, weight, district and place
 		// where used to go
+		this.id = id;
 		this.nickname = nickname;
 		this.sex = sex;
 		this.breed = breed;
@@ -51,6 +54,22 @@ public class PetBean implements Serializable {
 		this.weight = weight;
 		this.district = district;
 		this.placeUsed2Go = placeUsed2Go;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public byte[] getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
 	}
 
 	public String getNickname() {
@@ -69,11 +88,11 @@ public class PetBean implements Serializable {
 		this.sex = sex;
 	}
 
-	public String getBreed() {
+	public PetBreed getBreed() {
 		return breed;
 	}
 
-	public void setBreed(String breed) {
+	public void setBreed(PetBreed breed) {
 		this.breed = breed;
 	}
 
@@ -125,11 +144,12 @@ public class PetBean implements Serializable {
 		// get application context resource
 		Resources _contextRes = CTApplication.getContext().getResources();
 
-		// append pet nickname, sex, breed, age, height, weight, district and
-		// place where used to go
-		_petDescription.append("pet nickname: ").append(nickname).append(", ");
-		_petDescription.append("sex: ").append(sex.name()).append(", ");
-		_petDescription.append("breed: ").append(breed).append(", ");
+		// append pet id, nickname, sex, breed, age, height, weight, district
+		// and place where used to go
+		_petDescription.append("pet id: ").append(id).append(", ");
+		_petDescription.append("nickname: ").append(nickname).append(", ");
+		_petDescription.append("sex: ").append(sex.toString()).append(", ");
+		_petDescription.append("breed: ").append(breed.toString()).append(", ");
 		_petDescription
 				.append("age: ")
 				.append(String.format(
@@ -150,12 +170,6 @@ public class PetBean implements Serializable {
 				.append("\n");
 
 		return _petDescription.toString();
-	}
-
-	// inner class
-	// pet sex
-	public static enum PetSex {
-		MALE, FEMALE
 	}
 
 }

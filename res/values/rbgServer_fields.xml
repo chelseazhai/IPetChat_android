@@ -15,4 +15,20 @@
     <string name="rbgServer_userLoginPwd" translatable="false">password</string>
     <string name="rbgServer_loginReq_resp_userkey" translatable="false">userKey</string>
 
+    <!-- pet info -->
+    <!-- my pet list -->
+    <string name="rbgServer_getMyPetsReq_resp_number" translatable="false">nums</string>
+    <string name="rbgServer_getMyPetsReq_resp_list" translatable="false">pets</string>
+    <string name="rbgServer_getMyPetsReq_resp_id" translatable="false">petid</string>
+    <string name="rbgServer_getMyPetsReq_resp_avatar" translatable="false">touxiang</string>
+    <string name="rbgServer_getMyPetsReq_resp_nickname" translatable="false">nickname</string>
+    <string name="rbgServer_getMyPetsReq_resp_sex" translatable="false">sex</string>
+    <string name="rbgServer_getMyPetsReq_resp_breed" translatable="false">sort</string>
+    <string name="rbgServer_getMyPetsReq_resp_age" translatable="false">age</string>
+    <string name="rbgServer_getMyPetsReq_resp_height" translatable="false">height</string>
+    <string name="rbgServer_getMyPetsReq_resp_weight" translatable="false">weight</string>
+    <string name="rbgServer_getMyPetsReq_resp_district" translatable="false">district</string>
+    <string name="rbgServer_getMyPetsReq_resp_placeUsed2Go" translatable="false">placeoftengo</string>
+    <string name="rbgServer_getMyPetsReq_resp_score" translatable="false">defen</string>
+
 </resources>
