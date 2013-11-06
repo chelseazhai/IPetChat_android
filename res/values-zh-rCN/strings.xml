@@ -38,10 +38,6 @@
 
     <!-- iPetChat tab activity -->
     <!-- pet info -->
-    <!-- pet sex -->
-    <string name="male">公</string>
-    <string name="female">母</string>
-
     <!-- pet breed -->
     <string name="golden_retriever">黄金猎犬</string>
     <string name="husky">哈士奇</string>

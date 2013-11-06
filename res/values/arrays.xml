@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- pet sex array -->
-    <string-array name="pet_sex_array" translatable="false">
-        <item>@string/male</item>
-        <item>@string/female</item>
-    </string-array>
-
     <!-- pet breed array -->
     <string-array name="pet_breed_array" translatable="false">
         <item>@string/golden_retriever</item>

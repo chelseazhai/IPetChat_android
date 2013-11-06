@@ -44,10 +44,6 @@
     <string name="title_activity_ipet_chat_tab" translatable="false">IPetChatTabActivity</string>
 
     <!-- pet info -->
-    <!-- pet sex -->
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-
     <!-- pet breed -->
     <string name="golden_retriever">Golden Retriever</string>
     <string name="husky">Husky</string>
