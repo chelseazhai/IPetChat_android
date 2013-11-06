@@ -12,7 +12,7 @@ public class BlackListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		// set content view
-		setContentView(R.layout.black_list_activity_layout);
+		setContentView(R.layout.blacklist_activity_layout);
 	}
 
 }

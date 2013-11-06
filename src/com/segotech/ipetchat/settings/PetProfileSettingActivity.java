@@ -5,14 +5,16 @@ import android.os.Bundle;
 
 import com.segotech.ipetchat.R;
 
-public class PetInfoSettingActivity extends Activity {
+public class PetProfileSettingActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// set content view
-		setContentView(R.layout.pet_info_setting_activity_layout);
+		setContentView(R.layout.pet_profile_setting_activity_layout);
+
+		//
 	}
 
 }

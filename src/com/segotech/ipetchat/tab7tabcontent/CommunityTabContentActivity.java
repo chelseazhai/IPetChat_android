@@ -57,7 +57,7 @@ public class CommunityTabContentActivity extends IPetChatRootNavigationActivity 
 
 		// get pet community info title array
 		String[] _titles = getResources().getStringArray(
-				R.array.community_info_array);
+				R.array.pet_community_info_array);
 
 		// set them
 		for (int i = 0; i < _titles.length; i++) {

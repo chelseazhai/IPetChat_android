@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_light_gray"
-    tools:context=".tab7tancontent.CommunityTabContentActivity" >
+    tools:context=".tab7tabcontent.CommunityTabContentActivity" >
 
     <ListView
         android:id="@+id/pet_community_info_listView"

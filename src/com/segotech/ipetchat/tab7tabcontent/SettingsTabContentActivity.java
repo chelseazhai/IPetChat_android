@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -19,8 +20,20 @@ import android.widget.TextView;
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
+import com.segotech.ipetchat.petcommunity.BlackListActivity;
+import com.segotech.ipetchat.settings.AccountInfoSettingActivity;
+import com.segotech.ipetchat.settings.PetDeviceBindActivity;
+import com.segotech.ipetchat.settings.PetPhotosSettingActivity;
+import com.segotech.ipetchat.settings.PetProfileSettingActivity;
 
 public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
+
+	// settings info item target activity class array
+	@SuppressWarnings("unchecked")
+	private final Class<? extends Activity>[] SETTINGS_INFO_TARGET_ACTIVITYCLSES = new Class[] {
+			PetProfileSettingActivity.class, PetPhotosSettingActivity.class,
+			AccountInfoSettingActivity.class, BlackListActivity.class,
+			PetDeviceBindActivity.class };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +52,8 @@ public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 		List<Map<String, ?>> _settingsList = new ArrayList<Map<String, ?>>();
 
 		// get setting title array
-		String[] _titles = getResources()
-				.getStringArray(R.array.settings_array);
+		String[] _titles = getResources().getStringArray(
+				R.array.settings_info_array);
 
 		// set them
 		for (int i = 0; i < _titles.length; i++) {
@@ -109,8 +122,9 @@ public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			// TODO Auto-generated method stub
-
+			// go to target activity
+			SettingsTabContentActivity.this
+					.pushActivity(SETTINGS_INFO_TARGET_ACTIVITYCLSES[position]);
 		}
 
 	}

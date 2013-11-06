@@ -44,6 +44,10 @@
     <string name="title_activity_ipet_chat_tab" translatable="false">IPetChatTabActivity</string>
 
     <!-- pet info -->
+    <!-- pet sex -->
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
     <!-- pet breed -->
     <string name="golden_retriever">Golden Retriever</string>
     <string name="husky">Husky</string>
@@ -94,13 +98,13 @@
     <string name="pet_community_info_item_icon_imageview_contentdescription" translatable="false">pet community info item icon image view</string>
     <string name="pet_community_info_item_detailindicator_imageview_contentdescription" translatable="false">pet community info item detail indicator image view</string>
 
-    <string-array name="community_info_array">
-        <item>Pet stars</item>
-        <item>Pets nearby</item>
-        <item>Concern</item>
-        <item>Message box</item>
-    </string-array>
+    <!-- pet conmunity info items -->
+    <string name="petStars_community_item_title">Pet stars</string>
+    <string name="petsNearby_community_item_title">Pets nearby</string>
+    <string name="myConcern_community_item_title">Concern</string>
+    <string name="messagebox_community_item_title">Message box</string>
 
+    <!-- pet mood tag -->
     <string name="pet_mood_textview_tag" translatable="false">101</string>
 
     <!-- pet stars -->
@@ -135,23 +139,33 @@
     <string name="settings_tab7nav_title">Settings</string>
     <string name="setting_item_detailindicator_imageview_contentdescription" translatable="false">setting item detail indicator image view</string>
 
-    <string-array name="settings_array">
-        <item>pet info</item>
-        <item>photos</item>
-        <item>account</item>
-        <item>blacklist</item>
-        <item>pet device bind</item>
-    </string-array>
+    <!-- settings info items -->
+    <string name="petProfile_setting_item_title">Pet profile</string>
+    <string name="petPhotos_setting_item_title">Pet photos</string>
+    <string name="accountInfo_setting_item_title">Account info</string>
+    <string name="blacklist_setting_item_title">Blacklist</string>
+    <string name="petDeviceBind_setting_item_title">Pet device bind</string>
 
+    <!-- account logout -->
     <string name="account_logout_button_title">Logout</string>
 
-    <!-- others -->
-    <string name="title_activity_pet_info_setting" translatable="false">PetInfoSettingActivity</string>
-    <string name="title_activity_photos_setting" translatable="false">PhotosSettingActivity</string>
+    <!-- pet profile -->
+    <string name="title_activity_pet_profile_setting" translatable="false">PetProfileSettingActivity</string>
+
+    <!-- pet photos -->
+    <string name="title_activity_pet_photos_setting" translatable="false">PetPhotosSettingActivity</string>
+
+    <!-- account info -->
+    <string name="title_activity_account_info_setting" translatable="false">AccountInfoSettingActivity</string>
+
+    <!-- blacklist -->
+    <string name="title_activity_blacklist" translatable="false">BlackListActivity</string>
+
+    <!-- pet device bind -->
     <string name="title_activity_pet_device_bind" translatable="false">PetDeviceBindActivity</string>
+
+    <!-- others -->
     <string name="title_activity_account_setting4_switch" translatable="false">AccountSetting4SwitchActivity</string>
     <string name="title_activity_account_reset_pwd" translatable="false">AccountResetPWDActivity</string>
-    <string name="title_activity_account_info_setting" translatable="false">AccountInfoSettingActivity</string>
-    <string name="title_activity_black_list" translatable="false">BlackListActivity</string>
 
 </resources>

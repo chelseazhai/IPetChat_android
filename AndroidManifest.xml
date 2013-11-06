@@ -39,6 +39,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".account.AccountSetting4FirstActivity"
+            android:label="@string/title_activity_account_setting4_first" >
+        </activity>
+        <activity
+            android:name=".account.AccountLoginActivity"
+            android:label="@string/title_activity_account_login" >
+        </activity>
+        <activity
+            android:name=".account.AccountRegisterActivity"
+            android:label="@string/title_activity_account_register" >
+        </activity>
+        <activity
             android:name=".tab7tabcontent.IPetChatTabActivity"
             android:label="@string/title_activity_ipet_chat_tab"
             android:screenOrientation="portrait"
@@ -77,40 +89,28 @@
             android:label="@string/title_activity_messagebox" >
         </activity>
         <activity
-            android:name=".petcommunity.BlackListActivity"
-            android:label="@string/title_activity_black_list" >
+            android:name=".settings.PetProfileSettingActivity"
+            android:label="@string/title_activity_pet_profile_setting" >
         </activity>
         <activity
-            android:name=".settings.PetInfoSettingActivity"
-            android:label="@string/title_activity_pet_info_setting" >
-        </activity>
-        <activity
-            android:name=".settings.PhotosSettingActivity"
-            android:label="@string/title_activity_photos_setting" >
+            android:name=".settings.PetPhotosSettingActivity"
+            android:label="@string/title_activity_pet_photos_setting" >
         </activity>
         <activity
             android:name=".settings.AccountInfoSettingActivity"
             android:label="@string/title_activity_account_info_setting" >
         </activity>
         <activity
+            android:name=".petcommunity.BlackListActivity"
+            android:label="@string/title_activity_blacklist" >
+        </activity>
+        <activity
             android:name=".settings.PetDeviceBindActivity"
             android:label="@string/title_activity_pet_device_bind" >
         </activity>
         <activity
-            android:name=".account.AccountSetting4FirstActivity"
-            android:label="@string/title_activity_account_setting4_first" >
-        </activity>
-        <activity
             android:name=".account.AccountSetting4SwitchActivity"
             android:label="@string/title_activity_account_setting4_switch" >
-        </activity>
-        <activity
-            android:name=".account.AccountLoginActivity"
-            android:label="@string/title_activity_account_login" >
-        </activity>
-        <activity
-            android:name=".account.AccountRegisterActivity"
-            android:label="@string/title_activity_account_register" >
         </activity>
         <activity
             android:name=".account.AccountResetPWDActivity"

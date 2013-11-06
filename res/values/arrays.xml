@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- pet sex array -->
+    <string-array name="pet_sex_array" translatable="false">
+        <item>@string/male</item>
+        <item>@string/female</item>
+    </string-array>
+
     <!-- pet breed array -->
     <string-array name="pet_breed_array" translatable="false">
         <item>@string/golden_retriever</item>
@@ -13,6 +19,23 @@
         <item>@string/chow</item>
         <item>@string/pekingese</item>
         <item>@string/others_pet</item>
+    </string-array>
+
+    <!-- pet community info item array -->
+    <string-array name="pet_community_info_array" translatable="false">
+        <item>@string/petStars_community_item_title</item>
+        <item>@string/petsNearby_community_item_title</item>
+        <item>@string/myConcern_community_item_title</item>
+        <item>@string/messagebox_community_item_title</item>
+    </string-array>
+
+    <!-- settings info item array -->
+    <string-array name="settings_info_array" translatable="false">
+        <item>@string/petProfile_setting_item_title</item>
+        <item>@string/petPhotos_setting_item_title</item>
+        <item>@string/accountInfo_setting_item_title</item>
+        <item>@string/blacklist_setting_item_title</item>
+        <item>@string/petDeviceBind_setting_item_title</item>
     </string-array>
 
 </resources>

@@ -38,6 +38,10 @@
 
     <!-- iPetChat tab activity -->
     <!-- pet info -->
+    <!-- pet sex -->
+    <string name="male">公</string>
+    <string name="female">母</string>
+
     <!-- pet breed -->
     <string name="golden_retriever">黄金猎犬</string>
     <string name="husky">哈士奇</string>
@@ -81,12 +85,11 @@
     <!-- community tab content activity -->
     <string name="community_tab7nav_title">社区</string>
 
-    <string-array name="community_info_array">
-        <item>宠物之星推荐</item>
-        <item>附近的宠物</item>
-        <item>我的关注</item>
-        <item>留言箱</item>
-    </string-array>
+    <!-- pet conmunity info items -->
+    <string name="petStars_community_item_title">宠物之星推荐</string>
+    <string name="petsNearby_community_item_title">附近的宠物</string>
+    <string name="myConcern_community_item_title">我的关注</string>
+    <string name="messagebox_community_item_title">留言箱</string>
 
     <!-- pet stars -->
     <string name="petstars_nav_title">宠物之星</string>
@@ -107,14 +110,14 @@
     <!-- settings tab content activity -->
     <string name="settings_tab7nav_title">设置</string>
 
-    <string-array name="settings_array">
-        <item>宠物档案</item>
-        <item>相册</item>
-        <item>账号</item>
-        <item>黑名单管理</item>
-        <item>绑定硬件设备</item>
-    </string-array>
+    <!-- settings info items -->
+    <string name="petProfile_setting_item_title">宠物档案</string>
+    <string name="petPhotos_setting_item_title">相册</string>
+    <string name="accountInfo_setting_item_title">账号</string>
+    <string name="blacklist_setting_item_title">黑名单管理</string>
+    <string name="petDeviceBind_setting_item_title">绑定硬件设备</string>
 
+    <!-- account logout -->
     <string name="account_logout_button_title">退出登录</string>
 
 </resources>
