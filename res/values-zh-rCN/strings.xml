@@ -120,4 +120,19 @@
     <!-- account logout -->
     <string name="account_logout_button_title">退出登录</string>
 
+    <!-- pet profile -->
+    <string name="pet_profile_setting_nav_title">宠物档案</string>
+
+    <!-- pet photos -->
+    <string name="pet_photos_setting_nav_title">宠物相册</string>
+
+    <!-- account info -->
+    <string name="account_info_setting_nav_title">账号</string>
+
+    <!-- blacklist -->
+    <string name="blacklist_setting_nav_title">黑名单管理</string>
+
+    <!-- pet device bind -->
+    <string name="pet_device_bind_setting_nav_title">绑定硬件设备</string>
+
 </resources>

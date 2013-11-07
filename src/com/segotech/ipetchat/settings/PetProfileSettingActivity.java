@@ -1,11 +1,11 @@
 package com.segotech.ipetchat.settings;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.segotech.ipetchat.R;
+import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 
-public class PetProfileSettingActivity extends Activity {
+public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -13,6 +13,9 @@ public class PetProfileSettingActivity extends Activity {
 
 		// set content view
 		setContentView(R.layout.pet_profile_setting_activity_layout);
+
+		// set title
+		setTitle(R.string.pet_profile_setting_nav_title);
 
 		//
 	}

@@ -151,18 +151,24 @@
 
     <!-- pet profile -->
     <string name="title_activity_pet_profile_setting" translatable="false">PetProfileSettingActivity</string>
+    <string name="pet_profile_setting_nav_title">Pet profile</string>
 
     <!-- pet photos -->
     <string name="title_activity_pet_photos_setting" translatable="false">PetPhotosSettingActivity</string>
+    <string name="pet_photos_setting_nav_title">Pet photos</string>
 
     <!-- account info -->
     <string name="title_activity_account_info_setting" translatable="false">AccountInfoSettingActivity</string>
+    <string name="account_info_setting_nav_title">Account info</string>
 
     <!-- blacklist -->
     <string name="title_activity_blacklist" translatable="false">BlackListActivity</string>
+    <string name="blacklist_setting_nav_title">Blacklist</string>
+    <string name="blacklist_pet_detailindicator_imageview_contentdescription" translatable="false">blacklist pet detail indicator image view</string>
 
     <!-- pet device bind -->
     <string name="title_activity_pet_device_bind" translatable="false">PetDeviceBindActivity</string>
+    <string name="pet_device_bind_setting_nav_title">Bind pet device</string>
 
     <!-- others -->
     <string name="title_activity_account_setting4_switch" translatable="false">AccountSetting4SwitchActivity</string>
