@@ -97,11 +97,13 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 
 		// check user pet info
 		if (null != _petInfo) {
-			// set pet avatar
-			((ImageView) findViewById(R.id.pet_avatar_imageView))
-					.setImageBitmap(BitmapFactory.decodeByteArray(
-							_petInfo.getAvatar(), 0,
-							_petInfo.getAvatar().length));
+			// check and set pet avatar
+			if (null != _petInfo.getAvatar()) {
+				((ImageView) findViewById(R.id.pet_avatar_imageView))
+						.setImageBitmap(BitmapFactory.decodeByteArray(
+								_petInfo.getAvatar(), 0,
+								_petInfo.getAvatar().length));
+			}
 
 			// set pet nickname
 			((TextView) findViewById(R.id.pet_nickname_textView))

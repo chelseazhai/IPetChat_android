@@ -122,6 +122,16 @@
 
     <!-- pet profile -->
     <string name="pet_profile_setting_nav_title">宠物档案</string>
+    <string name="pet_profile_avatar_label">头像</string>
+    <string name="pet_profile_item_textView_hint">未设置</string>
+    <string name="pet_profile_item_nickname_label">昵称</string>
+    <string name="pet_profile_item_sex_label">性别</string>
+    <string name="pet_profile_item_breed_label">品种</string>
+    <string name="pet_profile_item_age_label">年龄</string>
+    <string name="pet_profile_item_height_label">身高</string>
+    <string name="pet_profile_item_weight_label">体重</string>
+    <string name="pet_profile_item_district_label">地区</string>
+    <string name="pet_profile_item_placeUsed2Go_label">常去玩的地方</string>
 
     <!-- pet photos -->
     <string name="pet_photos_setting_nav_title">宠物相册</string>

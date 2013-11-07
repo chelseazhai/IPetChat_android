@@ -152,6 +152,19 @@
     <!-- pet profile -->
     <string name="title_activity_pet_profile_setting" translatable="false">PetProfileSettingActivity</string>
     <string name="pet_profile_setting_nav_title">Pet profile</string>
+    <string name="pet_profile_avatar_label">Avatar</string>
+    <string name="pet_profile_avatar_imageview_contentdescription" translatable="false">pet profile avatar image view</string>
+    <string name="pet_profile_avatar_settingindicator_imageview_contentdescription" translatable="false">pet profile avatar setting indicator image view</string>
+    <string name="pet_profile_item_textView_hint">No setting</string>
+    <string name="pet_profile_item_settingindicator_imageview_contentdescription" translatable="false">pet profile item setting indicator image view</string>
+    <string name="pet_profile_item_nickname_label">Nickname</string>
+    <string name="pet_profile_item_sex_label">Sex</string>
+    <string name="pet_profile_item_breed_label">Breed</string>
+    <string name="pet_profile_item_age_label">Age</string>
+    <string name="pet_profile_item_height_label">Height</string>
+    <string name="pet_profile_item_weight_label">Weight</string>
+    <string name="pet_profile_item_district_label">District</string>
+    <string name="pet_profile_item_placeUsed2Go_label">Place used to go</string>
 
     <!-- pet photos -->
     <string name="title_activity_pet_photos_setting" translatable="false">PetPhotosSettingActivity</string>

@@ -1,7 +1,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ipetchat="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_light_gray"
+    android:paddingBottom="20dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="20dp"
+    android:scrollbars="none"
     tools:context=".settings.PetProfileSettingActivity" >
 
     <LinearLayout
@@ -9,67 +16,135 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <include
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            layout="@android:layout/simple_list_item_single_choice" />
+            android:background="@drawable/pet_profile_single_item_bg"
+            android:clickable="true"
+            android:paddingBottom="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="8dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:text="@string/pet_profile_avatar_label"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ImageView
+                android:id="@+id/pet_profile_avatar_settingIndicator_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/pet_profile_avatar_settingindicator_imageview_contentdescription"
+                android:src="@drawable/img_listview_item_detail_small_indicator" />
+
+            <ImageView
+                android:id="@+id/pet_profile_avatar_imageView"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:layout_toLeftOf="@id/pet_profile_avatar_settingIndicator_imageView"
+                android:background="@drawable/pet_profile_avatar_bg"
+                android:contentDescription="@string/pet_profile_avatar_imageview_contentdescription"
+                android:scaleType="centerInside"
+                android:src="@android:drawable/ic_dialog_map" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="vertical" >
 
-            <include
+            <com.segotech.ipetchat.customwidget.PetProfileItem
+                android:id="@+id/pet_profile_nickname_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                layout="@android:layout/simple_list_item_checked" />
+                android:background="@drawable/pet_profile_topmultiple_item_bg"
+                ipetchat:label="@string/pet_profile_item_nickname_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileItem>
 
-            <include
+            <com.segotech.ipetchat.customwidget.PetProfileItem
+                android:id="@+id/pet_profile_sex_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                layout="@android:layout/simple_list_item_checked" />
+                android:layout_marginTop="-1dp"
+                android:background="@drawable/pet_profile_bottommultiple_item_bg"
+                ipetchat:label="@string/pet_profile_item_sex_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileItem>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="vertical" >
 
-            <include
+            <com.segotech.ipetchat.customwidget.PetProfileItem
+                android:id="@+id/pet_profile_breed_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                layout="@android:layout/simple_list_item_single_choice" />
+                android:background="@drawable/pet_profile_topmultiple_item_bg"
+                ipetchat:label="@string/pet_profile_item_breed_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileItem>
 
-            <include
+            <com.segotech.ipetchat.customwidget.PetProfileItem
+                android:id="@+id/pet_profile_age_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                layout="@android:layout/simple_list_item_single_choice" />
+                android:layout_marginTop="-1dp"
+                android:background="@drawable/pet_profile_middlemultiple_item_bg"
+                ipetchat:label="@string/pet_profile_item_age_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileItem>
 
-            <include
+            <com.segotech.ipetchat.customwidget.PetProfileItem
+                android:id="@+id/pet_profile_height_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                layout="@android:layout/simple_list_item_single_choice" />
+                android:layout_marginTop="-1dp"
+                android:background="@drawable/pet_profile_middlemultiple_item_bg"
+                ipetchat:label="@string/pet_profile_item_height_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileItem>
 
-            <include
+            <com.segotech.ipetchat.customwidget.PetProfileItem
+                android:id="@+id/pet_profile_weight_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                layout="@android:layout/simple_list_item_single_choice" />
+                android:layout_marginTop="-1dp"
+                android:background="@drawable/pet_profile_bottommultiple_item_bg"
+                ipetchat:label="@string/pet_profile_item_weight_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileItem>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="vertical" >
 
-            <include
+            <com.segotech.ipetchat.customwidget.PetProfileItem
+                android:id="@+id/pet_profile_district_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                layout="@android:layout/simple_list_item_multiple_choice" />
+                android:background="@drawable/pet_profile_topmultiple_item_bg"
+                ipetchat:label="@string/pet_profile_item_district_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileItem>
 
-            <include
+            <com.segotech.ipetchat.customwidget.PetProfileItem
+                android:id="@+id/pet_profile_placeUsed2Go_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                layout="@android:layout/simple_list_item_multiple_choice" />
+                android:layout_marginTop="-1dp"
+                android:background="@drawable/pet_profile_bottommultiple_item_bg"
+                ipetchat:label="@string/pet_profile_item_placeUsed2Go_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileItem>
         </LinearLayout>
     </LinearLayout>
 
