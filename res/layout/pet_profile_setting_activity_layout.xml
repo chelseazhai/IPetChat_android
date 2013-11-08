@@ -17,6 +17,7 @@
         android:orientation="vertical" >
 
         <RelativeLayout
+            android:id="@+id/pet_profile_avatar_item"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/pet_profile_single_item_bg"
