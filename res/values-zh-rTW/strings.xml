@@ -64,8 +64,11 @@
 
     <!-- home tab info content view -->
     <string name="pet_breed_prefix">品种：</string>
+    <string name="pet_age_prefix">年龄：</string>
     <string name="pet_age_format">年龄：%d个月</string>
+    <string name="pet_height_prefix">身高：</string>
     <string name="pet_height_format">身高：%.2f厘米</string>
+    <string name="pet_weight_prefix">体重：</string>
     <string name="pet_weight_format">体重：%.2f公斤</string>
     <string name="pet_district_prefix">地区：</string>
     <string name="pet_placeUsed2Go_prefix">常去玩的地方：</string>

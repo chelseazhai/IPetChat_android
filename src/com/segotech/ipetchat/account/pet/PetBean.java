@@ -148,23 +148,25 @@ public class PetBean implements Serializable {
 		// and place where used to go
 		_petDescription.append("pet id: ").append(id).append(", ");
 		_petDescription.append("nickname: ").append(nickname).append(", ");
-		_petDescription.append("sex: ").append(sex.toString()).append(", ");
-		_petDescription.append("breed: ").append(breed.toString()).append(", ");
+		_petDescription.append("sex: ")
+				.append(null != sex ? sex.toString() : "").append(", ");
+		_petDescription.append("breed: ")
+				.append(null != breed ? breed.toString() : "").append(", ");
 		_petDescription
 				.append("age: ")
 				.append(String.format(
 						_contextRes.getString(R.string.pet_age_value_format),
-						age)).append(", ");
+						null != age ? age : 0)).append(", ");
 		_petDescription
 				.append("height: ")
 				.append(String.format(
 						_contextRes.getString(R.string.pet_height_value_format),
-						height)).append(", ");
+						null != height ? height : 0.0f)).append(", ");
 		_petDescription
 				.append("weight: ")
 				.append(String.format(
 						_contextRes.getString(R.string.pet_weight_value_format),
-						weight)).append(", ");
+						null != weight ? weight : 0.0f)).append(", ");
 		_petDescription.append("district: ").append(district).append(" and ");
 		_petDescription.append("place where used to go: ").append(placeUsed2Go)
 				.append("\n");

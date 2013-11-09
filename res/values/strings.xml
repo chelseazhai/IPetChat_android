@@ -74,8 +74,11 @@
     <string name="pet_avatar_imageview_contentdescription" translatable="false">pet avatar image view</string>
     <string name="pet_sex_imageview_contentdescription" translatable="false">pet sex image view</string>
     <string name="pet_breed_prefix">Breed: </string>
+    <string name="pet_age_prefix">Age: </string>
     <string name="pet_age_format">Age: %d months</string>
+    <string name="pet_height_prefix">Height: </string>
     <string name="pet_height_format">Height: %.2fcm</string>
+    <string name="pet_weight_prefix">Weight: </string>
     <string name="pet_weight_format">Weight: %.2fkg</string>
     <string name="pet_district_prefix">District: </string>
     <string name="pet_placeUsed2Go_prefix">Place used to go: </string>

@@ -135,42 +135,65 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 								_mPetInfo.getAvatar().length));
 			}
 
-			// set pet nickname
-			_mPetProfileNicknameSettingItem.setText(_mPetInfo.getNickname());
+			// check and set pet nickname
+			if (null != _mPetInfo.getNickname()) {
+				_mPetProfileNicknameSettingItem
+						.setText(_mPetInfo.getNickname());
+			}
 
-			// set pet sex
-			_mPetProfileSexSettingItem.setText(_mPetInfo.getSex().getSex());
+			// check and set pet sex
+			if (null != _mPetInfo.getSex()) {
+				_mPetProfileSexSettingItem.setText(_mPetInfo.getSex().getSex());
+			}
 
-			// set pet breed
-			_mPetProfileBreedSettingItem.setText(_mPetInfo.getBreed()
-					.getBreed());
+			// check and set pet breed
+			if (null != _mPetInfo.getBreed()) {
+				_mPetProfileBreedSettingItem.setText(_mPetInfo.getBreed()
+						.getBreed());
+			}
 
-			// set pet age
-			_mPetProfileAgeSettingItem.setText(String.format(getResources()
-					.getString(R.string.pet_age_value_format), _mPetInfo
-					.getAge()));
+			// check and set pet age
+			if (null != _mPetInfo.getAge()) {
+				_mPetProfileAgeSettingItem.setText(String.format(getResources()
+						.getString(R.string.pet_age_value_format), _mPetInfo
+						.getAge()));
+			}
 
-			// set pet height
-			_mPetProfileHeightSettingItem.setText(String.format(getResources()
-					.getString(R.string.pet_height_value_format), _mPetInfo
-					.getHeight()));
+			// check and set pet height
+			if (null != _mPetInfo.getWeight()) {
+				_mPetProfileHeightSettingItem.setText(String.format(
+						getResources().getString(
+								R.string.pet_height_value_format),
+						_mPetInfo.getHeight()));
+			}
 
-			// set pet weight
-			_mPetProfileWeightSettingItem.setText(String.format(getResources()
-					.getString(R.string.pet_weight_value_format), _mPetInfo
-					.getWeight()));
+			// check and set pet weight
+			if (null != _mPetInfo.getWeight()) {
+				_mPetProfileWeightSettingItem.setText(String.format(
+						getResources().getString(
+								R.string.pet_weight_value_format),
+						_mPetInfo.getWeight()));
+			}
 
-			// set pet district
-			_mPetProfileDistrictSettingItem.setText(_mPetInfo.getDistrict());
+			// check and set pet district
+			if (null != _mPetInfo.getDistrict()) {
+				_mPetProfileDistrictSettingItem
+						.setText(_mPetInfo.getDistrict());
+			}
 
-			// set pet place used to go
-			_mPetProfilePlaceUsed2GoSettingItem.setText(_mPetInfo
-					.getPlaceUsed2Go());
+			// check and set pet place used to go
+			if (null != _mPetInfo.getPlaceUsed2Go()) {
+				_mPetProfilePlaceUsed2GoSettingItem.setText(_mPetInfo
+						.getPlaceUsed2Go());
+			}
 		}
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// check and reset pet info
+		_mPetInfo = null != _mPetInfo ? _mPetInfo : new PetBean();
+
 		// check result code
 		switch (resultCode) {
 		case RESULT_OK:
@@ -249,8 +272,12 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 					break;
 
 				case PET_PROFILE_DISTRICT_SETTING_REQCODE:
-					_mPetProfileDistrictSettingItem.setText(data
-							.getStringExtra(POP_RET_EXTRADATA_KEY));
+					// get setting district
+					String _district = data
+							.getStringExtra(POP_RET_EXTRADATA_KEY);
+
+					_mPetProfileDistrictSettingItem.setText(_district);
+					_mPetInfo.setDistrict(_district);
 					break;
 
 				case PET_PROFILE_PLACEUSED2GO_EDITTEXT_SETTING_REQCODE:
@@ -263,6 +290,10 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 					break;
 				}
 			}
+
+			// save pet info
+			IPCUserExtension.setUserPetInfo(
+					UserManager.getInstance().getUser(), _mPetInfo);
 			break;
 
 		default:
@@ -304,34 +335,41 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 			switch (v.getId()) {
 			case R.id.pet_profile_nickname_setting_item:
 				_petProfileSettingItem = _mPetProfileNicknameSettingItem;
-				_editTextText = _mPetProfileNicknameSettingItem.getText();
+				_editTextText = null != (_editTextText = _mPetProfileNicknameSettingItem
+						.getText()) ? _editTextText : "";
 				_requestCode = PET_PROFILE_NICKNAME_EDITTEXT_SETTING_REQCODE;
 				break;
 
 			case R.id.pet_profile_age_setting_item:
 				_petProfileSettingItem = _mPetProfileAgeSettingItem;
-				_editTextText = _mPetInfo.getAge().toString();
+				_editTextText = null != _mPetInfo && null != _mPetInfo.getAge() ? _mPetInfo
+						.getAge().toString() : "";
 				_editTextInputType = InputType.TYPE_CLASS_NUMBER;
 				_requestCode = PET_PROFILE_AGE_EDITTEXT_SETTING_REQCODE;
 				break;
 
 			case R.id.pet_profile_height_setting_item:
 				_petProfileSettingItem = _mPetProfileHeightSettingItem;
-				_editTextText = _mPetInfo.getHeight().toString();
+				_editTextText = null != _mPetInfo
+						&& null != _mPetInfo.getHeight() ? _mPetInfo
+						.getHeight().toString() : "";
 				_editTextInputType = InputType.TYPE_CLASS_NUMBER;
 				_requestCode = PET_PROFILE_HEIGHT_EDITTEXT_SETTING_REQCODE;
 				break;
 
 			case R.id.pet_profile_weight_setting_item:
 				_petProfileSettingItem = _mPetProfileWeightSettingItem;
-				_editTextText = _mPetInfo.getWeight().toString();
+				_editTextText = null != _mPetInfo
+						&& null != _mPetInfo.getWeight() ? _mPetInfo
+						.getWeight().toString() : "";
 				_editTextInputType = InputType.TYPE_CLASS_NUMBER;
 				_requestCode = PET_PROFILE_WEIGHT_EDITTEXT_SETTING_REQCODE;
 				break;
 
 			case R.id.pet_profile_placeUsed2Go_setting_item:
 				_petProfileSettingItem = _mPetProfilePlaceUsed2GoSettingItem;
-				_editTextText = _mPetProfilePlaceUsed2GoSettingItem.getText();
+				_editTextText = null != (_editTextText = _mPetProfilePlaceUsed2GoSettingItem
+						.getText()) ? _editTextText : "";
 				_requestCode = PET_PROFILE_PLACEUSED2GO_EDITTEXT_SETTING_REQCODE;
 				break;
 			}
@@ -379,8 +417,8 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 			switch (v.getId()) {
 			case R.id.pet_profile_sex_setting_item:
 				_petProfileSettingItem = _mPetProfileSexSettingItem;
-				_petProfileCheckedSettingItemIndex = _mPetInfo.getSex()
-						.getValue();
+				_petProfileCheckedSettingItemIndex = (null != _mPetInfo && null != _mPetInfo
+						.getSex()) ? _mPetInfo.getSex().getValue() : -1;
 				_petProfileCheckedSettingItemSubItems = getResources()
 						.getStringArray(R.array.pet_sex_array);
 				_requestCode = PET_PROFILE_SEX_CHECKED_SETTING_REQCODE;
@@ -388,8 +426,8 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 
 			case R.id.pet_profile_breed_setting_item:
 				_petProfileSettingItem = _mPetProfileBreedSettingItem;
-				_petProfileCheckedSettingItemIndex = _mPetInfo.getBreed()
-						.getValue();
+				_petProfileCheckedSettingItemIndex = (null != _mPetInfo && null != _mPetInfo
+						.getBreed()) ? _mPetInfo.getBreed().getValue() : -1;
 				_petProfileCheckedSettingItemSubItems = getResources()
 						.getStringArray(R.array.pet_breed_array);
 				_requestCode = PET_PROFILE_BREED_CHECKED_SETTING_REQCODE;
@@ -430,10 +468,16 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 			// define extra data
 			Map<String, String> _extraData = new HashMap<String, String>();
 
+			// define pet profile district setting item text
+			String _petProfileDistrictSettingItemText = _mPetProfileDistrictSettingItem
+					.getText();
+
 			// put pet profile district in extra data
 			_extraData
 					.put(PetProfileDistrictSettingActivity.PET_PROFILE_CUSTOM_DISTRICT_VALUE_KEY,
-							_mPetProfileDistrictSettingItem.getText());
+							null != (_petProfileDistrictSettingItemText = _mPetProfileDistrictSettingItem
+									.getText()) ? _petProfileDistrictSettingItemText
+									: "");
 
 			// go to target activity
 			pushActivityForResult(PetProfileDistrictSettingActivity.class,
