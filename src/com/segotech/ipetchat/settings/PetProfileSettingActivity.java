@@ -160,7 +160,7 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 			}
 
 			// check and set pet height
-			if (null != _mPetInfo.getWeight()) {
+			if (null != _mPetInfo.getHeight()) {
 				_mPetProfileHeightSettingItem.setText(String.format(
 						getResources().getString(
 								R.string.pet_height_value_format),

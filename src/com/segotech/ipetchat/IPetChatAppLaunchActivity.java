@@ -30,7 +30,9 @@ public class IPetChatAppLaunchActivity extends AppLaunchActivity {
 
 		// check if there is a account at least
 		if (null == _localStorageUser.getName()
-				|| "".equalsIgnoreCase(_localStorageUser.getName())) {
+				|| "".equalsIgnoreCase(_localStorageUser.getName())
+				|| null == _localStorageUser.getUserKey()
+				|| "".equalsIgnoreCase(_localStorageUser.getUserKey())) {
 			// account setting for first activity as target
 			_targetIntentActivity = new Intent(this,
 					AccountSetting4FirstActivity.class);
