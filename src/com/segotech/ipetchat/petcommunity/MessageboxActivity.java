@@ -20,15 +20,9 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 	// test data
 	// test by ares
 	private final JSONArray leavedmessages_JSONArray = JSONUtils
-			.toJSONArray("[{\"avatar\":1, \"nickname\":\"乐乐\", \"content\":\"有空一起出来溜溜弯\", \"timestamp\":1}, {\"avatar\":2, \"nickname\":\"阿豆\", \"content\":\"Hi, 我是阿豆，很高兴认识你\", \"timestamp\":2}, {\"avatar\":3, \"nickname\":\"明珠\", \"content\":\"下午3点，我在玄武湖公园等你，不见不散\", \"timestamp\":3}, {\"avatar\":4, \"nickname\":\"虎子\", \"content\":\"[ 图片 ]\", \"timestamp\":4}, {\"avatar\":5, \"nickname\":\"小苏瑷\", \"content\":\"hi,O(∩_∩)O~\", \"timestamp\":5}]");
-	private final int[] message_leavers_avatars = new int[] {
-			R.drawable.img_demo_messageleaver1,
-			R.drawable.img_demo_messageleaver2,
-			R.drawable.img_demo_messageleaver3,
-			R.drawable.img_demo_messageleaver4,
-			R.drawable.img_demo_messageleaver5 };
-	private final String[] message_leaved_timestamps = new String[] { "23:14",
-			"12:00", "昨天", "星期一", "13-10-25" };
+			.toJSONArray("[]");
+	private final int[] message_leavers_avatars = new int[] {};
+	private final String[] message_leaved_timestamps = new String[] {};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

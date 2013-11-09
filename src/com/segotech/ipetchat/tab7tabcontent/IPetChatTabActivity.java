@@ -47,6 +47,9 @@ public class IPetChatTabActivity extends TabActivity {
 			{ R.string.community_tab7nav_title, R.drawable.community_tab_icon },
 			{ R.string.settings_tab7nav_title, R.drawable.settings_tab_icon } };
 
+	// tabHost
+	private TabHost _mTabHost;
+
 	// current tab index, default is home tab
 	private int _mCurrentTabIndex = 0;
 
@@ -58,14 +61,14 @@ public class IPetChatTabActivity extends TabActivity {
 		setContentView(R.layout.ipet_chat_tab_activity_layout);
 
 		// get tabHost
-		TabHost _tabHost = getTabHost();
+		_mTabHost = getTabHost();
 
 		// define tabSpec
 		TabSpec _tabSpec;
 
 		// set tab indicator and content
 		// home
-		_tabSpec = _tabHost
+		_tabSpec = _mTabHost
 				.newTabSpec(
 						getResources().getString(TAB_WIDGETITEM_CONTENTS[0][0]))
 				.setIndicator(
@@ -75,10 +78,10 @@ public class IPetChatTabActivity extends TabActivity {
 				.setContent(
 						new Intent().setClass(this,
 								HomeTabContentActivity.class));
-		_tabHost.addTab(_tabSpec);
+		_mTabHost.addTab(_tabSpec);
 
 		// sports and health
-		_tabSpec = _tabHost
+		_tabSpec = _mTabHost
 				.newTabSpec(
 						getResources().getString(TAB_WIDGETITEM_CONTENTS[1][0]))
 				.setIndicator(
@@ -88,10 +91,10 @@ public class IPetChatTabActivity extends TabActivity {
 				.setContent(
 						new Intent().setClass(this,
 								SportsHealthTabContentActivity.class));
-		_tabHost.addTab(_tabSpec);
+		_mTabHost.addTab(_tabSpec);
 
 		// community
-		_tabSpec = _tabHost
+		_tabSpec = _mTabHost
 				.newTabSpec(
 						getResources().getString(TAB_WIDGETITEM_CONTENTS[2][0]))
 				.setIndicator(
@@ -101,10 +104,10 @@ public class IPetChatTabActivity extends TabActivity {
 				.setContent(
 						new Intent().setClass(this,
 								CommunityTabContentActivity.class));
-		_tabHost.addTab(_tabSpec);
+		_mTabHost.addTab(_tabSpec);
 
 		// settings
-		_tabSpec = _tabHost
+		_tabSpec = _mTabHost
 				.newTabSpec(
 						getResources().getString(TAB_WIDGETITEM_CONTENTS[3][0]))
 				.setIndicator(
@@ -114,20 +117,11 @@ public class IPetChatTabActivity extends TabActivity {
 				.setContent(
 						new Intent().setClass(this,
 								SettingsTabContentActivity.class));
-		_tabHost.addTab(_tabSpec);
+		_mTabHost.addTab(_tabSpec);
 
 		// set current tab
-		_tabHost.setCurrentTab(_mCurrentTabIndex);
+		_mTabHost.setCurrentTab(_mCurrentTabIndex);
 
-		// test by ares
-		Log.d(LOG_TAG,
-				"" + _tabHost.getCurrentTabView() + " and "
-						+ _tabHost.getCurrentView() + " and "
-						+ _tabHost.getTabContentView());
-	}
-
-	@Override
-	protected void onResume() {
 		// get user all pets info
 		// send get user all pets info post http request
 		HttpUtils.postSignatureRequest(
@@ -137,8 +131,6 @@ public class IPetChatTabActivity extends TabActivity {
 				PostRequestFormat.URLENCODED, null, null,
 				HttpRequestType.ASYNCHRONOUS,
 				new GetAllPetsInfoHttpRequestListener());
-
-		super.onResume();
 	}
 
 	// inner class
@@ -268,12 +260,17 @@ public class IPetChatTabActivity extends TabActivity {
 						// set pet info as extension of user
 						IPCUserExtension.setUserPetInfo(UserManager
 								.getInstance().getUser(), _mPetInfo);
-						
-						Log.d(LOG_TAG, "my pet info = " + IPCUserExtension.getUserPetInfo(UserManager
-								.getInstance().getUser()));
 
-						//
-						//
+						Log.d(LOG_TAG,
+								"my pet info = "
+										+ IPCUserExtension
+												.getUserPetInfo(UserManager
+														.getInstance()
+														.getUser()));
+
+						// set current tab
+						_mTabHost.setCurrentTab(1);
+						_mTabHost.setCurrentTab(_mCurrentTabIndex);
 					} else {
 						// nothing to do
 						break;

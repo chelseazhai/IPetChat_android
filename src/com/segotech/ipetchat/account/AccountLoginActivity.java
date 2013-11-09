@@ -71,9 +71,8 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onClick(View v) {
-			// test by ares
-			Log.d(LOG_TAG,
-					"forget user login password button on click listener");
+			// go to account retrieve password activity
+			pushActivity(AccountRetrievePwdActivity.class);
 		}
 
 	}

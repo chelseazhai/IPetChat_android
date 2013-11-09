@@ -22,6 +22,10 @@
     <string name="toast_login_password_null">登录密码不能为空</string>
     <string name="toast_login_user_notExisted">此用户不存在，请先注册</string>
     <string name="toast_login_user_loginPwd_wrong">用户登录密码错误</string>
+    
+    <!-- account modify password -->
+    <string name="toast_accountOriginPassword_null">账户原始密码不能为空</string>
+    <string name="toast_accountRestNewPassword_null">账户新设置的密码不能为空</string>
 
     <!-- pet info -->
     <string name="toast_no_pet">没有宠物信息，你可以到设置页面宠物信息处添加一个宠物</string>

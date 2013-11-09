@@ -20,7 +20,7 @@ public class PetsNearbyActivity extends IPetChatNavigationActivity {
 	// test data
 	// test by ares
 	private final JSONArray pets_nearby_JSONArray = JSONUtils
-			.toJSONArray("[{\"avatar\":1, \"nickname\":\"欢欢\", \"sex\":0, \"distance\":100, \"mood\":\"好高兴啊\"}, {\"avatar\":2, \"nickname\":\"白白\", \"sex\":1, \"distance\":100, \"mood\":\"\"}, {\"avatar\":3, \"nickname\":\"阿豆\", \"sex\":1, \"distance\":200, \"mood\":\"@合肥，生命中第一次长途旅行...\"}, {\"avatar\":4, \"nickname\":\"小黄\", \"sex\":1, \"distance\":300, \"mood\":\"没有食欲\"}, {\"avatar\":5, \"nickname\":\"萌萌\", \"sex\":0, \"distance\":300, \"mood\":\"\"}, {\"avatar\":6, \"nickname\":\"小狗\", \"sex\":1, \"distance\":500, \"mood\":\"最近各种倒霉%>_<%\"}, {\"avatar\":7, \"nickname\":\"旺财\", \"sex\":0, \"distance\":1000, \"mood\":\"运动，运动\"}]");
+			.toJSONArray("[]");
 	private final int[] pets_nearby_avatars = new int[] {
 			R.drawable.img_demo_petnearby1, R.drawable.img_demo_petnearby2,
 			R.drawable.img_demo_petnearby3, R.drawable.img_demo_petnearby4,

@@ -20,7 +20,7 @@ public class BlackListActivity extends IPetChatNavigationActivity {
 	// test data
 	// test by ares
 	private final JSONArray blacklist_pets_JSONArray = JSONUtils
-			.toJSONArray("[{\"id\":1, \"nickname\":\"欢欢\"}, {\"id\":2, \"nickname\":\"白白\"}, {\"id\":3, \"nickname\":\"阿豆\"}, {\"id\":4, \"nickname\":\"小黄\"}]");
+			.toJSONArray("[]");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

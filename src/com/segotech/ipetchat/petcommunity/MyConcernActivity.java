@@ -29,16 +29,8 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 	// test data
 	// test by ares
 	private final JSONArray my_concern_pets_JSONArray = JSONUtils
-			.toJSONArray("[{\"avatar\":1, \"nickname\":\"阿豆\", \"sex\":0, \"mood\":\"\"}, {\"avatar\":2, \"nickname\":\"白白\", \"sex\":1, \"mood\":\"吃的好饱\"}, {\"avatar\":3, \"nickname\":\"欢欢\", \"sex\":1, \"mood\":\"\"}, {\"avatar\":4, \"nickname\":\"吉祥娃娃\", \"sex\":1, \"mood\":\"走开，走开，休息一下\"}, {\"avatar\":5, \"nickname\":\"萌萌\", \"sex\":0, \"mood\":\"O(∩_∩)O~，噢耶\"}, {\"avatar\":6, \"nickname\":\"小曲\", \"sex\":1, \"mood\":\"\"}, {\"avatar\":7, \"nickname\":\"自由的小四\", \"sex\":1, \"mood\":\"开心每一天，快乐一辈子\"}, {\"avatar\":8, \"nickname\":\"自恋的萨萨\", \"sex\":0, \"mood\":\"\"}]");
-	private final int[] my_concern_pets_avatars = new int[] {
-			R.drawable.img_demo_myconcernpet1,
-			R.drawable.img_demo_myconcernpet2,
-			R.drawable.img_demo_myconcernpet3,
-			R.drawable.img_demo_myconcernpet4,
-			R.drawable.img_demo_myconcernpet5,
-			R.drawable.img_demo_myconcernpet6,
-			R.drawable.img_demo_myconcernpet7,
-			R.drawable.img_demo_myconcernpet8 };
+			.toJSONArray("[]");
+	private final int[] my_concern_pets_avatars = new int[] {};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -22,6 +22,10 @@ public enum PetSex {
 		return sex;
 	}
 
+	public Integer getValue() {
+		return sexValue;
+	}
+
 	public static PetSex getSex(Integer sexValue) {
 		PetSex _ret = MALE;
 

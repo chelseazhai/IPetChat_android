@@ -40,15 +40,23 @@
         </activity>
         <activity
             android:name=".account.AccountSetting4FirstActivity"
-            android:label="@string/title_activity_account_setting4_first" >
+            android:label="@string/title_activity_account_setting4_first"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".account.AccountLoginActivity"
-            android:label="@string/title_activity_account_login" >
+            android:label="@string/title_activity_account_login"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".account.AccountRetrievePwdActivity"
+            android:label="@string/title_activity_account_retrieve_pwd"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".account.AccountRegisterActivity"
-            android:label="@string/title_activity_account_register" >
+            android:label="@string/title_activity_account_register"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".tab7tabcontent.IPetChatTabActivity"
@@ -74,47 +82,77 @@
         </activity>
         <activity
             android:name=".petcommunity.PetStarsActivity"
-            android:label="@string/title_activity_pet_stars" >
+            android:label="@string/title_activity_pet_stars"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".petcommunity.PetsNearbyActivity"
-            android:label="@string/title_activity_pets_nearby" >
+            android:label="@string/title_activity_pets_nearby"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".petcommunity.MyConcernActivity"
-            android:label="@string/title_activity_my_concern" >
+            android:label="@string/title_activity_my_concern"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".petcommunity.MessageboxActivity"
-            android:label="@string/title_activity_messagebox" >
+            android:label="@string/title_activity_messagebox"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".settings.PetProfileSettingActivity"
-            android:label="@string/title_activity_pet_profile_setting" >
+            android:label="@string/title_activity_pet_profile_setting"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".settings.PetPhotosSettingActivity"
-            android:label="@string/title_activity_pet_photos_setting" >
+            android:label="@string/title_activity_pet_photos_setting"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".settings.AccountInfoSettingActivity"
-            android:label="@string/title_activity_account_info_setting" >
+            android:label="@string/title_activity_account_info_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".account.AccountModifyPwdActivity"
+            android:label="@string/title_activity_account_modify_pwd"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".petcommunity.BlackListActivity"
-            android:label="@string/title_activity_blacklist" >
+            android:label="@string/title_activity_blacklist"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".settings.PetDeviceBindActivity"
-            android:label="@string/title_activity_pet_device_bind" >
+            android:label="@string/title_activity_pet_device_bind"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".settings.profile.PetProfileEditTextSettingActivity"
+            android:label="@string/title_activity_pet_profile_edittext_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".settings.profile.PetProfileCheckedSettingActivity"
+            android:label="@string/title_activity_pet_profile_checked_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".settings.profile.PetProfileDistrictSettingActivity"
+            android:label="@string/title_activity_pet_profile_district_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".settings.profile.PetProfileDistrictSelectedSettingActivity"
+            android:label="@string/title_activity_pet_profile_district_selected_setting"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".account.AccountSetting4SwitchActivity"
             android:label="@string/title_activity_account_setting4_switch" >
-        </activity>
-        <activity
-            android:name=".account.AccountResetPWDActivity"
-            android:label="@string/title_activity_account_reset_pwd" >
         </activity>
     </application>
 

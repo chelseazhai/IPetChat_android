@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="pet_profile_item">
+    <!-- pet profile setting item -->
+    <declare-styleable name="pet_profile_setting_item">
         <attr name="label" format="string" />
+    </declare-styleable>
+
+    <!-- pet profile district item -->
+    <declare-styleable name="pet_profile_district_item">
         <attr name="text" format="string" />
+        <attr name="subitems" format="reference" />
     </declare-styleable>
 
 </resources>

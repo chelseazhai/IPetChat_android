@@ -22,7 +22,7 @@ public class PetStarsActivity extends IPetChatNavigationActivity {
 	// test data
 	// test by ares
 	private final JSONArray petstars_JSONArray = JSONUtils
-			.toJSONArray("[{\"avatar\":1, \"recommendation\":\"欢欢，是一个聪明的姑娘\"}, {\"avatar\":2, \"recommendation\":\"白白，是一个帅气的小伙\"}, {\"avatar\":3, \"recommendation\":\"阿豆，霸气彻漏\"}, {\"avatar\":4, \"recommendation\":\"小黄，被称作万人迷\"}, {\"avatar\":5, \"recommendation\":\"萌萌，好萌好可爱\"}]");
+			.toJSONArray("[]");
 	private final int[] petstars_avatars = new int[] {
 			R.drawable.img_demo_petstar1, R.drawable.img_demo_petstar2,
 			R.drawable.img_demo_petstar3, R.drawable.img_demo_petstar4,

@@ -40,6 +40,11 @@
     <string name="forget_pwd_btn_title">Forget Pwd</string>
     <string name="login_confirm_btn_title">Login</string>
 
+    <!-- account retrieve password -->
+    <string name="title_activity_account_retrieve_pwd" translatable="false">AccountRetrievePWDActivity</string>
+    <string name="account_retrieve_password_nav_title">Retrieve password</string>
+    <string name="account_retrieve_password_not_implement">account retrieve password not implement</string>
+
     <!-- iPetChat tab activity -->
     <string name="title_activity_ipet_chat_tab" translatable="false">IPetChatTabActivity</string>
 
@@ -152,27 +157,104 @@
     <!-- pet profile -->
     <string name="title_activity_pet_profile_setting" translatable="false">PetProfileSettingActivity</string>
     <string name="pet_profile_setting_nav_title">Pet profile</string>
-    <string name="pet_profile_avatar_label">Avatar</string>
+    <string name="pet_profile_avatar_setting_label">Avatar</string>
     <string name="pet_profile_avatar_imageview_contentdescription" translatable="false">pet profile avatar image view</string>
-    <string name="pet_profile_avatar_settingindicator_imageview_contentdescription" translatable="false">pet profile avatar setting indicator image view</string>
-    <string name="pet_profile_item_textView_hint">No setting</string>
-    <string name="pet_profile_item_settingindicator_imageview_contentdescription" translatable="false">pet profile item setting indicator image view</string>
-    <string name="pet_profile_item_nickname_label">Nickname</string>
-    <string name="pet_profile_item_sex_label">Sex</string>
-    <string name="pet_profile_item_breed_label">Breed</string>
-    <string name="pet_profile_item_age_label">Age</string>
-    <string name="pet_profile_item_height_label">Height</string>
-    <string name="pet_profile_item_weight_label">Weight</string>
-    <string name="pet_profile_item_district_label">District</string>
-    <string name="pet_profile_item_placeUsed2Go_label">Place used to go</string>
+    <string name="pet_profile_avatar_setting_settingindicator_imageview_contentdescription" translatable="false">pet profile avatar setting indicator image view</string>
+    <string name="pet_profile_setting_item_textView_hint">No setting</string>
+    <string name="pet_profile_setting_item_settingindicator_imageview_contentdescription" translatable="false">pet profile item setting indicator image view</string>
+    <string name="pet_profile_nickname_setting_label">Nickname</string>
+    <string name="pet_profile_sex_setting_label">Sex</string>
+    <string name="pet_profile_breed_setting_label">Breed</string>
+    <string name="pet_profile_age_setting_label">Age</string>
+    <string name="pet_profile_height_setting_label">Height</string>
+    <string name="pet_profile_weight_setting_label">Weight</string>
+    <string name="pet_profile_district_setting_label">District</string>
+    <string name="pet_profile_placeUsed2Go_setting_label">Place used to go</string>
+
+    <!-- pet profile setting -->
+    <!-- pet profile editText -->
+    <string name="title_activity_pet_profile_edittext_setting" translatable="false">PetProfileEditTextSettingActivity</string>
+    <string name="pet_profile_edittext_setting_save_button_title">Save</string>
+
+    <!-- pet profile checked -->
+    <string name="title_activity_pet_profile_checked_setting" translatable="false">PetProfileCheckedSettingActivity</string>
+
+    <!-- pet profile district -->
+    <string name="title_activity_pet_profile_district_setting" translatable="false">PetProfileDistrictSettingActivity</string>
+    <string name="pet_profile_district_setting_nav_title">District</string>
+    <string name="pet_profile_district_item_subitemsindicator_imageview_contentdescription" translatable="false">pet profile district item sub items indicator image view</string>
+    <string name="pet_profile_beijing_district_text">Beijing</string>
+    <string name="pet_profile_beijing_tongzhou_district_text">Tongzhou</string>
+    <string name="pet_profile_beijing_fangshan_district_text">Fangshan</string>
+    <string name="pet_profile_shanghai_district_text">Shanghai</string>
+    <string name="pet_profile_shanghai_putuo_district_text">Putuo</string>
+    <string name="pet_profile_shanghai_zhabei_district_text">Zhabei</string>
+    <string name="pet_profile_tianjin_district_text">Tianjin</string>
+    <string name="pet_profile_tianjin_wuqing_district_text">Wuqing</string>
+    <string name="pet_profile_tianjin_hedong_district_text">Hedong</string>
+    <string name="pet_profile_chongqing_district_text">Chongqing</string>
+    <string name="pet_profile_chongqing_kaixian_district_text">Kaixian</string>
+    <string name="pet_profile_chongqing_jiangbei_district_text">Jiangbei</string>
+    <string name="pet_profile_zhejiang_district_text">Zhejiang</string>
+    <string name="pet_profile_zhejiang_lishui_district_text">Lishui</string>
+    <string name="pet_profile_zhejiang_zhoushan_district_text">Zhoushan</string>
+    <string name="pet_profile_guangdong_district_text">Guangdong</string>
+    <string name="pet_profile_guangdong_zhuhai_district_text">Zhuhai</string>
+    <string name="pet_profile_guangdong_huizhou_district_text">Huizhou</string>
+    <string name="pet_profile_jiangsu_district_text">Jiangsu</string>
+    <string name="pet_profile_jiangsu_lianyungang_district_text">Lianyungang</string>
+    <string name="pet_profile_jiangsu_yancheng_district_text">Yancheng</string>
+    <string name="pet_profile_shandong_district_text">Shandong</string>
+    <string name="pet_profile_fujian_district_text">Fujian</string>
+    <string name="pet_profile_anhui_district_text">Anhui</string>
+    <string name="pet_profile_sichuan_district_text">Sichuan</string>
+    <string name="pet_profile_hubei_district_text">Hubei</string>
+    <string name="pet_profile_hebei_district_text">Hebei</string>
+    <string name="pet_profile_yunnan_district_text">Yunnan</string>
+    <string name="pet_profile_heilongjiang_district_text">Heilongjiang</string>
+    <string name="pet_profile_jilin_district_text">Jilin</string>
+    <string name="pet_profile_liaoning_district_text">Liaoning</string>
+    <string name="pet_profile_hainan_district_text">Hainan</string>
+    <string name="pet_profile_hunan_district_text">Hunan</string>
+    <string name="pet_profile_henan_district_text">Henan</string>
+    <string name="pet_profile_guizhou_district_text">Guizhou</string>
+    <string name="pet_profile_jiangxi_district_text">Jiangxi</string>
+    <string name="pet_profile_guangxi_district_text">Guangxi</string>
+    <string name="pet_profile_shanxi1_district_text">Shanxi</string>
+    <string name="pet_profile_shanxi2_district_text">Shanxi</string>
+    <string name="pet_profile_qinghai_district_text">Qinghai</string>
+    <string name="pet_profile_ningxia_district_text">Ningxia</string>
+    <string name="pet_profile_gansu_district_text">Gansu</string>
+    <string name="pet_profile_xizang_district_text">Xizang</string>
+    <string name="pet_profile_neimenggu_district_text">Neimenggu</string>
+    <string name="pet_profile_xinjiang_district_text">Xinjiang</string>
+    <string name="pet_profile_taiwan_district_text">Taiwan</string>
+    <string name="pet_profile_hongkong_district_text">Hongkong</string>
+    <string name="pet_profile_macau_district_text">Macau</string>
+    <string name="pet_profile_custom_district_text">Custom</string>
+
+    <!-- pet profile district selected -->
+    <string name="title_activity_pet_profile_district_selected_setting" translatable="false">PetProfileDistrictSelectedSettingActivity</string>
+    <string name="pet_profile_district_selected_setting_nav_title_format">%s District</string>
 
     <!-- pet photos -->
     <string name="title_activity_pet_photos_setting" translatable="false">PetPhotosSettingActivity</string>
     <string name="pet_photos_setting_nav_title">Pet photos</string>
+    <string name="pet_photos_setting_not_implement">pet photos not implement</string>
 
     <!-- account info -->
     <string name="title_activity_account_info_setting" translatable="false">AccountInfoSettingActivity</string>
     <string name="account_info_setting_nav_title">Account info</string>
+    <string name="account_info_username_item_label">Sego account</string>
+    <string name="account_info_modifypwd_item_label">Modify pwd</string>
+    <string name="account_info_modifypwd_item_indicator_imageview_contentdescription" translatable="false">account info modify password item indicator image view</string>
+
+    <!-- account modify password -->
+    <string name="title_activity_account_modify_pwd" translatable="false">AccountModifyPWDActivity</string>
+    <string name="account_modify_password_nav_title">Modify password</string>
+    <string name="done_modify_account_password_button_title">Done</string>
+    <string name="origin_pwd_editText_hint">Please input the origin password</string>
+    <string name="modify_pwd_editText_hint">Please input the reset new password</string>
 
     <!-- blacklist -->
     <string name="title_activity_blacklist" translatable="false">BlackListActivity</string>
@@ -182,9 +264,9 @@
     <!-- pet device bind -->
     <string name="title_activity_pet_device_bind" translatable="false">PetDeviceBindActivity</string>
     <string name="pet_device_bind_setting_nav_title">Bind pet device</string>
+    <string name="pet_device_bind_setting_not_implement">pet device bind not implement</string>
 
     <!-- others -->
     <string name="title_activity_account_setting4_switch" translatable="false">AccountSetting4SwitchActivity</string>
-    <string name="title_activity_account_reset_pwd" translatable="false">AccountResetPWDActivity</string>
 
 </resources>

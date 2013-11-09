@@ -14,6 +14,10 @@
     <string name="rbgServer_userLoginName" translatable="false">loginid</string>
     <string name="rbgServer_userLoginPwd" translatable="false">password</string>
     <string name="rbgServer_loginReq_resp_userkey" translatable="false">userKey</string>
+    
+    <!-- account modify password -->
+    <string name="rbgServer_accountOriginPwd" translatable="false">password</string>
+    <string name="rbgServer_accountNewResetPwd" translatable="false">newpassword</string>
 
     <!-- pet info -->
     <!-- my pet list -->

@@ -38,4 +38,52 @@
         <item>@string/petDeviceBind_setting_item_title</item>
     </string-array>
 
+    <!-- pet profile district -->
+    <!-- beijing -->
+    <string-array name="beijing_info_array" translatable="false">
+        <item>@string/pet_profile_beijing_tongzhou_district_text</item>
+        <item>@string/pet_profile_beijing_fangshan_district_text</item>
+    </string-array>
+    
+    <!-- shanghai -->
+    <string-array name="shanghai_info_array" translatable="false">
+        <item>@string/pet_profile_shanghai_putuo_district_text</item>
+        <item>@string/pet_profile_shanghai_zhabei_district_text</item>
+    </string-array>
+    
+    <!-- tianjin -->
+    <string-array name="tianjin_info_array" translatable="false">
+        <item>@string/pet_profile_tianjin_wuqing_district_text</item>
+        <item>@string/pet_profile_tianjin_hedong_district_text</item>
+    </string-array>
+    
+    <!-- chongqing -->
+    <string-array name="chongqing_info_array" translatable="false">
+        <item>@string/pet_profile_chongqing_kaixian_district_text</item>
+        <item>@string/pet_profile_chongqing_jiangbei_district_text</item>
+    </string-array>
+    
+    <!-- zhejiang -->
+    <string-array name="zhejiang_info_array" translatable="false">
+        <item>@string/pet_profile_zhejiang_lishui_district_text</item>
+        <item>@string/pet_profile_zhejiang_zhoushan_district_text</item>
+    </string-array>
+    
+    <!-- guangdong -->
+    <string-array name="guangdong_info_array" translatable="false">
+        <item>@string/pet_profile_guangdong_zhuhai_district_text</item>
+        <item>@string/pet_profile_guangdong_huizhou_district_text</item>
+    </string-array>
+    
+    <!-- jiangsu -->
+    <string-array name="jiangsu_info_array" translatable="false">
+        <item>@string/pet_profile_jiangsu_lianyungang_district_text</item>
+        <item>@string/pet_profile_jiangsu_yancheng_district_text</item>
+    </string-array>
+    
+    <!-- test -->
+    <string-array name="test_info_array" translatable="false">
+        <item>Test</item>
+    </string-array>
+
 </resources>

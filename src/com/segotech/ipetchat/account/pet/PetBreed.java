@@ -24,6 +24,10 @@ public enum PetBreed {
 		return breed;
 	}
 
+	public Integer getValue() {
+		return breedValue;
+	}
+
 	public static PetBreed getBreed(Integer breedValue) {
 		PetBreed _ret = OTHERS;
 

@@ -36,6 +36,10 @@
     <string name="forget_pwd_btn_title">忘记密码</string>
     <string name="login_confirm_btn_title">登录</string>
 
+    <!-- account retrieve password -->
+    <string name="account_retrieve_password_nav_title">找回密码</string>
+    <string name="account_retrieve_password_not_implement">找回密码暂未实现</string>
+
     <!-- iPetChat tab activity -->
     <!-- pet info -->
     <!-- pet sex -->
@@ -122,27 +126,99 @@
 
     <!-- pet profile -->
     <string name="pet_profile_setting_nav_title">宠物档案</string>
-    <string name="pet_profile_avatar_label">头像</string>
-    <string name="pet_profile_item_textView_hint">未设置</string>
-    <string name="pet_profile_item_nickname_label">昵称</string>
-    <string name="pet_profile_item_sex_label">性别</string>
-    <string name="pet_profile_item_breed_label">品种</string>
-    <string name="pet_profile_item_age_label">年龄</string>
-    <string name="pet_profile_item_height_label">身高</string>
-    <string name="pet_profile_item_weight_label">体重</string>
-    <string name="pet_profile_item_district_label">地区</string>
-    <string name="pet_profile_item_placeUsed2Go_label">常去玩的地方</string>
+    <string name="pet_profile_avatar_setting_label">头像</string>
+    <string name="pet_profile_setting_item_textView_hint">未设置</string>
+    <string name="pet_profile_nickname_setting_label">昵称</string>
+    <string name="pet_profile_sex_setting_label">性别</string>
+    <string name="pet_profile_breed_setting_label">品种</string>
+    <string name="pet_profile_age_setting_label">年龄</string>
+    <string name="pet_profile_height_setting_label">身高</string>
+    <string name="pet_profile_weight_setting_label">体重</string>
+    <string name="pet_profile_district_setting_label">地区</string>
+    <string name="pet_profile_placeUsed2Go_setting_label">常去玩的地方</string>
+
+    <!-- pet profile setting -->
+    <!-- pet profile editText -->
+    <string name="pet_profile_edittext_setting_save_button_title">保存</string>
+
+    <!-- pet profile checked -->
+
+
+    <!-- pet profile district -->
+    <string name="pet_profile_district_setting_nav_title">地区</string>
+    <string name="pet_profile_beijing_district_text">北京</string>
+    <string name="pet_profile_beijing_tongzhou_district_text">通州</string>
+    <string name="pet_profile_beijing_fangshan_district_text">房山</string>
+    <string name="pet_profile_shanghai_district_text">上海</string>
+    <string name="pet_profile_shanghai_putuo_district_text">普陀</string>
+    <string name="pet_profile_shanghai_zhabei_district_text">闸北</string>
+    <string name="pet_profile_tianjin_district_text">天津</string>
+    <string name="pet_profile_tianjin_wuqing_district_text">武清</string>
+    <string name="pet_profile_tianjin_hedong_district_text">河东</string>
+    <string name="pet_profile_chongqing_district_text">重庆</string>
+    <string name="pet_profile_chongqing_kaixian_district_text">开县</string>
+    <string name="pet_profile_chongqing_jiangbei_district_text">江北</string>      
+    <string name="pet_profile_zhejiang_district_text">浙江</string>
+    <string name="pet_profile_zhejiang_lishui_district_text">丽水</string>
+    <string name="pet_profile_zhejiang_zhoushan_district_text">舟山</string>
+    <string name="pet_profile_guangdong_district_text">广东</string>
+    <string name="pet_profile_guangdong_zhuhai_district_text">珠海</string>
+    <string name="pet_profile_guangdong_huizhou_district_text">惠州</string>
+    <string name="pet_profile_jiangsu_district_text">江苏</string>
+    <string name="pet_profile_jiangsu_lianyungang_district_text">连云港</string>
+    <string name="pet_profile_jiangsu_yancheng_district_text">盐城</string>
+    <string name="pet_profile_shandong_district_text">山东</string>
+    <string name="pet_profile_fujian_district_text">福建</string>
+    <string name="pet_profile_anhui_district_text">安徽</string>
+    <string name="pet_profile_sichuan_district_text">四川</string>
+    <string name="pet_profile_hubei_district_text">湖北</string>
+    <string name="pet_profile_hebei_district_text">河北</string>
+    <string name="pet_profile_yunnan_district_text">云南</string>
+    <string name="pet_profile_heilongjiang_district_text">黑龙江</string>
+    <string name="pet_profile_jilin_district_text">吉林</string>
+    <string name="pet_profile_liaoning_district_text">辽宁</string>
+    <string name="pet_profile_hainan_district_text">海南</string>
+    <string name="pet_profile_hunan_district_text">湖南</string>
+    <string name="pet_profile_henan_district_text">河南</string>
+    <string name="pet_profile_guizhou_district_text">贵州</string>
+    <string name="pet_profile_jiangxi_district_text">江西</string>
+    <string name="pet_profile_guangxi_district_text">广西</string>
+    <string name="pet_profile_shanxi1_district_text">山西</string>
+    <string name="pet_profile_shanxi2_district_text">陕西</string>
+    <string name="pet_profile_qinghai_district_text">青海</string>
+    <string name="pet_profile_ningxia_district_text">宁夏</string>
+    <string name="pet_profile_gansu_district_text">甘肃</string>
+    <string name="pet_profile_xizang_district_text">西藏</string>
+    <string name="pet_profile_neimenggu_district_text">内蒙古</string>
+    <string name="pet_profile_xinjiang_district_text">新疆</string>
+    <string name="pet_profile_taiwan_district_text">台湾</string>
+    <string name="pet_profile_hongkong_district_text">香港</string>
+    <string name="pet_profile_macau_district_text">澳门</string>
+    <string name="pet_profile_custom_district_text">自定义</string>
+
+    <!-- pet profile district selected -->
+    <string name="pet_profile_district_selected_setting_nav_title_format">%s 地区</string>
 
     <!-- pet photos -->
     <string name="pet_photos_setting_nav_title">宠物相册</string>
+    <string name="pet_photos_setting_not_implement">宠物相册暂未实现</string>
 
     <!-- account info -->
     <string name="account_info_setting_nav_title">账号</string>
+    <string name="account_info_username_item_label">赛果号</string>
+    <string name="account_info_modifypwd_item_label">修改密码</string>
+
+    <!-- account modify password -->
+    <string name="account_modify_password_nav_title">修改密码</string>
+    <string name="done_modify_account_password_button_title">完成</string>
+    <string name="origin_pwd_editText_hint">请输入原始密码</string>
+    <string name="modify_pwd_editText_hint">请输入新的密码</string>
 
     <!-- blacklist -->
     <string name="blacklist_setting_nav_title">黑名单管理</string>
 
     <!-- pet device bind -->
     <string name="pet_device_bind_setting_nav_title">绑定硬件设备</string>
+    <string name="pet_device_bind_setting_not_implement">绑定硬件设备暂未实现</string>
 
 </resources>

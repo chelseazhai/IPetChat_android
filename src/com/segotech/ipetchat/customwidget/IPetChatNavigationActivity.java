@@ -10,6 +10,9 @@ import com.segotech.ipetchat.R;
 
 public class IPetChatNavigationActivity extends NavigationActivity {
 
+	// navigation activity pop result extra data key
+	protected final String POP_RET_EXTRADATA_KEY = "pop_result_extradata_key";
+
 	@Override
 	public void setContentView(int layoutResID) {
 		super.setContentView(layoutResID);

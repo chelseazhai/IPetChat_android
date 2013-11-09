@@ -1,7 +1,12 @@
 package com.segotech.ipetchat.settings;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,34 +15,52 @@ import android.widget.ImageView;
 import com.richitec.commontoolkit.user.UserManager;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.account.pet.PetBean;
+import com.segotech.ipetchat.account.pet.PetBreed;
+import com.segotech.ipetchat.account.pet.PetSex;
 import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
-import com.segotech.ipetchat.customwidget.PetProfileItem;
+import com.segotech.ipetchat.customwidget.PetProfileSettingItem;
+import com.segotech.ipetchat.settings.profile.PetProfileCheckedSettingActivity;
+import com.segotech.ipetchat.settings.profile.PetProfileDistrictSettingActivity;
+import com.segotech.ipetchat.settings.profile.PetProfileEditTextSettingActivity;
 
 public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 
 	private static final String LOG_TAG = PetProfileSettingActivity.class
 			.getCanonicalName();
 
+	// pet profile setting request code
+	private static final int PET_PROFILE_NICKNAME_EDITTEXT_SETTING_REQCODE = 200;
+	private static final int PET_PROFILE_AGE_EDITTEXT_SETTING_REQCODE = 201;
+	private static final int PET_PROFILE_HEIGHT_EDITTEXT_SETTING_REQCODE = 202;
+	private static final int PET_PROFILE_WEIGHT_EDITTEXT_SETTING_REQCODE = 203;
+	private static final int PET_PROFILE_PLACEUSED2GO_EDITTEXT_SETTING_REQCODE = 204;
+	private static final int PET_PROFILE_SEX_CHECKED_SETTING_REQCODE = 206;
+	private static final int PET_PROFILE_BREED_CHECKED_SETTING_REQCODE = 207;
+	private static final int PET_PROFILE_DISTRICT_SETTING_REQCODE = 209;
+
+	// user pet info
+	private PetBean _mPetInfo;
+
 	// pet profile avatar imageView
-	private ImageView _mPetProfileImageView;
+	private ImageView _mPetProfileAvatarImageView;
 
-	// pet profile item: nickname, sex, breed, age, height, weight, district and
-	// place used to go
-	private PetProfileItem _mPetProfileNicknameItem;
-	private PetProfileItem _mPetProfileSexItem;
-	private PetProfileItem _mPetProfileBreedItem;
-	private PetProfileItem _mPetProfileAgeItem;
-	private PetProfileItem _mPetProfileHeightItem;
-	private PetProfileItem _mPetProfileWeightItem;
-	private PetProfileItem _mPetProfileDistrictItem;
-	private PetProfileItem _mPetProfilePlaceUsed2GoItem;
+	// pet profile setting item: nickname, sex, breed, age, height, weight,
+	// district and place used to go
+	private PetProfileSettingItem _mPetProfileNicknameSettingItem;
+	private PetProfileSettingItem _mPetProfileSexSettingItem;
+	private PetProfileSettingItem _mPetProfileBreedSettingItem;
+	private PetProfileSettingItem _mPetProfileAgeSettingItem;
+	private PetProfileSettingItem _mPetProfileHeightSettingItem;
+	private PetProfileSettingItem _mPetProfileWeightSettingItem;
+	private PetProfileSettingItem _mPetProfileDistrictSettingItem;
+	private PetProfileSettingItem _mPetProfilePlaceUsed2GoSettingItem;
 
-	// pet profile editText item onclick listener
-	private PetProfileEditTextItemOnClickListener _mPetProfileEditTextItemOnClickListener = new PetProfileEditTextItemOnClickListener();
+	// pet profile editText setting item on click listener
+	private PetProfileEditTextSettingItemOnClickListener _mPetProfileEditTextSettingItemOnClickListener = new PetProfileEditTextSettingItemOnClickListener();
 
-	// pet profile checked item onclick listener
-	private PetProfileCheckedItemOnClickListener _mPetProfileCheckedItemOnClickListener = new PetProfileCheckedItemOnClickListener();
+	// pet profile checked setting item on click listener
+	private PetProfileCheckedSettingItemOnClickListener _mPetProfileCheckedSettingItemOnClickListener = new PetProfileCheckedSettingItemOnClickListener();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,148 +72,372 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 		// set title
 		setTitle(R.string.pet_profile_setting_nav_title);
 
-		// set pet profile avatar item on click listener
-		findViewById(R.id.pet_profile_avatar_item).setOnClickListener(
-				new PetProfileAvatarItemOnClickListener());
+		// set pet profile avatar setting item on click listener
+		findViewById(R.id.pet_profile_avatar_setting_item).setOnClickListener(
+				new PetProfileAvatarSettingItemOnClickListener());
 
 		// get pet profile avatar imageView
-		_mPetProfileImageView = (ImageView) findViewById(R.id.pet_profile_avatar_imageView);
+		_mPetProfileAvatarImageView = (ImageView) findViewById(R.id.pet_profile_avatar_imageView);
 
 		// get pet profile item and set its on click listener
 		// nickname
-		_mPetProfileNicknameItem = (PetProfileItem) findViewById(R.id.pet_profile_nickname_item);
-		_mPetProfileNicknameItem
-				.setOnClickListener(_mPetProfileEditTextItemOnClickListener);
+		_mPetProfileNicknameSettingItem = (PetProfileSettingItem) findViewById(R.id.pet_profile_nickname_setting_item);
+		_mPetProfileNicknameSettingItem
+				.setOnClickListener(_mPetProfileEditTextSettingItemOnClickListener);
 
 		// sex
-		_mPetProfileSexItem = (PetProfileItem) findViewById(R.id.pet_profile_sex_item);
-		_mPetProfileSexItem
-				.setOnClickListener(_mPetProfileCheckedItemOnClickListener);
+		_mPetProfileSexSettingItem = (PetProfileSettingItem) findViewById(R.id.pet_profile_sex_setting_item);
+		_mPetProfileSexSettingItem
+				.setOnClickListener(_mPetProfileCheckedSettingItemOnClickListener);
 
 		// breed
-		_mPetProfileBreedItem = (PetProfileItem) findViewById(R.id.pet_profile_breed_item);
-		_mPetProfileBreedItem
-				.setOnClickListener(_mPetProfileCheckedItemOnClickListener);
+		_mPetProfileBreedSettingItem = (PetProfileSettingItem) findViewById(R.id.pet_profile_breed_setting_item);
+		_mPetProfileBreedSettingItem
+				.setOnClickListener(_mPetProfileCheckedSettingItemOnClickListener);
 
 		// age
-		_mPetProfileAgeItem = (PetProfileItem) findViewById(R.id.pet_profile_age_item);
-		_mPetProfileAgeItem
-				.setOnClickListener(_mPetProfileEditTextItemOnClickListener);
+		_mPetProfileAgeSettingItem = (PetProfileSettingItem) findViewById(R.id.pet_profile_age_setting_item);
+		_mPetProfileAgeSettingItem
+				.setOnClickListener(_mPetProfileEditTextSettingItemOnClickListener);
 
 		// height
-		_mPetProfileHeightItem = (PetProfileItem) findViewById(R.id.pet_profile_height_item);
-		_mPetProfileHeightItem
-				.setOnClickListener(_mPetProfileEditTextItemOnClickListener);
+		_mPetProfileHeightSettingItem = (PetProfileSettingItem) findViewById(R.id.pet_profile_height_setting_item);
+		_mPetProfileHeightSettingItem
+				.setOnClickListener(_mPetProfileEditTextSettingItemOnClickListener);
 
 		// weight
-		_mPetProfileWeightItem = (PetProfileItem) findViewById(R.id.pet_profile_weight_item);
-		_mPetProfileWeightItem
-				.setOnClickListener(_mPetProfileEditTextItemOnClickListener);
+		_mPetProfileWeightSettingItem = (PetProfileSettingItem) findViewById(R.id.pet_profile_weight_setting_item);
+		_mPetProfileWeightSettingItem
+				.setOnClickListener(_mPetProfileEditTextSettingItemOnClickListener);
 
 		// district
-		_mPetProfileDistrictItem = (PetProfileItem) findViewById(R.id.pet_profile_district_item);
-		_mPetProfileDistrictItem
-				.setOnClickListener(new PetProfileDistrictItemOnClickListener());
+		_mPetProfileDistrictSettingItem = (PetProfileSettingItem) findViewById(R.id.pet_profile_district_setting_item);
+		_mPetProfileDistrictSettingItem
+				.setOnClickListener(new PetProfileDistrictSettingItemOnClickListener());
 
 		// place used to go
-		_mPetProfilePlaceUsed2GoItem = (PetProfileItem) findViewById(R.id.pet_profile_placeUsed2Go_item);
-		_mPetProfilePlaceUsed2GoItem
-				.setOnClickListener(_mPetProfileEditTextItemOnClickListener);
+		_mPetProfilePlaceUsed2GoSettingItem = (PetProfileSettingItem) findViewById(R.id.pet_profile_placeUsed2Go_setting_item);
+		_mPetProfilePlaceUsed2GoSettingItem
+				.setOnClickListener(_mPetProfileEditTextSettingItemOnClickListener);
 
 		// get user pet info
-		PetBean _petInfo = IPCUserExtension.getUserPetInfo(UserManager
-				.getInstance().getUser());
+		_mPetInfo = IPCUserExtension.getUserPetInfo(UserManager.getInstance()
+				.getUser());
 
-		Log.d(LOG_TAG, "my pet info = " + _petInfo);
+		Log.d(LOG_TAG, "my pet info = " + _mPetInfo);
 
 		// check user pet info
-		if (null != _petInfo) {
+		if (null != _mPetInfo) {
 			// check and set pet avatar
-			if (null != _petInfo.getAvatar()) {
-				_mPetProfileImageView.setImageBitmap(BitmapFactory
-						.decodeByteArray(_petInfo.getAvatar(), 0,
-								_petInfo.getAvatar().length));
+			if (null != _mPetInfo.getAvatar()) {
+				_mPetProfileAvatarImageView.setImageBitmap(BitmapFactory
+						.decodeByteArray(_mPetInfo.getAvatar(), 0,
+								_mPetInfo.getAvatar().length));
 			}
 
 			// set pet nickname
-			_mPetProfileNicknameItem.setText(_petInfo.getNickname());
+			_mPetProfileNicknameSettingItem.setText(_mPetInfo.getNickname());
 
 			// set pet sex
-			_mPetProfileSexItem.setText(_petInfo.getSex().getSex());
+			_mPetProfileSexSettingItem.setText(_mPetInfo.getSex().getSex());
 
 			// set pet breed
-			_mPetProfileBreedItem.setText(_petInfo.getBreed().getBreed());
+			_mPetProfileBreedSettingItem.setText(_mPetInfo.getBreed()
+					.getBreed());
 
 			// set pet age
-			_mPetProfileAgeItem.setText(String.format(
-					getResources().getString(R.string.pet_age_value_format),
-					_petInfo.getAge()));
+			_mPetProfileAgeSettingItem.setText(String.format(getResources()
+					.getString(R.string.pet_age_value_format), _mPetInfo
+					.getAge()));
 
 			// set pet height
-			_mPetProfileHeightItem.setText(String.format(getResources()
-					.getString(R.string.pet_height_value_format), _petInfo
+			_mPetProfileHeightSettingItem.setText(String.format(getResources()
+					.getString(R.string.pet_height_value_format), _mPetInfo
 					.getHeight()));
 
 			// set pet weight
-			_mPetProfileWeightItem.setText(String.format(getResources()
-					.getString(R.string.pet_weight_value_format), _petInfo
+			_mPetProfileWeightSettingItem.setText(String.format(getResources()
+					.getString(R.string.pet_weight_value_format), _mPetInfo
 					.getWeight()));
 
 			// set pet district
-			_mPetProfileDistrictItem.setText(_petInfo.getDistrict());
+			_mPetProfileDistrictSettingItem.setText(_mPetInfo.getDistrict());
 
 			// set pet place used to go
-			_mPetProfilePlaceUsed2GoItem.setText(_petInfo.getPlaceUsed2Go());
+			_mPetProfilePlaceUsed2GoSettingItem.setText(_mPetInfo
+					.getPlaceUsed2Go());
 		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// check result code
+		switch (resultCode) {
+		case RESULT_OK:
+			// check pop result extra data
+			if (null != data) {
+				// check request code and set user set pet profile setting item
+				switch (requestCode) {
+				case PET_PROFILE_NICKNAME_EDITTEXT_SETTING_REQCODE:
+					// get setting nickname
+					String _nickname = data
+							.getStringExtra(POP_RET_EXTRADATA_KEY);
+
+					_mPetProfileNicknameSettingItem.setText(_nickname);
+					_mPetInfo.setNickname(_nickname);
+					break;
+
+				case PET_PROFILE_SEX_CHECKED_SETTING_REQCODE:
+					// get setting sex and its value
+					String _sex = data.getStringExtra(POP_RET_EXTRADATA_KEY);
+					Integer _sexValue = data
+							.getIntExtra(
+									PetProfileCheckedSettingActivity.PET_PROFILE_CHECKED_SETTING_CHECKED_INDEX_KEY,
+									0);
+
+					_mPetProfileSexSettingItem.setText(_sex);
+					_mPetInfo.setSex(PetSex.getSex(_sexValue));
+					break;
+
+				case PET_PROFILE_BREED_CHECKED_SETTING_REQCODE:
+					// get setting breed and its value
+					String _breed = data.getStringExtra(POP_RET_EXTRADATA_KEY);
+					Integer _breedValue = data
+							.getIntExtra(
+									PetProfileCheckedSettingActivity.PET_PROFILE_CHECKED_SETTING_CHECKED_INDEX_KEY,
+									0);
+
+					_mPetProfileBreedSettingItem.setText(_breed);
+					_mPetInfo.setBreed(PetBreed.getBreed(_breedValue));
+					break;
+
+				case PET_PROFILE_AGE_EDITTEXT_SETTING_REQCODE:
+					// get setting age
+					Integer _age = Integer.parseInt(data
+							.getStringExtra(POP_RET_EXTRADATA_KEY));
+
+					_mPetProfileAgeSettingItem.setText(String.format(
+							getResources().getString(
+									R.string.pet_age_value_format), _age));
+					_mPetInfo.setAge(_age);
+					break;
+
+				case PET_PROFILE_HEIGHT_EDITTEXT_SETTING_REQCODE:
+					// get setting height
+					Float _height = Float.parseFloat(data
+							.getStringExtra(POP_RET_EXTRADATA_KEY));
+
+					_mPetProfileHeightSettingItem
+							.setText(String.format(
+									getResources().getString(
+											R.string.pet_height_value_format),
+									_height));
+					_mPetInfo.setHeight(_height);
+					break;
+
+				case PET_PROFILE_WEIGHT_EDITTEXT_SETTING_REQCODE:
+					// get setting weight
+					Float _weight = Float.parseFloat(data
+							.getStringExtra(POP_RET_EXTRADATA_KEY));
+
+					_mPetProfileWeightSettingItem
+							.setText(String.format(
+									getResources().getString(
+											R.string.pet_weight_value_format),
+									_weight));
+					_mPetInfo.setWeight(_weight);
+					break;
+
+				case PET_PROFILE_DISTRICT_SETTING_REQCODE:
+					_mPetProfileDistrictSettingItem.setText(data
+							.getStringExtra(POP_RET_EXTRADATA_KEY));
+					break;
+
+				case PET_PROFILE_PLACEUSED2GO_EDITTEXT_SETTING_REQCODE:
+					// get setting place used to go
+					String _placeUsed2Go = data
+							.getStringExtra(POP_RET_EXTRADATA_KEY);
+
+					_mPetProfilePlaceUsed2GoSettingItem.setText(_placeUsed2Go);
+					_mPetInfo.setPlaceUsed2Go(_placeUsed2Go);
+					break;
+				}
+			}
+			break;
+
+		default:
+			// nothing to do
+			break;
+		}
+
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	// inner class
-	// pet profile avatar item on click listener
-	class PetProfileAvatarItemOnClickListener implements OnClickListener {
+	// pet profile avatar setting item on click listener
+	class PetProfileAvatarSettingItemOnClickListener implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			Log.d(LOG_TAG, "PetProfileAvatarItemOnClickListener");
+			Log.d(LOG_TAG, "PetProfileAvatarSettingItemOnClickListener");
 
 			//
 		}
 
 	}
 
-	// pet profile editText item on click listener
-	class PetProfileEditTextItemOnClickListener implements OnClickListener {
+	// pet profile editText setting item on click listener
+	class PetProfileEditTextSettingItemOnClickListener implements
+			OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			Log.d(LOG_TAG, "PetProfileEditTextItemOnClickListener, item id = "
-					+ v.getId());
+			// define pet profile setting item, editText text, input type and
+			// request code
+			PetProfileSettingItem _petProfileSettingItem = null;
+			String _editTextText = "";
+			int _editTextInputType = InputType.TYPE_CLASS_TEXT;
+			int _requestCode = 0;
 
-			//
+			// check setting item id then set pet profile setting item, editText
+			// text, input type and request code
+			switch (v.getId()) {
+			case R.id.pet_profile_nickname_setting_item:
+				_petProfileSettingItem = _mPetProfileNicknameSettingItem;
+				_editTextText = _mPetProfileNicknameSettingItem.getText();
+				_requestCode = PET_PROFILE_NICKNAME_EDITTEXT_SETTING_REQCODE;
+				break;
+
+			case R.id.pet_profile_age_setting_item:
+				_petProfileSettingItem = _mPetProfileAgeSettingItem;
+				_editTextText = _mPetInfo.getAge().toString();
+				_editTextInputType = InputType.TYPE_CLASS_NUMBER;
+				_requestCode = PET_PROFILE_AGE_EDITTEXT_SETTING_REQCODE;
+				break;
+
+			case R.id.pet_profile_height_setting_item:
+				_petProfileSettingItem = _mPetProfileHeightSettingItem;
+				_editTextText = _mPetInfo.getHeight().toString();
+				_editTextInputType = InputType.TYPE_CLASS_NUMBER;
+				_requestCode = PET_PROFILE_HEIGHT_EDITTEXT_SETTING_REQCODE;
+				break;
+
+			case R.id.pet_profile_weight_setting_item:
+				_petProfileSettingItem = _mPetProfileWeightSettingItem;
+				_editTextText = _mPetInfo.getWeight().toString();
+				_editTextInputType = InputType.TYPE_CLASS_NUMBER;
+				_requestCode = PET_PROFILE_WEIGHT_EDITTEXT_SETTING_REQCODE;
+				break;
+
+			case R.id.pet_profile_placeUsed2Go_setting_item:
+				_petProfileSettingItem = _mPetProfilePlaceUsed2GoSettingItem;
+				_editTextText = _mPetProfilePlaceUsed2GoSettingItem.getText();
+				_requestCode = PET_PROFILE_PLACEUSED2GO_EDITTEXT_SETTING_REQCODE;
+				break;
+			}
+
+			// define extra data
+			Map<String, Object> _extraData = new HashMap<String, Object>();
+
+			// check pet profile setting item and set extra data
+			if (null != _petProfileSettingItem) {
+				_extraData
+						.put(PetProfileEditTextSettingActivity.PET_PROFILE_EDITTEXT_TITLE_KEY,
+								_petProfileSettingItem.getLabel());
+				_extraData
+						.put(PetProfileEditTextSettingActivity.PET_PROFILE_EDITTEXT_HINT_KEY,
+								_petProfileSettingItem.getLabel());
+				_extraData
+						.put(PetProfileEditTextSettingActivity.PET_PROFILE_EDITTEXT_TEXT_KEY,
+								_editTextText);
+				_extraData
+						.put(PetProfileEditTextSettingActivity.PET_PROFILE_EDITTEXT_INPUTTYPE_KEY,
+								_editTextInputType);
+			}
+
+			// go to target activity
+			pushActivityForResult(PetProfileEditTextSettingActivity.class,
+					_extraData, _requestCode);
 		}
-
 	}
 
-	// pet profile checked item on click listener
-	class PetProfileCheckedItemOnClickListener implements OnClickListener {
+	// pet profile checked setting item on click listener
+	class PetProfileCheckedSettingItemOnClickListener implements
+			OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			Log.d(LOG_TAG, "PetProfileCheckedItemOnClickListener, item id = "
-					+ v.getId());
+			// define pet profile checked setting item, its index, sub items and
+			// request code
+			PetProfileSettingItem _petProfileSettingItem = null;
+			int _petProfileCheckedSettingItemIndex = 0;
+			String[] _petProfileCheckedSettingItemSubItems = null;
+			int _requestCode = 0;
 
-			//
+			// check setting item id then set pet profile checked setting item,
+			// its index, sub items and request code
+			switch (v.getId()) {
+			case R.id.pet_profile_sex_setting_item:
+				_petProfileSettingItem = _mPetProfileSexSettingItem;
+				_petProfileCheckedSettingItemIndex = _mPetInfo.getSex()
+						.getValue();
+				_petProfileCheckedSettingItemSubItems = getResources()
+						.getStringArray(R.array.pet_sex_array);
+				_requestCode = PET_PROFILE_SEX_CHECKED_SETTING_REQCODE;
+				break;
+
+			case R.id.pet_profile_breed_setting_item:
+				_petProfileSettingItem = _mPetProfileBreedSettingItem;
+				_petProfileCheckedSettingItemIndex = _mPetInfo.getBreed()
+						.getValue();
+				_petProfileCheckedSettingItemSubItems = getResources()
+						.getStringArray(R.array.pet_breed_array);
+				_requestCode = PET_PROFILE_BREED_CHECKED_SETTING_REQCODE;
+				break;
+			}
+
+			// define extra data
+			Map<String, Object> _extraData = new HashMap<String, Object>();
+
+			// check pet profile setting item, sub items and set extra data
+			if (null != _petProfileSettingItem
+					&& null != _petProfileCheckedSettingItemSubItems) {
+				// put pet profile checked setting name, selected index and sub
+				// items in extra data
+				_extraData
+						.put(PetProfileCheckedSettingActivity.PET_PROFILE_CHECKED_SETTING_NAME_KEY,
+								_petProfileSettingItem.getLabel());
+				_extraData
+						.put(PetProfileCheckedSettingActivity.PET_PROFILE_CHECKED_SETTING_CHECKED_INDEX_KEY,
+								_petProfileCheckedSettingItemIndex);
+				_extraData
+						.put(PetProfileCheckedSettingActivity.PET_PROFILE_CHECKED_SETTING_SUBITEMS_KEY,
+								_petProfileCheckedSettingItemSubItems);
+			}
+
+			// go to target activity
+			pushActivityForResult(PetProfileCheckedSettingActivity.class,
+					_extraData, _requestCode);
 		}
-
 	}
 
-	// pet profile district item on click listener
-	class PetProfileDistrictItemOnClickListener implements OnClickListener {
+	// pet profile district setting item on click listener
+	class PetProfileDistrictSettingItemOnClickListener implements
+			OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			Log.d(LOG_TAG, "PetProfileDistrictItemOnClickListener");
+			// define extra data
+			Map<String, String> _extraData = new HashMap<String, String>();
 
-			//
+			// put pet profile district in extra data
+			_extraData
+					.put(PetProfileDistrictSettingActivity.PET_PROFILE_CUSTOM_DISTRICT_VALUE_KEY,
+							_mPetProfileDistrictSettingItem.getText());
+
+			// go to target activity
+			pushActivityForResult(PetProfileDistrictSettingActivity.class,
+					_extraData, PET_PROFILE_DISTRICT_SETTING_REQCODE);
 		}
 
 	}

@@ -116,7 +116,7 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 
 			// test by ares
 			// get pet device battery progress
-			int _petDeviceBatteryProgress = 86;
+			int _petDeviceBatteryProgress = 0;
 
 			// set pet device battery
 			((ProgressBar) findViewById(R.id.pet_deviceBattery_progressBar))
@@ -126,7 +126,7 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 
 			// test by ares
 			// get pet sports score progress
-			int _petSportsScoreProgress = 95;
+			int _petSportsScoreProgress = 0;
 
 			// set pet sports score
 			((ProgressBar) findViewById(R.id.pet_sportsScore_progressBar))

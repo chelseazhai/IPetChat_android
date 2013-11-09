@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,8 +17,12 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
+import com.segotech.ipetchat.account.pet.PetBean;
+import com.segotech.ipetchat.account.pet.PetSex;
+import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
 
 public class SportsHealthTabContentActivity extends
@@ -25,12 +30,6 @@ public class SportsHealthTabContentActivity extends
 
 	private static final String LOG_TAG = SportsHealthTabContentActivity.class
 			.getCanonicalName();
-
-	// test data
-	// test by ares
-	private final JSONObject demo_pet_JSONInfo = JSONUtils
-			.toJSONObject("{\"avatar\":1, \"nickname\":\"乐乐\", \"sex\":1, \"deviceBattery\":85, \"sportsScore\":90, \"breed\":\"金毛\", \"age\":24, \"height\":50.0, \"weight\":25.0, \"district\":\"江苏南京\", \"placeUsed2Go\":\"玄武湖公园\"}");
-	private final int demo_pet_avatar = R.drawable.img_demo_pet;
 
 	// pet info tableRow data keys
 	private static final String PET_INFO_LABEL_KEY = "pet_info_label_key";
@@ -49,135 +48,145 @@ public class SportsHealthTabContentActivity extends
 		// set title
 		setTitle(R.string.sports_health_tab7nav_title);
 
-		// test by ares
-		// set pet avatar
-		((ImageView) findViewById(R.id.pet_avatar_imageView))
-				.setImageResource(demo_pet_avatar);
-
-		// set pet nickname
-		((TextView) findViewById(R.id.pet_nickname_textView)).setText(JSONUtils
-				.getStringFromJSONObject(demo_pet_JSONInfo, "nickname"));
-
-		// set pet sex
-		((ImageView) findViewById(R.id.pet_sex_imageView))
-				.setImageResource(0 == JSONUtils.getIntegerFromJSONObject(
-						demo_pet_JSONInfo, "sex") ? R.drawable.img_male
-						: R.drawable.img_female);
-
-		// define pet other info JSONArray
-		JSONArray _petOtherInfoList = new JSONArray();
-
-		// set them
-		try {
-			// breed
-			JSONObject _petOtherInfoBreed = new JSONObject();
-
-			_petOtherInfoBreed.put(PET_INFO_LABEL_KEY, getResources()
-					.getString(R.string.pet_breed_label));
-			_petOtherInfoBreed.put(PET_INFO_VALUE_KEY, JSONUtils
-					.getStringFromJSONObject(demo_pet_JSONInfo, "breed"));
-
-			// add to list
-			_petOtherInfoList.put(_petOtherInfoBreed);
-
-			// age
-			JSONObject _petOtherInfoAge = new JSONObject();
-
-			_petOtherInfoAge.put(PET_INFO_LABEL_KEY,
-					getResources().getString(R.string.pet_age_label));
-			_petOtherInfoAge.put(PET_INFO_VALUE_KEY,
-					String.format(
-							getResources().getString(
-									R.string.pet_age_value_format), JSONUtils
-									.getIntegerFromJSONObject(
-											demo_pet_JSONInfo, "age")));
-
-			// add to list
-			_petOtherInfoList.put(_petOtherInfoAge);
-
-			// height
-			JSONObject _petOtherInfoHeight = new JSONObject();
-
-			_petOtherInfoHeight.put(PET_INFO_LABEL_KEY, getResources()
-					.getString(R.string.pet_height_label));
-			_petOtherInfoHeight.put(PET_INFO_VALUE_KEY, String.format(
-					getResources().getString(R.string.pet_height_value_format),
-					JSONUtils.getDoubleFromJSONObject(demo_pet_JSONInfo,
-							"height")));
-
-			// add to list
-			_petOtherInfoList.put(_petOtherInfoHeight);
-
-			// weight
-			JSONObject _petOtherInfoWeight = new JSONObject();
-
-			_petOtherInfoWeight.put(PET_INFO_LABEL_KEY, getResources()
-					.getString(R.string.pet_weight_label));
-			_petOtherInfoWeight.put(PET_INFO_VALUE_KEY, String.format(
-					getResources().getString(R.string.pet_weight_value_format),
-					JSONUtils.getDoubleFromJSONObject(demo_pet_JSONInfo,
-							"weight")));
-
-			// add to list
-			_petOtherInfoList.put(_petOtherInfoWeight);
-		} catch (JSONException e) {
-			e.printStackTrace();
-
-			Log.e(LOG_TAG,
-					"Put json value with key error, exception message = "
-							+ e.getMessage());
-		}
-
-		// get pet info tableRow
-		TableRow _petInfoTableRow = (TableRow) findViewById(R.id.pet_info_tableRow);
-
-		// set pet info tableRow data
-		for (int i = 0; i < _petOtherInfoList.length(); i++) {
-			// get pet info tableRow item linearLayout
-			LinearLayout _petInfoTableRowItem = (LinearLayout) _petInfoTableRow
-					.getChildAt(i);
-
-			// get pet other info JSONObject
-			JSONObject _petOtherInfo = null;
-			try {
-				_petOtherInfo = (JSONObject) _petOtherInfoList.get(i);
-			} catch (JSONException e) {
-				e.printStackTrace();
-
-				Log.e(LOG_TAG, "Get json object from json array = "
-						+ _petOtherInfoList + " at index = " + i
-						+ " error, exception message = " + e.getMessage());
-			}
-
-			// set pet info label and value textView text
-			((TextView) _petInfoTableRowItem
-					.findViewById(R.id.pet_info_label_textView))
-					.setText(JSONUtils.getStringFromJSONObject(_petOtherInfo,
-							PET_INFO_LABEL_KEY));
-
-			((TextView) _petInfoTableRowItem
-					.findViewById(R.id.pet_info_value_textView))
-					.setText(JSONUtils.getStringFromJSONObject(_petOtherInfo,
-							PET_INFO_VALUE_KEY));
-
-		}
-
 		// set pet sports info segment radioGroup
 		((RadioGroup) findViewById(R.id.pet_sportsInfo_segment_radioGroup))
 				.setOnCheckedChangeListener(new PetSportsInfoSegmentRadioGroupOnCheckedChangeListener());
+	}
 
-		// get pet sports score progress
-		int _petSportsScoreProgress = JSONUtils.getIntegerFromJSONObject(
-				demo_pet_JSONInfo, "sportsScore");
+	@Override
+	protected void onResume() {
+		// get user pet info
+		PetBean _petInfo = IPCUserExtension.getUserPetInfo(UserManager
+				.getInstance().getUser());
 
-		// set pet sports score
-		((ProgressBar) findViewById(R.id.pet_sportsScore_progressBar))
-				.setProgress(_petSportsScoreProgress);
-		((TextView) findViewById(R.id.pet_sportsScore_textView)).setText(""
-				+ _petSportsScoreProgress);
+		Log.d(LOG_TAG, "my pet info = " + _petInfo);
 
-		//
-		//
+		// check user pet info
+		if (null != _petInfo) {
+			// check and set pet avatar
+			if (null != _petInfo.getAvatar()) {
+				((ImageView) findViewById(R.id.pet_avatar_imageView))
+						.setImageBitmap(BitmapFactory.decodeByteArray(
+								_petInfo.getAvatar(), 0,
+								_petInfo.getAvatar().length));
+			}
+
+			// set pet nickname
+			((TextView) findViewById(R.id.pet_nickname_textView))
+					.setText(_petInfo.getNickname());
+
+			// set pet sex
+			((ImageView) findViewById(R.id.pet_sex_imageView))
+					.setImageResource(PetSex.MALE == _petInfo.getSex() ? R.drawable.img_male
+							: R.drawable.img_female);
+
+			// define pet other info JSONArray
+			JSONArray _petOtherInfoList = new JSONArray();
+
+			// set them
+			try {
+				// breed
+				JSONObject _petOtherInfoBreed = new JSONObject();
+
+				_petOtherInfoBreed.put(PET_INFO_LABEL_KEY, getResources()
+						.getString(R.string.pet_breed_label));
+				_petOtherInfoBreed.put(PET_INFO_VALUE_KEY, _petInfo.getBreed()
+						.getBreed());
+
+				// add to list
+				_petOtherInfoList.put(_petOtherInfoBreed);
+
+				// age
+				JSONObject _petOtherInfoAge = new JSONObject();
+
+				_petOtherInfoAge.put(PET_INFO_LABEL_KEY, getResources()
+						.getString(R.string.pet_age_label));
+				_petOtherInfoAge.put(PET_INFO_VALUE_KEY, String
+						.format(getResources().getString(
+								R.string.pet_age_value_format),
+								_petInfo.getAge()));
+
+				// add to list
+				_petOtherInfoList.put(_petOtherInfoAge);
+
+				// height
+				JSONObject _petOtherInfoHeight = new JSONObject();
+
+				_petOtherInfoHeight.put(PET_INFO_LABEL_KEY, getResources()
+						.getString(R.string.pet_height_label));
+				_petOtherInfoHeight.put(PET_INFO_VALUE_KEY, String.format(
+						getResources().getString(
+								R.string.pet_height_value_format),
+						_petInfo.getHeight()));
+
+				// add to list
+				_petOtherInfoList.put(_petOtherInfoHeight);
+
+				// weight
+				JSONObject _petOtherInfoWeight = new JSONObject();
+
+				_petOtherInfoWeight.put(PET_INFO_LABEL_KEY, getResources()
+						.getString(R.string.pet_weight_label));
+				_petOtherInfoWeight.put(PET_INFO_VALUE_KEY, String.format(
+						getResources().getString(
+								R.string.pet_weight_value_format),
+						_petInfo.getWeight()));
+
+				// add to list
+				_petOtherInfoList.put(_petOtherInfoWeight);
+			} catch (JSONException e) {
+				e.printStackTrace();
+
+				Log.e(LOG_TAG,
+						"Put json value with key error, exception message = "
+								+ e.getMessage());
+			}
+
+			// get pet info tableRow
+			TableRow _petInfoTableRow = (TableRow) findViewById(R.id.pet_info_tableRow);
+
+			// set pet info tableRow data
+			for (int i = 0; i < _petOtherInfoList.length(); i++) {
+				// get pet info tableRow item linearLayout
+				LinearLayout _petInfoTableRowItem = (LinearLayout) _petInfoTableRow
+						.getChildAt(i);
+
+				// get pet other info JSONObject
+				JSONObject _petOtherInfo = null;
+				try {
+					_petOtherInfo = (JSONObject) _petOtherInfoList.get(i);
+				} catch (JSONException e) {
+					e.printStackTrace();
+
+					Log.e(LOG_TAG, "Get json object from json array = "
+							+ _petOtherInfoList + " at index = " + i
+							+ " error, exception message = " + e.getMessage());
+				}
+
+				// set pet info label and value textView text
+				((TextView) _petInfoTableRowItem
+						.findViewById(R.id.pet_info_label_textView))
+						.setText(JSONUtils.getStringFromJSONObject(
+								_petOtherInfo, PET_INFO_LABEL_KEY));
+
+				((TextView) _petInfoTableRowItem
+						.findViewById(R.id.pet_info_value_textView))
+						.setText(JSONUtils.getStringFromJSONObject(
+								_petOtherInfo, PET_INFO_VALUE_KEY));
+
+			}
+
+			// get pet sports score progress
+			int _petSportsScoreProgress = 0;
+
+			// set pet sports score
+			((ProgressBar) findViewById(R.id.pet_sportsScore_progressBar))
+					.setProgress(_petSportsScoreProgress);
+			((TextView) findViewById(R.id.pet_sportsScore_textView)).setText(""
+					+ _petSportsScoreProgress);
+		}
+
+		super.onResume();
 	}
 
 	// inner class

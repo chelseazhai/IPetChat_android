@@ -1,0 +1,41 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_light_gray"
+    android:paddingBottom="20dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="20dp"
+    android:scrollbars="none"
+    tools:context=".account.AccountModifyPWDActivity" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/origin_pwd_editText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/common_edittext_bg"
+            android:ellipsize="end"
+            android:hint="@string/origin_pwd_editText_hint"
+            android:inputType="textPassword" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/modify_pwd_editText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/common_edittext_bg"
+            android:ellipsize="end"
+            android:hint="@string/modify_pwd_editText_hint"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+</ScrollView>

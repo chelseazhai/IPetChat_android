@@ -1,6 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:ipetchat="http://schemas.android.com/apk/res-auto"
+    xmlns:ipetchat="http://schemas.android.com/apk/res/com.segotech.ipetchat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_light_gray"
@@ -17,10 +17,10 @@
         android:orientation="vertical" >
 
         <RelativeLayout
-            android:id="@+id/pet_profile_avatar_item"
+            android:id="@+id/pet_profile_avatar_setting_item"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/pet_profile_single_item_bg"
+            android:background="@drawable/common_setting_single_item_bg"
             android:clickable="true"
             android:paddingBottom="8dp"
             android:paddingLeft="12dp"
@@ -33,16 +33,16 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
-                android:text="@string/pet_profile_avatar_label"
+                android:text="@string/pet_profile_avatar_setting_label"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ImageView
-                android:id="@+id/pet_profile_avatar_settingIndicator_imageView"
+                android:id="@+id/pet_profile_avatar_setting_settingIndicator_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:contentDescription="@string/pet_profile_avatar_settingindicator_imageview_contentdescription"
+                android:contentDescription="@string/pet_profile_avatar_setting_settingindicator_imageview_contentdescription"
                 android:src="@drawable/img_listview_item_detail_small_indicator" />
 
             <ImageView
@@ -51,7 +51,7 @@
                 android:layout_height="60dp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="12dp"
-                android:layout_toLeftOf="@id/pet_profile_avatar_settingIndicator_imageView"
+                android:layout_toLeftOf="@id/pet_profile_avatar_setting_settingIndicator_imageView"
                 android:background="@drawable/pet_profile_avatar_bg"
                 android:contentDescription="@string/pet_profile_avatar_imageview_contentdescription"
                 android:scaleType="centerInside"
@@ -64,22 +64,22 @@
             android:layout_marginTop="20dp"
             android:orientation="vertical" >
 
-            <com.segotech.ipetchat.customwidget.PetProfileItem
-                android:id="@+id/pet_profile_nickname_item"
+            <com.segotech.ipetchat.customwidget.PetProfileSettingItem
+                android:id="@+id/pet_profile_nickname_setting_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/pet_profile_topmultiple_item_bg"
-                ipetchat:label="@string/pet_profile_item_nickname_label" >
-            </com.segotech.ipetchat.customwidget.PetProfileItem>
+                android:background="@drawable/common_setting_topmultiple_item_bg"
+                ipetchat:label="@string/pet_profile_nickname_setting_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileSettingItem>
 
-            <com.segotech.ipetchat.customwidget.PetProfileItem
-                android:id="@+id/pet_profile_sex_item"
+            <com.segotech.ipetchat.customwidget.PetProfileSettingItem
+                android:id="@+id/pet_profile_sex_setting_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-1dp"
-                android:background="@drawable/pet_profile_bottommultiple_item_bg"
-                ipetchat:label="@string/pet_profile_item_sex_label" >
-            </com.segotech.ipetchat.customwidget.PetProfileItem>
+                android:background="@drawable/common_setting_bottommultiple_item_bg"
+                ipetchat:label="@string/pet_profile_sex_setting_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileSettingItem>
         </LinearLayout>
 
         <LinearLayout
@@ -88,40 +88,40 @@
             android:layout_marginTop="20dp"
             android:orientation="vertical" >
 
-            <com.segotech.ipetchat.customwidget.PetProfileItem
-                android:id="@+id/pet_profile_breed_item"
+            <com.segotech.ipetchat.customwidget.PetProfileSettingItem
+                android:id="@+id/pet_profile_breed_setting_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/pet_profile_topmultiple_item_bg"
-                ipetchat:label="@string/pet_profile_item_breed_label" >
-            </com.segotech.ipetchat.customwidget.PetProfileItem>
+                android:background="@drawable/common_setting_topmultiple_item_bg"
+                ipetchat:label="@string/pet_profile_breed_setting_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileSettingItem>
 
-            <com.segotech.ipetchat.customwidget.PetProfileItem
-                android:id="@+id/pet_profile_age_item"
+            <com.segotech.ipetchat.customwidget.PetProfileSettingItem
+                android:id="@+id/pet_profile_age_setting_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-1dp"
-                android:background="@drawable/pet_profile_middlemultiple_item_bg"
-                ipetchat:label="@string/pet_profile_item_age_label" >
-            </com.segotech.ipetchat.customwidget.PetProfileItem>
+                android:background="@drawable/common_setting_middlemultiple_item_bg"
+                ipetchat:label="@string/pet_profile_age_setting_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileSettingItem>
 
-            <com.segotech.ipetchat.customwidget.PetProfileItem
-                android:id="@+id/pet_profile_height_item"
+            <com.segotech.ipetchat.customwidget.PetProfileSettingItem
+                android:id="@+id/pet_profile_height_setting_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-1dp"
-                android:background="@drawable/pet_profile_middlemultiple_item_bg"
-                ipetchat:label="@string/pet_profile_item_height_label" >
-            </com.segotech.ipetchat.customwidget.PetProfileItem>
+                android:background="@drawable/common_setting_middlemultiple_item_bg"
+                ipetchat:label="@string/pet_profile_height_setting_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileSettingItem>
 
-            <com.segotech.ipetchat.customwidget.PetProfileItem
-                android:id="@+id/pet_profile_weight_item"
+            <com.segotech.ipetchat.customwidget.PetProfileSettingItem
+                android:id="@+id/pet_profile_weight_setting_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-1dp"
-                android:background="@drawable/pet_profile_bottommultiple_item_bg"
-                ipetchat:label="@string/pet_profile_item_weight_label" >
-            </com.segotech.ipetchat.customwidget.PetProfileItem>
+                android:background="@drawable/common_setting_bottommultiple_item_bg"
+                ipetchat:label="@string/pet_profile_weight_setting_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileSettingItem>
         </LinearLayout>
 
         <LinearLayout
@@ -130,22 +130,22 @@
             android:layout_marginTop="20dp"
             android:orientation="vertical" >
 
-            <com.segotech.ipetchat.customwidget.PetProfileItem
-                android:id="@+id/pet_profile_district_item"
+            <com.segotech.ipetchat.customwidget.PetProfileSettingItem
+                android:id="@+id/pet_profile_district_setting_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/pet_profile_topmultiple_item_bg"
-                ipetchat:label="@string/pet_profile_item_district_label" >
-            </com.segotech.ipetchat.customwidget.PetProfileItem>
+                android:background="@drawable/common_setting_topmultiple_item_bg"
+                ipetchat:label="@string/pet_profile_district_setting_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileSettingItem>
 
-            <com.segotech.ipetchat.customwidget.PetProfileItem
-                android:id="@+id/pet_profile_placeUsed2Go_item"
+            <com.segotech.ipetchat.customwidget.PetProfileSettingItem
+                android:id="@+id/pet_profile_placeUsed2Go_setting_item"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-1dp"
-                android:background="@drawable/pet_profile_bottommultiple_item_bg"
-                ipetchat:label="@string/pet_profile_item_placeUsed2Go_label" >
-            </com.segotech.ipetchat.customwidget.PetProfileItem>
+                android:background="@drawable/common_setting_bottommultiple_item_bg"
+                ipetchat:label="@string/pet_profile_placeUsed2Go_setting_label" >
+            </com.segotech.ipetchat.customwidget.PetProfileSettingItem>
         </LinearLayout>
     </LinearLayout>
 

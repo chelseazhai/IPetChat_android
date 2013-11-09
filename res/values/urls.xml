@@ -11,6 +11,12 @@
 
     <!-- account login -->
     <string name="user_login_url" translatable="false">/login/home_!denglu.action</string>
+    
+    <!-- account retrieve password -->
+    <string name="account_retrievePwd_url" translatable="false">/login/home_!denglu.action</string>
+    
+    <!-- account modify password -->
+    <string name="account_modifyPwd_url" translatable="false">/login/home_!updatepassword.action</string>
 
     <!-- pet info -->
     <string name="get_allPetsInfo_url" translatable="false">/login/home_!getpets.action</string>

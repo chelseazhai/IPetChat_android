@@ -17,23 +17,7 @@
         android:layout_marginTop="16dp"
         android:layout_weight="2"
         android:background="@drawable/pet_location_mapview_bg"
-        android:padding="2dp"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/pet_location_imageView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="2"
-        android:background="@drawable/pet_location_mapview_bg"
-        android:contentDescription=""
-        android:padding="2dp"
-        android:scaleType="matrix"
-        android:src="@drawable/img_demo_location_map" />
+        android:padding="2dp" />
 
     <Button
         android:id="@+id/pet_info_button"

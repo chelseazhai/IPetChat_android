@@ -123,8 +123,7 @@ public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// go to target activity
-			SettingsTabContentActivity.this
-					.pushActivity(SETTINGS_INFO_TARGET_ACTIVITYCLSES[position]);
+			pushActivity(SETTINGS_INFO_TARGET_ACTIVITYCLSES[position]);
 		}
 
 	}
@@ -134,7 +133,8 @@ public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 
 		@Override
 		public void onClick(View button) {
-			//
+			// application exit
+			System.exit(0);
 		}
 
 	}

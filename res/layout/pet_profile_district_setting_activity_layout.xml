@@ -1,0 +1,326 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ipetchat="http://schemas.android.com/apk/res/com.segotech.ipetchat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_light_gray"
+    android:paddingBottom="20dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="20dp"
+    android:scrollbars="none"
+    tools:context=".settings.profile.PetProfileDistrictSettingActivity" >
+
+    <LinearLayout
+        android:id="@+id/pet_profile_district_items_parentLinearlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/common_setting_topmultiple_item_bg"
+            ipetchat:subitems="@array/beijing_info_array"
+            ipetchat:text="@string/pet_profile_beijing_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/shanghai_info_array"
+            ipetchat:text="@string/pet_profile_shanghai_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/tianjin_info_array"
+            ipetchat:text="@string/pet_profile_tianjin_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/chongqing_info_array"
+            ipetchat:text="@string/pet_profile_chongqing_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/zhejiang_info_array"
+            ipetchat:text="@string/pet_profile_zhejiang_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/guangdong_info_array"
+            ipetchat:text="@string/pet_profile_guangdong_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/jiangsu_info_array"
+            ipetchat:text="@string/pet_profile_jiangsu_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_shandong_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_fujian_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_anhui_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_sichuan_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_hubei_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_hebei_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_yunnan_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_heilongjiang_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_jilin_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_liaoning_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_hainan_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_hunan_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_henan_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_guizhou_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_jiangxi_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_guangxi_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_shanxi1_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_shanxi2_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_qinghai_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_ningxia_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_gansu_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_xizang_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_neimenggu_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_xinjiang_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_middlemultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_taiwan_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/common_setting_bottommultiple_item_bg"
+            ipetchat:subitems="@array/test_info_array"
+            ipetchat:text="@string/pet_profile_macau_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+
+        <com.segotech.ipetchat.customwidget.PetProfileDistrictItem
+            android:id="@+id/pet_profile_custom_district_item"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/common_setting_single_item_bg"
+            ipetchat:text="@string/pet_profile_custom_district_text" >
+        </com.segotech.ipetchat.customwidget.PetProfileDistrictItem>
+    </LinearLayout>
+
+</ScrollView>

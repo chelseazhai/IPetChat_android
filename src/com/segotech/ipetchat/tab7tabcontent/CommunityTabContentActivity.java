@@ -157,8 +157,7 @@ public class CommunityTabContentActivity extends IPetChatRootNavigationActivity 
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// go to target activity
-			CommunityTabContentActivity.this
-					.pushActivity(PET_COMMUNITY_INFO_TARGET_ACTIVITYCLSES[position]);
+			pushActivity(PET_COMMUNITY_INFO_TARGET_ACTIVITYCLSES[position]);
 		}
 	}
 

@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings.PetDeviceBindActivity" >
+    tools:context=".account.AccountRetrievePWDActivity" >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/pet_device_bind_setting_not_implement"
+        android:text="@string/account_retrieve_password_not_implement"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
