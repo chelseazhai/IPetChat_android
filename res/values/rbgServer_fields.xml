@@ -14,7 +14,7 @@
     <string name="rbgServer_userLoginName" translatable="false">loginid</string>
     <string name="rbgServer_userLoginPwd" translatable="false">password</string>
     <string name="rbgServer_loginReq_resp_userkey" translatable="false">userKey</string>
-    
+
     <!-- account modify password -->
     <string name="rbgServer_accountOriginPwd" translatable="false">password</string>
     <string name="rbgServer_accountNewResetPwd" translatable="false">newpassword</string>
@@ -34,5 +34,15 @@
     <string name="rbgServer_getMyPetsReq_resp_district" translatable="false">district</string>
     <string name="rbgServer_getMyPetsReq_resp_placeUsed2Go" translatable="false">placeoftengo</string>
     <string name="rbgServer_getMyPetsReq_resp_score" translatable="false">defen</string>
+
+    <!-- set pet info -->
+    <string name="rbgServer_pet_nickname" translatable="false">nickname</string>
+    <string name="rbgServer_pet_sex" translatable="false">sex</string>
+    <string name="rbgServer_pet_breed" translatable="false">sort</string>
+    <string name="rbgServer_pet_age" translatable="false">age</string>
+    <string name="rbgServer_pet_height" translatable="false">height</string>
+    <string name="rbgServer_pet_weight" translatable="false">weight</string>
+    <string name="rbgServer_pet_district" translatable="false">district</string>
+    <string name="rbgServer_pet_placeUsed2Go" translatable="false">placeoftengo</string>
 
 </resources>

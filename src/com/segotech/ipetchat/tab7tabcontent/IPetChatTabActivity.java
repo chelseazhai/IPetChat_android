@@ -188,6 +188,7 @@ public class IPetChatTabActivity extends TabActivity {
 								Bitmap.CompressFormat.PNG, 100, _baos);
 						byte[] _avatarByteArray = _baos.toByteArray();
 						_mPetInfo.setAvatar(_avatarByteArray);
+
 						// nickname
 						_mPetInfo
 								.setNickname(JSONUtils
@@ -196,48 +197,62 @@ public class IPetChatTabActivity extends TabActivity {
 												getResources()
 														.getString(
 																R.string.rbgServer_getMyPetsReq_resp_nickname)));
-						// sex
-						_mPetInfo
-								.setSex(PetSex.getSex(JSONUtils
-										.getIntegerFromJSONObject(
-												_petInfoJSONObject,
-												getResources()
-														.getString(
-																R.string.rbgServer_getMyPetsReq_resp_sex))));
-						// breed
-						_mPetInfo
-								.setBreed(PetBreed.getBreed(JSONUtils
-										.getIntegerFromJSONObject(
-												_petInfoJSONObject,
-												getResources()
-														.getString(
-																R.string.rbgServer_getMyPetsReq_resp_breed))));
-						// age
-						_mPetInfo
-								.setAge(JSONUtils
-										.getIntegerFromJSONObject(
-												_petInfoJSONObject,
-												getResources()
-														.getString(
-																R.string.rbgServer_getMyPetsReq_resp_age)));
-						// height
-						_mPetInfo
-								.setHeight(JSONUtils
-										.getDoubleFromJSONObject(
-												_petInfoJSONObject,
-												getResources()
-														.getString(
-																R.string.rbgServer_getMyPetsReq_resp_height))
-										.floatValue());
-						// weight
-						_mPetInfo
-								.setWeight(JSONUtils
-										.getDoubleFromJSONObject(
-												_petInfoJSONObject,
-												getResources()
-														.getString(
-																R.string.rbgServer_getMyPetsReq_resp_weight))
-										.floatValue());
+
+						try {
+							// sex
+							_mPetInfo
+									.setSex(PetSex.getSex(JSONUtils
+											.getIntegerFromJSONObject(
+													_petInfoJSONObject,
+													getResources()
+															.getString(
+																	R.string.rbgServer_getMyPetsReq_resp_sex))));
+
+							// breed
+							_mPetInfo
+									.setBreed(PetBreed.getBreed(JSONUtils
+											.getIntegerFromJSONObject(
+													_petInfoJSONObject,
+													getResources()
+															.getString(
+																	R.string.rbgServer_getMyPetsReq_resp_breed))));
+
+							// age
+							_mPetInfo
+									.setAge(JSONUtils
+											.getIntegerFromJSONObject(
+													_petInfoJSONObject,
+													getResources()
+															.getString(
+																	R.string.rbgServer_getMyPetsReq_resp_age)));
+
+							// height
+							_mPetInfo
+									.setHeight(JSONUtils
+											.getDoubleFromJSONObject(
+													_petInfoJSONObject,
+													getResources()
+															.getString(
+																	R.string.rbgServer_getMyPetsReq_resp_height))
+											.floatValue());
+
+							// weight
+							_mPetInfo
+									.setWeight(JSONUtils
+											.getDoubleFromJSONObject(
+													_petInfoJSONObject,
+													getResources()
+															.getString(
+																	R.string.rbgServer_getMyPetsReq_resp_weight))
+											.floatValue());
+						} catch (Exception e) {
+							Log.e(LOG_TAG,
+									"get pet info error, exception message = "
+											+ e.getMessage());
+
+							e.printStackTrace();
+						}
+
 						// district
 						_mPetInfo
 								.setDistrict(JSONUtils
@@ -246,6 +261,7 @@ public class IPetChatTabActivity extends TabActivity {
 												getResources()
 														.getString(
 																R.string.rbgServer_getMyPetsReq_resp_district)));
+
 						// place where used to go
 						_mPetInfo
 								.setPlaceUsed2Go(JSONUtils

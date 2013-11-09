@@ -3,6 +3,10 @@ package com.segotech.ipetchat.settings;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -11,8 +15,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.richitec.commontoolkit.user.UserManager;
+import com.richitec.commontoolkit.utils.HttpUtils;
+import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
+import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
+import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
+import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.account.pet.PetBean;
 import com.segotech.ipetchat.account.pet.PetBreed;
@@ -294,6 +304,63 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 			// save pet info
 			IPCUserExtension.setUserPetInfo(
 					UserManager.getInstance().getUser(), _mPetInfo);
+
+			// generate set pet info post request param
+			Map<String, String> _setPetInfoParam = new HashMap<String, String>();
+			if (null != _mPetInfo.getNickname()) {
+				_setPetInfoParam.put(
+						getResources().getString(
+								R.string.rbgServer_pet_nickname),
+						_mPetInfo.getNickname());
+			}
+			if (null != _mPetInfo.getSex()) {
+				_setPetInfoParam.put(
+						getResources().getString(R.string.rbgServer_pet_sex),
+						_mPetInfo.getSex().getValue().toString());
+			}
+			if (null != _mPetInfo.getBreed()) {
+				_setPetInfoParam.put(
+						getResources().getString(R.string.rbgServer_pet_breed),
+						_mPetInfo.getBreed().getValue().toString());
+			}
+			if (null != _mPetInfo.getAge()) {
+				_setPetInfoParam.put(
+						getResources().getString(R.string.rbgServer_pet_age),
+						_mPetInfo.getAge().toString());
+			}
+			if (null != _mPetInfo.getHeight()) {
+				_setPetInfoParam
+						.put(getResources().getString(
+								R.string.rbgServer_pet_height), _mPetInfo
+								.getHeight().toString());
+			}
+			if (null != _mPetInfo.getWeight()) {
+				_setPetInfoParam
+						.put(getResources().getString(
+								R.string.rbgServer_pet_weight), _mPetInfo
+								.getWeight().toString());
+			}
+			if (null != _mPetInfo.getDistrict()) {
+				_setPetInfoParam.put(
+						getResources().getString(
+								R.string.rbgServer_pet_district),
+						_mPetInfo.getDistrict());
+			}
+			if (null != _mPetInfo.getPlaceUsed2Go()) {
+				_setPetInfoParam.put(
+						getResources().getString(
+								R.string.rbgServer_pet_placeUsed2Go),
+						_mPetInfo.getPlaceUsed2Go());
+			}
+
+			// send set pet info post http request
+			HttpUtils.postSignatureRequest(
+					getResources().getString(R.string.server_url)
+							+ getResources()
+									.getString(R.string.set_petInfo_url),
+					PostRequestFormat.URLENCODED, _setPetInfoParam, null,
+					HttpRequestType.ASYNCHRONOUS,
+					new SetPetInfoHttpRequestListener());
 			break;
 
 		default:
@@ -302,6 +369,13 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 		}
 
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	// process set pet info exception
+	private void processSetPetInfoException() {
+		// show set pet info failed toast
+		Toast.makeText(PetProfileSettingActivity.this,
+				R.string.toast_request_exception, Toast.LENGTH_LONG).show();
 	}
 
 	// inner class
@@ -482,6 +556,32 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 			// go to target activity
 			pushActivityForResult(PetProfileDistrictSettingActivity.class,
 					_extraData, PET_PROFILE_DISTRICT_SETTING_REQCODE);
+		}
+
+	}
+
+	// set pet info http request listener
+	class SetPetInfoHttpRequestListener extends OnHttpRequestListener {
+
+		@Override
+		public void onFinished(HttpRequest request, HttpResponse response) {
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
+
+			// test by ares
+			Log.d(LOG_TAG, "_respJsonData = " + _respJsonData);
+
+			//
+			//
+		}
+
+		@Override
+		public void onFailed(HttpRequest request, HttpResponse response) {
+			Log.e(LOG_TAG,
+					"set pet info failed, send set pet info post request failed");
+
+			processSetPetInfoException();
 		}
 
 	}
