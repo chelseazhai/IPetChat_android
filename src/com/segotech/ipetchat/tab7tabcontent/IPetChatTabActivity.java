@@ -280,7 +280,7 @@ public class IPetChatTabActivity extends TabActivity {
 
 						// set current tab
 						_mTabHost.setCurrentTab(1);
-						_mTabHost.setCurrentTab(_mCurrentTabIndex);
+						_mTabHost.setCurrentTab(0);
 					} else {
 						// nothing to do
 						break;
