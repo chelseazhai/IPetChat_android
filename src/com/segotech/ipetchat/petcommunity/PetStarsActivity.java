@@ -21,12 +21,8 @@ public class PetStarsActivity extends IPetChatNavigationActivity {
 
 	// test data
 	// test by ares
-	private final JSONArray petstars_JSONArray = JSONUtils
-			.toJSONArray("[]");
-	private final int[] petstars_avatars = new int[] {
-			R.drawable.img_demo_petstar1, R.drawable.img_demo_petstar2,
-			R.drawable.img_demo_petstar3, R.drawable.img_demo_petstar4,
-			R.drawable.img_demo_petstar5 };
+	private final JSONArray petstars_JSONArray = JSONUtils.toJSONArray("[]");
+	private final int[] petstars_avatars = new int[] {};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

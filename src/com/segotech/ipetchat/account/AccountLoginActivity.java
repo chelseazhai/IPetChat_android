@@ -7,6 +7,7 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,9 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 
 	private static final String LOG_TAG = AccountLoginActivity.class
 			.getCanonicalName();
+
+	// asynchronous http request progress dialog
+	private ProgressDialog _mAsyncHttpReqProgressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,14 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 		// show login failed toast
 		Toast.makeText(AccountLoginActivity.this,
 				R.string.toast_request_exception, Toast.LENGTH_LONG).show();
+	}
+
+	// close asynchronous http request process dialog
+	private void closeAsyncHttpReqProgressDialog() {
+		// check and dismiss asynchronous http request process dialog
+		if (null != _mAsyncHttpReqProgressDialog) {
+			_mAsyncHttpReqProgressDialog.dismiss();
+		}
 	}
 
 	// inner class
@@ -108,6 +120,13 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 				return;
 			}
 
+			// show account login process dialog
+			_mAsyncHttpReqProgressDialog = ProgressDialog
+					.show(AccountLoginActivity.this,
+							null,
+							getString(R.string.asyncHttpRequest_progressDialog_message),
+							true);
+
 			// account login confirm
 			// generate account login confirm post request param
 			Map<String, String> _accountLoginConfirmParam = new HashMap<String, String>();
@@ -135,6 +154,9 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFinished(HttpRequest request, HttpResponse response) {
+			// close account login process dialog
+			closeAsyncHttpReqProgressDialog();
+
 			// get http response entity string json data
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
@@ -211,6 +233,9 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFailed(HttpRequest request, HttpResponse response) {
+			// close account login process dialog
+			closeAsyncHttpReqProgressDialog();
+
 			Log.e(LOG_TAG,
 					"account login failed, send account login confirm post request failed");
 

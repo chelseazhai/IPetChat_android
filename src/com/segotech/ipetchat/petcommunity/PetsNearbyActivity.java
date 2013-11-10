@@ -19,13 +19,8 @@ public class PetsNearbyActivity extends IPetChatNavigationActivity {
 
 	// test data
 	// test by ares
-	private final JSONArray pets_nearby_JSONArray = JSONUtils
-			.toJSONArray("[]");
-	private final int[] pets_nearby_avatars = new int[] {
-			R.drawable.img_demo_petnearby1, R.drawable.img_demo_petnearby2,
-			R.drawable.img_demo_petnearby3, R.drawable.img_demo_petnearby4,
-			R.drawable.img_demo_petnearby5, R.drawable.img_demo_petnearby6,
-			R.drawable.img_demo_petnearby7 };
+	private final JSONArray pets_nearby_JSONArray = JSONUtils.toJSONArray("[]");
+	private final int[] pets_nearby_avatars = new int[] {};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

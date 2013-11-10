@@ -21,9 +21,7 @@
     <string name="account_modifyPwd_url" translatable="false">/login/home_!updatepassword.action</string>
 
     <!-- pet info -->
-    <string name="get_allPets_url" translatable="false">/login/home_!getpets.action</string>
-
-    <!-- set pet info -->
-    <string name="set_petInfo_url" translatable="false">/login/home_!addpets.action</string>
+    <string name="get_allPets_url" translatable="false">/petinfo/getpets</string>
+    <string name="set_petInfo_url" translatable="false">/petinfo/modify</string>
 
 </resources>

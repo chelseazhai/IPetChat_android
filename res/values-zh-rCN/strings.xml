@@ -4,6 +4,9 @@
     <!-- iPetChat project name -->
     <string name="app_name">赛果宠物</string>
 
+    <!-- common -->
+    <string name="asyncHttpRequest_progressDialog_message">正在处理，请稍后&#8230;</string>
+
     <!-- account setting -->
     <!-- account setting for first enter -->
     <string name="account_register_button_title">注\t册</string>

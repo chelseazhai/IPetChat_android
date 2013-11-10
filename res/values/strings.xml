@@ -4,6 +4,9 @@
     <!-- iPetChat project name -->
     <string name="app_name">IPetChat</string>
 
+    <!-- common -->
+    <string name="asyncHttpRequest_progressDialog_message">Processing, please waiting&#8230;</string>
+
     <!-- account setting -->
     <!-- account setting for first enter -->
     <string name="title_activity_account_setting4_first" translatable="false">AccountSetting4FirstActivity</string>

@@ -49,7 +49,7 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 	private static final int PET_PROFILE_BREED_CHECKED_SETTING_REQCODE = 207;
 	private static final int PET_PROFILE_DISTRICT_SETTING_REQCODE = 209;
 
-	// user pet info
+	// my pet info
 	private PetBean _mPetInfo;
 
 	// pet profile avatar imageView
@@ -130,13 +130,11 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 		_mPetProfilePlaceUsed2GoSettingItem
 				.setOnClickListener(_mPetProfileEditTextSettingItemOnClickListener);
 
-		// get user pet info
+		// get my pet info
 		_mPetInfo = IPCUserExtension.getUserPetInfo(UserManager.getInstance()
 				.getUser());
 
-		Log.d(LOG_TAG, "my pet info = " + _mPetInfo);
-
-		// check user pet info
+		// check my pet info
 		if (null != _mPetInfo) {
 			// check and set pet avatar
 			if (null != _mPetInfo.getAvatar()) {
@@ -201,8 +199,10 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// check and reset pet info
-		_mPetInfo = null != _mPetInfo ? _mPetInfo : new PetBean();
+		// check and init my pet info
+		if (null == _mPetInfo) {
+			_mPetInfo = new PetBean();
+		}
 
 		// check result code
 		switch (resultCode) {
@@ -257,7 +257,7 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 
 				case PET_PROFILE_HEIGHT_EDITTEXT_SETTING_REQCODE:
 					// get setting height
-					Float _height = Float.parseFloat(data
+					Double _height = Double.parseDouble(data
 							.getStringExtra(POP_RET_EXTRADATA_KEY));
 
 					_mPetProfileHeightSettingItem
@@ -270,7 +270,7 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 
 				case PET_PROFILE_WEIGHT_EDITTEXT_SETTING_REQCODE:
 					// get setting weight
-					Float _weight = Float.parseFloat(data
+					Double _weight = Double.parseDouble(data
 							.getStringExtra(POP_RET_EXTRADATA_KEY));
 
 					_mPetProfileWeightSettingItem
@@ -301,56 +301,66 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 				}
 			}
 
-			// save pet info
+			// save my pet info
 			IPCUserExtension.setUserPetInfo(
 					UserManager.getInstance().getUser(), _mPetInfo);
 
+			// set pet info
 			// generate set pet info post request param
 			Map<String, String> _setPetInfoParam = new HashMap<String, String>();
+			if (null != _mPetInfo.getId()) {
+				_setPetInfoParam.put(
+						getResources().getString(
+								R.string.rbgServer_setPetInfo_pet_id),
+						_mPetInfo.getId().toString());
+			}
 			if (null != _mPetInfo.getNickname()) {
 				_setPetInfoParam.put(
 						getResources().getString(
-								R.string.rbgServer_pet_nickname),
+								R.string.rbgServer_setPetInfo_pet_nickname),
 						_mPetInfo.getNickname());
 			}
 			if (null != _mPetInfo.getSex()) {
 				_setPetInfoParam.put(
-						getResources().getString(R.string.rbgServer_pet_sex),
+						getResources().getString(
+								R.string.rbgServer_setPetInfo_pet_sex),
 						_mPetInfo.getSex().getValue().toString());
 			}
 			if (null != _mPetInfo.getBreed()) {
 				_setPetInfoParam.put(
-						getResources().getString(R.string.rbgServer_pet_breed),
+						getResources().getString(
+								R.string.rbgServer_setPetInfo_pet_breed),
 						_mPetInfo.getBreed().getValue().toString());
 			}
 			if (null != _mPetInfo.getAge()) {
 				_setPetInfoParam.put(
-						getResources().getString(R.string.rbgServer_pet_age),
+						getResources().getString(
+								R.string.rbgServer_setPetInfo_pet_age),
 						_mPetInfo.getAge().toString());
 			}
 			if (null != _mPetInfo.getHeight()) {
-				_setPetInfoParam
-						.put(getResources().getString(
-								R.string.rbgServer_pet_height), _mPetInfo
-								.getHeight().toString());
+				_setPetInfoParam.put(
+						getResources().getString(
+								R.string.rbgServer_setPetInfo_pet_height),
+						_mPetInfo.getHeight().toString());
 			}
 			if (null != _mPetInfo.getWeight()) {
-				_setPetInfoParam
-						.put(getResources().getString(
-								R.string.rbgServer_pet_weight), _mPetInfo
-								.getWeight().toString());
+				_setPetInfoParam.put(
+						getResources().getString(
+								R.string.rbgServer_setPetInfo_pet_weight),
+						_mPetInfo.getWeight().toString());
 			}
 			if (null != _mPetInfo.getDistrict()) {
 				_setPetInfoParam.put(
 						getResources().getString(
-								R.string.rbgServer_pet_district),
+								R.string.rbgServer_setPetInfo_pet_district),
 						_mPetInfo.getDistrict());
 			}
 			if (null != _mPetInfo.getPlaceUsed2Go()) {
-				_setPetInfoParam.put(
-						getResources().getString(
-								R.string.rbgServer_pet_placeUsed2Go),
-						_mPetInfo.getPlaceUsed2Go());
+				_setPetInfoParam
+						.put(getResources().getString(
+								R.string.rbgServer_setPetInfo_pet_placeUsed2Go),
+								_mPetInfo.getPlaceUsed2Go());
 			}
 
 			// send set pet info post http request
@@ -569,11 +579,47 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
 
-			// test by ares
-			Log.d(LOG_TAG, "_respJsonData = " + _respJsonData);
+			// get http response entity string json object result and user key
+			String _result = JSONUtils.getStringFromJSONObject(_respJsonData,
+					getResources()
+							.getString(R.string.rbgServer_req_resp_result));
 
-			//
-			//
+			// check result
+			if (null != _result) {
+				switch (Integer.parseInt(_result)) {
+				case 0:
+					// get response pet id
+					Long _responsePetId = JSONUtils
+							.getLongFromJSONObject(
+									_respJsonData,
+									getResources()
+											.getString(
+													R.string.rbgServer_setPetInfoReq_resp_petId));
+
+					Log.d(LOG_TAG, "Response pet id = " + _responsePetId);
+
+					// set new add pet id or update my pet id
+					_mPetInfo.setId(_responsePetId);
+					break;
+
+				case 1:
+				case 3:
+				case 4:
+					Log.d(LOG_TAG, "set pet info failed");
+
+					Toast.makeText(PetProfileSettingActivity.this,
+							R.string.toast_set_petInfo_error,
+							Toast.LENGTH_SHORT).show();
+					break;
+
+				default:
+					Log.e(LOG_TAG,
+							"set pet info failed, bg_server return result is unrecognized");
+
+					processSetPetInfoException();
+					break;
+				}
+			}
 		}
 
 		@Override

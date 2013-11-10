@@ -1,7 +1,5 @@
 package com.segotech.ipetchat.tab7tabcontent;
 
-import java.io.ByteArrayOutputStream;
-
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.json.JSONArray;
@@ -9,8 +7,6 @@ import org.json.JSONObject;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
@@ -120,11 +116,17 @@ public class IPetChatTabActivity extends TabActivity {
 		// send get user all pets info post http request
 		HttpUtils.postSignatureRequest(
 				getResources().getString(R.string.server_url)
-						+ getResources()
-								.getString(R.string.get_allPets_url),
+						+ getResources().getString(R.string.get_allPets_url),
 				PostRequestFormat.URLENCODED, null, null,
 				HttpRequestType.ASYNCHRONOUS,
 				new GetAllPetsInfoHttpRequestListener());
+	}
+
+	// process get user all pets info exception
+	private void processGetPetsException() {
+		// show login failed toast
+		Toast.makeText(IPetChatTabActivity.this,
+				R.string.toast_request_exception, Toast.LENGTH_LONG).show();
 	}
 
 	// inner class
@@ -137,79 +139,90 @@ public class IPetChatTabActivity extends TabActivity {
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
 
-			// get the number and list from http response json data
-			Integer _petsNumber = JSONUtils.getIntegerFromJSONObject(
-					_respJsonData,
-					getResources().getString(
-							R.string.rbgServer_getMyPetsReq_resp_number));
+			// get http response entity string json object result and user key
+			String _result = JSONUtils.getStringFromJSONObject(_respJsonData,
+					getResources()
+							.getString(R.string.rbgServer_req_resp_result));
 
-			JSONArray _petsInfoArray = JSONUtils.getJSONArrayFromJSONObject(
-					_respJsonData,
-					getResources().getString(
-							R.string.rbgServer_getMyPetsReq_resp_list));
+			// check result
+			if (null != _result) {
+				switch (Integer.parseInt(_result)) {
+				case 0:
+					// get user all pets info array
+					JSONArray _petsInfoArray = JSONUtils
+							.getJSONArrayFromJSONObject(
+									_respJsonData,
+									getResources()
+											.getString(
+													R.string.rbgServer_getAllPetsReq_resp_list));
 
-			Log.d(LOG_TAG, "my pets info array count = " + _petsNumber
-					+ " and array = " + _petsInfoArray);
+					// check user all pets info array
+					if (0 != _petsInfoArray.length()) {
+						// process user all pets info array and get the header
+						for (int i = 0; i < _petsInfoArray.length(); i++) {
+							// get the header
+							JSONObject _petInfoJSONObject = JSONUtils
+									.getJSONObjectFromJSONArray(_petsInfoArray,
+											0);
 
-			// check and process pets info array
-			if (0 != _petsNumber) {
-				for (int i = 0; i < _petsNumber; i++) {
-					// get first only currently
-					if (0 == i) {
-						// get pet info JSONObject
-						JSONObject _petInfoJSONObject = JSONUtils
-								.getJSONObjectFromJSONArray(_petsInfoArray, i);
+							// check my pet info
+							if (null == _mPetInfo) {
+								// init my pet info
+								_mPetInfo = new PetBean();
+							}
 
-						// check pet info
-						if (null == _mPetInfo) {
-							// init pet info
-							_mPetInfo = new PetBean();
-						}
-
-						// set pet info bean attributes
-						// id
-						_mPetInfo
-								.setId(JSONUtils
-										.getLongFromJSONObject(
-												_petInfoJSONObject,
-												getResources()
-														.getString(
-																R.string.rbgServer_getMyPetsReq_resp_id)));
-						// avatar
-						ByteArrayOutputStream _baos = new ByteArrayOutputStream();
-						BitmapFactory.decodeResource(getResources(),
-								R.drawable.img_demo_pet).compress(
-								Bitmap.CompressFormat.PNG, 100, _baos);
-						byte[] _avatarByteArray = _baos.toByteArray();
-						_mPetInfo.setAvatar(_avatarByteArray);
-
-						// nickname
-						_mPetInfo
-								.setNickname(JSONUtils
-										.getStringFromJSONObject(
-												_petInfoJSONObject,
-												getResources()
-														.getString(
-																R.string.rbgServer_getMyPetsReq_resp_nickname)));
-
-						try {
-							// sex
+							// check and set pet info bean attributes
+							// id
 							_mPetInfo
-									.setSex(PetSex.getSex(JSONUtils
-											.getIntegerFromJSONObject(
+									.setId(JSONUtils
+											.getLongFromJSONObject(
 													_petInfoJSONObject,
 													getResources()
 															.getString(
-																	R.string.rbgServer_getMyPetsReq_resp_sex))));
+																	R.string.rbgServer_getAllPetsReq_resp_pet_id)));
+
+							// avatar url
+							_mPetInfo
+									.setAvatarUrl(JSONUtils
+											.getStringFromJSONObject(
+													_petInfoJSONObject,
+													getResources()
+															.getString(
+																	R.string.rbgServer_getAllPetsReq_resp_pet_avatarUrl)));
+
+							// nickname
+							_mPetInfo
+									.setNickname(JSONUtils
+											.getStringFromJSONObject(
+													_petInfoJSONObject,
+													getResources()
+															.getString(
+																	R.string.rbgServer_getAllPetsReq_resp_pet_nickname)));
+
+							// sex
+							// get and check sex value
+							Integer _sexValue = JSONUtils
+									.getIntegerFromJSONObject(
+											_petInfoJSONObject,
+											getResources()
+													.getString(
+															R.string.rbgServer_getAllPetsReq_resp_pet_sex));
+							if (null != _sexValue) {
+								_mPetInfo.setSex(PetSex.getSex(_sexValue));
+							}
 
 							// breed
-							_mPetInfo
-									.setBreed(PetBreed.getBreed(JSONUtils
-											.getIntegerFromJSONObject(
-													_petInfoJSONObject,
-													getResources()
-															.getString(
-																	R.string.rbgServer_getMyPetsReq_resp_breed))));
+							// get and check breed value
+							Integer _breedValue = JSONUtils
+									.getIntegerFromJSONObject(
+											_petInfoJSONObject,
+											getResources()
+													.getString(
+															R.string.rbgServer_getAllPetsReq_resp_pet_breed));
+							if (null != _breedValue) {
+								_mPetInfo.setBreed(PetBreed
+										.getBreed(_breedValue));
+							}
 
 							// age
 							_mPetInfo
@@ -218,7 +231,7 @@ public class IPetChatTabActivity extends TabActivity {
 													_petInfoJSONObject,
 													getResources()
 															.getString(
-																	R.string.rbgServer_getMyPetsReq_resp_age)));
+																	R.string.rbgServer_getAllPetsReq_resp_pet_age)));
 
 							// height
 							_mPetInfo
@@ -227,8 +240,7 @@ public class IPetChatTabActivity extends TabActivity {
 													_petInfoJSONObject,
 													getResources()
 															.getString(
-																	R.string.rbgServer_getMyPetsReq_resp_height))
-											.floatValue());
+																	R.string.rbgServer_getAllPetsReq_resp_pet_height)));
 
 							// weight
 							_mPetInfo
@@ -237,61 +249,60 @@ public class IPetChatTabActivity extends TabActivity {
 													_petInfoJSONObject,
 													getResources()
 															.getString(
-																	R.string.rbgServer_getMyPetsReq_resp_weight))
-											.floatValue());
-						} catch (Exception e) {
-							Log.e(LOG_TAG,
-									"get pet info error, exception message = "
-											+ e.getMessage());
+																	R.string.rbgServer_getAllPetsReq_resp_pet_weight)));
 
-							e.printStackTrace();
+							// district
+							_mPetInfo
+									.setDistrict(JSONUtils
+											.getStringFromJSONObject(
+													_petInfoJSONObject,
+													getResources()
+															.getString(
+																	R.string.rbgServer_getAllPetsReq_resp_pet_district)));
+
+							// place where used to go
+							_mPetInfo
+									.setPlaceUsed2Go(JSONUtils
+											.getStringFromJSONObject(
+													_petInfoJSONObject,
+													getResources()
+															.getString(
+																	R.string.rbgServer_getAllPetsReq_resp_pet_placeUsed2Go)));
+
+							Log.d(LOG_TAG, "Got my pet info = " + _mPetInfo);
+
+							// set got pet info as extension of user
+							IPCUserExtension.setUserPetInfo(UserManager
+									.getInstance().getUser(), _mPetInfo);
+
+							// test by ares
+							// set current tab
+							_mTabHost.setCurrentTab(1);
+							_mTabHost.setCurrentTab(0);
 						}
-
-						// district
-						_mPetInfo
-								.setDistrict(JSONUtils
-										.getStringFromJSONObject(
-												_petInfoJSONObject,
-												getResources()
-														.getString(
-																R.string.rbgServer_getMyPetsReq_resp_district)));
-
-						// place where used to go
-						_mPetInfo
-								.setPlaceUsed2Go(JSONUtils
-										.getStringFromJSONObject(
-												_petInfoJSONObject,
-												getResources()
-														.getString(
-																R.string.rbgServer_getMyPetsReq_resp_placeUsed2Go)));
-
-						Log.d(LOG_TAG, "get pet info = " + _mPetInfo);
-
-						// set pet info as extension of user
-						IPCUserExtension.setUserPetInfo(UserManager
-								.getInstance().getUser(), _mPetInfo);
-
-						Log.d(LOG_TAG,
-								"my pet info = "
-										+ IPCUserExtension
-												.getUserPetInfo(UserManager
-														.getInstance()
-														.getUser()));
-
-						// set current tab
-						_mTabHost.setCurrentTab(1);
-						_mTabHost.setCurrentTab(0);
 					} else {
-						// nothing to do
-						break;
+						Log.w(LOG_TAG,
+								"There is no pet info, please insert a pet");
+
+						// show there is no pet info toast
+						Toast.makeText(IPetChatTabActivity.this,
+								R.string.toast_no_pet, Toast.LENGTH_LONG)
+								.show();
 					}
+					break;
+
+				default:
+					Log.e(LOG_TAG,
+							"get user all pets info failed, bg_server return result is unrecognized");
+
+					processGetPetsException();
+					break;
 				}
 			} else {
-				Log.w(LOG_TAG, "there is no user pets info");
+				Log.e(LOG_TAG,
+						"get user all pets info failed, bg_server return result is null");
 
-				// show there is no pets info toast
-				Toast.makeText(IPetChatTabActivity.this, R.string.toast_no_pet,
-						Toast.LENGTH_LONG).show();
+				processGetPetsException();
 			}
 		}
 

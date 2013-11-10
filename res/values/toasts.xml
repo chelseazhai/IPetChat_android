@@ -36,6 +36,7 @@
 
     <!-- pet info -->
     <string name="toast_no_pet">There is no pet info, you can go to settings tab pet info section and then add a pet</string>
+    <string name="toast_set_petInfo_error">Set pet info error</string>
 
     <!-- account modify password -->
     <string name="toast_accountOriginPassword_null">Account origin password mustn\'t null</string>

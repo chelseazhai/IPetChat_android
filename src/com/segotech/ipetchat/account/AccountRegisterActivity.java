@@ -7,6 +7,7 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,9 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 	private View _mAccountRegVerifyVerificationCodeView;
 	private View _mAccountRegFinishRegisterView;
 
+	// asynchronous http request progress dialog
+	private ProgressDialog _mAsyncHttpReqProgressDialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,6 +68,14 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 				R.string.toast_request_exception, Toast.LENGTH_LONG).show();
 	}
 
+	// close asynchronous http request process dialog
+	private void closeAsyncHttpReqProgressDialog() {
+		// check and dismiss asynchronous http request process dialog
+		if (null != _mAsyncHttpReqProgressDialog) {
+			_mAsyncHttpReqProgressDialog.dismiss();
+		}
+	}
+
 	// inner class
 	// get account register phone verification code button on click listener
 	class GetPhoneVerificationCodeBtnOnClickListener implements OnClickListener {
@@ -84,6 +96,13 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 				return;
 			}
+
+			// show get account register phone verification code process dialog
+			_mAsyncHttpReqProgressDialog = ProgressDialog
+					.show(AccountRegisterActivity.this,
+							null,
+							getString(R.string.asyncHttpRequest_progressDialog_message),
+							true);
 
 			// get account register phone verification code
 			// generate get account register phone verification code post
@@ -114,6 +133,9 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFinished(HttpRequest request, HttpResponse response) {
+			// close get account register phone verification code process dialog
+			closeAsyncHttpReqProgressDialog();
+
 			// get http response entity string json data
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
@@ -211,6 +233,9 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFailed(HttpRequest request, HttpResponse response) {
+			// close get account register phone verification code process dialog
+			closeAsyncHttpReqProgressDialog();
+
 			Log.e(LOG_TAG,
 					"get account register phone verification code failed, send get account register phone verification code post request failed");
 
@@ -237,6 +262,13 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 				return;
 			}
+
+			// show verify account register verification code process dialog
+			_mAsyncHttpReqProgressDialog = ProgressDialog
+					.show(AccountRegisterActivity.this,
+							null,
+							getString(R.string.asyncHttpRequest_progressDialog_message),
+							true);
 
 			// verify account register verification code
 			// generate verify account register verification code post request
@@ -265,6 +297,9 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFinished(HttpRequest request, HttpResponse response) {
+			// close verify verification code process dialog
+			closeAsyncHttpReqProgressDialog();
+
 			// get http response entity string json data
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
@@ -360,6 +395,9 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFailed(HttpRequest request, HttpResponse response) {
+			// close verify verification code process dialog
+			closeAsyncHttpReqProgressDialog();
+
 			Log.e(LOG_TAG,
 					"verify account register verification code failed, send verify account register verification code post request failed");
 
@@ -411,6 +449,13 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 				return;
 			}
 
+			// show finish register process dialog
+			_mAsyncHttpReqProgressDialog = ProgressDialog
+					.show(AccountRegisterActivity.this,
+							null,
+							getString(R.string.asyncHttpRequest_progressDialog_message),
+							true);
+
 			// account finish register
 			// generate account finish register post request param
 			Map<String, String> _accountFinishRegisterParam = new HashMap<String, String>();
@@ -438,6 +483,9 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFinished(HttpRequest request, HttpResponse response) {
+			// close finish register process dialog
+			closeAsyncHttpReqProgressDialog();
+
 			// get http response entity string json data
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
@@ -505,6 +553,9 @@ public class AccountRegisterActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFailed(HttpRequest request, HttpResponse response) {
+			// close finish register process dialog
+			closeAsyncHttpReqProgressDialog();
+
 			Log.e(LOG_TAG,
 					"account register finish failed, send account register finish post request failed");
 

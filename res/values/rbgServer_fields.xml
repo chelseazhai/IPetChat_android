@@ -22,29 +22,29 @@
     <string name="rbgServer_accountNewResetPwd" translatable="false">newpassword</string>
 
     <!-- pet info -->
-    <!-- my pet list -->
-    <string name="rbgServer_getMyPetsReq_resp_number" translatable="false">nums</string>
-    <string name="rbgServer_getMyPetsReq_resp_list" translatable="false">pets</string>
-    <string name="rbgServer_getMyPetsReq_resp_id" translatable="false">petid</string>
-    <string name="rbgServer_getMyPetsReq_resp_avatar" translatable="false">touxiang</string>
-    <string name="rbgServer_getMyPetsReq_resp_nickname" translatable="false">nickname</string>
-    <string name="rbgServer_getMyPetsReq_resp_sex" translatable="false">sex</string>
-    <string name="rbgServer_getMyPetsReq_resp_breed" translatable="false">sort</string>
-    <string name="rbgServer_getMyPetsReq_resp_age" translatable="false">age</string>
-    <string name="rbgServer_getMyPetsReq_resp_height" translatable="false">height</string>
-    <string name="rbgServer_getMyPetsReq_resp_weight" translatable="false">weight</string>
-    <string name="rbgServer_getMyPetsReq_resp_district" translatable="false">district</string>
-    <string name="rbgServer_getMyPetsReq_resp_placeUsed2Go" translatable="false">placeoftengo</string>
-    <string name="rbgServer_getMyPetsReq_resp_score" translatable="false">defen</string>
+    <!-- get all pets -->
+    <string name="rbgServer_getAllPetsReq_resp_list" translatable="false">list</string>
+    <string name="rbgServer_getAllPetsReq_resp_pet_id" translatable="false">petid</string>
+    <string name="rbgServer_getAllPetsReq_resp_pet_avatarUrl" translatable="false">avatar</string>
+    <string name="rbgServer_getAllPetsReq_resp_pet_nickname" translatable="false">nickname</string>
+    <string name="rbgServer_getAllPetsReq_resp_pet_sex" translatable="false">sex</string>
+    <string name="rbgServer_getAllPetsReq_resp_pet_breed" translatable="false">breed</string>
+    <string name="rbgServer_getAllPetsReq_resp_pet_age" translatable="false">age</string>
+    <string name="rbgServer_getAllPetsReq_resp_pet_height" translatable="false">height</string>
+    <string name="rbgServer_getAllPetsReq_resp_pet_weight" translatable="false">weight</string>
+    <string name="rbgServer_getAllPetsReq_resp_pet_district" translatable="false">district</string>
+    <string name="rbgServer_getAllPetsReq_resp_pet_placeUsed2Go" translatable="false">placeoftengo</string>
 
     <!-- set pet info -->
-    <string name="rbgServer_pet_nickname" translatable="false">nickname</string>
-    <string name="rbgServer_pet_sex" translatable="false">sex</string>
-    <string name="rbgServer_pet_breed" translatable="false">sort</string>
-    <string name="rbgServer_pet_age" translatable="false">age</string>
-    <string name="rbgServer_pet_height" translatable="false">height</string>
-    <string name="rbgServer_pet_weight" translatable="false">weight</string>
-    <string name="rbgServer_pet_district" translatable="false">district</string>
-    <string name="rbgServer_pet_placeUsed2Go" translatable="false">placeoftengo</string>
+    <string name="rbgServer_setPetInfo_pet_id" translatable="false">petid</string>
+    <string name="rbgServer_setPetInfo_pet_nickname" translatable="false">nickname</string>
+    <string name="rbgServer_setPetInfo_pet_sex" translatable="false">sex</string>
+    <string name="rbgServer_setPetInfo_pet_breed" translatable="false">breed</string>
+    <string name="rbgServer_setPetInfo_pet_age" translatable="false">age</string>
+    <string name="rbgServer_setPetInfo_pet_height" translatable="false">height</string>
+    <string name="rbgServer_setPetInfo_pet_weight" translatable="false">weight</string>
+    <string name="rbgServer_setPetInfo_pet_district" translatable="false">district</string>
+    <string name="rbgServer_setPetInfo_pet_placeUsed2Go" translatable="false">placeoftengo</string>
+    <string name="rbgServer_setPetInfoReq_resp_petId" translatable="false">petid</string>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.segotech.ipetchat.tab7tabcontent;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,44 +54,45 @@ public class SportsHealthTabContentActivity extends
 
 	@Override
 	protected void onResume() {
-		// get user pet info
+		super.onResume();
+
+		// get my pet info
 		PetBean _petInfo = IPCUserExtension.getUserPetInfo(UserManager
 				.getInstance().getUser());
 
-		Log.d(LOG_TAG, "my pet info = " + _petInfo);
+		// define pet breed, age, height and weight label and value JSONObject
+		// and init
+		JSONObject _petBreedJSON = new JSONObject();
+		JSONObject _petAgeJSON = new JSONObject();
+		JSONObject _petHeightJSON = new JSONObject();
+		JSONObject _petWeightJSON = new JSONObject();
 
-		// define pet breed, age, height and weight JSONObject and init
-		JSONObject _petOtherInfoBreed = new JSONObject();
-		JSONObject _petOtherInfoAge = new JSONObject();
-		JSONObject _petOtherInfoHeight = new JSONObject();
-		JSONObject _petOtherInfoWeight = new JSONObject();
-
-		// set pet other info JSONObject label
+		// set pet other info label
 		try {
 			// breed
-			_petOtherInfoBreed.put(PET_INFO_LABEL_KEY, getResources()
-					.getString(R.string.pet_breed_label));
+			_petBreedJSON.put(PET_INFO_LABEL_KEY,
+					getResources().getString(R.string.pet_breed_label));
 
 			// age
-			_petOtherInfoAge.put(PET_INFO_LABEL_KEY,
+			_petAgeJSON.put(PET_INFO_LABEL_KEY,
 					getResources().getString(R.string.pet_age_label));
 
 			// height
-			_petOtherInfoHeight.put(PET_INFO_LABEL_KEY, getResources()
-					.getString(R.string.pet_height_label));
+			_petHeightJSON.put(PET_INFO_LABEL_KEY,
+					getResources().getString(R.string.pet_height_label));
 
 			// weight
-			_petOtherInfoWeight.put(PET_INFO_LABEL_KEY, getResources()
-					.getString(R.string.pet_weight_label));
+			_petWeightJSON.put(PET_INFO_LABEL_KEY,
+					getResources().getString(R.string.pet_weight_label));
 		} catch (JSONException e) {
 			e.printStackTrace();
 
 			Log.e(LOG_TAG,
-					"Put json label with key error, exception message = "
+					"Put pet other info label to json object with key error, exception message = "
 							+ e.getMessage());
 		}
 
-		// check user pet info
+		// check my pet info
 		if (null != _petInfo) {
 			// check and set pet avatar
 			if (null != _petInfo.getAvatar()) {
@@ -102,10 +102,11 @@ public class SportsHealthTabContentActivity extends
 								_petInfo.getAvatar().length));
 			}
 
-			// set pet nickname
-			((TextView) findViewById(R.id.pet_nickname_textView))
-					.setText(null != _petInfo.getNickname() ? _petInfo
-							.getNickname() : "");
+			// check and set pet nickname
+			if (null != _petInfo.getNickname()) {
+				((TextView) findViewById(R.id.pet_nickname_textView))
+						.setText(_petInfo.getNickname());
+			}
 
 			// check and set pet sex
 			if (null != _petInfo.getSex()) {
@@ -114,17 +115,17 @@ public class SportsHealthTabContentActivity extends
 								: R.drawable.img_female);
 			}
 
-			// set pet other info JSONObject value
+			// set pet other info value
 			try {
 				// breed
 				if (null != _petInfo.getBreed()) {
-					_petOtherInfoBreed.put(PET_INFO_VALUE_KEY, _petInfo
-							.getBreed().getBreed());
+					_petBreedJSON.put(PET_INFO_VALUE_KEY, _petInfo.getBreed()
+							.getBreed());
 				}
 
 				// age
 				if (null != _petInfo.getAge()) {
-					_petOtherInfoAge.put(PET_INFO_VALUE_KEY, String.format(
+					_petAgeJSON.put(PET_INFO_VALUE_KEY, String.format(
 							getResources().getString(
 									R.string.pet_age_value_format),
 							_petInfo.getAge()));
@@ -132,7 +133,7 @@ public class SportsHealthTabContentActivity extends
 
 				// height
 				if (null != _petInfo.getHeight()) {
-					_petOtherInfoHeight.put(PET_INFO_VALUE_KEY, String.format(
+					_petHeightJSON.put(PET_INFO_VALUE_KEY, String.format(
 							getResources().getString(
 									R.string.pet_height_value_format),
 							_petInfo.getHeight()));
@@ -140,7 +141,7 @@ public class SportsHealthTabContentActivity extends
 
 				// weight
 				if (null != _petInfo.getWeight()) {
-					_petOtherInfoWeight.put(PET_INFO_VALUE_KEY, String.format(
+					_petWeightJSON.put(PET_INFO_VALUE_KEY, String.format(
 							getResources().getString(
 									R.string.pet_weight_value_format),
 							_petInfo.getWeight()));
@@ -149,52 +150,41 @@ public class SportsHealthTabContentActivity extends
 				e.printStackTrace();
 
 				Log.e(LOG_TAG,
-						"Put json value with key error, exception message = "
+						"Put pet other info value to json object with key error, exception message = "
 								+ e.getMessage());
 			}
 		}
 
-		// define pet other info JSONArray and put pet other info breed, age,
-		// height and weight to it
-		JSONArray _petOtherInfoList = new JSONArray();
+		// define pet other info JSONObject array and add pet other info breed,
+		// age, height and weight to it
+		JSONObject[] _petOtherInfoArray = new JSONObject[] { _petBreedJSON,
+				_petAgeJSON, _petHeightJSON, _petWeightJSON };
 
-		_petOtherInfoList.put(_petOtherInfoBreed);
-		_petOtherInfoList.put(_petOtherInfoAge);
-		_petOtherInfoList.put(_petOtherInfoHeight);
-		_petOtherInfoList.put(_petOtherInfoWeight);
-
-		// get pet info tableRow
-		TableRow _petInfoTableRow = (TableRow) findViewById(R.id.pet_info_tableRow);
+		// get pet other info tableRow
+		TableRow _petOtherInfoTableRow = (TableRow) findViewById(R.id.pet_info_tableRow);
 
 		// set pet info tableRow data
-		for (int i = 0; i < _petOtherInfoList.length(); i++) {
-			// get pet info tableRow item linearLayout
-			LinearLayout _petInfoTableRowItem = (LinearLayout) _petInfoTableRow
+		for (int i = 0; i < _petOtherInfoArray.length; i++) {
+			// get pet other info tableRow item linearLayout
+			LinearLayout _petInfoTableRowItem = (LinearLayout) _petOtherInfoTableRow
 					.getChildAt(i);
 
 			// get pet other info JSONObject
-			JSONObject _petOtherInfo = null;
-			try {
-				_petOtherInfo = (JSONObject) _petOtherInfoList.get(i);
-			} catch (JSONException e) {
-				e.printStackTrace();
+			JSONObject _petOtherInfoJSON = _petOtherInfoArray[i];
 
-				Log.e(LOG_TAG, "Get json object from json array = "
-						+ _petOtherInfoList + " at index = " + i
-						+ " error, exception message = " + e.getMessage());
+			// check pet other info JSONObject and set pet other info label,
+			// value textView text
+			if (null != _petOtherInfoJSON) {
+				((TextView) _petInfoTableRowItem
+						.findViewById(R.id.pet_info_label_textView))
+						.setText(JSONUtils.getStringFromJSONObject(
+								_petOtherInfoJSON, PET_INFO_LABEL_KEY));
+
+				((TextView) _petInfoTableRowItem
+						.findViewById(R.id.pet_info_value_textView))
+						.setText(JSONUtils.getStringFromJSONObject(
+								_petOtherInfoJSON, PET_INFO_VALUE_KEY));
 			}
-
-			// set pet info label and value textView text
-			((TextView) _petInfoTableRowItem
-					.findViewById(R.id.pet_info_label_textView))
-					.setText(JSONUtils.getStringFromJSONObject(_petOtherInfo,
-							PET_INFO_LABEL_KEY));
-
-			((TextView) _petInfoTableRowItem
-					.findViewById(R.id.pet_info_value_textView))
-					.setText(JSONUtils.getStringFromJSONObject(_petOtherInfo,
-							PET_INFO_VALUE_KEY));
-
 		}
 
 		// test by ares
@@ -206,8 +196,6 @@ public class SportsHealthTabContentActivity extends
 				.setProgress(_petSportsScoreProgress);
 		((TextView) findViewById(R.id.pet_sportsScore_textView)).setText(""
 				+ _petSportsScoreProgress);
-
-		super.onResume();
 	}
 
 	// inner class

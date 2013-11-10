@@ -16,6 +16,8 @@ public class PetBean implements Serializable {
 
 	// pet id
 	private Long id;
+	// pet avatar location url
+	private String avatarUrl;
 	// pet avatar
 	private byte[] avatar;
 	// pet nickname
@@ -27,9 +29,9 @@ public class PetBean implements Serializable {
 	// pet age
 	private Integer age;
 	// pet height
-	private Float height;
+	private Double height;
 	// pet weight
-	private Float weight;
+	private Double weight;
 	// pet district
 	private String district;
 	// pet place where used to go
@@ -40,28 +42,20 @@ public class PetBean implements Serializable {
 		// nothing to do
 	}
 
-	public PetBean(Long id, String nickname, PetSex sex, PetBreed breed,
-			Integer age, Float height, Float weight, String district,
-			String placeUsed2Go) {
-		// set id, nickname, sex, breed, age, height, weight, district and place
-		// where used to go
-		this.id = id;
-		this.nickname = nickname;
-		this.sex = sex;
-		this.breed = breed;
-		this.age = age;
-		this.height = height;
-		this.weight = weight;
-		this.district = district;
-		this.placeUsed2Go = placeUsed2Go;
-	}
-
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
 	}
 
 	public byte[] getAvatar() {
@@ -104,19 +98,19 @@ public class PetBean implements Serializable {
 		this.age = age;
 	}
 
-	public Float getHeight() {
+	public Double getHeight() {
 		return height;
 	}
 
-	public void setHeight(Float height) {
+	public void setHeight(Double height) {
 		this.height = height;
 	}
 
-	public Float getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(Float weight) {
+	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 

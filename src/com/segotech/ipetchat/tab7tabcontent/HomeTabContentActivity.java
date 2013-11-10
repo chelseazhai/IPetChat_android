@@ -1,11 +1,7 @@
 package com.segotech.ipetchat.tab7tabcontent;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewStub;
@@ -26,9 +22,6 @@ import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
 
 public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
-
-	private static final String LOG_TAG = HomeTabContentActivity.class
-			.getCanonicalName();
 
 	// pet location view
 	private View _mPetLocationView;
@@ -89,11 +82,9 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 	protected void onResume() {
 		super.onResume();
 
-		// get user pet info
+		// get my pet info
 		PetBean _petInfo = IPCUserExtension.getUserPetInfo(UserManager
 				.getInstance().getUser());
-
-		Log.d(LOG_TAG, "my pet info = " + _petInfo);
 
 		// define pet breed, age, height, weight, district and place used to go
 		// string
@@ -103,16 +94,14 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 				R.string.pet_age_prefix);
 		String _petOtherInfoHeight = getResources().getString(
 				R.string.pet_height_prefix);
-		;
 		String _petOtherInfoWeight = getResources().getString(
 				R.string.pet_weight_prefix);
-		;
 		StringBuilder _petOtherInfoDistrict = new StringBuilder(getResources()
 				.getString(R.string.pet_district_prefix));
 		StringBuilder _petOtherInfoPlaceUsed2Go = new StringBuilder(
 				getResources().getString(R.string.pet_placeUsed2Go_prefix));
 
-		// check user pet info
+		// check my pet info
 		if (null != _petInfo) {
 			// check and set pet avatar
 			if (null != _petInfo.getAvatar()) {
@@ -135,7 +124,7 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 								: R.drawable.img_female);
 			}
 
-			// set them
+			// set pet other info
 			// breed
 			if (null != _petInfo.getBreed()) {
 				_petOtherInfoBreed.append(_petInfo.getBreed().getBreed());
@@ -173,22 +162,15 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 			}
 		}
 
-		// define pet other info list and add pet other info breed, age, height,
-		// weight, district and place used to go
-		List<String> _petOtherInfoList = new ArrayList<String>();
-
-		_petOtherInfoList.add(_petOtherInfoBreed.toString());
-		_petOtherInfoList.add(_petOtherInfoAge);
-		_petOtherInfoList.add(_petOtherInfoHeight);
-		_petOtherInfoList.add(_petOtherInfoWeight);
-		_petOtherInfoList.add(_petOtherInfoDistrict.toString());
-		_petOtherInfoList.add(_petOtherInfoPlaceUsed2Go.toString());
-
 		// set pet other info adapter
 		((ListView) findViewById(R.id.pet_info_listView))
 				.setAdapter(new ArrayAdapter<String>(this,
-						R.layout.pet_info_listview_item_layout,
-						_petOtherInfoList));
+						R.layout.pet_info_listview_item_layout, new String[] {
+								_petOtherInfoBreed.toString(),
+								_petOtherInfoAge, _petOtherInfoHeight,
+								_petOtherInfoWeight,
+								_petOtherInfoDistrict.toString(),
+								_petOtherInfoPlaceUsed2Go.toString() }));
 
 		// test by ares
 		// get pet device battery progress

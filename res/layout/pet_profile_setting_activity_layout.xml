@@ -55,7 +55,7 @@
                 android:background="@drawable/pet_profile_avatar_bg"
                 android:contentDescription="@string/pet_profile_avatar_imageview_contentdescription"
                 android:scaleType="centerInside"
-                android:src="@android:drawable/ic_dialog_map" />
+                android:src="@drawable/img_pet_profile_avatar" />
         </RelativeLayout>
 
         <LinearLayout
