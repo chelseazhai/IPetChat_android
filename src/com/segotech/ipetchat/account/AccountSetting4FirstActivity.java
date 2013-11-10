@@ -38,37 +38,28 @@ public class AccountSetting4FirstActivity extends NavigationActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// check request code
-		switch (requestCode) {
-		case ACCOUNT_REGISTER_REQCODE:
-			// check result code
-			switch (resultCode) {
-			case RESULT_OK:
+		// check result code
+		switch (resultCode) {
+		case RESULT_OK:
+			// check request code
+			switch (requestCode) {
+			case ACCOUNT_REGISTER_REQCODE:
 				// go to account login activity
 				pushActivityForResult(AccountLoginActivity.class,
 						ACCOUNT_LOGIN_REQCODE);
 				break;
 
-			default:
-				// nothing to do
-				break;
-			}
-			break;
-
-		case ACCOUNT_LOGIN_REQCODE:
-			// check result code
-			switch (resultCode) {
-			case RESULT_OK:
+			case ACCOUNT_LOGIN_REQCODE:
 				// finish account setting activity and go to iPetChat tab
 				// activity
 				finish();
 				startActivity(new Intent(this, IPetChatTabActivity.class));
 				break;
-
-			default:
-				// nothing to do
-				break;
 			}
+			break;
+
+		default:
+			// nothing to do
 			break;
 		}
 

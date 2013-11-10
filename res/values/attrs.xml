@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- account register or reset password view stub -->
+    <declare-styleable name="account_register6reset_password_viewstub">
+        <attr name="description" format="string" />
+        <attr name="passwordEditText1Hint" format="string" />
+        <attr name="passwordEditText2Hint" format="string" />
+        <attr name="buttonTitle" format="string" />
+    </declare-styleable>
+
     <!-- pet profile setting item -->
     <declare-styleable name="pet_profile_setting_item">
         <attr name="label" format="string" />

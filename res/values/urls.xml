@@ -4,13 +4,15 @@
     <!-- pet chat remote background server url -->
     <string name="server_url" translatable="false">http://www.segopet.com/segopet</string>
 
+    <!-- get and verify verification code -->
+    <string name="get_phoneVerificationCode_url" translatable="false">/user/getPhoneCode</string>
+    <string name="verify_verificationCode_url" translatable="false">/user/checkPhoneCode</string>
+
     <!-- account register -->
-    <string name="get_registerPhone_verification_code_url" translatable="false">/login/home_!getyanzhengma.action</string>
-    <string name="verify_verificationCode_url" translatable="false">/login/home_!yanzheng.action</string>
-    <string name="account_register_url" translatable="false">/login/home_!zhuce.action</string>
+    <string name="account_register_url" translatable="false">/user/regUser</string>
 
     <!-- account login -->
-    <string name="user_login_url" translatable="false">/login/home_!denglu.action</string>
+    <string name="account_login_url" translatable="false">/user/login</string>
 
     <!-- account retrieve password -->
     <string name="account_retrievePwd_url" translatable="false">/login/home_!denglu.action</string>
@@ -19,7 +21,7 @@
     <string name="account_modifyPwd_url" translatable="false">/login/home_!updatepassword.action</string>
 
     <!-- pet info -->
-    <string name="get_allPetsInfo_url" translatable="false">/login/home_!getpets.action</string>
+    <string name="get_allPets_url" translatable="false">/login/home_!getpets.action</string>
 
     <!-- set pet info -->
     <string name="set_petInfo_url" translatable="false">/login/home_!addpets.action</string>

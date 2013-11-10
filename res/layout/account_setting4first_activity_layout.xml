@@ -16,7 +16,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:contentDescription="@string/application_icon_imageview_contentdescription"
+            android:contentDescription="@string/application_icon_imageView_contentDescription"
             android:scaleType="centerCrop"
             android:src="@drawable/img_application_icon" />
     </FrameLayout>

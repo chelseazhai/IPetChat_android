@@ -36,9 +36,6 @@ public class IPetChatTabActivity extends TabActivity {
 	private static final String LOG_TAG = IPetChatTabActivity.class
 			.getCanonicalName();
 
-	// my pet info
-	private PetBean _mPetInfo;
-
 	// tab widget item content array
 	private final int[][] TAB_WIDGETITEM_CONTENTS = new int[][] {
 			{ R.string.home_tab_title, R.drawable.home_tab_icon },
@@ -47,11 +44,11 @@ public class IPetChatTabActivity extends TabActivity {
 			{ R.string.community_tab7nav_title, R.drawable.community_tab_icon },
 			{ R.string.settings_tab7nav_title, R.drawable.settings_tab_icon } };
 
-	// tabHost
+	// tab host
 	private TabHost _mTabHost;
 
-	// current tab index, default is home tab
-	private int _mCurrentTabIndex = 0;
+	// my pet info
+	private PetBean _mPetInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,15 +116,12 @@ public class IPetChatTabActivity extends TabActivity {
 								SettingsTabContentActivity.class));
 		_mTabHost.addTab(_tabSpec);
 
-		// set current tab
-		_mTabHost.setCurrentTab(_mCurrentTabIndex);
-
 		// get user all pets info
 		// send get user all pets info post http request
 		HttpUtils.postSignatureRequest(
 				getResources().getString(R.string.server_url)
 						+ getResources()
-								.getString(R.string.get_allPetsInfo_url),
+								.getString(R.string.get_allPets_url),
 				PostRequestFormat.URLENCODED, null, null,
 				HttpRequestType.ASYNCHRONOUS,
 				new GetAllPetsInfoHttpRequestListener());

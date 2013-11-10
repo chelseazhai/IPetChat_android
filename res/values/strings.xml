@@ -7,43 +7,50 @@
     <!-- account setting -->
     <!-- account setting for first enter -->
     <string name="title_activity_account_setting4_first" translatable="false">AccountSetting4FirstActivity</string>
-    <string name="application_icon_imageview_contentdescription" translatable="false">application icon image view</string>
+    <string name="application_icon_imageView_contentDescription" translatable="false">application icon image view</string>
     <string name="account_register_button_title">Register</string>
     <string name="account_login_button_title">Login</string>
+
+    <!-- get and verify verification code -->
+    <!-- get phone verification code -->
+    <string name="get_phoneVerificationCode_step_textView_text">Step1</string>
+    <string name="get_phoneVerificationCode_step_description">Input phone number to retrieve verification code</string>
+    <string name="get_phoneVerificationCode_phone_editText_hint">Input phone number</string>
+    <string name="get_phoneVerificationCode_btn_title">Get Verification Code</string>
+    <string name="get_phoneVerificationCode_step_comment">(Your phone number is used for authentication only, we assure that we won\'t send junk message to you.)</string>
+
+    <!-- verify verification code -->
+    <string name="verify_verificationCode_step_textView_text">Step2</string>
+    <string name="verify_verificationCode_step_textView_description">Input verification code and press \'Next\' to verify</string>
+    <string name="verify_verificationCode_verificationCode_editText_hint">Input verification code</string>
+    <string name="verify_verificationCode_btn_title">Next</string>
+
+    <!-- account register or reset password -->
+    <string name="accountReg_or_resetPwd_finish_step_textView_text">Step3</string>
 
     <!-- account register -->
     <string name="title_activity_account_register" translatable="false">AccountRegisterActivity</string>
     <string name="account_register_nav_title">Account Register</string>
-    <!-- step 1 -->
-    <string name="register_step1_textView_text">Step1</string>
-    <string name="register_step1_description">Input phone number to retrieve verification code</string>
-    <string name="registerPhone_editText_hint">Input register phone number</string>
-    <string name="get_verificationCode_btn_title">Get Verification Code</string>
-    <string name="register_step1_comment">(Your phone number is used for authentication only, we assure that we won\'t send junk message to you.)</string>
-    <!-- step 2 -->
-    <string name="register_step2_textView_text">Step2</string>
-    <string name="register_step2_description">Input verification code and press \'Next\' to verify</string>
-    <string name="verificationCode_verify_editText_hint">Input verification code</string>
-    <string name="verify_verificationCode_btn_title">Next</string>
-    <!-- step3 -->
-    <string name="register_step3_textView_text">Step3</string>
-    <string name="register_step3_description">Input password and confirmation to finish the register</string>
-    <string name="pwd_editText_hint">Input password</string>
-    <string name="confirmationPwd_editText_hint">Input confirmation password</string>
-    <string name="register_finish_btn_title">Finish Register</string>
+    <string name="account_register_finish_step_description">Input password and confirmation to finish the register</string>
+    <string name="account_register_finish_password_editText_hint">Input password</string>
+    <string name="account_register_finish_confirmationPwd_editText_hint">Input confirmation password</string>
+    <string name="account_register_finish_btn_title">Finish Register</string>
 
     <!-- account login -->
     <string name="title_activity_account_login" translatable="false">AccountLoginActivity</string>
     <string name="account_login_nav_title">Account Login</string>
-    <string name="login_name_editText_hint">Please input your registered phone number</string>
-    <string name="login_pwd_editText_hint">Please input the account password</string>
-    <string name="forget_pwd_btn_title">Forget Pwd</string>
-    <string name="login_confirm_btn_title">Login</string>
+    <string name="account_login_phone_editText_hint">Please input your registered phone number</string>
+    <string name="account_login_password_editText_hint">Please input the account password</string>
+    <string name="forget_account_loginPwd_btn_title">Forget Pwd</string>
+    <string name="account_login_confirm_btn_title">Login</string>
 
     <!-- account retrieve password -->
-    <string name="title_activity_account_retrieve_pwd" translatable="false">AccountRetrievePWDActivity</string>
+    <string name="title_activity_account_retrieve_pwd" translatable="false">AccountRetrievePwdActivity</string>
     <string name="account_retrieve_password_nav_title">Retrieve password</string>
-    <string name="account_retrieve_password_not_implement">account retrieve password not implement</string>
+    <string name="account_reset_password_finish_step_description">Input new password and confirmation to finish reset</string>
+    <string name="account_reset_password_finish_newPwd_editText_hint">Input new password</string>
+    <string name="account_reset_password_finish_newConfirmationPwd_editText_hint">Input new confirmation password</string>
+    <string name="account_reset_password_finish_btn_title">Finish Reset</string>
 
     <!-- iPetChat tab activity -->
     <string name="title_activity_ipet_chat_tab" translatable="false">IPetChatTabActivity</string>

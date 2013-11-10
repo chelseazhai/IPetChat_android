@@ -77,12 +77,11 @@ public class PetProfileDistrictItem extends RelativeLayout {
 			}
 		}
 
-		// get pet profile district item text textView
-		TextView _textTextView = (TextView) findViewById(R.id.pet_profile_district_item_textView);
-
-		// set profile district item text
+		// check pet profile district item text
 		if (null != text) {
-			_textTextView.setText(text);
+			// set pet profile district item text textView text
+			((TextView) findViewById(R.id.pet_profile_district_item_textView))
+					.setText(text);
 		}
 
 		// set pet profile district item clickable

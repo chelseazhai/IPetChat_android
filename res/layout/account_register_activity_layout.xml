@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ipetchat="http://schemas.android.com/apk/res/com.segotech.ipetchat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".account.AccountRegisterActivity" >
@@ -8,18 +9,21 @@
         android:id="@+id/account_register_step1_linearLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        layout="@layout/account_register_activity_step1_layout" />
+        layout="@layout/get_phone_verification_code_layout" />
 
     <ViewStub
         android:id="@+id/account_register_step2_viewStub"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout="@layout/account_register_activity_step2_layout" />
+        android:layout="@layout/verify_verification_code_layout" />
 
-    <ViewStub
+    <com.segotech.ipetchat.customwidget.AccountReg6ResetPwdViewStub
         android:id="@+id/account_register_step3_viewStub"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout="@layout/account_register_activity_step3_layout" />
+        ipetchat:buttonTitle="@string/account_register_finish_btn_title"
+        ipetchat:description="@string/account_register_finish_step_description"
+        ipetchat:passwordEditText1Hint="@string/account_register_finish_password_editText_hint"
+        ipetchat:passwordEditText2Hint="@string/account_register_finish_confirmationPwd_editText_hint" />
 
 </FrameLayout>

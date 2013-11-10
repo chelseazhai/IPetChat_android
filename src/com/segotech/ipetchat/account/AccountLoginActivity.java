@@ -43,18 +43,16 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 		// set title
 		setTitle(R.string.account_login_nav_title);
 
-		// auto complete login user name
-		((EditText) findViewById(R.id.login_name_editText))
-				.setText(DataStorageUtils
-						.getString(ComUserLocalStorageAttributes.LOGIN_USERNAME
-								.name()));
+		// auto complete login phone
+		((EditText) findViewById(R.id.account_login_phone_editText))
+				.setText(UserManager.getInstance().getUser().getName());
 
-		// set forget user login password button on click listener
-		((Button) findViewById(R.id.forget_pwd_btn))
+		// set forget account login password button on click listener
+		((Button) findViewById(R.id.forget_account_loginPwd_button))
 				.setOnClickListener(new ForgetPwdBtnOnClickListener());
 
-		// set user login confirm button on click listener
-		((Button) findViewById(R.id.login_confirm_btn))
+		// set account login confirm button on click listener
+		((Button) findViewById(R.id.account_login_confirm_button))
 				.setOnClickListener(new LoginConfirmBtnOnClickListener());
 	}
 
@@ -66,7 +64,7 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 	}
 
 	// inner class
-	// forget user login password button on click listener
+	// forget account login password button on click listener
 	class ForgetPwdBtnOnClickListener implements OnClickListener {
 
 		@Override
@@ -77,16 +75,18 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 
 	}
 
-	// user login confirm button on click listener
+	// account login confirm button on click listener
 	class LoginConfirmBtnOnClickListener implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			// get login user name
-			String _loginUserName = ((EditText) findViewById(R.id.login_name_editText))
+			// get account login phone number
+			String _accountLoginPhoneNumber = ((EditText) findViewById(R.id.account_login_phone_editText))
 					.getText().toString();
-			// check login user name
-			if (null == _loginUserName || _loginUserName.equalsIgnoreCase("")) {
+
+			// check account login phone number
+			if (null == _accountLoginPhoneNumber
+					|| "".equalsIgnoreCase(_accountLoginPhoneNumber)) {
 				Toast.makeText(AccountLoginActivity.this,
 						R.string.toast_login_userName_null, Toast.LENGTH_SHORT)
 						.show();
@@ -94,11 +94,13 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 				return;
 			}
 
-			// get login password
-			String _loginPassword = ((EditText) findViewById(R.id.login_pwd_editText))
+			// get account login password
+			String _accountLoginPassword = ((EditText) findViewById(R.id.account_login_password_editText))
 					.getText().toString();
-			// check login password
-			if (null == _loginPassword || _loginPassword.equalsIgnoreCase("")) {
+
+			// check account login password
+			if (null == _accountLoginPassword
+					|| "".equalsIgnoreCase(_accountLoginPassword)) {
 				Toast.makeText(AccountLoginActivity.this,
 						R.string.toast_login_password_null, Toast.LENGTH_SHORT)
 						.show();
@@ -106,28 +108,30 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 				return;
 			}
 
-			// login confirm
-			// generate user login post request param
-			Map<String, String> _loginParam = new HashMap<String, String>();
-			_loginParam.put(
-					getResources().getString(R.string.rbgServer_userLoginName),
-					_loginUserName);
-			_loginParam.put(
-					getResources().getString(R.string.rbgServer_userLoginPwd),
-					StringUtils.md5(_loginPassword));
+			// account login confirm
+			// generate account login confirm post request param
+			Map<String, String> _accountLoginConfirmParam = new HashMap<String, String>();
+			_accountLoginConfirmParam.put(
+					getResources().getString(
+							R.string.rbgServer_accountLogin_phone),
+					_accountLoginPhoneNumber);
+			_accountLoginConfirmParam.put(
+					getResources().getString(
+							R.string.rbgServer_accountLogin_password),
+					StringUtils.md5(_accountLoginPassword));
 
-			// send user login post http request
+			// send account login confirm post http request
 			HttpUtils.postRequest(getResources().getString(R.string.server_url)
-					+ getResources().getString(R.string.user_login_url),
-					PostRequestFormat.URLENCODED, _loginParam, null,
-					HttpRequestType.ASYNCHRONOUS,
-					new UserLoginHttpRequestListener());
+					+ getResources().getString(R.string.account_login_url),
+					PostRequestFormat.URLENCODED, _accountLoginConfirmParam,
+					null, HttpRequestType.ASYNCHRONOUS,
+					new AccountLoginHttpRequestListener());
 		}
 
 	}
 
-	// user login confirm http request listener
-	class UserLoginHttpRequestListener extends OnHttpRequestListener {
+	// account login confirm http request listener
+	class AccountLoginHttpRequestListener extends OnHttpRequestListener {
 
 		@Override
 		public void onFinished(HttpRequest request, HttpResponse response) {
@@ -135,7 +139,7 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
 
-			// get http response entity string json object result and userKey
+			// get http response entity string json object result and user key
 			String _result = JSONUtils.getStringFromJSONObject(_respJsonData,
 					getResources()
 							.getString(R.string.rbgServer_req_resp_result));
@@ -144,22 +148,22 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 			if (null != _result) {
 				switch (Integer.parseInt(_result)) {
 				case 0:
-					// get login user name and response userKey
-					String _loginName = ((EditText) findViewById(R.id.login_name_editText))
+					// get account login name and response user key
+					String _loginName = ((EditText) findViewById(R.id.account_login_phone_editText))
 							.getText().toString();
 					String _responseLoginUserKey = JSONUtils
 							.getStringFromJSONObject(
 									_respJsonData,
 									getResources()
 											.getString(
-													R.string.rbgServer_loginReq_resp_userkey));
+													R.string.rbgServer_accountLoginReq_resp_userKey));
 
-					// save user bean and add to user manager
+					// save login user bean and add it to user manager
 					UserManager.getInstance().setUser(
 							new UserBean(_loginName, null,
 									_responseLoginUserKey));
 
-					// add to data storage
+					// add login name and user key to local data storage
 					DataStorageUtils
 							.putObject(
 									ComUserLocalStorageAttributes.LOGIN_USERNAME
@@ -174,7 +178,7 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 					break;
 
 				case 1:
-					Log.d(LOG_TAG, "login failed, user not existed");
+					Log.d(LOG_TAG, "account login failed, user not existed");
 
 					Toast.makeText(AccountLoginActivity.this,
 							R.string.toast_login_user_notExisted,
@@ -182,7 +186,8 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 					break;
 
 				case 2:
-					Log.d(LOG_TAG, "login failed, user login password is wrong");
+					Log.d(LOG_TAG,
+							"account login failed, user login password is wrong");
 
 					Toast.makeText(AccountLoginActivity.this,
 							R.string.toast_login_user_loginPwd_wrong,
@@ -191,13 +196,14 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 
 				default:
 					Log.e(LOG_TAG,
-							"login failed, bg_server return result is unrecognized");
+							"account login failed, bg_server return result is unrecognized");
 
 					processLoginException();
 					break;
 				}
 			} else {
-				Log.e(LOG_TAG, "login failed, bg_server return result is null");
+				Log.e(LOG_TAG,
+						"account login failed, bg_server return result is null");
 
 				processLoginException();
 			}
@@ -205,7 +211,8 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFailed(HttpRequest request, HttpResponse response) {
-			Log.e(LOG_TAG, "login failed, send user login post request failed");
+			Log.e(LOG_TAG,
+					"account login failed, send account login confirm post request failed");
 
 			processLoginException();
 		}

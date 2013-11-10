@@ -71,12 +71,11 @@ public class PetProfileSettingItem extends RelativeLayout {
 			}
 		}
 
-		// get pet profile setting item label textView
-		TextView _labelTextView = (TextView) findViewById(R.id.pet_profile_setting_item_label_textView);
-
-		// set profile setting item label
+		// check pet profile setting item label
 		if (null != label) {
-			_labelTextView.setText(label);
+			// set pet profile setting item label textView text
+			((TextView) findViewById(R.id.pet_profile_setting_item_label_textView))
+					.setText(label);
 		}
 
 		// set pet profile setting item clickable

@@ -9,36 +9,43 @@
     <string name="account_register_button_title">注\t册</string>
     <string name="account_login_button_title">登\t录</string>
 
+    <!-- get and verify verification code -->
+    <!-- get phone verification code -->
+    <string name="get_phoneVerificationCode_step_textView_text">第一步</string>
+    <string name="get_phoneVerificationCode_step_description">输入手机号，获取验证码</string>
+    <string name="get_phoneVerificationCode_phone_editText_hint">输入手机号码</string>
+    <string name="get_phoneVerificationCode_btn_title">获取验证码</string>
+    <string name="get_phoneVerificationCode_step_comment">（您的手机号码仅用于身份验证，我们不会向您发送垃圾短信。）</string>
+
+    <!-- verify verification code -->
+    <string name="verify_verificationCode_step_textView_text">第二步</string>
+    <string name="verify_verificationCode_step_textView_description">输入验证码，点击下一步验证</string>
+    <string name="verify_verificationCode_verificationCode_editText_hint">输入验证码</string>
+    <string name="verify_verificationCode_btn_title">下一步</string>
+
+    <!-- account register or reset password -->
+    <string name="accountReg_or_resetPwd_finish_step_textView_text">第三步</string>
+
     <!-- account register -->
     <string name="account_register_nav_title">账户注册</string>
-    <!-- step 1 -->
-    <string name="register_step1_textView_text">第一步</string>
-    <string name="register_step1_description">输入手机号，获取验证码</string>
-    <string name="registerPhone_editText_hint">输入注册手机号码</string>
-    <string name="get_verificationCode_btn_title">获取验证码</string>
-    <string name="register_step1_comment">（您的手机号码仅用于身份验证，我们不会向您发送垃圾短信。）</string>
-    <!-- step 2 -->
-    <string name="register_step2_textView_text">第二步</string>
-    <string name="register_step2_description">输入验证码，点击下一步验证</string>
-    <string name="verificationCode_verify_editText_hint">输入验证码</string>
-    <string name="verify_verificationCode_btn_title">下一步</string>
-    <!-- step3 -->
-    <string name="register_step3_textView_text">第三步</string>
-    <string name="register_step3_description">输入密码和确认密码，完成注册</string>
-    <string name="pwd_editText_hint">输入密码</string>
-    <string name="confirmationPwd_editText_hint">输入确认密码</string>
-    <string name="register_finish_btn_title">完成注册</string>
+    <string name="account_register_finish_step_description">输入密码和确认密码，完成注册</string>
+    <string name="account_register_finish_password_editText_hint">输入密码</string>
+    <string name="account_register_finish_confirmationPwd_editText_hint">输入确认密码</string>
+    <string name="account_register_finish_btn_title">完成注册</string>
 
     <!-- account login -->
     <string name="account_login_nav_title">账户登录</string>
-    <string name="login_name_editText_hint">请输入您已注册了的手机号码</string>
-    <string name="login_pwd_editText_hint">请输入账号密码</string>
-    <string name="forget_pwd_btn_title">忘记密码</string>
-    <string name="login_confirm_btn_title">登录</string>
+    <string name="account_login_phone_editText_hint">请输入您已注册了的手机号码</string>
+    <string name="account_login_password_editText_hint">请输入账号密码</string>
+    <string name="forget_account_loginPwd_btn_title">忘记密码</string>
+    <string name="account_login_confirm_btn_title">登录</string>
 
     <!-- account retrieve password -->
     <string name="account_retrieve_password_nav_title">找回密码</string>
-    <string name="account_retrieve_password_not_implement">找回密码暂未实现</string>
+    <string name="account_reset_password_finish_step_description">输入新密码和确认密码，完成重置</string>
+    <string name="account_reset_password_finish_newPwd_editText_hint">输入新密码</string>
+    <string name="account_reset_password_finish_newConfirmationPwd_editText_hint">输入新确认密码</string>
+    <string name="account_reset_password_finish_btn_title">完成重置密码</string>
 
     <!-- iPetChat tab activity -->
     <!-- pet info -->
@@ -160,7 +167,7 @@
     <string name="pet_profile_tianjin_hedong_district_text">河东</string>
     <string name="pet_profile_chongqing_district_text">重庆</string>
     <string name="pet_profile_chongqing_kaixian_district_text">开县</string>
-    <string name="pet_profile_chongqing_jiangbei_district_text">江北</string>      
+    <string name="pet_profile_chongqing_jiangbei_district_text">江北</string>
     <string name="pet_profile_zhejiang_district_text">浙江</string>
     <string name="pet_profile_zhejiang_lishui_district_text">丽水</string>
     <string name="pet_profile_zhejiang_zhoushan_district_text">舟山</string>
