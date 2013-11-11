@@ -119,6 +119,12 @@
     <!-- my concern -->
     <string name="my_concern_nav_title">我的关注</string>
     <string name="my_concern_pet_search_editText_hint">按名字或则拼音搜索</string>
+    <string name="add_new_concern_pet_button_title">添加</string>
+
+    <!-- add concern pet -->
+    <string name="add_concern_pet_nav_title">搜号码</string>
+    <string name="add_concern_pet_numberLabel_textView_text">赛果号/手机号</string>
+    <string name="add_concern_pet_findAccount_button_text">查找</string>
 
     <!-- message box -->
     <string name="message_box_nav_title">留言箱</string>

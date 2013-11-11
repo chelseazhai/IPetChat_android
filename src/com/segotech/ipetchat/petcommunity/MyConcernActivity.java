@@ -12,10 +12,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
+import com.richitec.commontoolkit.customcomponent.BarButtonItem;
 import com.richitec.commontoolkit.customcomponent.CTToast;
 import com.richitec.commontoolkit.customcomponent.ListViewQuickAlphabetBar;
 import com.richitec.commontoolkit.customcomponent.ListViewQuickAlphabetBar.OnTouchListener;
@@ -41,6 +44,11 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 
 		// set title
 		setTitle(R.string.my_concern_nav_title);
+
+		// set add new concern pet as right bar button item
+		setRightBarButtonItem(new BarButtonItem(this,
+				R.string.add_new_concern_pet_button_title,
+				new AddNewConcernPetBtnOnClickListener()));
 
 		// define my concern pets list
 		List<Map<String, ?>> _myConcernPetsList = new ArrayList<Map<String, ?>>();
@@ -131,6 +139,17 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 	}
 
 	// inner calss
+	// add new concern pet button on click listener
+	class AddNewConcernPetBtnOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			// goto add concern pet activity
+			pushActivity(AddConcernPetActivity.class);
+		}
+
+	}
+
 	// my concern pets adapter
 	class MyConcernPetsAdapter extends PetCommunityItemListViewAdapter {
 

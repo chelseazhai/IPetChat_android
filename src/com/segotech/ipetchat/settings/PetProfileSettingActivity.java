@@ -598,10 +598,8 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 
 					Log.d(LOG_TAG, "Response pet id = " + _responsePetId);
 
-					// set new add pet id
-					if (null != _responsePetId) {
-						_mPetInfo.setId(_responsePetId);
-					}
+					// set new add pet id or update existed pet id
+					_mPetInfo.setId(_responsePetId);
 					break;
 
 				case 1:

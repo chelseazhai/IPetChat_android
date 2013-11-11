@@ -45,6 +45,6 @@
     <string name="rbgServer_setPetInfo_pet_weight" translatable="false">weight</string>
     <string name="rbgServer_setPetInfo_pet_district" translatable="false">district</string>
     <string name="rbgServer_setPetInfo_pet_placeUsed2Go" translatable="false">placeoftengo</string>
-    <string name="rbgServer_setPetInfoReq_resp_petId" translatable="false">petid</string>
+    <string name="rbgServer_setPetInfoReq_resp_petId" translatable="false">id</string>
 
 </resources>

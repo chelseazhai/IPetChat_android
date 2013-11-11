@@ -145,6 +145,13 @@
     <string name="my_concern_pet_search_editText_hint">search with name or phonetics</string>
     <string name="my_concern_pet_avatar_imageview_contentdescription" translatable="false">my concern pet avatar image view</string>
     <string name="my_concern_pet_sex_imageview_contentdescription" translatable="false">my concern pet image view</string>
+    <string name="add_new_concern_pet_button_title">Add</string>
+
+    <!-- add concern pet -->
+    <string name="title_activity_add_concern_pet" translatable="false">AddConcernPetActivity</string>
+    <string name="add_concern_pet_nav_title">Search phone</string>
+    <string name="add_concern_pet_numberLabel_textView_text">Sego account/Phone number</string>
+    <string name="add_concern_pet_findAccount_button_text">Find</string>
 
     <!-- message box -->
     <string name="title_activity_messagebox" translatable="false">MessageboxActivity</string>

@@ -96,6 +96,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".petcommunity.AddConcernPetActivity"
+            android:label="@string/title_activity_add_concern_pet"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".petcommunity.MessageboxActivity"
             android:label="@string/title_activity_messagebox"
             android:screenOrientation="portrait" >
