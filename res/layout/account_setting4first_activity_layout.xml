@@ -12,11 +12,10 @@
         android:layout_weight="1" >
 
         <ImageView
-            android:id="@+id/application_icon_imageView"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:contentDescription="@string/application_icon_imageView_contentDescription"
+            android:contentDescription="@string/as4f_appIcon_imageView_contentDescription"
             android:scaleType="centerCrop"
             android:src="@drawable/img_application_icon" />
     </FrameLayout>
@@ -29,23 +28,23 @@
         android:paddingRight="20dp" >
 
         <Button
-            android:id="@+id/account_register_button"
+            android:id="@+id/as4f_accountRegister_button"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:background="@drawable/plane_gainsboro_btn_bg"
-            android:text="@string/account_register_button_title"
+            android:text="@string/as4f_accountRegister_button_title"
             android:textColor="@color/middle_green"
             android:textSize="22sp" />
 
         <Button
-            android:id="@+id/account_login_button"
+            android:id="@+id/as4f_accountLogin_button"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/account_register_button"
+            android:layout_below="@id/as4f_accountRegister_button"
             android:layout_marginTop="14dp"
             android:background="@drawable/plane_green_btn_bg"
-            android:text="@string/account_login_button_title"
+            android:text="@string/as4f_accountLogin_button_title"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
     </RelativeLayout>

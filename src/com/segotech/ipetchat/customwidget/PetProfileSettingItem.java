@@ -74,8 +74,7 @@ public class PetProfileSettingItem extends RelativeLayout {
 		// check pet profile setting item label
 		if (null != label) {
 			// set pet profile setting item label textView text
-			((TextView) findViewById(R.id.pet_profile_setting_item_label_textView))
-					.setText(label);
+			((TextView) findViewById(R.id.ppsi_label_textView)).setText(label);
 		}
 
 		// set pet profile setting item clickable
@@ -94,8 +93,7 @@ public class PetProfileSettingItem extends RelativeLayout {
 		this.text = text;
 
 		// set pet profile setting item text textView text
-		((TextView) findViewById(R.id.pet_profile_setting_item_textView))
-				.setText(text);
+		((TextView) findViewById(R.id.ppsi_textView)).setText(text);
 	}
 
 }

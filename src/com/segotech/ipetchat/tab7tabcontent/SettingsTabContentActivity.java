@@ -28,9 +28,9 @@ import com.segotech.ipetchat.settings.PetProfileSettingActivity;
 
 public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 
-	// settings info item target activity class array
+	// setting items info target activity class array
 	@SuppressWarnings("unchecked")
-	private final Class<? extends Activity>[] SETTINGS_INFO_TARGET_ACTIVITYCLSES = new Class[] {
+	private final Class<? extends Activity>[] SETTING_ITEMSINFO_TARGET_ACTIVITYCLSES = new Class[] {
 			PetProfileSettingActivity.class, PetPhotosSettingActivity.class,
 			AccountInfoSettingActivity.class, BlackListActivity.class,
 			PetDeviceBindActivity.class };
@@ -45,52 +45,53 @@ public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 		// set title
 		setTitle(R.string.settings_tab7nav_title);
 
-		// get settings listView
-		ListView _settingsListView = (ListView) findViewById(R.id.settings_listView);
+		// get setting items listView
+		ListView _settingItemsListView = (ListView) findViewById(R.id.st_settingItems_listView);
 
-		// define settings list
-		List<Map<String, ?>> _settingsList = new ArrayList<Map<String, ?>>();
+		// get setting items title array
+		String[] _settingItemsTitles = getResources().getStringArray(
+				R.array.setting_items_info_array);
 
-		// get setting title array
-		String[] _titles = getResources().getStringArray(
-				R.array.settings_info_array);
+		// define setting items data list
+		List<Map<String, ?>> _settingItemsDataList = new ArrayList<Map<String, ?>>();
 
-		// set them
-		for (int i = 0; i < _titles.length; i++) {
-			// define setting map
-			Map<String, Object> _itemMap = new HashMap<String, Object>();
+		// process each setting item
+		for (int i = 0; i < _settingItemsTitles.length; i++) {
+			// define setting item data map
+			Map<String, Object> _itemDataMap = new HashMap<String, Object>();
 
-			// title
-			_itemMap.put(SettingsAdapter.SETTING_ITEM_TITLE, _titles[i]);
+			// set title
+			_itemDataMap.put(SettingItemsAdapter.SETTING_ITEM_TITLE,
+					_settingItemsTitles[i]);
 
-			// add setting map to list
-			_settingsList.add(_itemMap);
+			// add setting item data map to list
+			_settingItemsDataList.add(_itemDataMap);
 
 		}
 
-		// set settings listView adapter
-		_settingsListView.setAdapter(new SettingsAdapter(this, _settingsList,
-				R.layout.settings_listview_item_layout,
-				new String[] { SettingsAdapter.SETTING_ITEM_TITLE },
-				new int[] { R.id.setting_item_title_textView }));
+		// set setting items listView adapter
+		_settingItemsListView.setAdapter(new SettingItemsAdapter(this,
+				_settingItemsDataList, R.layout.settings_listview_item_layout,
+				new String[] { SettingItemsAdapter.SETTING_ITEM_TITLE },
+				new int[] { R.id.sti_title_textView }));
 
-		// set settings listView on item click listener
-		_settingsListView
-				.setOnItemClickListener(new SettingsListViewOnItemClickListener());
+		// set setting items listView on item click listener
+		_settingItemsListView
+				.setOnItemClickListener(new SettingItemsListViewOnItemClickListener());
 
 		// bind account logout button on click listener
-		((Button) findViewById(R.id.account_logout_button))
+		((Button) findViewById(R.id.st_account_logout_button))
 				.setOnClickListener(new AccountLogoutBtnOnClickListener());
 	}
 
 	// inner class
-	// settings adapter
-	class SettingsAdapter extends CTListAdapter {
+	// setting items adapter
+	class SettingItemsAdapter extends CTListAdapter {
 
-		// settings adapter data keys
+		// setting items adapter data keys
 		private static final String SETTING_ITEM_TITLE = "setting_item_title";
 
-		public SettingsAdapter(Context context, List<Map<String, ?>> data,
+		public SettingItemsAdapter(Context context, List<Map<String, ?>> data,
 				int itemsLayoutResId, String[] dataKeys,
 				int[] itemsComponentResIds) {
 			super(context, data, itemsLayoutResId, dataKeys,
@@ -116,14 +117,15 @@ public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 
 	}
 
-	// settings listView on item click listener
-	class SettingsListViewOnItemClickListener implements OnItemClickListener {
+	// setting items listView on item click listener
+	class SettingItemsListViewOnItemClickListener implements
+			OnItemClickListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// go to target activity
-			pushActivity(SETTINGS_INFO_TARGET_ACTIVITYCLSES[position]);
+			pushActivity(SETTING_ITEMSINFO_TARGET_ACTIVITYCLSES[position]);
 		}
 
 	}

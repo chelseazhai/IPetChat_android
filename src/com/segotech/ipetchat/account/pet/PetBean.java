@@ -2,9 +2,14 @@ package com.segotech.ipetchat.account.pet;
 
 import java.io.Serializable;
 
+import org.json.JSONObject;
+
+import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 
 import com.richitec.commontoolkit.CTApplication;
+import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
 
 public class PetBean implements Serializable {
@@ -13,6 +18,8 @@ public class PetBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 3288951473132588097L;
+
+	private static final String LOG_TAG = PetBean.class.getCanonicalName();
 
 	// pet id
 	private Long id;
@@ -40,6 +47,11 @@ public class PetBean implements Serializable {
 	// PetBean constructor
 	public PetBean() {
 		// nothing to do
+	}
+
+	public PetBean(JSONObject petJSONInfo) {
+		// set pet info bean attributes
+		updatePetInfo(petJSONInfo);
 	}
 
 	public Long getId() {
@@ -128,6 +140,97 @@ public class PetBean implements Serializable {
 
 	public void setPlaceUsed2Go(String placeUsed2Go) {
 		this.placeUsed2Go = placeUsed2Go;
+	}
+
+	// update pet info
+	public void updatePetInfo(JSONObject petJSONInfo) {
+		// check pet json info
+		if (null != petJSONInfo) {
+			// get application context
+			Context _appContext = CTApplication.getContext();
+
+			// set pet info bean attributes
+			// id
+			// get and check id value
+			Long _idValue = JSONUtils.getLongFromJSONObject(
+					petJSONInfo,
+					_appContext.getResources().getString(
+							R.string.rbgServer_getAllPetsReqResp_pet_id));
+			if (null != _idValue) {
+				id = _idValue;
+			}
+
+			// avatar url
+			avatarUrl = JSONUtils
+					.getStringFromJSONObject(
+							petJSONInfo,
+							_appContext
+									.getResources()
+									.getString(
+											R.string.rbgServer_getAllPetsReqResp_pet_avatarUrl));
+
+			// nickname
+			nickname = JSONUtils.getStringFromJSONObject(
+					petJSONInfo,
+					_appContext.getResources().getString(
+							R.string.rbgServer_getAllPetsReqResp_pet_nickname));
+
+			// sex
+			// get and check sex value
+			Integer _sexValue = JSONUtils.getIntegerFromJSONObject(
+					petJSONInfo,
+					_appContext.getResources().getString(
+							R.string.rbgServer_getAllPetsReqResp_pet_sex));
+			if (null != _sexValue) {
+				sex = PetSex.getSex(_sexValue);
+			}
+
+			// breed
+			// get and check breed value
+			Integer _breedValue = JSONUtils.getIntegerFromJSONObject(
+					petJSONInfo,
+					_appContext.getResources().getString(
+							R.string.rbgServer_getAllPetsReqResp_pet_breed));
+			if (null != _breedValue) {
+				breed = PetBreed.getBreed(_breedValue);
+			}
+
+			// age
+			age = JSONUtils.getIntegerFromJSONObject(
+					petJSONInfo,
+					_appContext.getResources().getString(
+							R.string.rbgServer_getAllPetsReqResp_pet_age));
+
+			// height
+			height = JSONUtils.getDoubleFromJSONObject(
+					petJSONInfo,
+					_appContext.getResources().getString(
+							R.string.rbgServer_getAllPetsReqResp_pet_height));
+
+			// weight
+			weight = JSONUtils.getDoubleFromJSONObject(
+					petJSONInfo,
+					_appContext.getResources().getString(
+							R.string.rbgServer_getAllPetsReqResp_pet_weight));
+
+			// district
+			district = JSONUtils.getStringFromJSONObject(
+					petJSONInfo,
+					_appContext.getResources().getString(
+							R.string.rbgServer_getAllPetsReqResp_pet_district));
+
+			// place where used to go
+			placeUsed2Go = JSONUtils
+					.getStringFromJSONObject(
+							petJSONInfo,
+							_appContext
+									.getResources()
+									.getString(
+											R.string.rbgServer_getAllPetsReqResp_pet_placeUsed2Go));
+		} else {
+			Log.e(LOG_TAG, "update pet info error, pet json info = "
+					+ petJSONInfo);
+		}
 	}
 
 	@Override

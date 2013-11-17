@@ -7,53 +7,52 @@
     <!-- common -->
     <string name="asyncHttpRequest_progressDialog_message">Processing, please waiting&#8230;</string>
 
-    <!-- account setting -->
     <!-- account setting for first enter -->
-    <string name="title_activity_account_setting4_first" translatable="false">AccountSetting4FirstActivity</string>
-    <string name="application_icon_imageView_contentDescription" translatable="false">application icon image view</string>
-    <string name="account_register_button_title">Register</string>
-    <string name="account_login_button_title">Login</string>
+    <string name="title_activity_account_setting4first" translatable="false">AccountSetting4FirstActivity</string>
+    <string name="as4f_appIcon_imageView_contentDescription" translatable="false">application icon image view</string>
+    <string name="as4f_accountRegister_button_title">Register</string>
+    <string name="as4f_accountLogin_button_title">Login</string>
 
-    <!-- get and verify verification code -->
+    <!-- get phone verification code and verify -->
     <!-- get phone verification code -->
-    <string name="get_phoneVerificationCode_step_textView_text">Step1</string>
-    <string name="get_phoneVerificationCode_step_description">Input phone number to retrieve verification code</string>
-    <string name="get_phoneVerificationCode_phone_editText_hint">Input phone number</string>
-    <string name="get_phoneVerificationCode_btn_title">Get Verification Code</string>
-    <string name="get_phoneVerificationCode_step_comment">(Your phone number is used for authentication only, we assure that we won\'t send junk message to you.)</string>
+    <string name="getPhoneVerificationCode_step_textView_text">Step1</string>
+    <string name="getPhoneVerificationCodeStep_description">Input phone number to retrieve verification code</string>
+    <string name="getPhoneVerificationCode_phone_editText_hint">Input phone number</string>
+    <string name="getPhoneVerificationCode_button_title">Get Verification Code</string>
+    <string name="getPhoneVerificationCodeStep_comment">(Your phone number is used for authentication only, we assure that we won\'t send junk message to you.)</string>
 
     <!-- verify verification code -->
-    <string name="verify_verificationCode_step_textView_text">Step2</string>
-    <string name="verify_verificationCode_step_textView_description">Input verification code and press \'Next\' to verify</string>
-    <string name="verify_verificationCode_verificationCode_editText_hint">Input verification code</string>
-    <string name="verify_verificationCode_btn_title">Next</string>
+    <string name="verifyVerificationCode_step_textView_text">Step2</string>
+    <string name="verifyVerificationCodeStep_description">Input verification code and press \'Next\' to verify</string>
+    <string name="verifyVerificationCode_verificationCode_editText_hint">Input verification code</string>
+    <string name="verifyVerificationCode_button_title">Next</string>
 
-    <!-- account register or reset password -->
-    <string name="accountReg_or_resetPwd_finish_step_textView_text">Step3</string>
+    <!-- account finish register or reset password -->
+    <string name="accountRegister_or_resetPwd_step_textView_text">Step3</string>
 
     <!-- account register -->
     <string name="title_activity_account_register" translatable="false">AccountRegisterActivity</string>
     <string name="account_register_nav_title">Account Register</string>
-    <string name="account_register_finish_step_description">Input password and confirmation to finish the register</string>
-    <string name="account_register_finish_password_editText_hint">Input password</string>
-    <string name="account_register_finish_confirmationPwd_editText_hint">Input confirmation password</string>
-    <string name="account_register_finish_btn_title">Finish Register</string>
+    <string name="ar_finishRegisterStep_description">Input password and confirmation to finish the register</string>
+    <string name="ar_finishRegister_password_editText_hint">Input password</string>
+    <string name="ar_finishRegister_confirmationPwd_editText_hint">Input confirmation password</string>
+    <string name="ar_finishRegister_button_title">Finish Register</string>
 
     <!-- account login -->
     <string name="title_activity_account_login" translatable="false">AccountLoginActivity</string>
     <string name="account_login_nav_title">Account Login</string>
-    <string name="account_login_phone_editText_hint">Please input your registered phone number</string>
-    <string name="account_login_password_editText_hint">Please input the account password</string>
-    <string name="forget_account_loginPwd_btn_title">Forget Pwd</string>
-    <string name="account_login_confirm_btn_title">Login</string>
+    <string name="al_username_editText_hint">Please input your registered phone number</string>
+    <string name="al_loginPwd_editText_hint">Please input the account password</string>
+    <string name="al_forgetLoginPwd_button_title">Forget Pwd</string>
+    <string name="al_confirmLogin_button_title">Login</string>
 
     <!-- account retrieve password -->
     <string name="title_activity_account_retrieve_pwd" translatable="false">AccountRetrievePwdActivity</string>
     <string name="account_retrieve_password_nav_title">Retrieve password</string>
-    <string name="account_reset_password_finish_step_description">Input new password and confirmation to finish reset</string>
-    <string name="account_reset_password_finish_newPwd_editText_hint">Input new password</string>
-    <string name="account_reset_password_finish_newConfirmationPwd_editText_hint">Input new confirmation password</string>
-    <string name="account_reset_password_finish_btn_title">Finish Reset</string>
+    <string name="arp_finishResetPwdStep_description">Input new password and confirmation to finish reset your password</string>
+    <string name="arp_finishResetPwd_newPwd_editText_hint">Input new password</string>
+    <string name="arp_finishResetPwd_newConfirmationPwd_editText_hint">Input new confirmation password</string>
+    <string name="arp_finishResetPwd_button_title">Finish Reset</string>
 
     <!-- iPetChat tab activity -->
     <string name="title_activity_ipet_chat_tab" translatable="false">IPetChatTabActivity</string>
@@ -77,6 +76,7 @@
 
     <!-- home tab content activity -->
     <string name="title_activity_home_tab_content" translatable="false">HomeTabContentActivity</string>
+    <string name="home_tab_tag" translatable="false">sego pet home tab</string>
     <string name="home_tab_title">Home</string>
     <string name="home_nav_title">Sego Pet</string>
 
@@ -99,7 +99,8 @@
 
     <!-- sports and health tab content activity -->
     <string name="title_activity_sports_health_tab_content" translatable="false">SportsHealthTabContentActivity</string>
-    <string name="sports_health_tab7nav_title">SportsHealth</string>
+    <string name="sports_and_health_tab_tag" translatable="false">sports and health tab</string>
+    <string name="sports_and_health_tab7nav_title">SportsHealth</string>
     <string name="pet_breed_label">Breed</string>
     <string name="pet_age_label">Age</string>
     <string name="pet_age_value_format">%d months</string>
@@ -112,6 +113,7 @@
 
     <!-- community tab content activity -->
     <string name="title_activity_community_tab_content" translatable="false">CommunityTabContentActivity</string>
+    <string name="community_tab_tag" translatable="false">community tab</string>
     <string name="community_tab7nav_title">Community</string>
     <string name="pet_community_info_item_icon_imageview_contentdescription" translatable="false">pet community info item icon image view</string>
     <string name="pet_community_info_item_detailindicator_imageview_contentdescription" translatable="false">pet community info item detail indicator image view</string>
@@ -153,48 +155,65 @@
     <string name="add_concern_pet_numberLabel_textView_text">Sego account/Phone number</string>
     <string name="add_concern_pet_findAccount_button_text">Find</string>
 
+    <!-- pet detail info -->
+    <string name="title_activity_pet_detail_info" translatable="false">PetDetailInfoActivity</string>
+    <string name="pet_detail_info_nav_title">Pet detail info</string>
+    <string name="moreMenu_cancelConcernMenuItem">Cancel concern</string>
+    <string name="moreMenu_add2BlacklistMenuItem">Add to blacklist</string>
+    <string name="pet_detail_info_sendMsg_button_title">Send message</string>
+    <string name="pet_detail_info_addConcern_button_title">Add concern</string>
+
     <!-- message box -->
     <string name="title_activity_messagebox" translatable="false">MessageboxActivity</string>
     <string name="message_box_nav_title">Message box</string>
     <string name="messagebox_message_search_editText_hint">search</string>
     <string name="message_leaver_avatar_imageview_contentdescription" translatable="false">message leaver avatar image view</string>
 
+    <!-- leave or reply message -->
+    <string name="title_activity_leave6reply_msg" translatable="false">Leave6ReplyMsgActivity</string>
+    <string name="leave_or_reply_msg_nav_title">Message record</string>
+    <string name="msg_send_button_title">Send</string>
+
     <!-- settings tab content activity -->
     <string name="title_activity_settings_tab_content" translatable="false">SettingsTabContentActivity</string>
+    <string name="settings_tab_tag" translatable="false">settings tab</string>
     <string name="settings_tab7nav_title">Settings</string>
-    <string name="setting_item_detailindicator_imageview_contentdescription" translatable="false">setting item detail indicator image view</string>
 
     <!-- settings info items -->
-    <string name="petProfile_setting_item_title">Pet profile</string>
-    <string name="petPhotos_setting_item_title">Pet photos</string>
-    <string name="accountInfo_setting_item_title">Account info</string>
-    <string name="blacklist_setting_item_title">Blacklist</string>
-    <string name="petDeviceBind_setting_item_title">Pet device bind</string>
+    <string name="sti_detailIndicator_imageView_contentDescription" translatable="false">setting item detail indicator image view</string>
+    <string name="sti_petProfile_title">Pet profile</string>
+    <string name="sti_petPhotos_title">Pet photos</string>
+    <string name="sti_accountInfo_title">Account info</string>
+    <string name="sti_blacklist_title">Blacklist</string>
+    <string name="sti_petDeviceBind_title">Pet device bind</string>
 
     <!-- account logout -->
-    <string name="account_logout_button_title">Logout</string>
+    <string name="st_account_logout_button_title">Logout</string>
 
     <!-- pet profile -->
     <string name="title_activity_pet_profile_setting" translatable="false">PetProfileSettingActivity</string>
     <string name="pet_profile_setting_nav_title">Pet profile</string>
-    <string name="pet_profile_avatar_setting_label">Avatar</string>
-    <string name="pet_profile_avatar_imageview_contentdescription" translatable="false">pet profile avatar image view</string>
-    <string name="pet_profile_avatar_setting_settingindicator_imageview_contentdescription" translatable="false">pet profile avatar setting indicator image view</string>
-    <string name="pet_profile_setting_item_textView_hint">No setting</string>
-    <string name="pet_profile_setting_item_settingindicator_imageview_contentdescription" translatable="false">pet profile item setting indicator image view</string>
-    <string name="pet_profile_nickname_setting_label">Nickname</string>
-    <string name="pet_profile_sex_setting_label">Sex</string>
-    <string name="pet_profile_breed_setting_label">Breed</string>
-    <string name="pet_profile_age_setting_label">Age</string>
-    <string name="pet_profile_height_setting_label">Height</string>
-    <string name="pet_profile_weight_setting_label">Weight</string>
-    <string name="pet_profile_district_setting_label">District</string>
-    <string name="pet_profile_placeUsed2Go_setting_label">Place used to go</string>
+    <string name="pp_avatar_setting_label">Avatar</string>
+    <string name="pp_avatar_imageView_contentDescription" translatable="false">pet profile avatar image view</string>
+    <string name="pp_avatar_setting_settingIndicator_imageView_contentDescription" translatable="false">pet profile avatar setting indicator image view</string>
+    <string name="ppsi_textView_hint">No setting</string>
+    <string name="ppsi_settingIndicator_imageView_contentDescription" translatable="false">pet profile item setting indicator image view</string>
+    <string name="ppsi_nickname_label">Nickname</string>
+    <string name="ppsi_sex_label">Sex</string>
+    <string name="ppsi_breed_label">Breed</string>
+    <string name="ppsi_age_label">Age</string>
+    <string name="ppsi_height_label">Height</string>
+    <string name="ppsi_weight_label">Weight</string>
+    <string name="ppsi_district_label">District</string>
+    <string name="ppsi_placeUsed2Go_label">Place used to go</string>
 
     <!-- pet profile setting -->
     <!-- pet profile editText -->
     <string name="title_activity_pet_profile_edittext_setting" translatable="false">PetProfileEditTextSettingActivity</string>
-    <string name="pet_profile_edittext_setting_save_button_title">Save</string>
+    <string name="ppes_save_button_title">Save</string>
+    <string name="ppes_petAge_comment">months</string>
+    <string name="ppes_petHeight_comment">cm</string>
+    <string name="ppes_petWeight_comment">kg</string>
 
     <!-- pet profile checked -->
     <string name="title_activity_pet_profile_checked_setting" translatable="false">PetProfileCheckedSettingActivity</string>
@@ -275,6 +294,7 @@
     <string name="done_modify_account_password_button_title">Done</string>
     <string name="origin_pwd_editText_hint">Please input the origin password</string>
     <string name="modify_pwd_editText_hint">Please input the reset new password</string>
+    <string name="modify_confirmationPwd_editText_hint">Please input the reset new confirmation password</string>
 
     <!-- blacklist -->
     <string name="title_activity_blacklist" translatable="false">BlackListActivity</string>

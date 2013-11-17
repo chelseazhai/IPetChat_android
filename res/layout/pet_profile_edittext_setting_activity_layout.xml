@@ -14,18 +14,36 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/pet_profile_exitText_setting_editText"
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/common_edittext_bg"
-            android:ellipsize="end"
-            android:inputType="text" >
+            android:background="@android:color/transparent" >
 
-            <requestFocus />
-        </EditText>
+            <TextView
+                android:id="@+id/ppes_comment_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/ppes_editText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/ppes_comment_textView"
+                android:background="@drawable/common_edittext_bg"
+                android:ellipsize="end"
+                android:inputType="text" >
+
+                <requestFocus />
+            </EditText>
+        </RelativeLayout>
     </LinearLayout>
 
 </ScrollView>

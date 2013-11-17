@@ -2,7 +2,7 @@
 <resources>
 
     <!-- account register or reset password view stub -->
-    <declare-styleable name="account_register6reset_password_viewstub">
+    <declare-styleable name="account_register6resetpwd_viewstub">
         <attr name="description" format="string" />
         <attr name="passwordEditText1Hint" format="string" />
         <attr name="passwordEditText2Hint" format="string" />

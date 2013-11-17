@@ -84,17 +84,45 @@ public class AccountModifyPwdActivity extends IPetChatNavigationActivity {
 				return;
 			}
 
+			// get reset new confirmation password
+			String _resetNewConfirmationPwd = ((EditText) findViewById(R.id.modify_confirmationPwd_editText))
+					.getText().toString();
+
+			// check reset new confirmation password
+			if (null == _resetNewConfirmationPwd
+					|| _resetNewConfirmationPwd.equalsIgnoreCase("")) {
+				Toast.makeText(AccountModifyPwdActivity.this,
+						R.string.toast_accountRestNewConfirmationPassword_null,
+						Toast.LENGTH_SHORT).show();
+
+				return;
+			}
+
+			// check account modify password user two input password
+			if (!_resetNewPwd.equalsIgnoreCase(_resetNewConfirmationPwd)) {
+				Toast.makeText(AccountModifyPwdActivity.this,
+						R.string.toast_accountModifyPwd_twoPwd_notMatched,
+						Toast.LENGTH_LONG).show();
+
+				return;
+			}
+
 			// done modify password
 			// generate done modify password post request param
 			Map<String, String> _doneModifyPwdParam = new HashMap<String, String>();
+			_doneModifyPwdParam
+					.put(getResources().getString(
+							R.string.rbgServer_amp_changePwdReqParam_originPwd),
+							StringUtils.md5(_originPassword));
 			_doneModifyPwdParam.put(
 					getResources().getString(
-							R.string.rbgServer_accountOriginPwd),
-					StringUtils.md5(_originPassword));
-			_doneModifyPwdParam.put(
-					getResources().getString(
-							R.string.rbgServer_accountNewResetPwd),
-					StringUtils.md5(_resetNewPwd));
+							R.string.rbgServer_amp_changePwdReqParam_newPwd),
+					_resetNewPwd);
+			_doneModifyPwdParam
+					.put(getResources()
+							.getString(
+									R.string.rbgServer_amp_changePwdReqParam_newConfirmationPwd),
+							_resetNewConfirmationPwd);
 
 			// send done modify password post http request
 			HttpUtils.postSignatureRequest(
@@ -117,11 +145,56 @@ public class AccountModifyPwdActivity extends IPetChatNavigationActivity {
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
 
-			// test by ares
-			Log.d(LOG_TAG, "_respJsonData = " + _respJsonData);
+			// get http response entity string json object result
+			String _result = JSONUtils
+					.getStringFromJSONObject(_respJsonData, getResources()
+							.getString(R.string.rbgServer_reqResp_result));
 
-			//
-			//
+			// check an process result
+			if (null != _result) {
+				switch (Integer.parseInt(_result)) {
+				case 0:
+					Log.d(LOG_TAG, "account modify password finish successful");
+
+					// pop account modify password activity
+					popActivity();
+
+					break;
+
+				case 2:
+					Log.d(LOG_TAG,
+							"done modify password failed, user two input password not matched");
+
+					Toast.makeText(AccountModifyPwdActivity.this,
+							R.string.toast_accountModifyPwd_twoPwd_notMatched,
+							Toast.LENGTH_LONG).show();
+					break;
+
+				case 4:
+					Log.d(LOG_TAG,
+							"done modify password failed, origin password is wrong");
+
+					Toast.makeText(
+							AccountModifyPwdActivity.this,
+							R.string.toast_accountModifyPwd_originPassword_wrong,
+							Toast.LENGTH_LONG).show();
+					break;
+
+				case 1:
+				case 3:
+				default:
+					Log.e(LOG_TAG,
+							"done modify password failed, bg_server return result is unrecognized");
+
+					processAccountModifyPwdException();
+					break;
+				}
+			} else {
+				Log.e(LOG_TAG,
+						"done modify password failed, bg_server return result is null");
+
+				processAccountModifyPwdException();
+			}
 		}
 
 		@Override

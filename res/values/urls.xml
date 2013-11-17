@@ -4,7 +4,7 @@
     <!-- pet chat remote background server url -->
     <string name="server_url" translatable="false">http://www.segopet.com/segopet</string>
 
-    <!-- get and verify verification code -->
+    <!-- get phone verification code and verify -->
     <string name="get_phoneVerificationCode_url" translatable="false">/user/getPhoneCode</string>
     <string name="verify_verificationCode_url" translatable="false">/user/checkPhoneCode</string>
 
@@ -15,13 +15,26 @@
     <string name="account_login_url" translatable="false">/user/login</string>
 
     <!-- account retrieve password -->
-    <string name="account_retrievePwd_url" translatable="false">/login/home_!denglu.action</string>
-
-    <!-- account modify password -->
-    <string name="account_modifyPwd_url" translatable="false">/login/home_!updatepassword.action</string>
+    <string name="account_resetPwd_url" translatable="false">/user/resetpwd</string>
 
     <!-- pet info -->
     <string name="get_allPets_url" translatable="false">/petinfo/getpets</string>
     <string name="set_petInfo_url" translatable="false">/petinfo/modify</string>
+    <string name="get_petInfo_url" translatable="false">/petinfo/getpetdetail</string>
+    <string name="get_petStarsInfo_url" translatable="false">/community/getrecommendpets</string>
+    <string name="get_petNearbyPetsInfo_url" translatable="false">/community/getnearbypets</string>
+    <string name="get_myConcernPetsInfo_url" translatable="false">/community/getconcernpets</string>
+    <string name="search_pet_url" translatable="false">/petinfo/searchpets</string>
+    <string name="concern_pet_url" translatable="false">/community/concernpet</string>
+    <string name="cancelConcern_pet_url" translatable="false">/community/unconcernpet</string>
+    <string name="addPet2Blacklist_url" translatable="false">/community/addblacklist</string>
+    <string name="leaveMsg_url" translatable="false">/community/leavemsg</string>
+    <string name="getLeaveMsgs_url" translatable="false">/community/getleavemsgs</string>
+    <string name="delMsg_url" translatable="false">/community/delmsg</string>
+    <string name="getLeaveMsg_url" translatable="false">/community/getleavemsgdetail</string>
+    <string name="replyMsg_url" translatable="false">/community/replymsg</string>
+
+    <!-- account modify password -->
+    <string name="account_modifyPwd_url" translatable="false">/profile/changePwd</string>
 
 </resources>

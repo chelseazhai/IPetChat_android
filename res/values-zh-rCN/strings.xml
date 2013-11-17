@@ -7,54 +7,53 @@
     <!-- common -->
     <string name="asyncHttpRequest_progressDialog_message">正在处理，请稍后&#8230;</string>
 
-    <!-- account setting -->
     <!-- account setting for first enter -->
-    <string name="account_register_button_title">注\t册</string>
-    <string name="account_login_button_title">登\t录</string>
+    <string name="as4f_accountRegister_button_title">注\t册</string>
+    <string name="as4f_accountLogin_button_title">登\t录</string>
 
-    <!-- get and verify verification code -->
+    <!-- get phone verification code and verify -->
     <!-- get phone verification code -->
-    <string name="get_phoneVerificationCode_step_textView_text">第一步</string>
-    <string name="get_phoneVerificationCode_step_description">输入手机号，获取验证码</string>
-    <string name="get_phoneVerificationCode_phone_editText_hint">输入手机号码</string>
-    <string name="get_phoneVerificationCode_btn_title">获取验证码</string>
-    <string name="get_phoneVerificationCode_step_comment">（您的手机号码仅用于身份验证，我们不会向您发送垃圾短信。）</string>
+    <string name="getPhoneVerificationCode_step_textView_text">第一步</string>
+    <string name="getPhoneVerificationCodeStep_description">输入手机号，获取验证码</string>
+    <string name="getPhoneVerificationCode_phone_editText_hint">输入手机号码</string>
+    <string name="getPhoneVerificationCode_button_title">获取验证码</string>
+    <string name="getPhoneVerificationCodeStep_comment">（您的手机号码仅用于身份验证，我们不会向您发送垃圾短信。）</string>
 
     <!-- verify verification code -->
-    <string name="verify_verificationCode_step_textView_text">第二步</string>
-    <string name="verify_verificationCode_step_textView_description">输入验证码，点击下一步验证</string>
-    <string name="verify_verificationCode_verificationCode_editText_hint">输入验证码</string>
-    <string name="verify_verificationCode_btn_title">下一步</string>
+    <string name="verifyVerificationCode_step_textView_text">第二步</string>
+    <string name="verifyVerificationCodeStep_description">输入验证码，点击下一步验证</string>
+    <string name="verifyVerificationCode_verificationCode_editText_hint">输入验证码</string>
+    <string name="verifyVerificationCode_button_title">下一步</string>
 
-    <!-- account register or reset password -->
-    <string name="accountReg_or_resetPwd_finish_step_textView_text">第三步</string>
+    <!-- account finish register or reset password -->
+    <string name="accountRegister_or_resetPwd_step_textView_text">第三步</string>
 
     <!-- account register -->
     <string name="account_register_nav_title">账户注册</string>
-    <string name="account_register_finish_step_description">输入密码和确认密码，完成注册</string>
-    <string name="account_register_finish_password_editText_hint">输入密码</string>
-    <string name="account_register_finish_confirmationPwd_editText_hint">输入确认密码</string>
-    <string name="account_register_finish_btn_title">完成注册</string>
+    <string name="ar_finishRegisterStep_description">输入密码和确认密码，完成注册</string>
+    <string name="ar_finishRegister_password_editText_hint">输入密码</string>
+    <string name="ar_finishRegister_confirmationPwd_editText_hint">输入确认密码</string>
+    <string name="ar_finishRegister_button_title">完成注册</string>
 
     <!-- account login -->
     <string name="account_login_nav_title">账户登录</string>
-    <string name="account_login_phone_editText_hint">请输入您已注册了的手机号码</string>
-    <string name="account_login_password_editText_hint">请输入账号密码</string>
-    <string name="forget_account_loginPwd_btn_title">忘记密码</string>
-    <string name="account_login_confirm_btn_title">登录</string>
+    <string name="al_username_editText_hint">请输入您已注册了的手机号码</string>
+    <string name="al_loginPwd_editText_hint">请输入账号密码</string>
+    <string name="al_forgetLoginPwd_button_title">忘记密码</string>
+    <string name="al_confirmLogin_button_title">登录</string>
 
     <!-- account retrieve password -->
     <string name="account_retrieve_password_nav_title">找回密码</string>
-    <string name="account_reset_password_finish_step_description">输入新密码和确认密码，完成重置</string>
-    <string name="account_reset_password_finish_newPwd_editText_hint">输入新密码</string>
-    <string name="account_reset_password_finish_newConfirmationPwd_editText_hint">输入新确认密码</string>
-    <string name="account_reset_password_finish_btn_title">完成重置密码</string>
+    <string name="arp_finishResetPwdStep_description">输入新密码和确认密码，完成重置</string>
+    <string name="arp_finishResetPwd_newPwd_editText_hint">输入新密码</string>
+    <string name="arp_finishResetPwd_newConfirmationPwd_editText_hint">输入新确认密码</string>
+    <string name="arp_finishResetPwd_button_title">完成重置密码</string>
 
     <!-- iPetChat tab activity -->
     <!-- pet info -->
     <!-- pet sex -->
-    <string name="male">公</string>
-    <string name="female">母</string>
+    <string name="male">帅哥</string>
+    <string name="female">美女</string>
 
     <!-- pet breed -->
     <string name="golden_retriever">黄金猎犬</string>
@@ -80,7 +79,7 @@
     <string name="pet_height_format">身高：%.2f厘米</string>
     <string name="pet_weight_prefix">体重：</string>
     <string name="pet_weight_format">体重：%.2f公斤</string>
-    <string name="pet_district_prefix">地区：</string>
+    <string name="pet_district_prefix">城市：</string>
     <string name="pet_placeUsed2Go_prefix">常去玩的地方：</string>
     <string name="pet_location_button_title">定位</string>
 
@@ -88,7 +87,7 @@
     <string name="pet_info_button_title">宠物信息</string>
 
     <!-- sports and health tab content activity -->
-    <string name="sports_health_tab7nav_title">运动健康</string>
+    <string name="sports_and_health_tab7nav_title">运动健康</string>
     <string name="pet_breed_label">品种</string>
     <string name="pet_age_label">年龄</string>
     <string name="pet_age_value_format">%d个月</string>
@@ -126,45 +125,59 @@
     <string name="add_concern_pet_numberLabel_textView_text">赛果号/手机号</string>
     <string name="add_concern_pet_findAccount_button_text">查找</string>
 
+    <!-- pet detail info -->
+    <string name="pet_detail_info_nav_title">详细信息</string>
+    <string name="moreMenu_cancelConcernMenuItem">取消关注</string>
+    <string name="moreMenu_add2BlacklistMenuItem">拉黑</string>
+    <string name="pet_detail_info_sendMsg_button_title">给TA留言</string>
+    <string name="pet_detail_info_addConcern_button_title">关注TA</string>
+
     <!-- message box -->
     <string name="message_box_nav_title">留言箱</string>
     <string name="messagebox_message_search_editText_hint">搜索</string>
+    
+    <!-- leave or reply message -->
+    <string name="leave_or_reply_msg_nav_title">留言记录</string>
+    <string name="msg_send_button_title">发送</string>
 
     <!-- settings tab content activity -->
     <string name="settings_tab7nav_title">设置</string>
 
     <!-- settings info items -->
-    <string name="petProfile_setting_item_title">宠物档案</string>
-    <string name="petPhotos_setting_item_title">相册</string>
-    <string name="accountInfo_setting_item_title">账号</string>
-    <string name="blacklist_setting_item_title">黑名单管理</string>
-    <string name="petDeviceBind_setting_item_title">绑定硬件设备</string>
+    <string name="sti_petProfile_title">宠物档案</string>
+    <string name="sti_petPhotos_title">相册</string>
+    <string name="sti_accountInfo_title">账号</string>
+    <string name="sti_blacklist_title">黑名单管理</string>
+    <string name="sti_petDeviceBind_title">绑定硬件设备</string>
 
     <!-- account logout -->
-    <string name="account_logout_button_title">退出登录</string>
+    <string name="st_account_logout_button_title">退出登录</string>
 
     <!-- pet profile -->
     <string name="pet_profile_setting_nav_title">宠物档案</string>
-    <string name="pet_profile_avatar_setting_label">头像</string>
-    <string name="pet_profile_setting_item_textView_hint">未设置</string>
-    <string name="pet_profile_nickname_setting_label">昵称</string>
-    <string name="pet_profile_sex_setting_label">性别</string>
-    <string name="pet_profile_breed_setting_label">品种</string>
-    <string name="pet_profile_age_setting_label">年龄</string>
-    <string name="pet_profile_height_setting_label">身高</string>
-    <string name="pet_profile_weight_setting_label">体重</string>
-    <string name="pet_profile_district_setting_label">地区</string>
-    <string name="pet_profile_placeUsed2Go_setting_label">常去玩的地方</string>
+    <string name="pp_avatar_setting_label">头像</string>
+    <string name="ppsi_textView_hint">未设置</string>
+    <string name="ppsi_nickname_label">昵称</string>
+    <string name="ppsi_sex_label">性别</string>
+    <string name="ppsi_breed_label">品种</string>
+    <string name="ppsi_age_label">年龄</string>
+    <string name="ppsi_height_label">身高</string>
+    <string name="ppsi_weight_label">体重</string>
+    <string name="ppsi_district_label">城市</string>
+    <string name="ppsi_placeUsed2Go_label">常去玩的地方</string>
 
     <!-- pet profile setting -->
     <!-- pet profile editText -->
-    <string name="pet_profile_edittext_setting_save_button_title">保存</string>
+    <string name="ppes_save_button_title">保存</string>
+    <string name="ppes_petAge_comment">月</string>
+    <string name="ppes_petHeight_comment">厘米</string>
+    <string name="ppes_petWeight_comment">公斤</string>
 
     <!-- pet profile checked -->
 
 
     <!-- pet profile district -->
-    <string name="pet_profile_district_setting_nav_title">地区</string>
+    <string name="pet_profile_district_setting_nav_title">城市</string>
     <string name="pet_profile_beijing_district_text">北京</string>
     <string name="pet_profile_beijing_tongzhou_district_text">通州</string>
     <string name="pet_profile_beijing_fangshan_district_text">房山</string>
@@ -216,7 +229,7 @@
     <string name="pet_profile_custom_district_text">自定义</string>
 
     <!-- pet profile district selected -->
-    <string name="pet_profile_district_selected_setting_nav_title_format">%s 地区</string>
+    <string name="pet_profile_district_selected_setting_nav_title_format">%s 城市</string>
 
     <!-- pet photos -->
     <string name="pet_photos_setting_nav_title">宠物相册</string>
@@ -232,6 +245,7 @@
     <string name="done_modify_account_password_button_title">完成</string>
     <string name="origin_pwd_editText_hint">请输入原始密码</string>
     <string name="modify_pwd_editText_hint">请输入新的密码</string>
+    <string name="modify_confirmationPwd_editText_hint">请输入新的确认密码</string>
 
     <!-- blacklist -->
     <string name="blacklist_setting_nav_title">黑名单管理</string>

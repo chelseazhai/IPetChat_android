@@ -6,24 +6,24 @@
     tools:context=".account.AccountRetrievePWDActivity" >
 
     <include
-        android:id="@+id/account_retrieve_password_step1_linearLayout"
+        android:id="@+id/arp_getPhoneVerificationCodeStep_linearLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         layout="@layout/get_phone_verification_code_layout" />
 
     <ViewStub
-        android:id="@+id/account_retrieve_password_step2_viewStub"
+        android:id="@+id/arp_verifyVerificationCodeStep_viewStub"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout="@layout/verify_verification_code_layout" />
 
     <com.segotech.ipetchat.customwidget.AccountReg6ResetPwdViewStub
-        android:id="@+id/account_retrieve_password_step3_viewStub"
+        android:id="@+id/arp_finishResetPwdStep_viewStub"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        ipetchat:buttonTitle="@string/account_reset_password_finish_btn_title"
-        ipetchat:description="@string/account_reset_password_finish_step_description"
-        ipetchat:passwordEditText1Hint="@string/account_reset_password_finish_newPwd_editText_hint"
-        ipetchat:passwordEditText2Hint="@string/account_reset_password_finish_newConfirmationPwd_editText_hint" />
+        ipetchat:buttonTitle="@string/arp_finishResetPwd_button_title"
+        ipetchat:description="@string/arp_finishResetPwdStep_description"
+        ipetchat:passwordEditText1Hint="@string/arp_finishResetPwd_newPwd_editText_hint"
+        ipetchat:passwordEditText2Hint="@string/arp_finishResetPwd_newConfirmationPwd_editText_hint" />
 
 </FrameLayout>

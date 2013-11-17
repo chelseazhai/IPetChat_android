@@ -24,9 +24,9 @@ public class AccountSetting4FirstActivity extends NavigationActivity {
 		setContentView(R.layout.account_setting4first_activity_layout);
 
 		// set account register and login button on click listener
-		((Button) findViewById(R.id.account_register_button))
+		((Button) findViewById(R.id.as4f_accountRegister_button))
 				.setOnClickListener(new AccountRegisterBtnOnClickListener());
-		((Button) findViewById(R.id.account_login_button))
+		((Button) findViewById(R.id.as4f_accountLogin_button))
 				.setOnClickListener(new AccountLoginBtnOnClickListener());
 	}
 

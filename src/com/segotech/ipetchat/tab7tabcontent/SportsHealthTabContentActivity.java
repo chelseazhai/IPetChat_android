@@ -45,7 +45,7 @@ public class SportsHealthTabContentActivity extends
 		setContentView(R.layout.sports_health_tab_content_activity_layout);
 
 		// set title
-		setTitle(R.string.sports_health_tab7nav_title);
+		setTitle(R.string.sports_and_health_tab7nav_title);
 
 		// set pet sports info segment radioGroup
 		((RadioGroup) findViewById(R.id.pet_sportsInfo_segment_radioGroup))

@@ -8,7 +8,7 @@
     tools:context=".tab7tabcontent.SettingsTabContentActivity" >
 
     <ListView
-        android:id="@+id/settings_listView"
+        android:id="@+id/st_settingItems_listView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="6dp"
@@ -26,7 +26,7 @@
     </ListView>
 
     <Button
-        android:id="@+id/account_logout_button"
+        android:id="@+id/st_account_logout_button"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="10dp"
@@ -35,7 +35,7 @@
         android:layout_marginTop="10dp"
         android:layout_weight="13"
         android:background="@drawable/red_btn_bg"
-        android:text="@string/account_logout_button_title"
+        android:text="@string/st_account_logout_button_title"
         android:textColor="@android:color/white" />
 
 </LinearLayout>

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/light_light_light_gray"
     android:orientation="vertical"
     android:padding="20dp" >
 
@@ -10,46 +11,46 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/verify_verificationCode_step_textView"
+            android:id="@+id/verifyVerificationCode_step_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="@string/verify_verificationCode_step_textView_text"
+            android:text="@string/verifyVerificationCode_step_textView_text"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/dim_gray" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/verify_verificationCode_step_textView"
-            android:layout_toRightOf="@id/verify_verificationCode_step_textView"
+            android:layout_alignBaseline="@id/verifyVerificationCode_step_textView"
+            android:layout_toRightOf="@id/verifyVerificationCode_step_textView"
             android:ellipsize="end"
             android:gravity="right"
             android:singleLine="true"
-            android:text="@string/verify_verificationCode_step_textView_description"
+            android:text="@string/verifyVerificationCodeStep_description"
             android:textColor="@color/light_dim_gray" />
     </RelativeLayout>
 
     <EditText
-        android:id="@+id/verify_verificationCode_verificationCode_editText"
+        android:id="@+id/verifyVerificationCode_verificationCode_editText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/common_edittext_bg"
         android:ellipsize="end"
-        android:hint="@string/verify_verificationCode_verificationCode_editText_hint"
+        android:hint="@string/verifyVerificationCode_verificationCode_editText_hint"
         android:inputType="number" >
 
         <requestFocus />
     </EditText>
 
     <Button
-        android:id="@+id/verify_verificationCode_button"
+        android:id="@+id/verifyVerificationCode_button"
         android:layout_width="fill_parent"
         android:layout_height="46dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/plane_gray_btn_bg"
-        android:text="@string/verify_verificationCode_btn_title"
+        android:text="@string/verifyVerificationCode_button_title"
         android:textColor="@android:color/white" />
 
 </LinearLayout>

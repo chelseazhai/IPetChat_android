@@ -5,41 +5,45 @@
     <string name="toast_request_exception">Connect to server exception, please retry again later</string>
     <string name="toast_request_remoteBackgroundServer_exception">Remote background server internal exception, please contact administrator immediately</string>
 
-    <!-- get and verify verification code -->
-    <string name="toast_get_phoneVerificationCode_phoneNumber_null">Phone number mustn\'t null</string>
-    <string name="toast_get_phoneVerificationCode_phoneNumber_invalid">Phone number is invalid</string>
-    <string name="toast_verify_verificationCode_null">Verification code mustn\'t null</string>
-    <string name="toast_verify_verificationCode_wrong">Verification code is wrong</string>
-    <string name="toast_verify_verificationCode_timeout">Verification code is timeout, please reget it again</string>
+    <!-- get phone verification code and verify -->
+    <string name="toast_getPhoneVerificationCode_phoneNumber_null">Phone number mustn\'t null</string>
+    <string name="toast_getPhoneVerificationCode_phoneNumber_invalid">Phone number is invalid</string>
+    <string name="toast_verifyVerificationCode_verificationCode_null">Verification code mustn\'t null</string>
+    <string name="toast_verifyVerificationCode_verificationCode_wrong">Verification code is wrong</string>
+    <string name="toast_verifyVerificationCode_verificationCode_timeout">Verification code is timeout, please reget it again</string>
 
     <!-- account register -->
-    <string name="toast_account_register_phoneNumber_existed">Register phone number is existed</string>
-    <string name="toast_account_register_password_null">Account register password mustn\'t null</string>
-    <string name="toast_account_register_confirmationPwd_null">Account register confirmation password mustn\'t null</string>
-    <string name="toast_account_register_twoPwd_notMatched">Register password not matched confirmation password</string>
-    <string name="toast_account_register_timeout">Register is timeout, please retry it again</string>
-    <string name="toast_account_register_successful">Account register successful, please login to enjoy sego pet timely</string>
+    <string name="toast_ar_accountWithPhoneNumber_existed">Register phone number is existed in system</string>
+    <string name="toast_ar_password_null">Account register password mustn\'t null</string>
+    <string name="toast_ar_confirmationPwd_null">Account register confirmation password mustn\'t null</string>
+    <string name="toast_ar_twoPwd_notMatched">Register password not matched with confirmation password</string>
+    <string name="toast_ar_register_timeout">Register is timeout, please retry it again</string>
+    <string name="toast_ar_register_successful">Account register successful, please login to enjoy sego pet timely</string>
 
     <!-- account login -->
-    <string name="toast_login_userName_null">Login user phone mustn\'t null</string>
-    <string name="toast_login_password_null">Login user password mustn\'t null</string>
-    <string name="toast_login_user_notExisted">User not existed, please register first</string>
-    <string name="toast_login_user_loginPwd_wrong">User login password is wrong</string>
+    <string name="toast_al_username_null">Login user phone mustn\'t null</string>
+    <string name="toast_al_loginPwd_null">Login user password mustn\'t null</string>
+    <string name="toast_al_user_notExisted">Login user not existed, please register first</string>
+    <string name="toast_al_loginPwd_wrong">User login password is wrong</string>
 
     <!-- account retrieve password -->
-    <string name="toast_account_retrievePwd_phoneNumber_notExisted">User not existed, please register first</string>
-    <string name="toast_account_retrievePwd_newPwd_null">Account reset new password mustn\'t null</string>
-    <string name="toast_account_retrievePwd_newConfirmationPwd_null">Account reset new confirmation password mustn\'t null</string>
-    <string name="toast_account_retrievePwd_twoNewPwd_notMatched">Account reset new password not matched confirmation password</string>
-    <string name="toast_account_retrievePwd_timeout">Retrieve password is timeout, please retry it again</string>
-    <string name="toast_account_retrievePwd_successful">Account reset password successful, please login to enjoy sego pet timely</string>
+    <string name="toast_arp_accountWithPhoneNumber_notExisted">User not existed, please register first</string>
+    <string name="toast_arp_newPwd_null">Account reset new password mustn\'t null</string>
+    <string name="toast_arp_newConfirmationPwd_null">Account reset new confirmation password mustn\'t null</string>
+    <string name="toast_arp_twoNewPwd_notMatched">Account reset new password not matched confirmation password</string>
+    <string name="toast_arp_resetPwd_timeout">Retrieve password is timeout, please retry it again</string>
+    <string name="toast_arp_resetPwd_successful">Account reset password successful, please login to enjoy sego pet timely</string>
 
     <!-- pet info -->
-    <string name="toast_no_pet">There is no pet info, you can go to settings tab pet info section and then add a pet</string>
+    <string name="toast_gap_no_pet">There is no pet info, you can go to settings tab pet info section and then add a pet</string>
     <string name="toast_set_petInfo_error">Set pet info error</string>
+    <string name="toast_no_pet">There is no pet info</string>
 
     <!-- account modify password -->
     <string name="toast_accountOriginPassword_null">Account origin password mustn\'t null</string>
     <string name="toast_accountRestNewPassword_null">Account new reset password mustn\'t null</string>
+    <string name="toast_accountRestNewConfirmationPassword_null">Account new reset confirmation password mustn\'t null</string>
+    <string name="toast_accountModifyPwd_twoPwd_notMatched">Account new reset password not matched with confirmation password</string>
+    <string name="toast_accountModifyPwd_originPassword_wrong">Account origin password is wrong</string>
 
 </resources>

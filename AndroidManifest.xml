@@ -40,7 +40,7 @@
         </activity>
         <activity
             android:name=".account.AccountSetting4FirstActivity"
-            android:label="@string/title_activity_account_setting4_first"
+            android:label="@string/title_activity_account_setting4first"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -101,8 +101,18 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".petcommunity.PetDetailInfoActivity"
+            android:label="@string/title_activity_pet_detail_info"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".petcommunity.MessageboxActivity"
             android:label="@string/title_activity_messagebox"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".petcommunity.petchat.Leave6ReplyMsgActivity"
+            android:label="@string/title_activity_leave6reply_msg"
             android:screenOrientation="portrait" >
         </activity>
         <activity

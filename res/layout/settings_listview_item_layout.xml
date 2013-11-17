@@ -9,21 +9,21 @@
     android:paddingTop="4dp" >
 
     <ImageView
-        android:id="@+id/setting_item_detailInfoIndicator_imageView"
+        android:id="@+id/sti_detailInfoIndicator_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:contentDescription="@string/setting_item_detailindicator_imageview_contentdescription"
+        android:contentDescription="@string/sti_detailIndicator_imageView_contentDescription"
         android:src="@drawable/img_listview_item_detail_large_indicator" />
 
     <TextView
-        android:id="@+id/setting_item_title_textView"
+        android:id="@+id/sti_title_textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@id/setting_item_detailInfoIndicator_imageView"
+        android:layout_toLeftOf="@id/sti_detailInfoIndicator_imageView"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

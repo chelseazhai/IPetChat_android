@@ -34,6 +34,9 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 	private static final String LOG_TAG = AccountLoginActivity.class
 			.getCanonicalName();
 
+	// account login username(phone number)
+	private String _mAccountLoginUsername;
+
 	// asynchronous http request progress dialog
 	private ProgressDialog _mAsyncHttpReqProgressDialog;
 
@@ -47,17 +50,17 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 		// set title
 		setTitle(R.string.account_login_nav_title);
 
-		// auto complete login phone
-		((EditText) findViewById(R.id.account_login_phone_editText))
+		// auto complete login username(phone number)
+		((EditText) findViewById(R.id.al_username_editText))
 				.setText(UserManager.getInstance().getUser().getName());
 
 		// set forget account login password button on click listener
-		((Button) findViewById(R.id.forget_account_loginPwd_button))
-				.setOnClickListener(new ForgetPwdBtnOnClickListener());
+		((Button) findViewById(R.id.al_forgetLoginPwd_button))
+				.setOnClickListener(new ForgetLoginPwdBtnOnClickListener());
 
-		// set account login confirm button on click listener
-		((Button) findViewById(R.id.account_login_confirm_button))
-				.setOnClickListener(new LoginConfirmBtnOnClickListener());
+		// set account confirm login button on click listener
+		((Button) findViewById(R.id.al_confirmLogin_button))
+				.setOnClickListener(new ConfirmLoginBtnOnClickListener());
 	}
 
 	// process login exception
@@ -77,7 +80,7 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 
 	// inner class
 	// forget account login password button on click listener
-	class ForgetPwdBtnOnClickListener implements OnClickListener {
+	class ForgetLoginPwdBtnOnClickListener implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
@@ -88,33 +91,33 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 	}
 
 	// account login confirm button on click listener
-	class LoginConfirmBtnOnClickListener implements OnClickListener {
+	class ConfirmLoginBtnOnClickListener implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			// get account login phone number
-			String _accountLoginPhoneNumber = ((EditText) findViewById(R.id.account_login_phone_editText))
+			// get account login username(phone number)
+			_mAccountLoginUsername = ((EditText) findViewById(R.id.al_username_editText))
 					.getText().toString();
 
-			// check account login phone number
-			if (null == _accountLoginPhoneNumber
-					|| "".equalsIgnoreCase(_accountLoginPhoneNumber)) {
+			// check account login username(phone number)
+			if (null == _mAccountLoginUsername
+					|| "".equalsIgnoreCase(_mAccountLoginUsername)) {
 				Toast.makeText(AccountLoginActivity.this,
-						R.string.toast_login_userName_null, Toast.LENGTH_SHORT)
+						R.string.toast_al_username_null, Toast.LENGTH_SHORT)
 						.show();
 
 				return;
 			}
 
 			// get account login password
-			String _accountLoginPassword = ((EditText) findViewById(R.id.account_login_password_editText))
+			String _accountLoginPwd = ((EditText) findViewById(R.id.al_loginPwd_editText))
 					.getText().toString();
 
 			// check account login password
-			if (null == _accountLoginPassword
-					|| "".equalsIgnoreCase(_accountLoginPassword)) {
+			if (null == _accountLoginPwd
+					|| "".equalsIgnoreCase(_accountLoginPwd)) {
 				Toast.makeText(AccountLoginActivity.this,
-						R.string.toast_login_password_null, Toast.LENGTH_SHORT)
+						R.string.toast_al_loginPwd_null, Toast.LENGTH_SHORT)
 						.show();
 
 				return;
@@ -127,29 +130,31 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 							getString(R.string.asyncHttpRequest_progressDialog_message),
 							true);
 
-			// account login confirm
-			// generate account login confirm post request param
-			Map<String, String> _accountLoginConfirmParam = new HashMap<String, String>();
-			_accountLoginConfirmParam.put(
-					getResources().getString(
-							R.string.rbgServer_accountLogin_phone),
-					_accountLoginPhoneNumber);
-			_accountLoginConfirmParam.put(
-					getResources().getString(
-							R.string.rbgServer_accountLogin_password),
-					StringUtils.md5(_accountLoginPassword));
+			// account confirm login
+			// generate account confirm login post request param
+			Map<String, String> _accountConfirmLoginParam = new HashMap<String, String>();
+			_accountConfirmLoginParam
+					.put(getResources()
+							.getString(
+									R.string.rbgServer_al_confirmLoginReqParam_username),
+							_mAccountLoginUsername);
+			_accountConfirmLoginParam
+					.put(getResources()
+							.getString(
+									R.string.rbgServer_al_confirmLoginReqParam_loginPwd),
+							StringUtils.md5(_accountLoginPwd));
 
-			// send account login confirm post http request
+			// send account confirm login post http request
 			HttpUtils.postRequest(getResources().getString(R.string.server_url)
 					+ getResources().getString(R.string.account_login_url),
-					PostRequestFormat.URLENCODED, _accountLoginConfirmParam,
+					PostRequestFormat.URLENCODED, _accountConfirmLoginParam,
 					null, HttpRequestType.ASYNCHRONOUS,
 					new AccountLoginHttpRequestListener());
 		}
 
 	}
 
-	// account login confirm http request listener
+	// account confirm login http request listener
 	class AccountLoginHttpRequestListener extends OnHttpRequestListener {
 
 		@Override
@@ -161,38 +166,38 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
 
-			// get http response entity string json object result and user key
-			String _result = JSONUtils.getStringFromJSONObject(_respJsonData,
-					getResources()
-							.getString(R.string.rbgServer_req_resp_result));
+			// get http response entity string json object result
+			String _result = JSONUtils
+					.getStringFromJSONObject(_respJsonData, getResources()
+							.getString(R.string.rbgServer_reqResp_result));
 
-			// check result
+			// check an process result
 			if (null != _result) {
 				switch (Integer.parseInt(_result)) {
 				case 0:
-					// get account login name and response user key
-					String _loginName = ((EditText) findViewById(R.id.account_login_phone_editText))
-							.getText().toString();
-					String _responseLoginUserKey = JSONUtils
+					// get http response entity string json object userkey
+					String _confirmLoginReqRespUserKey = JSONUtils
 							.getStringFromJSONObject(
 									_respJsonData,
 									getResources()
 											.getString(
-													R.string.rbgServer_accountLoginReq_resp_userKey));
+													R.string.rbgServer_al_confirmLoginReqResp_userKey));
 
-					// save login user bean and add it to user manager
+					// generate account login user bean with username and
+					// userkey and add it to user manager
 					UserManager.getInstance().setUser(
-							new UserBean(_loginName, null,
-									_responseLoginUserKey));
+							new UserBean(_mAccountLoginUsername, null,
+									_confirmLoginReqRespUserKey));
 
-					// add login name and user key to local data storage
+					// add account login username and userkey to local data
+					// storage
 					DataStorageUtils
 							.putObject(
 									ComUserLocalStorageAttributes.LOGIN_USERNAME
-											.name(), _loginName);
+											.name(), _mAccountLoginUsername);
 					DataStorageUtils.putObject(
 							ComUserLocalStorageAttributes.LOGIN_USERKEY.name(),
-							_responseLoginUserKey);
+							_confirmLoginReqRespUserKey);
 
 					// pop account login activity and go to iPetChat tab
 					// activity
@@ -203,7 +208,7 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 					Log.d(LOG_TAG, "account login failed, user not existed");
 
 					Toast.makeText(AccountLoginActivity.this,
-							R.string.toast_login_user_notExisted,
+							R.string.toast_al_user_notExisted,
 							Toast.LENGTH_SHORT).show();
 					break;
 
@@ -212,7 +217,7 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 							"account login failed, user login password is wrong");
 
 					Toast.makeText(AccountLoginActivity.this,
-							R.string.toast_login_user_loginPwd_wrong,
+							R.string.toast_al_loginPwd_wrong,
 							Toast.LENGTH_SHORT).show();
 					break;
 

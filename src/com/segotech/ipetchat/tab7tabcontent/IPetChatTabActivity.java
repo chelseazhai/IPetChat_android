@@ -14,6 +14,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
 import com.richitec.commontoolkit.customcomponent.CTTabSpecIndicator;
+import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
@@ -22,8 +23,6 @@ import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.account.pet.PetBean;
-import com.segotech.ipetchat.account.pet.PetBreed;
-import com.segotech.ipetchat.account.pet.PetSex;
 import com.segotech.ipetchat.account.user.IPCUserExtension;
 
 @SuppressWarnings("deprecation")
@@ -32,19 +31,24 @@ public class IPetChatTabActivity extends TabActivity {
 	private static final String LOG_TAG = IPetChatTabActivity.class
 			.getCanonicalName();
 
-	// tab widget item content array
-	private final int[][] TAB_WIDGETITEM_CONTENTS = new int[][] {
-			{ R.string.home_tab_title, R.drawable.home_tab_icon },
-			{ R.string.sports_health_tab7nav_title,
-					R.drawable.sportshealth_tab_icon },
-			{ R.string.community_tab7nav_title, R.drawable.community_tab_icon },
-			{ R.string.settings_tab7nav_title, R.drawable.settings_tab_icon } };
+	// tab widget item and content class array, home, sports and health,
+	// community and settings
+	private final Object[][] TAB_WIDGETITEMS7CONTENTCLS = new Object[][] {
+			{ R.string.home_tab_tag, R.string.home_tab_title,
+					R.drawable.home_tab_icon, HomeTabContentActivity.class },
+			{ R.string.sports_and_health_tab_tag,
+					R.string.sports_and_health_tab7nav_title,
+					R.drawable.sportshealth_tab_icon,
+					SportsHealthTabContentActivity.class },
+			{ R.string.community_tab_tag, R.string.community_tab7nav_title,
+					R.drawable.community_tab_icon,
+					CommunityTabContentActivity.class },
+			{ R.string.settings_tab_tag, R.string.settings_tab7nav_title,
+					R.drawable.settings_tab_icon,
+					SettingsTabContentActivity.class } };
 
 	// tab host
 	private TabHost _mTabHost;
-
-	// my pet info
-	private PetBean _mPetInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,61 +60,45 @@ public class IPetChatTabActivity extends TabActivity {
 		// get tabHost
 		_mTabHost = getTabHost();
 
-		// define tabSpec
-		TabSpec _tabSpec;
-
 		// set tab indicator and content
-		// home
-		_tabSpec = _mTabHost
-				.newTabSpec(
-						getResources().getString(TAB_WIDGETITEM_CONTENTS[0][0]))
-				.setIndicator(
-						new CTTabSpecIndicator(this,
-								TAB_WIDGETITEM_CONTENTS[0][0],
-								TAB_WIDGETITEM_CONTENTS[0][1]))
-				.setContent(
-						new Intent().setClass(this,
-								HomeTabContentActivity.class));
-		_mTabHost.addTab(_tabSpec);
+		for (int i = 0; i < TAB_WIDGETITEMS7CONTENTCLS.length; i++) {
+			try {
+				// get tab spec tag, indicator label, icon resource and content
+				// class tag
+				String _tag = getResources().getString(
+						(Integer) TAB_WIDGETITEMS7CONTENTCLS[i][0]);
 
-		// sports and health
-		_tabSpec = _mTabHost
-				.newTabSpec(
-						getResources().getString(TAB_WIDGETITEM_CONTENTS[1][0]))
-				.setIndicator(
-						new CTTabSpecIndicator(this,
-								TAB_WIDGETITEM_CONTENTS[1][0],
-								TAB_WIDGETITEM_CONTENTS[1][1]))
-				.setContent(
-						new Intent().setClass(this,
-								SportsHealthTabContentActivity.class));
-		_mTabHost.addTab(_tabSpec);
+				// label resource
+				Integer _labelRes = (Integer) TAB_WIDGETITEMS7CONTENTCLS[i][1];
 
-		// community
-		_tabSpec = _mTabHost
-				.newTabSpec(
-						getResources().getString(TAB_WIDGETITEM_CONTENTS[2][0]))
-				.setIndicator(
-						new CTTabSpecIndicator(this,
-								TAB_WIDGETITEM_CONTENTS[2][0],
-								TAB_WIDGETITEM_CONTENTS[2][1]))
-				.setContent(
-						new Intent().setClass(this,
-								CommunityTabContentActivity.class));
-		_mTabHost.addTab(_tabSpec);
+				// icon resource
+				Integer _iconRes = (Integer) TAB_WIDGETITEMS7CONTENTCLS[i][2];
 
-		// settings
-		_tabSpec = _mTabHost
-				.newTabSpec(
-						getResources().getString(TAB_WIDGETITEM_CONTENTS[3][0]))
-				.setIndicator(
-						new CTTabSpecIndicator(this,
-								TAB_WIDGETITEM_CONTENTS[3][0],
-								TAB_WIDGETITEM_CONTENTS[3][1]))
-				.setContent(
-						new Intent().setClass(this,
-								SettingsTabContentActivity.class));
-		_mTabHost.addTab(_tabSpec);
+				// content class
+				Class<?> _contentCls = (Class<?>) TAB_WIDGETITEMS7CONTENTCLS[i][3];
+
+				Log.d(LOG_TAG, "tab spec tag = " + _tag
+						+ ", indicator label resource = " + _labelRes
+						+ ", icon resource = " + _iconRes
+						+ " and content class = " + _contentCls);
+
+				// new tab spec and add to tab host
+				TabSpec _tabSpec = _mTabHost
+						.newTabSpec(_tag)
+						.setIndicator(
+								new CTTabSpecIndicator(this, _labelRes,
+										_iconRes))
+						.setContent(new Intent().setClass(this, _contentCls));
+
+				_mTabHost.addTab(_tabSpec);
+			} catch (Exception e) {
+				Log.e(LOG_TAG,
+						"new tab spec error, exception message = "
+								+ e.getMessage());
+
+				e.printStackTrace();
+			}
+		}
 
 		// get user all pets info
 		// send get user all pets info post http request
@@ -139,12 +127,12 @@ public class IPetChatTabActivity extends TabActivity {
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
 
-			// get http response entity string json object result and user key
-			String _result = JSONUtils.getStringFromJSONObject(_respJsonData,
-					getResources()
-							.getString(R.string.rbgServer_req_resp_result));
+			// get http response entity string json object result
+			String _result = JSONUtils
+					.getStringFromJSONObject(_respJsonData, getResources()
+							.getString(R.string.rbgServer_reqResp_result));
 
-			// check result
+			// check an process result
 			if (null != _result) {
 				switch (Integer.parseInt(_result)) {
 				case 0:
@@ -154,139 +142,59 @@ public class IPetChatTabActivity extends TabActivity {
 									_respJsonData,
 									getResources()
 											.getString(
-													R.string.rbgServer_getAllPetsReq_resp_list));
+													R.string.rbgServer_getAllPetsReqResp_petsList));
 
 					// check user all pets info array
 					if (0 != _petsInfoArray.length()) {
-						// process user all pets info array and get the header
+						// process user got all pets info array and get the
+						// header
 						for (int i = 0; i < _petsInfoArray.length(); i++) {
 							// get the header
-							JSONObject _petInfoJSONObject = JSONUtils
-									.getJSONObjectFromJSONArray(_petsInfoArray,
-											0);
+							if (0 == i) {
+								// get the header pet json info
+								JSONObject _petInfoJSONObject = JSONUtils
+										.getJSONObjectFromJSONArray(
+												_petsInfoArray, 0);
 
-							// check my pet info
-							if (null == _mPetInfo) {
-								// init my pet info
-								_mPetInfo = new PetBean();
+								// get the user
+								UserBean _user = UserManager.getInstance()
+										.getUser();
+
+								// get my pet info
+								PetBean _petInfo = IPCUserExtension
+										.getUserPetInfo(_user);
+
+								// check my pet info
+								if (null == _petInfo) {
+									// init my pet info
+									_petInfo = new PetBean(_petInfoJSONObject);
+
+									// set got pet info as extension of user
+									IPCUserExtension.setUserPetInfo(_user,
+											_petInfo);
+								} else {
+									// update my pet info
+									_petInfo.updatePetInfo(_petInfoJSONObject);
+								}
+
+								Log.d(LOG_TAG, "Got my pet info = " + _petInfo);
+
+								// test by ares
+								// set current tab, work around
+								_mTabHost.setCurrentTab(1);
+								_mTabHost.setCurrentTab(0);
+
+								// break immediately
+								break;
 							}
-
-							// check and set pet info bean attributes
-							// id
-							_mPetInfo
-									.setId(JSONUtils
-											.getLongFromJSONObject(
-													_petInfoJSONObject,
-													getResources()
-															.getString(
-																	R.string.rbgServer_getAllPetsReq_resp_pet_id)));
-
-							// avatar url
-							_mPetInfo
-									.setAvatarUrl(JSONUtils
-											.getStringFromJSONObject(
-													_petInfoJSONObject,
-													getResources()
-															.getString(
-																	R.string.rbgServer_getAllPetsReq_resp_pet_avatarUrl)));
-
-							// nickname
-							_mPetInfo
-									.setNickname(JSONUtils
-											.getStringFromJSONObject(
-													_petInfoJSONObject,
-													getResources()
-															.getString(
-																	R.string.rbgServer_getAllPetsReq_resp_pet_nickname)));
-
-							// sex
-							// get and check sex value
-							Integer _sexValue = JSONUtils
-									.getIntegerFromJSONObject(
-											_petInfoJSONObject,
-											getResources()
-													.getString(
-															R.string.rbgServer_getAllPetsReq_resp_pet_sex));
-							if (null != _sexValue) {
-								_mPetInfo.setSex(PetSex.getSex(_sexValue));
-							}
-
-							// breed
-							// get and check breed value
-							Integer _breedValue = JSONUtils
-									.getIntegerFromJSONObject(
-											_petInfoJSONObject,
-											getResources()
-													.getString(
-															R.string.rbgServer_getAllPetsReq_resp_pet_breed));
-							if (null != _breedValue) {
-								_mPetInfo.setBreed(PetBreed
-										.getBreed(_breedValue));
-							}
-
-							// age
-							_mPetInfo
-									.setAge(JSONUtils
-											.getIntegerFromJSONObject(
-													_petInfoJSONObject,
-													getResources()
-															.getString(
-																	R.string.rbgServer_getAllPetsReq_resp_pet_age)));
-
-							// height
-							_mPetInfo
-									.setHeight(JSONUtils
-											.getDoubleFromJSONObject(
-													_petInfoJSONObject,
-													getResources()
-															.getString(
-																	R.string.rbgServer_getAllPetsReq_resp_pet_height)));
-
-							// weight
-							_mPetInfo
-									.setWeight(JSONUtils
-											.getDoubleFromJSONObject(
-													_petInfoJSONObject,
-													getResources()
-															.getString(
-																	R.string.rbgServer_getAllPetsReq_resp_pet_weight)));
-
-							// district
-							_mPetInfo
-									.setDistrict(JSONUtils
-											.getStringFromJSONObject(
-													_petInfoJSONObject,
-													getResources()
-															.getString(
-																	R.string.rbgServer_getAllPetsReq_resp_pet_district)));
-
-							// place where used to go
-							_mPetInfo
-									.setPlaceUsed2Go(JSONUtils
-											.getStringFromJSONObject(
-													_petInfoJSONObject,
-													getResources()
-															.getString(
-																	R.string.rbgServer_getAllPetsReq_resp_pet_placeUsed2Go)));
-
-							Log.d(LOG_TAG, "Got my pet info = " + _mPetInfo);
-
-							// set got pet info as extension of user
-							IPCUserExtension.setUserPetInfo(UserManager
-									.getInstance().getUser(), _mPetInfo);
-
-							// test by ares
-							// set current tab
-							_mTabHost.setCurrentTab(1);
-							_mTabHost.setCurrentTab(0);
 						}
 					} else {
 						Log.w(LOG_TAG,
-								"There is no pet info, please insert a pet");
+								"there is no pet info, please insert a pet");
 
 						// show there is no pet info toast
 						Toast.makeText(IPetChatTabActivity.this,
-								R.string.toast_no_pet, Toast.LENGTH_LONG)
+								R.string.toast_gap_no_pet, Toast.LENGTH_LONG)
 								.show();
 					}
 					break;

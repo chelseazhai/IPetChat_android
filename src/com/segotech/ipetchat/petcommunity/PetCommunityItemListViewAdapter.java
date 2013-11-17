@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
@@ -68,17 +68,18 @@ public class PetCommunityItemListViewAdapter extends CTListAdapter {
 		// imageView
 		else if (view instanceof ImageView) {
 			try {
-				// define item data drawable and convert item data to
-				// drawable
-				Drawable _itemDrawable = (Drawable) _itemData;
+				// define item data bitmap and convert item data to bitmap
+				Bitmap _itemDataBitmap = (Bitmap) _itemData;
 
 				// set imageView image
-				((ImageView) view).setImageDrawable(_itemDrawable);
+				if (null != _itemDataBitmap) {
+					((ImageView) view).setImageBitmap(_itemDataBitmap);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 
 				Log.e(LOG_TAG,
-						"Convert item data to drawable error, item data = "
+						"Convert item data to bitmap error, item data = "
 								+ _itemData);
 			}
 		}

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/light_light_light_gray"
     android:orientation="vertical"
     android:padding="20dp" >
 
@@ -10,20 +11,20 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/accountReg_or_resetPwd_finish_step_textView"
+            android:id="@+id/accountRegister_or_resetPwd_step_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="@string/accountReg_or_resetPwd_finish_step_textView_text"
+            android:text="@string/accountRegister_or_resetPwd_step_textView_text"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/dim_gray" />
 
         <TextView
-            android:id="@+id/accountReg_or_resetPwd_finish_description_textView"
+            android:id="@+id/accountRegister_or_resetPwd_description_textView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/accountReg_or_resetPwd_finish_step_textView"
-            android:layout_toRightOf="@id/accountReg_or_resetPwd_finish_step_textView"
+            android:layout_alignBaseline="@id/accountRegister_or_resetPwd_step_textView"
+            android:layout_toRightOf="@id/accountRegister_or_resetPwd_step_textView"
             android:ellipsize="end"
             android:gravity="right"
             android:singleLine="true"
@@ -32,7 +33,7 @@
     </RelativeLayout>
 
     <EditText
-        android:id="@+id/accountReg_or_resetPwd_finish_password1_editText"
+        android:id="@+id/accountRegister_or_resetPwd_password1_editText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -44,7 +45,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/accountReg_or_resetPwd_finish_password2_editText"
+        android:id="@+id/accountRegister_or_resetPwd_password2_editText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -53,7 +54,7 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/accountReg_or_resetPwd_finish_button"
+        android:id="@+id/accountRegister_or_resetPwd_finish_button"
         android:layout_width="fill_parent"
         android:layout_height="46dp"
         android:layout_marginTop="10dp"
