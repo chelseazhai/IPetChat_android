@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
@@ -32,12 +33,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
+import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
 import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
+import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 import com.segotech.ipetchat.petcommunity.petchat.ChatMsgBean.ChatMsgType;
 
@@ -132,7 +135,12 @@ public class Leave6ReplyMsgActivity extends IPetChatNavigationActivity {
 		Map<String, Object> _ret = new HashMap<String, Object>();
 
 		// set message leaver nickname, avatar, content and send date
-		_ret.put(MessageAdapter.MESSAGE_ITEM_LEAVER_NICKNAME, message.getName());
+		_ret.put(
+				MessageAdapter.MESSAGE_ITEM_LEAVER_NICKNAME,
+				message.getName().equalsIgnoreCase(
+						IPCUserExtension.getUserPetInfo(
+								UserManager.getInstance().getUser())
+								.getNickname()) ? "我" : message.getName());
 		_ret.put(MessageAdapter.MESSAGE_ITEM_SENDTIME, new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss").format(new Date(
 				message.getTimestamp() * 1000)));
@@ -386,12 +394,31 @@ public class Leave6ReplyMsgActivity extends IPetChatNavigationActivity {
 			if (null != _result) {
 				switch (Integer.parseInt(_result)) {
 				case 0:
-					// get message detail info
-					ChatMsgBean _msgDetailInfo = new ChatMsgBean(_respJsonData);
+					// get messages info array
+					JSONArray _msgsInfoArray = JSONUtils
+							.getJSONArrayFromJSONObject(
+									_respJsonData,
+									getResources()
+											.getString(
+													R.string.rbgServer_getAllPetsReqResp_petsList));
+
+					// define got message detail info data list
+					List<Map<String, ?>> _msgDetailInfosDataList = new ArrayList<Map<String, ?>>();
+
+					for (int i = 0; i < _msgsInfoArray.length(); i++) {
+						// get message detail info and add to message list
+						ChatMsgBean _msgDetailInfo = new ChatMsgBean(
+								JSONUtils.getJSONObjectFromJSONArray(
+										_msgsInfoArray, i));
+
+						// add message detail info item map to list
+						_msgDetailInfosDataList
+								.add(generateMsgInfoMap(_msgDetailInfo));
+					}
 
 					// append data
 					((MessageAdapter) _mMsgListView.getAdapter())
-							.appendData(generateMsgInfoMap(_msgDetailInfo));
+							.appendData(_msgDetailInfosDataList);
 					break;
 
 				case 2:
