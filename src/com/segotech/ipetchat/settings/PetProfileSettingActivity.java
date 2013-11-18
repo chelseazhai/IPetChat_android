@@ -1,5 +1,6 @@
 package com.segotech.ipetchat.settings;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,16 +8,24 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.richitec.commontoolkit.customcomponent.CTPopupWindow;
 import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
@@ -48,11 +57,18 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 	private static final int PET_PROFILE_BREED_CHECKED_SETTING_REQCODE = 207;
 	private static final int PET_PROFILE_DISTRICT_SETTING_REQCODE = 209;
 
+	// pet avatar upload
+	private static final int CAPTURE_PHOTO = 600;
+	private static final int SELECT_PHOTO = 601;
+	private static final int CROP_IMAGE = 602;
+
 	// my pet info
 	private PetBean _mPetInfo;
 
 	// pet profile avatar imageView
 	private ImageView _mPetProfileAvatarImageView;
+
+	private Bitmap tmpBitmap;
 
 	// pet profile setting item: nickname, sex, breed, age, height, weight,
 	// district and place used to go
@@ -64,6 +80,11 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 	private PetProfileSettingItem _mPetProfileWeightSettingItem;
 	private PetProfileSettingItem _mPetProfileDistrictSettingItem;
 	private PetProfileSettingItem _mPetProfilePlaceUsed2GoSettingItem;
+
+	// pet avatar upload photo source select popup window
+	private PetAvatarUploadPhotoSourceSelectPopupWindow _mPetAvatarUploadPhotoSourceSelectPopupWindow = new PetAvatarUploadPhotoSourceSelectPopupWindow(
+			R.layout.petavatar_uploadphotosource_select_popupwindow_layout,
+			LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 
 	// pet profile editText setting item on click listener
 	private PetProfileEditTextSettingItemOnClickListener _mPetProfileEditTextSettingItemOnClickListener = new PetProfileEditTextSettingItemOnClickListener();
@@ -202,6 +223,42 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 		// check and init my pet info
 		if (null == _mPetInfo) {
 			_mPetInfo = new PetBean();
+		}
+
+		if (resultCode == Activity.RESULT_OK && data != null) {
+			switch (requestCode) {
+			case CAPTURE_PHOTO:
+			case SELECT_PHOTO:
+				Uri uri = data.getData();
+				if (uri == null) {
+					Toast.makeText(this, "获取照片出错", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				cropPhoto(uri, 500);
+				return;
+
+			case CROP_IMAGE:
+				Bundle bundle = data.getExtras();
+				if (bundle != null) {
+					Bitmap photo = bundle.getParcelable("data");
+					if (photo != null) {
+						if (tmpBitmap != null) {
+							_mPetProfileAvatarImageView
+									.setImageResource(R.drawable.img_pet_profile_avatar);
+							tmpBitmap.recycle();
+						}
+						tmpBitmap = photo;
+						_mPetProfileAvatarImageView.setImageBitmap(tmpBitmap);
+
+						// set pet info avatar
+						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+						tmpBitmap
+								.compress(Bitmap.CompressFormat.PNG, 100, baos);
+						_mPetInfo.setAvatar(baos.toByteArray());
+					}
+				}
+				return;
+			}
 		}
 
 		// check result code
@@ -386,6 +443,24 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	private void cropPhoto(Uri uri, int size) {
+		Intent intent = new Intent("com.android.camera.action.CROP");
+		intent.setDataAndType(uri, "image/*");
+		// crop为true是设置在开启的intent中设置显示的view可以剪裁
+		intent.putExtra("crop", "true");
+
+		// aspectX aspectY 是宽高的比例
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+
+		// outputX,outputY 是剪裁图片的宽高
+		intent.putExtra("outputX", size);
+		intent.putExtra("outputY", size);
+		intent.putExtra("return-data", true);
+
+		startActivityForResult(intent, CROP_IMAGE);
+	}
+
 	// process set pet info exception
 	private void processSetPetInfoException() {
 		// show set pet info failed toast
@@ -394,14 +469,101 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 	}
 
 	// inner class
+	// pet avatar upload photo source select popup window
+	class PetAvatarUploadPhotoSourceSelectPopupWindow extends CTPopupWindow {
+
+		public PetAvatarUploadPhotoSourceSelectPopupWindow(int resource,
+				int width, int height, boolean focusable,
+				boolean isBindDefListener) {
+			super(resource, width, height, focusable, isBindDefListener);
+		}
+
+		public PetAvatarUploadPhotoSourceSelectPopupWindow(int resource,
+				int width, int height) {
+			super(resource, width, height);
+		}
+
+		@Override
+		protected void bindPopupWindowComponentsListener() {
+			// bind talk photo, select photo from photo album and cancel button
+			// click listener
+			((Button) getContentView().findViewById(R.id.talkPhoto_button))
+					.setOnClickListener(new TalkPhotoBtnOnClickListener());
+
+			((Button) getContentView().findViewById(
+					R.id.selectPhoto_fromAlbum_button))
+					.setOnClickListener(new SelectPhotoFromAlbumBtnOnClickListener());
+
+			((Button) getContentView().findViewById(R.id.selectCancel_button))
+					.setOnClickListener(new CancelSelectBtnOnClickListener());
+		}
+
+		@Override
+		protected void resetPopupWindow() {
+			// nothing to do
+		}
+
+		// inner class
+		// insert phone to contact mode select insert to new contact button on
+		// click listener
+		class TalkPhotoBtnOnClickListener implements OnClickListener {
+
+			@Override
+			public void onClick(View v) {
+				// dismiss insert phone to contact mode select popup window
+				dismiss();
+
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+				// test by ares
+				// pushActivityForResult(intent, CAPTURE_PHOTO);
+				startActivityForResult(intent, CAPTURE_PHOTO);
+			}
+
+		}
+
+		// insert phone to contact mode select insert to existed contact button
+		// on click listener
+		class SelectPhotoFromAlbumBtnOnClickListener implements OnClickListener {
+
+			@Override
+			public void onClick(View v) {
+				// dismiss insert phone to contact mode select popup window
+				dismiss();
+
+				// test by ares
+				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+				intent.addCategory(Intent.CATEGORY_OPENABLE);
+				intent.setType("image/*");
+				startActivityForResult(Intent.createChooser(intent, "选择相片"),
+						SELECT_PHOTO);
+			}
+
+		}
+
+		// cancel select button on click listener
+		class CancelSelectBtnOnClickListener implements OnClickListener {
+
+			@Override
+			public void onClick(View v) {
+				// dismiss insert phone to contact mode select popup window with
+				// animation
+				dismissWithAnimation();
+			}
+
+		}
+
+	}
+
 	// pet profile avatar setting item on click listener
 	class PetProfileAvatarSettingItemOnClickListener implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			Log.d(LOG_TAG, "PetProfileAvatarSettingItemOnClickListener");
-
-			//
+			// show pet avatar upload photo source select popup window
+			// with animation
+			_mPetAvatarUploadPhotoSourceSelectPopupWindow
+					.showAtLocationWithAnimation(v, Gravity.CENTER, 0, 0);
 		}
 
 	}

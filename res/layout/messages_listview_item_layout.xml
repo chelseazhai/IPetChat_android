@@ -14,6 +14,7 @@
         android:id="@+id/self_message"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        layout="@layout/self_msg_layout" />
+        layout="@layout/self_msg_layout"
+        android:visibility="gone" />
 
 </FrameLayout>

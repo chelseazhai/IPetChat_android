@@ -98,15 +98,8 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 				: _namePhoneticsStringBuilder.toString();
 	}
 
-	// process my concern pets info exception
-	private void processGetMyConcernPetsException() {
-		// show login failed toast
-		Toast.makeText(MyConcernActivity.this,
-				R.string.toast_request_exception, Toast.LENGTH_LONG).show();
-	}
-
-	// process get pet info exception
-	private void processGetPetInfoException() {
+	// process get my concern pets or get pet detail info exception
+	private void processException() {
 		// show login failed toast
 		Toast.makeText(MyConcernActivity.this,
 				R.string.toast_request_exception, Toast.LENGTH_LONG).show();
@@ -161,17 +154,18 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 						}
 
 						// check nickname
-						if (null != _concernPet.getNickname()) {
-							_itemMap.put(
-									MyConcernPetsAdapter.MY_CONCERN_PETS_ITEM_NICKNAME,
-									_concernPet.getNickname());
+						String _nickname = _concernPet.getNickname();
+						if (null == _nickname) {
+							_nickname = "未知";
 						}
+						_itemMap.put(
+								MyConcernPetsAdapter.MY_CONCERN_PETS_ITEM_NICKNAME,
+								_nickname);
 
 						// alphabet index
 						_itemMap.put(CTListAdapter.ALPHABET_INDEX,
 								generateNicknamePhoneticsString(PinyinUtils
-										.pinyins4String(_concernPet
-												.getNickname())));
+										.pinyins4String(_nickname)));
 
 						// check sex
 						if (null != _concernPet.getSex()) {
@@ -199,14 +193,14 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 					Log.e(LOG_TAG,
 							"get my concern pets info failed, bg_server return result is unrecognized");
 
-					processGetMyConcernPetsException();
+					processException();
 					break;
 				}
 			} else {
 				Log.e(LOG_TAG,
 						"get my concern pets info failed, bg_server return result is null");
 
-				processGetMyConcernPetsException();
+				processException();
 			}
 
 			// get my concern pets listView
@@ -392,14 +386,14 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 					Log.e(LOG_TAG,
 							"get pet info failed, bg_server return result is unrecognized");
 
-					processGetPetInfoException();
+					processException();
 					break;
 				}
 			} else {
 				Log.e(LOG_TAG,
 						"get pet info failed, bg_server return result is null");
 
-				processGetPetInfoException();
+				processException();
 			}
 		}
 

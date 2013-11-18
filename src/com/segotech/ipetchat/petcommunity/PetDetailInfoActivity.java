@@ -22,6 +22,7 @@ import com.richitec.commontoolkit.customcomponent.BarButtonItem.BarButtonItemSty
 import com.richitec.commontoolkit.customcomponent.CTMenu;
 import com.richitec.commontoolkit.customcomponent.CTMenu.CTMenuOnItemSelectedListener;
 import com.richitec.commontoolkit.customcomponent.ImageBarButtonItem;
+import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
@@ -30,6 +31,7 @@ import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.account.pet.PetBean;
 import com.segotech.ipetchat.account.pet.PetSex;
+import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 import com.segotech.ipetchat.petcommunity.petchat.Leave6ReplyMsgActivity;
 
@@ -209,8 +211,8 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 		}
 	}
 
-	// process concern pet exception
-	private void processConcernPetException() {
+	// process concern, cancel concern pet or add pet to blacklist exception
+	private void processException() {
 		// show login failed toast
 		Toast.makeText(PetDetailInfoActivity.this,
 				R.string.toast_request_exception, Toast.LENGTH_LONG).show();
@@ -298,15 +300,27 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onClick(View v) {
-			// define extra data
-			Map<String, Object> _extraData = new HashMap<String, Object>();
+			// get and check my pet info
+			PetBean _myPetInfo = IPCUserExtension.getUserPetInfo(UserManager
+					.getInstance().getUser());
+			if (null != _myPetInfo
+					&& !"".equalsIgnoreCase(_myPetInfo.getNickname())) {
+				// define extra data
+				Map<String, Object> _extraData = new HashMap<String, Object>();
 
-			// set extra data
-			_extraData.put(Leave6ReplyMsgActivity.LEAVEMSG_PETID_KEY,
-					_mPetDetailInfo.getId());
+				// set extra data
+				_extraData.put(Leave6ReplyMsgActivity.LEAVEMSG_PETID_KEY,
+						_mPetDetailInfo.getId());
 
-			// go to leave or reply message activity
-			pushActivity(Leave6ReplyMsgActivity.class, _extraData);
+				// go to leave or reply message activity
+				pushActivity(Leave6ReplyMsgActivity.class, _extraData);
+			} else {
+				// show get user all pets info failed toast
+				Toast.makeText(PetDetailInfoActivity.this,
+						"请先设置您的宠物信息并为其添加一个名字", Toast.LENGTH_LONG).show();
+
+				return;
+			}
 		}
 
 	}
@@ -388,14 +402,14 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 					Log.e(LOG_TAG,
 							"concern pet failed, bg_server return result is unrecognized");
 
-					processConcernPetException();
+					processException();
 					break;
 				}
 			} else {
 				Log.e(LOG_TAG,
 						"concern pet failed, bg_server return result is null");
 
-				processConcernPetException();
+				processException();
 			}
 		}
 
@@ -461,14 +475,14 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 					Log.e(LOG_TAG,
 							"cancel concern pet failed, bg_server return result is unrecognized");
 
-					processConcernPetException();
+					processException();
 					break;
 				}
 			} else {
 				Log.e(LOG_TAG,
 						"cancel concern pet failed, bg_server return result is null");
 
-				processConcernPetException();
+				processException();
 			}
 		}
 
@@ -535,14 +549,14 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 					Log.e(LOG_TAG,
 							"add pet to blacklist failed, bg_server return result is unrecognized");
 
-					processConcernPetException();
+					processException();
 					break;
 				}
 			} else {
 				Log.e(LOG_TAG,
 						"add pet to blacklist failed, bg_server return result is null");
 
-				processConcernPetException();
+				processException();
 			}
 		}
 
