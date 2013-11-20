@@ -84,7 +84,7 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 	// pet avatar upload photo source select popup window
 	private PetAvatarUploadPhotoSourceSelectPopupWindow _mPetAvatarUploadPhotoSourceSelectPopupWindow = new PetAvatarUploadPhotoSourceSelectPopupWindow(
 			R.layout.petavatar_uploadphotosource_select_popupwindow_layout,
-			LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+			LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
 	// pet profile editText setting item on click listener
 	private PetProfileEditTextSettingItemOnClickListener _mPetProfileEditTextSettingItemOnClickListener = new PetProfileEditTextSettingItemOnClickListener();
@@ -231,8 +231,25 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 			case SELECT_PHOTO:
 				Uri uri = data.getData();
 				if (uri == null) {
-					Toast.makeText(this, "获取照片出错", Toast.LENGTH_SHORT).show();
-					return;
+					if (CAPTURE_PHOTO == requestCode) {
+						// get bundle
+						Bundle bundle = data.getExtras();
+						if (null != bundle) {
+							// get bitmap
+							Bitmap capturePhoto = (Bitmap) bundle.get("data");
+
+							Log.d(LOG_TAG, "capturePhoto = " + capturePhoto);
+							return;
+						} else {
+							Toast.makeText(this, "获取照片出错", Toast.LENGTH_SHORT)
+									.show();
+							return;
+						}
+					} else {
+						Toast.makeText(this, "获取照片出错", Toast.LENGTH_SHORT)
+								.show();
+						return;
+					}
 				}
 				cropPhoto(uri, 500);
 				return;
@@ -255,6 +272,33 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 						tmpBitmap
 								.compress(Bitmap.CompressFormat.PNG, 100, baos);
 						_mPetInfo.setAvatar(baos.toByteArray());
+
+						// upload pet avatar post http request
+						// generate upload pet avatar request param
+						Map<String, Object> _uploadPetAvaterParam = new HashMap<String, Object>();
+						tmpBitmap
+								.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+						_uploadPetAvaterParam.put("avatar_file",
+								baos.toByteArray());
+						if (null != _mPetInfo.getId()) {
+							_uploadPetAvaterParam
+									.put(getResources()
+											.getString(
+													R.string.rbgServer_setPetInfoReqParam_petId),
+											_mPetInfo.getId().toString());
+						}
+						_uploadPetAvaterParam.put("username", UserManager
+								.getInstance().getUser().getName());
+
+						// send upload pet avatar post http request
+						HttpUtils.postRequest(
+								getResources().getString(R.string.server_url)
+										+ getResources().getString(
+												R.string.uploadPetAvatar_url),
+								PostRequestFormat.MULTIPARTFORMDATA,
+								_uploadPetAvaterParam, null,
+								HttpRequestType.ASYNCHRONOUS,
+								new UploadPetAvatarHttpRequestListener());
 					}
 				}
 				return;
@@ -834,6 +878,66 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 					"set pet info failed, send set pet info post request failed");
 
 			processSetPetInfoException();
+		}
+
+	}
+
+	// upload pet avatar http request listener
+	class UploadPetAvatarHttpRequestListener extends OnHttpRequestListener {
+
+		@Override
+		public void onFinished(HttpRequest request, HttpResponse response) {
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
+
+			// get http response entity string json object result
+			String _result = JSONUtils
+					.getStringFromJSONObject(_respJsonData, getResources()
+							.getString(R.string.rbgServer_reqResp_result));
+
+			// check an process result
+			if (null != _result) {
+				switch (Integer.parseInt(_result)) {
+				case 0:
+					// nothing to do
+					break;
+
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+					Log.e(LOG_TAG, "upload pet avatar failed");
+
+					// show get user all pets info failed toast
+					Toast.makeText(PetProfileSettingActivity.this, "上传头像失败",
+							Toast.LENGTH_LONG).show();
+					break;
+
+				default:
+					Log.e(LOG_TAG,
+							"upload pet avtar failed, bg_server return result is unrecognized");
+
+					processSetPetInfoException();
+					break;
+				}
+			} else {
+				Log.e(LOG_TAG,
+						"upload pet avatar failed, bg_server return result is null");
+
+				processSetPetInfoException();
+			}
+		}
+
+		@Override
+		public void onFailed(HttpRequest request, HttpResponse response) {
+			Log.e(LOG_TAG,
+					"upload pet avatar failed, send upload pet avatar post request failed");
+
+			// show get user all pets info failed toast
+			Toast.makeText(PetProfileSettingActivity.this,
+					R.string.toast_request_exception, Toast.LENGTH_LONG).show();
 		}
 
 	}

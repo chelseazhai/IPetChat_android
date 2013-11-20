@@ -4,12 +4,26 @@
     android:layout_height="match_parent"
     tools:context=".settings.PetPhotosSettingActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/add_new_photoAlbum_layout"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/pet_photos_setting_not_implement"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        layout="@layout/pet_photoalbum_listview_item_layout" />
+
+    <ListView
+        android:id="@+id/pet_photoAlbum_listView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/add_new_photoAlbum_layout"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:dividerHeight="4dp"
+        android:fadingEdge="none"
+        android:headerDividersEnabled="false"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" >
+    </ListView>
 
 </RelativeLayout>

@@ -276,10 +276,16 @@
     <string name="title_activity_pet_profile_district_selected_setting" translatable="false">PetProfileDistrictSelectedSettingActivity</string>
     <string name="pet_profile_district_selected_setting_nav_title_format">%s District</string>
 
-    <!-- pet photos -->
+    <!-- pet photo album -->
     <string name="title_activity_pet_photos_setting" translatable="false">PetPhotosSettingActivity</string>
     <string name="pet_photos_setting_nav_title">Pet photos</string>
-    <string name="pet_photos_setting_not_implement">pet photos not implement</string>
+
+    <!-- upload pet photo -->
+    <string name="title_activity_upload_pet_photo" translatable="false">UploadPetPhotoActivity</string>
+    <string name="upload_pet_photo_nav_title">Upload pet photos</string>
+
+    <!-- pet photos -->
+    <string name="title_activity_pet_photos" translatable="false">PetPhotosActivity</string>
 
     <!-- account info -->
     <string name="title_activity_account_info_setting" translatable="false">AccountInfoSettingActivity</string>

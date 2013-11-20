@@ -16,13 +16,6 @@
         android:paddingRight="4dp"
         android:paddingTop="10dp" >
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="请选择图片来源"
-            android:textColor="@android:color/white" />
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

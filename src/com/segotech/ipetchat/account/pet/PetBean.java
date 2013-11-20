@@ -244,6 +244,7 @@ public class PetBean implements Serializable {
 		// append pet id, nickname, sex, breed, age, height, weight, district
 		// and place where used to go
 		_petDescription.append("pet id: ").append(id).append(", ");
+		_petDescription.append("avatar url: ").append(avatarUrl).append(", ");
 		_petDescription.append("nickname: ").append(nickname).append(", ");
 		_petDescription.append("sex: ")
 				.append(null != sex ? sex.toString() : "").append(", ");

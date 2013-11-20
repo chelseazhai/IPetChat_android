@@ -121,8 +121,38 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".settings.profile.PetProfileEditTextSettingActivity"
+            android:label="@string/title_activity_pet_profile_edittext_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".settings.profile.PetProfileCheckedSettingActivity"
+            android:label="@string/title_activity_pet_profile_checked_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".settings.profile.PetProfileDistrictSettingActivity"
+            android:label="@string/title_activity_pet_profile_district_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".settings.profile.PetProfileDistrictSelectedSettingActivity"
+            android:label="@string/title_activity_pet_profile_district_selected_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".settings.PetPhotosSettingActivity"
             android:label="@string/title_activity_pet_photos_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".settings.photo.UploadPetPhotoActivity"
+            android:label="@string/title_activity_upload_pet_photo"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".settings.photo.PetPhotosActivity"
+            android:label="@string/title_activity_pet_photos"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -143,26 +173,6 @@
         <activity
             android:name=".settings.PetDeviceBindActivity"
             android:label="@string/title_activity_pet_device_bind"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".settings.profile.PetProfileEditTextSettingActivity"
-            android:label="@string/title_activity_pet_profile_edittext_setting"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".settings.profile.PetProfileCheckedSettingActivity"
-            android:label="@string/title_activity_pet_profile_checked_setting"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".settings.profile.PetProfileDistrictSettingActivity"
-            android:label="@string/title_activity_pet_profile_district_setting"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".settings.profile.PetProfileDistrictSelectedSettingActivity"
-            android:label="@string/title_activity_pet_profile_district_selected_setting"
             android:screenOrientation="portrait" >
         </activity>
         <activity

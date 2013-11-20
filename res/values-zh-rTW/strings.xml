@@ -135,7 +135,7 @@
     <!-- message box -->
     <string name="message_box_nav_title">留言箱</string>
     <string name="messagebox_message_search_editText_hint">搜索</string>
-    
+
     <!-- leave or reply message -->
     <string name="leave_or_reply_msg_nav_title">留言记录</string>
     <string name="msg_send_button_title">发送</string>
@@ -231,9 +231,11 @@
     <!-- pet profile district selected -->
     <string name="pet_profile_district_selected_setting_nav_title_format">%s 城市</string>
 
-    <!-- pet photos -->
+    <!-- pet photo album -->
     <string name="pet_photos_setting_nav_title">宠物相册</string>
-    <string name="pet_photos_setting_not_implement">宠物相册暂未实现</string>
+
+    <!-- upload pet photo -->
+    <string name="upload_pet_photo_nav_title">上传照片</string>
 
     <!-- account info -->
     <string name="account_info_setting_nav_title">账号</string>

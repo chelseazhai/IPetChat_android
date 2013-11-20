@@ -50,6 +50,16 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 
 		// set title
 		setTitle(R.string.message_box_nav_title);
+
+		// get messagebox messages listView
+		ListView _messageboxMsgsListView = (ListView) findViewById(R.id.messagebox_message_listView);
+
+		// set messagebox messages listView on item click listener
+		_messageboxMsgsListView
+				.setOnItemClickListener(new MessageboxMsgsListViewOnItemClickListener());
+
+		// set messagebox messages listView on item long click listener
+		_messageboxMsgsListView.setOnItemLongClickListener(null);
 	}
 
 	@Override
@@ -206,11 +216,8 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 				processGetMessageboxMSGException();
 			}
 
-			// get messagebox messages listView
-			ListView _messageboxMsgsListView = (ListView) findViewById(R.id.messagebox_message_listView);
-
 			// set messagebox messages listView adapter
-			_messageboxMsgsListView
+			((ListView) findViewById(R.id.messagebox_message_listView))
 					.setAdapter(new MessageboxMessagesAdapter(
 							MessageboxActivity.this,
 							_messageboxMsgsDataList,
@@ -224,13 +231,6 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 									R.id.message_leaver_nickname_textView,
 									R.id.leavedmessage_content_textView,
 									R.id.message_leaved_timestamp_textView }));
-
-			// set messagebox messages listView on item click listener
-			_messageboxMsgsListView
-					.setOnItemClickListener(new MessageboxMsgsListViewOnItemClickListener());
-
-			// set messagebox messages listView on item long click listener
-			_messageboxMsgsListView.setOnItemLongClickListener(null);
 		}
 
 		@Override
