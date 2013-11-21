@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 import com.segotech.ipetchat.customwidget.NetLoadImageView;
 import com.segotech.ipetchat.petcommunity.petchat.Leave6ReplyMsgActivity;
+import com.segotech.ipetchat.settings.photo.PetPhotoAlbumActivity;
 
 public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 
@@ -179,6 +181,18 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 			// set pet other info item textView text
 			((TextView) _petOtherInfoParentLinearLayout.getChildAt(i))
 					.setText(_petOtherInfoArray[i]);
+		}
+
+		// get pet photos tableRow
+		TableRow _petPhotosTableRow = (TableRow) findViewById(R.id.pet_photos_tableRow);
+
+		// set on click listener
+		_petPhotosTableRow
+				.setOnClickListener(new PetPhotoAlbumTableRowOnClickListener());
+
+		// set pet photos
+		for (int i = 0; i < _petPhotosTableRow.getChildCount(); i++) {
+			// ??
 		}
 
 		// set leave message button on click listener
@@ -575,6 +589,27 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 			// show get user all pets info failed toast
 			Toast.makeText(PetDetailInfoActivity.this,
 					R.string.toast_request_exception, Toast.LENGTH_LONG).show();
+		}
+
+	}
+
+	// pet photo album tableRow on click listener
+	class PetPhotoAlbumTableRowOnClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			// present pet photo album
+			// define extra data
+			Map<String, Object> _extraData = new HashMap<String, Object>();
+
+			// set extra data
+			_extraData.put(PetPhotoAlbumActivity.PET_NICKNAME_KEY,
+					_mPetDetailInfo.getNickname());
+			_extraData.put(PetPhotoAlbumActivity.PET_ID_KEY,
+					_mPetDetailInfo.getId());
+
+			// go to pet photo album activity
+			pushActivity(PetPhotoAlbumActivity.class, _extraData);
 		}
 
 	}

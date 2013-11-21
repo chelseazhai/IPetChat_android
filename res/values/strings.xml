@@ -163,6 +163,10 @@
     <string name="pet_detail_info_sendMsg_button_title">Send message</string>
     <string name="pet_detail_info_addConcern_button_title">Add concern</string>
 
+    <!-- pet photo album -->
+    <string name="title_activity_pet_photo_album" translatable="false">PetPhotoAlbumActivity</string>
+    <string name="pet_photo_album_nav_title_format">%s photo album</string>
+
     <!-- message box -->
     <string name="title_activity_messagebox" translatable="false">MessageboxActivity</string>
     <string name="message_box_nav_title">Message box</string>

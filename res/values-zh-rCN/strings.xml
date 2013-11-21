@@ -132,6 +132,9 @@
     <string name="pet_detail_info_sendMsg_button_title">给TA留言</string>
     <string name="pet_detail_info_addConcern_button_title">关注TA</string>
 
+    <!-- pet photo album -->
+    <string name="pet_photo_album_nav_title_format">%s的相册</string>
+
     <!-- message box -->
     <string name="message_box_nav_title">留言箱</string>
     <string name="messagebox_message_search_editText_hint">搜索</string>

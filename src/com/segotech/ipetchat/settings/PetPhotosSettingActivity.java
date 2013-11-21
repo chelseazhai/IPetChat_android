@@ -394,8 +394,6 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 			Log.e(LOG_TAG,
 					"get pet photo album info failed, send get pet photo album info post request failed");
 
-			Log.d(LOG_TAG, "@@ = " + response.getStatusLine().getStatusCode());
-
 			// show get user all pets info failed toast
 			Toast.makeText(PetPhotosSettingActivity.this,
 					R.string.toast_request_exception, Toast.LENGTH_LONG).show();

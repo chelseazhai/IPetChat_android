@@ -56,6 +56,7 @@ public class PetPhotosActivity extends IPetChatNavigationActivity {
 	// pet photo album key
 	public static final String PHOTOALBUM_ID_KEY = "photo_album_id_key";
 	public static final String PHOTOALBUM_TITLE_KEY = "photo_album_title_key";
+	public static final String PHOTOS_PRESENT_KEY = "photos_present_key";
 
 	// pet photo upload
 	private static final int CAPTURE_PHOTO = 800;
@@ -68,6 +69,8 @@ public class PetPhotosActivity extends IPetChatNavigationActivity {
 
 	// more popup menu
 	private CTMenu _mMorePopupMenu;
+
+	private Boolean _isPhotosPresent = false;
 
 	// pet photo source select popup window
 	private PetPhotoSourceSelectPopupWindow _mPetPhotoSourceSelectPopupWindow = new PetPhotoSourceSelectPopupWindow(
@@ -109,12 +112,6 @@ public class PetPhotosActivity extends IPetChatNavigationActivity {
 		_mMorePopupMenu
 				.setMenuOnItemSelectedListener(new MoreMenuOnItemSelectedListener());
 
-		// set right image bar button item, more info image bar button item
-		setRightBarButtonItem(new ImageBarButtonItem(this,
-				R.drawable.img_moremenu_barbuttonitem,
-				BarButtonItemStyle.RIGHT_GO,
-				new MoreMenuImageBarButtonItemOnClickListener()));
-
 		// get the intent extra data
 		final Bundle _data = getIntent().getExtras();
 
@@ -123,6 +120,15 @@ public class PetPhotosActivity extends IPetChatNavigationActivity {
 			// get id of pet left msg for
 			photoAlbumId = _data.getLong(PHOTOALBUM_ID_KEY);
 			photoAlbumTitle = _data.getString(PHOTOALBUM_TITLE_KEY);
+			_isPhotosPresent = _data.getBoolean(PHOTOS_PRESENT_KEY);
+		}
+
+		// set right image bar button item, more info image bar button item
+		if (!_isPhotosPresent) {
+			setRightBarButtonItem(new ImageBarButtonItem(this,
+					R.drawable.img_moremenu_barbuttonitem,
+					BarButtonItemStyle.RIGHT_GO,
+					new MoreMenuImageBarButtonItemOnClickListener()));
 		}
 
 		// get pet photo load webView

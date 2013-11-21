@@ -105,12 +105,40 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
 
-        <Gallery
-            android:id="@+id/pet_photo_gallery"
+        <TableRow
+            android:id="@+id/pet_photos_tableRow"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="6dp" />
+            android:layout_height="120dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/light_middle_gray" >
+
+            <com.segotech.ipetchat.customwidget.NetLoadImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@color/gainsboro"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <com.segotech.ipetchat.customwidget.NetLoadImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@color/gainsboro"
+                android:paddingLeft="2dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <com.segotech.ipetchat.customwidget.NetLoadImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@color/gainsboro"
+                android:paddingLeft="2dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+        </TableRow>
 
         <LinearLayout
             style="?android:attr/buttonBarStyle"
