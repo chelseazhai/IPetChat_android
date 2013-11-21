@@ -20,11 +20,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.richitec.commontoolkit.utils.HttpUtils;
+import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
+import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.account.pet.PetBean;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.settings.photo.PetPhotoAlbumBean;
 
 public class PetStarsActivity extends IPetChatNavigationActivity {
 
@@ -44,19 +47,19 @@ public class PetStarsActivity extends IPetChatNavigationActivity {
 		// set title
 		setTitle(R.string.petstars_nav_title);
 
-		// // get system recommend pet stars info
-		// // send get system recommend pet stars info post http request
-		// HttpUtils.postSignatureRequest(
-		// getResources().getString(R.string.server_url)
-		// + getResources().getString(
-		// R.string.get_petStarsInfo_url),
-		// PostRequestFormat.URLENCODED, null, null,
-		// HttpRequestType.ASYNCHRONOUS,
-		// new GetPetStarsInfoHttpRequestListener());
+		// get system recommend pet stars info
+		// send get system recommend pet stars info post http request
+		HttpUtils.postSignatureRequest(
+				getResources().getString(R.string.server_url)
+						+ getResources().getString(
+								R.string.get_petStarsInfo_url),
+				PostRequestFormat.URLENCODED, null, null,
+				HttpRequestType.ASYNCHRONOUS,
+				new GetPetStarsInfoHttpRequestListener());
 	}
 
 	// process system recommend pet stars info exception
-	private void processGetPetStarsException() {
+	private void processException() {
 		// show login failed toast
 		Toast.makeText(PetStarsActivity.this, R.string.toast_request_exception,
 				Toast.LENGTH_LONG).show();
@@ -108,6 +111,14 @@ public class PetStarsActivity extends IPetChatNavigationActivity {
 									BitmapFactory.decodeByteArray(
 											_petStar.getAvatar(), 0,
 											_petStar.getAvatar().length));
+						} else {
+							if (null != _petStar.getAvatarUrl()) {
+								_itemMap.put(
+										PetStarsAdapter.PET_STARS_ITEM_AVATAR,
+										getResources().getString(
+												R.string.img_url)
+												+ _petStar.getAvatarUrl());
+							}
 						}
 
 						// check recommendation
@@ -117,10 +128,19 @@ public class PetStarsActivity extends IPetChatNavigationActivity {
 									_petStar.getNickname());
 						}
 
+						// define detail button info map and init
+						Map<String, Object> _detailBtnInfoMap = new HashMap<String, Object>();
+						_detailBtnInfoMap.put(
+								PetCommunityItemListViewAdapter.BTN_TAG_KEY,
+								Integer.valueOf(i));
+						_detailBtnInfoMap
+								.put(PetCommunityItemListViewAdapter.BTN_ONCLICKLISTENER_KEY,
+										new PetStarDetailBtnOnClickListener());
+
 						// detail button on click listener
 						_itemMap.put(
-								PetStarsAdapter.PET_STARS_ITEM_DETAILBTN_ONCLICKLISTENER,
-								new PetStarDetailBtnOnClickListener());
+								PetStarsAdapter.PET_STARS_ITEM_DETAILBTN_INFO,
+								_detailBtnInfoMap);
 
 						// add pet star recommendation map to list
 						_petStarsDataList.add(_itemMap);
@@ -132,14 +152,14 @@ public class PetStarsActivity extends IPetChatNavigationActivity {
 					Log.e(LOG_TAG,
 							"get system recommend pet stars info failed, bg_server return result is unrecognized");
 
-					processGetPetStarsException();
+					processException();
 					break;
 				}
 			} else {
 				Log.e(LOG_TAG,
 						"get system recommend pet stars info failed, bg_server return result is null");
 
-				processGetPetStarsException();
+				processException();
 			}
 
 			// set pet stars listView adapter
@@ -151,7 +171,7 @@ public class PetStarsActivity extends IPetChatNavigationActivity {
 							new String[] {
 									PetStarsAdapter.PET_STARS_ITEM_AVATAR,
 									PetStarsAdapter.PET_STARS_ITEM_RECOMMENDATION,
-									PetStarsAdapter.PET_STARS_ITEM_DETAILBTN_ONCLICKLISTENER },
+									PetStarsAdapter.PET_STARS_ITEM_DETAILBTN_INFO },
 							new int[] { R.id.petStar_avatar_imageView,
 									R.id.petStar_recommendation_textView,
 									R.id.petStar_detail_button }));
@@ -175,7 +195,7 @@ public class PetStarsActivity extends IPetChatNavigationActivity {
 		// pet stars adapter data keys
 		private static final String PET_STARS_ITEM_AVATAR = "pet_stars_item_avatar";
 		private static final String PET_STARS_ITEM_RECOMMENDATION = "pet_stars_item_recommendation";
-		private static final String PET_STARS_ITEM_DETAILBTN_ONCLICKLISTENER = "pet_stars_item_detail_button_on_click_listener";
+		private static final String PET_STARS_ITEM_DETAILBTN_INFO = "pet_stars_item_detail_button_info";
 
 		public PetStarsAdapter(Context context, List<Map<String, ?>> data,
 				int itemsLayoutResId, String[] dataKeys,
@@ -191,21 +211,25 @@ public class PetStarsActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onClick(View button) {
+			// get button tag
+			Integer _petStarIndex = (Integer) button.getTag();
+
 			// get pet info
 			// generate get pet info post request param
 			Map<String, String> _getPetInfoParam = new HashMap<String, String>();
 			_getPetInfoParam.put(
 					getResources().getString(
-							R.string.rbgServer_getPetInfoReqParam_petId), "");
+							R.string.rbgServer_getPetInfoReqParam_petId),
+					_mPetStarsIdList.get(_petStarIndex).toString());
 
-			// // send get pet info post http request
-			// HttpUtils.postSignatureRequest(
-			// getResources().getString(R.string.server_url)
-			// + getResources()
-			// .getString(R.string.get_petInfo_url),
-			// PostRequestFormat.URLENCODED, _getPetInfoParam, null,
-			// HttpRequestType.ASYNCHRONOUS,
-			// new GetPetInfoHttpRequestListener());
+			// send get pet info post http request
+			HttpUtils.postSignatureRequest(
+					getResources().getString(R.string.server_url)
+							+ getResources()
+									.getString(R.string.get_petInfo_url),
+					PostRequestFormat.URLENCODED, _getPetInfoParam, null,
+					HttpRequestType.ASYNCHRONOUS,
+					new GetPetInfoHttpRequestListener());
 		}
 
 	}
@@ -215,14 +239,79 @@ public class PetStarsActivity extends IPetChatNavigationActivity {
 
 		@Override
 		public void onFinished(HttpRequest request, HttpResponse response) {
-			// TODO Auto-generated method stub
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
 
+			// get http response entity string json object result
+			String _result = JSONUtils
+					.getStringFromJSONObject(_respJsonData, getResources()
+							.getString(R.string.rbgServer_reqResp_result));
+
+			// check an process result
+			if (null != _result) {
+				switch (Integer.parseInt(_result)) {
+				case 0:
+					// define pet info and pet photo album cover image path list
+					PetBean _petInfo = new PetBean(_respJsonData);
+					List<String> _photoAlbumCoverPaths = new ArrayList<String>();
+
+					// get pet photo album list and init pet photo album cover
+					// image path array
+					JSONArray _petPhotoAlbumsInfoArray = JSONUtils
+							.getJSONArrayFromJSONObject(_respJsonData,
+									"galleries");
+					for (int i = 0; i < _petPhotoAlbumsInfoArray.length(); i++) {
+						_photoAlbumCoverPaths.add(new PetPhotoAlbumBean(
+								JSONUtils.getJSONObjectFromJSONArray(
+										_petPhotoAlbumsInfoArray, i))
+								.getCoverUrl());
+					}
+
+					// define extra data
+					Map<String, Object> _extraData = new HashMap<String, Object>();
+
+					// check pet info and set extra data
+					if (null != _petInfo) {
+						_extraData.put(
+								PetDetailInfoActivity.PET_DETAILINFO_PET_KEY,
+								_petInfo);
+						_extraData
+								.put(PetDetailInfoActivity.PET_DETAILINFO_CONCERN_KEY,
+										Boolean.valueOf(false));
+						_extraData
+								.put(PetDetailInfoActivity.PET_PHOTOALBUM_COVERIMGPATHS_KEY,
+										_photoAlbumCoverPaths
+												.toArray(new String[] {}));
+					}
+
+					// go to pet detail info activity
+					pushActivity(PetDetailInfoActivity.class, _extraData);
+					break;
+
+				default:
+					Log.e(LOG_TAG,
+							"get pet info failed, bg_server return result is unrecognized");
+
+					processException();
+					break;
+				}
+			} else {
+				Log.e(LOG_TAG,
+						"get pet info failed, bg_server return result is null");
+
+				processException();
+			}
 		}
 
 		@Override
 		public void onFailed(HttpRequest request, HttpResponse response) {
-			// TODO Auto-generated method stub
+			Log.e(LOG_TAG,
+					"get pet info failed, send get pet info post request failed");
 
+			// show get user all pets info failed toast
+			Toast.makeText(PetStarsActivity.this,
+					R.string.toast_request_exception, Toast.LENGTH_LONG).show();
 		}
 
 	}

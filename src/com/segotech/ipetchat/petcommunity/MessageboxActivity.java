@@ -299,8 +299,7 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 			new AlertDialog.Builder(MessageboxActivity.this)
 					.setTitle(R.string.iPetChat_exitAlertDialog_title)
 					.setMessage("你确定要删除此条留言？")
-					.setPositiveButton(
-							R.string.iPetChat_exitAlertDialog_exitButton_title,
+					.setPositiveButton("确定",
 							new DialogInterface.OnClickListener() {
 
 								@Override
@@ -383,7 +382,8 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 							"delete messagebox message failed successful");
 
 					// remove messagebox message
-					_mMessageboxMsgsList.remove(_mDeleteMessageIndex);
+					_mMessageboxMsgsList
+							.remove(_mDeleteMessageIndex.intValue());
 
 					// remove data
 					((MessageboxMessagesAdapter) ((ListView) findViewById(R.id.messagebox_message_listView))

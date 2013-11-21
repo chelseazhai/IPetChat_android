@@ -466,8 +466,7 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 			new AlertDialog.Builder(PetPhotosSettingActivity.this)
 					.setTitle(R.string.iPetChat_exitAlertDialog_title)
 					.setMessage("你确定要删除此相册？")
-					.setPositiveButton(
-							R.string.iPetChat_exitAlertDialog_exitButton_title,
+					.setPositiveButton("确定",
 							new DialogInterface.OnClickListener() {
 
 								@Override
@@ -549,7 +548,8 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 					Log.d(LOG_TAG, "delete pet photo album successful");
 
 					// remove pet photo album
-					_mPetPhotoAlbumInfoList.remove(_mDeletePhotoAlbumIndex);
+					_mPetPhotoAlbumInfoList.remove(_mDeletePhotoAlbumIndex
+							.intValue());
 
 					// remove data
 					((PetPhotoAlbumsAdapter) ((ListView) findViewById(R.id.pet_photoAlbum_listView))

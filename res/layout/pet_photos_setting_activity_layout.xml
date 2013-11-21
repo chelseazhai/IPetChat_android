@@ -18,7 +18,7 @@
         android:layout_height="fill_parent"
         android:layout_below="@id/add_new_photoAlbum_layout"
         android:cacheColorHint="@android:color/transparent"
-        android:divider="@null"
+        android:divider="@color/light_gray"
         android:dividerHeight="4dp"
         android:fadingEdge="none"
         android:headerDividersEnabled="false"

@@ -22,6 +22,10 @@ public class PetCommunityItemListViewAdapter extends CTListAdapter {
 	private static final String LOG_TAG = PetCommunityItemListViewAdapter.class
 			.getCanonicalName();
 
+	// button view tag and on click listener key
+	public static final String BTN_TAG_KEY = "button_tag";
+	public static final String BTN_ONCLICKLISTENER_KEY = "button_onClickListener";
+
 	public PetCommunityItemListViewAdapter(Context context,
 			List<Map<String, ?>> data, int itemsLayoutResId, String[] dataKeys,
 			int[] itemsComponentResIds) {
@@ -37,18 +41,22 @@ public class PetCommunityItemListViewAdapter extends CTListAdapter {
 		// button
 		if (view instanceof Button) {
 			try {
-				// define item data on click listener and convert item data
-				// to on click listener
-				OnClickListener _itemOnClickListener = (OnClickListener) _itemData;
+				// define item data map and convert item data
+				// to map
+				@SuppressWarnings("unchecked")
+				Map<String, Object> _itemMap = (Map<String, Object>) _itemData;
+
+				// set button tag
+				((Button) view).setTag(_itemMap.get(BTN_TAG_KEY));
 
 				// set button on click listener
-				((Button) view).setOnClickListener(_itemOnClickListener);
+				((Button) view).setOnClickListener((OnClickListener) _itemMap
+						.get(BTN_ONCLICKLISTENER_KEY));
 			} catch (Exception e) {
 				e.printStackTrace();
 
-				Log.e(LOG_TAG,
-						"Convert item data to on click listener error, item data = "
-								+ _itemData);
+				Log.e(LOG_TAG, "Convert item data to map error, item data = "
+						+ _itemData);
 			}
 		}
 		// textView
