@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.View;
@@ -135,8 +137,24 @@ public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 
 		@Override
 		public void onClick(View button) {
-			// application exit
-			System.exit(0);
+			// show exit pet chat client alert dialog
+			new AlertDialog.Builder(SettingsTabContentActivity.this)
+					.setTitle(R.string.iPetChat_exitAlertDialog_title)
+					.setMessage(R.string.iPetChat_exitAlertDialog_message)
+					.setPositiveButton(
+							R.string.iPetChat_exitAlertDialog_exitButton_title,
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// exit pet chat project
+									System.exit(0);
+								}
+							})
+					.setNegativeButton(
+							R.string.iPetChat_exitAlertDialog_cancelButton_title,
+							null).show();
 		}
 
 	}

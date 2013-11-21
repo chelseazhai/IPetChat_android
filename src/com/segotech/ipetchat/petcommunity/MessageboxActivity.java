@@ -10,13 +10,17 @@ import org.apache.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,6 +45,9 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 	// messagebox messages info list
 	List<ChatMsgBean> _mMessageboxMsgsList = new ArrayList<ChatMsgBean>();
 
+	// asynchronous http request progress dialog
+	private ProgressDialog _mAsyncHttpReqProgressDialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,7 +66,8 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 				.setOnItemClickListener(new MessageboxMsgsListViewOnItemClickListener());
 
 		// set messagebox messages listView on item long click listener
-		_messageboxMsgsListView.setOnItemLongClickListener(null);
+		_messageboxMsgsListView
+				.setOnItemLongClickListener(new MessageboxMsgsListViewOnItemLongClickListener());
 	}
 
 	@Override
@@ -92,10 +100,18 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 	}
 
 	// process get message box messages exception
-	private void processGetMessageboxMSGException() {
+	private void processException() {
 		// show login failed toast
 		Toast.makeText(MessageboxActivity.this,
 				R.string.toast_request_exception, Toast.LENGTH_LONG).show();
+	}
+
+	// close asynchronous http request process dialog
+	private void closeAsyncHttpReqProgressDialog() {
+		// check and dismiss asynchronous http request process dialog
+		if (null != _mAsyncHttpReqProgressDialog) {
+			_mAsyncHttpReqProgressDialog.dismiss();
+		}
 	}
 
 	// inner class
@@ -214,14 +230,14 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 					Log.e(LOG_TAG,
 							"get message box messages info failed, bg_server return result is unrecognized");
 
-					processGetMessageboxMSGException();
+					processException();
 					break;
 				}
 			} else {
 				Log.e(LOG_TAG,
 						"get message box messages info failed, bg_server return result is null");
 
-				processGetMessageboxMSGException();
+				processException();
 			}
 
 			// set messagebox messages listView adapter
@@ -270,6 +286,148 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 			// go to leave or reply message activity
 			pushActivity(Leave6ReplyMsgActivity.class, _extraData);
 		}
+	}
+
+	// message box messages listView on item long click listener
+	class MessageboxMsgsListViewOnItemLongClickListener implements
+			OnItemLongClickListener {
+
+		@Override
+		public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+				final int arg2, long arg3) {
+			// show delete message alert dialog
+			new AlertDialog.Builder(MessageboxActivity.this)
+					.setTitle(R.string.iPetChat_exitAlertDialog_title)
+					.setMessage("你确定要删除此条留言？")
+					.setPositiveButton(
+							R.string.iPetChat_exitAlertDialog_exitButton_title,
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// show account login process dialog
+									_mAsyncHttpReqProgressDialog = ProgressDialog
+											.show(MessageboxActivity.this,
+													null,
+													getString(R.string.asyncHttpRequest_progressDialog_message),
+													true);
+
+									// delete long press messagebox message
+									// generate delete long press messagebox
+									// message request param
+									Map<String, String> _deleteMessageboxMsgParam = new HashMap<String, String>();
+									_deleteMessageboxMsgParam.put("msgid",
+											_mMessageboxMsgsList.get(arg2)
+													.getId().toString());
+
+									// send get messagebox messages info post
+									// http request
+									HttpUtils
+											.postSignatureRequest(
+													getResources()
+															.getString(
+																	R.string.server_url)
+															+ getResources()
+																	.getString(
+																			R.string.deleteMsg_url),
+													PostRequestFormat.URLENCODED,
+													_deleteMessageboxMsgParam,
+													null,
+													HttpRequestType.ASYNCHRONOUS,
+													new DeleteMessageboxMsgHttpRequestListener(
+															arg2));
+								}
+							})
+					.setNegativeButton(
+							R.string.iPetChat_exitAlertDialog_cancelButton_title,
+							null).show();
+
+			return true;
+		}
+
+	}
+
+	// delete messagebox message http request listener
+	class DeleteMessageboxMsgHttpRequestListener extends OnHttpRequestListener {
+
+		// delete message index
+		private Integer _mDeleteMessageIndex;
+
+		public DeleteMessageboxMsgHttpRequestListener(Integer deleteMessageIndex) {
+			super();
+
+			// save delete photo album index
+			_mDeleteMessageIndex = deleteMessageIndex;
+		}
+
+		@Override
+		public void onFinished(HttpRequest request, HttpResponse response) {
+			// close account login process dialog
+			closeAsyncHttpReqProgressDialog();
+
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
+
+			// get http response entity string json object result
+			String _result = JSONUtils
+					.getStringFromJSONObject(_respJsonData, getResources()
+							.getString(R.string.rbgServer_reqResp_result));
+
+			// check an process result
+			if (null != _result) {
+				switch (Integer.parseInt(_result)) {
+				case 0:
+					Log.d(LOG_TAG,
+							"delete messagebox message failed successful");
+
+					// remove messagebox message
+					_mMessageboxMsgsList.remove(_mDeleteMessageIndex);
+
+					// remove data
+					((MessageboxMessagesAdapter) ((ListView) findViewById(R.id.messagebox_message_listView))
+							.getAdapter()).removeData(_mDeleteMessageIndex);
+					break;
+
+				case 1:
+				case 2:
+				case 3:
+					Log.e(LOG_TAG, "delete messagebox message failed");
+
+					// show get user all pets info failed toast
+					Toast.makeText(MessageboxActivity.this, "删除留言失败",
+							Toast.LENGTH_LONG).show();
+					break;
+
+				default:
+					Log.e(LOG_TAG,
+							"delete messagebox message failed, bg_server return result is unrecognized");
+
+					processException();
+					break;
+				}
+			} else {
+				Log.e(LOG_TAG,
+						"delete messagebox message failed, bg_server return result is null");
+
+				processException();
+			}
+		}
+
+		@Override
+		public void onFailed(HttpRequest request, HttpResponse response) {
+			// close account login process dialog
+			closeAsyncHttpReqProgressDialog();
+
+			Log.e(LOG_TAG,
+					"delete messagebox message failed, send delete messagebox message post request failed");
+
+			// show get user all pets info failed toast
+			Toast.makeText(MessageboxActivity.this,
+					R.string.toast_request_exception, Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 }

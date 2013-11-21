@@ -318,6 +318,12 @@
     <string name="pet_device_bind_setting_nav_title">Bind pet device</string>
     <string name="pet_device_bind_setting_not_implement">pet device bind not implement</string>
 
+    <!-- pet chat exit -->
+    <string name="iPetChat_exitAlertDialog_title">Sego remind</string>
+    <string name="iPetChat_exitAlertDialog_message">Are you sure to exit sego pet application?</string>
+    <string name="iPetChat_exitAlertDialog_exitButton_title">Exit</string>
+    <string name="iPetChat_exitAlertDialog_cancelButton_title">Cancel</string>
+
     <!-- others -->
     <string name="title_activity_account_setting4_switch" translatable="false">AccountSetting4SwitchActivity</string>
 

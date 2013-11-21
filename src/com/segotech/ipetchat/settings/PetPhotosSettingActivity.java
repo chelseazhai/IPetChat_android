@@ -11,7 +11,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -27,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -63,6 +67,9 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 	// pet photo album info list
 	private List<PetPhotoAlbumBean> _mPetPhotoAlbumInfoList;
 
+	// asynchronous http request progress dialog
+	private ProgressDialog _mAsyncHttpReqProgressDialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,7 +103,8 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 				.setOnItemClickListener(new PetPhotoAlbumsListViewOnItemClickListener());
 
 		// set pet photo albums listView on item long click listener
-		_petPhotoAlbumsListView.setOnItemLongClickListener(null);
+		_petPhotoAlbumsListView
+				.setOnItemLongClickListener(new PetPhotoAlbumsListViewOnItemLongClickListener());
 
 		// test by ares， ？？
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -178,11 +186,19 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	// process get pet photo albums exception
-	private void processGetPetPhotoAlbumsException() {
+	// process exception
+	private void processException() {
 		// show login failed toast
 		Toast.makeText(PetPhotosSettingActivity.this,
 				R.string.toast_request_exception, Toast.LENGTH_LONG).show();
+	}
+
+	// close asynchronous http request process dialog
+	private void closeAsyncHttpReqProgressDialog() {
+		// check and dismiss asynchronous http request process dialog
+		if (null != _mAsyncHttpReqProgressDialog) {
+			_mAsyncHttpReqProgressDialog.dismiss();
+		}
 	}
 
 	// inner class
@@ -364,14 +380,14 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 					Log.e(LOG_TAG,
 							"get pet photo album info failed, bg_server return result is unrecognized");
 
-					processGetPetPhotoAlbumsException();
+					processException();
 					break;
 				}
 			} else {
 				Log.e(LOG_TAG,
 						"get pet photo album info failed, bg_server return result is null");
 
-				processGetPetPhotoAlbumsException();
+				processException();
 			}
 
 			// set pet photo albums listView adapter
@@ -437,6 +453,146 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 			// go to leave or reply message activity
 			pushActivity(PetPhotosActivity.class, _extraData);
 		}
+	}
+
+	// pet photo albums listView on item long click listener
+	class PetPhotoAlbumsListViewOnItemLongClickListener implements
+			OnItemLongClickListener {
+
+		@Override
+		public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+				final int arg2, long arg3) {
+			// show delete pet photo album alert dialog
+			new AlertDialog.Builder(PetPhotosSettingActivity.this)
+					.setTitle(R.string.iPetChat_exitAlertDialog_title)
+					.setMessage("你确定要删除此相册？")
+					.setPositiveButton(
+							R.string.iPetChat_exitAlertDialog_exitButton_title,
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// show account login process dialog
+									_mAsyncHttpReqProgressDialog = ProgressDialog
+											.show(PetPhotosSettingActivity.this,
+													null,
+													getString(R.string.asyncHttpRequest_progressDialog_message),
+													true);
+
+									// delete long press pet photo album
+									// generate delete long press pet photo
+									// album request param
+									Map<String, String> _deletePhotoAlbumParam = new HashMap<String, String>();
+									_deletePhotoAlbumParam.put("galleryid",
+											_mPetPhotoAlbumInfoList.get(arg2)
+													.getId().toString());
+
+									// send get messagebox messages info post
+									// http request
+									HttpUtils
+											.postSignatureRequest(
+													getResources()
+															.getString(
+																	R.string.server_url)
+															+ getResources()
+																	.getString(
+																			R.string.deleteAlbum_url),
+													PostRequestFormat.URLENCODED,
+													_deletePhotoAlbumParam,
+													null,
+													HttpRequestType.ASYNCHRONOUS,
+													new DeletePhotoAlbumHttpRequestListener(
+															arg2));
+								}
+							})
+					.setNegativeButton(
+							R.string.iPetChat_exitAlertDialog_cancelButton_title,
+							null).show();
+
+			return true;
+		}
+
+	}
+
+	// delete pet photo album http request listener
+	class DeletePhotoAlbumHttpRequestListener extends OnHttpRequestListener {
+
+		// delete photo album index
+		private Integer _mDeletePhotoAlbumIndex;
+
+		public DeletePhotoAlbumHttpRequestListener(Integer deletePhotoAlbumIndex) {
+			super();
+
+			// save delete photo album index
+			_mDeletePhotoAlbumIndex = deletePhotoAlbumIndex;
+		}
+
+		@Override
+		public void onFinished(HttpRequest request, HttpResponse response) {
+			// close account login process dialog
+			closeAsyncHttpReqProgressDialog();
+
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
+
+			// get http response entity string json object result
+			String _result = JSONUtils
+					.getStringFromJSONObject(_respJsonData, getResources()
+							.getString(R.string.rbgServer_reqResp_result));
+
+			// check an process result
+			if (null != _result) {
+				switch (Integer.parseInt(_result)) {
+				case 0:
+					Log.d(LOG_TAG, "delete pet photo album successful");
+
+					// remove pet photo album
+					_mPetPhotoAlbumInfoList.remove(_mDeletePhotoAlbumIndex);
+
+					// remove data
+					((PetPhotoAlbumsAdapter) ((ListView) findViewById(R.id.pet_photoAlbum_listView))
+							.getAdapter()).removeData(_mDeletePhotoAlbumIndex);
+					break;
+
+				case 1:
+				case 2:
+					Log.e(LOG_TAG, "delete pet photo album failed");
+
+					// show get user all pets info failed toast
+					Toast.makeText(PetPhotosSettingActivity.this, "删除相册失败",
+							Toast.LENGTH_LONG).show();
+					break;
+
+				default:
+					Log.e(LOG_TAG,
+							"delete pet photo album failed, bg_server return result is unrecognized");
+
+					processException();
+					break;
+				}
+			} else {
+				Log.e(LOG_TAG,
+						"delete pet photo album failed, bg_server return result is null");
+
+				processException();
+			}
+		}
+
+		@Override
+		public void onFailed(HttpRequest request, HttpResponse response) {
+			// close account login process dialog
+			closeAsyncHttpReqProgressDialog();
+
+			Log.e(LOG_TAG,
+					"delete pet photo album failed, send delete pet photo album post request failed");
+
+			// show get user all pets info failed toast
+			Toast.makeText(PetPhotosSettingActivity.this,
+					R.string.toast_request_exception, Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 }

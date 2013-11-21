@@ -34,12 +34,14 @@
     <string name="addPet2Blacklist_url" translatable="false">/community/addblacklist</string>
     <string name="leaveMsg_url" translatable="false">/community/leavemsg</string>
     <string name="getLeaveMsgs_url" translatable="false">/community/getleavemsgs</string>
-    <string name="delMsg_url" translatable="false">/community/delmsg</string>
+    <string name="deleteMsg_url" translatable="false">/community/delmsg</string>
     <string name="getLeaveMsg_url" translatable="false">/community/getleavemsgdetail</string>
     <string name="replyMsg_url" translatable="false">/community/replymsg</string>
     <string name="getAlbum_url" translatable="false">/gallery/getgalleries</string>
     <string name="createAlbum_url" translatable="false">/gallery/creategallery</string>
+    <string name="deleteAlbum_url" translatable="false">/gallery/delgallery</string>
     <string name="uploadPhoto_url" translatable="false">/gallery/uploadphoto</string>
+    <string name="deletePhoto_url" translatable="false">/gallery/delphoto</string>
     <string name="getAlbumPhotos_url" translatable="false">/gallery/getgallery</string>
     <string name="setPhotoAlbumCover_url" translatable="false">/gallery/setgalleryinfo</string>
 

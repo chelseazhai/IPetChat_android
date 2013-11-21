@@ -262,4 +262,10 @@
     <string name="pet_device_bind_setting_nav_title">绑定硬件设备</string>
     <string name="pet_device_bind_setting_not_implement">绑定硬件设备暂未实现</string>
 
+    <!-- pet chat exit -->
+    <string name="iPetChat_exitAlertDialog_title">赛果提醒</string>
+    <string name="iPetChat_exitAlertDialog_message">确定要退出赛果宠物应用吗？</string>
+    <string name="iPetChat_exitAlertDialog_exitButton_title">退出</string>
+    <string name="iPetChat_exitAlertDialog_cancelButton_title">取消</string>
+
 </resources>
