@@ -46,6 +46,7 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 	// pet info key
 	public static final String PET_DETAILINFO_PET_KEY = "pet_detailinfo_pet_key";
 	public static final String PET_DETAILINFO_CONCERN_KEY = "pet_detailinfo_concern_key";
+	public static final String PET_PHOTOALBUM_COVERIMGPATHS_KEY = "pet_photoalbum_coverimgpaths_key";
 
 	// more menu ids
 	private static final int ADD2BLACKLIST_MENU = 10;
@@ -56,6 +57,9 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 
 	// pet detail info
 	private PetBean _mPetDetailInfo;
+
+	// pet photo album cover image path array
+	private String[] _mPetPhotoAlbumImgPathArray;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,8 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 			_mPetDetailInfo = (PetBean) _data
 					.getSerializable(PET_DETAILINFO_PET_KEY);
 			_concernPet = _data.getBoolean(PET_DETAILINFO_CONCERN_KEY);
+			_mPetPhotoAlbumImgPathArray = _data
+					.getStringArray(PET_PHOTOALBUM_COVERIMGPATHS_KEY);
 		}
 
 		// define pet breed, age, height, weight, district and place used to go
@@ -190,9 +196,27 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 		_petPhotosTableRow
 				.setOnClickListener(new PetPhotoAlbumTableRowOnClickListener());
 
-		// set pet photos
-		for (int i = 0; i < _petPhotosTableRow.getChildCount(); i++) {
-			// ??
+		// check pet photo album cover image path array
+		if (null != _mPetPhotoAlbumImgPathArray
+				&& _mPetPhotoAlbumImgPathArray.length > 0) {
+			// show pet photos tableRow
+			_petPhotosTableRow.setVisibility(View.VISIBLE);
+
+			// set pet photos
+			for (int i = 0; i < _petPhotosTableRow.getChildCount()
+					&& i < _mPetPhotoAlbumImgPathArray.length; i++) {
+				// get pet photo net load imageView
+				NetLoadImageView _petPhotoNetLoadImageView = (NetLoadImageView) _petPhotosTableRow
+						.getChildAt(i);
+
+				// set its visibility
+				_petPhotoNetLoadImageView.setVisibility(View.VISIBLE);
+
+				// load pet photo album cover
+				_petPhotoNetLoadImageView.loadUrl(getResources().getString(
+						R.string.img_url)
+						+ _mPetPhotoAlbumImgPathArray[i]);
+			}
 		}
 
 		// set leave message button on click listener

@@ -39,6 +39,7 @@ import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.account.pet.PetBean;
 import com.segotech.ipetchat.account.pet.PetSex;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.settings.photo.PetPhotoAlbumBean;
 
 public class MyConcernActivity extends IPetChatNavigationActivity {
 
@@ -371,8 +372,21 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 			if (null != _result) {
 				switch (Integer.parseInt(_result)) {
 				case 0:
-					// define pet info
+					// define pet info and pet photo album cover image path list
 					PetBean _petInfo = new PetBean(_respJsonData);
+					List<String> _photoAlbumCoverPaths = new ArrayList<String>();
+
+					// get pet photo album list and init pet photo album cover
+					// image path array
+					JSONArray _petPhotoAlbumsInfoArray = JSONUtils
+							.getJSONArrayFromJSONObject(_respJsonData,
+									"galleries");
+					for (int i = 0; i < _petPhotoAlbumsInfoArray.length(); i++) {
+						_photoAlbumCoverPaths.add(new PetPhotoAlbumBean(
+								JSONUtils.getJSONObjectFromJSONArray(
+										_petPhotoAlbumsInfoArray, i))
+								.getCoverUrl());
+					}
 
 					// define extra data
 					Map<String, Object> _extraData = new HashMap<String, Object>();
@@ -384,7 +398,11 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 								_petInfo);
 						_extraData
 								.put(PetDetailInfoActivity.PET_DETAILINFO_CONCERN_KEY,
-										true);
+										Boolean.valueOf(true));
+						_extraData
+								.put(PetDetailInfoActivity.PET_PHOTOALBUM_COVERIMGPATHS_KEY,
+										_photoAlbumCoverPaths
+												.toArray(new String[] {}));
 					}
 
 					// go to pet detail info activity

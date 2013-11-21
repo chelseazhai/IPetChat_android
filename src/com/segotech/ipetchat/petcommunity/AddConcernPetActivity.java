@@ -1,6 +1,8 @@
 package com.segotech.ipetchat.petcommunity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpRequest;
@@ -26,6 +28,7 @@ import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.account.pet.PetBean;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.settings.photo.PetPhotoAlbumBean;
 
 public class AddConcernPetActivity extends IPetChatNavigationActivity {
 
@@ -165,9 +168,32 @@ public class AddConcernPetActivity extends IPetChatNavigationActivity {
 										.getJSONObjectFromJSONArray(
 												_searchPetsInfoArray, 0);
 
-								// init pet info
+								// define pet info and pet photo album cover
+								// image path list
 								PetBean _petInfo = new PetBean(
 										_searchPetInfoJSONObject);
+								List<String> _photoAlbumCoverPaths = new ArrayList<String>();
+
+								// get pet photo album list and init pet photo
+								// album cover
+								// image path array
+								JSONArray _petPhotoAlbumsInfoArray = JSONUtils
+										.getJSONArrayFromJSONObject(
+												_searchPetInfoJSONObject,
+												"galleries");
+								// test by ares
+								if (null != _petPhotoAlbumsInfoArray) {
+									for (int j = 0; j < _petPhotoAlbumsInfoArray
+											.length(); j++) {
+										_photoAlbumCoverPaths
+												.add(new PetPhotoAlbumBean(
+														JSONUtils
+																.getJSONObjectFromJSONArray(
+																		_petPhotoAlbumsInfoArray,
+																		j))
+														.getCoverUrl());
+									}
+								}
 
 								// define extra data
 								Map<String, Object> _extraData = new HashMap<String, Object>();
@@ -179,7 +205,13 @@ public class AddConcernPetActivity extends IPetChatNavigationActivity {
 													_petInfo);
 									_extraData
 											.put(PetDetailInfoActivity.PET_DETAILINFO_CONCERN_KEY,
-													false);
+													Boolean.valueOf(false));
+									if (0 == _searchPetsInfoArray.length() - 1) {
+										_extraData
+												.put(PetDetailInfoActivity.PET_PHOTOALBUM_COVERIMGPATHS_KEY,
+														_photoAlbumCoverPaths
+																.toArray(new String[] {}));
+									}
 								}
 
 								// go to pet detail info activity
