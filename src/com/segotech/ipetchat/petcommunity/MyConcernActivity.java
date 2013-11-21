@@ -122,6 +122,7 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 
 			// define my concern pets data list
 			List<Map<String, ?>> _myConcernPetsDataList = new ArrayList<Map<String, ?>>();
+			_mMyConcernPetsIdList = new ArrayList<Long>();
 
 			// check an process result
 			if (null != _result) {
@@ -151,6 +152,14 @@ public class MyConcernActivity extends IPetChatNavigationActivity {
 									BitmapFactory.decodeByteArray(
 											_concernPet.getAvatar(), 0,
 											_concernPet.getAvatar().length));
+						} else {
+							if (null != _concernPet.getAvatarUrl()) {
+								_itemMap.put(
+										MyConcernPetsAdapter.MY_CONCERN_PETS_ITEM_AVATAR,
+										getResources().getString(
+												R.string.img_url)
+												+ _concernPet.getAvatarUrl());
+							}
 						}
 
 						// check nickname

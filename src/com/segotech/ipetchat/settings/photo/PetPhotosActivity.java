@@ -19,17 +19,25 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.richitec.commontoolkit.customcomponent.BarButtonItem.BarButtonItemStyle;
+import com.richitec.commontoolkit.customcomponent.CTMenu;
+import com.richitec.commontoolkit.customcomponent.CTMenu.CTMenuOnItemSelectedListener;
 import com.richitec.commontoolkit.customcomponent.CTPopupWindow;
 import com.richitec.commontoolkit.customcomponent.ImageBarButtonItem;
 import com.richitec.commontoolkit.utils.HttpUtils;
@@ -40,8 +48,7 @@ import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 
-public class PetPhotosActivity extends IPetChatNavigationActivity implements
-		OnGestureListener {
+public class PetPhotosActivity extends IPetChatNavigationActivity {
 
 	private static final String LOG_TAG = PetPhotosActivity.class
 			.getCanonicalName();
@@ -53,6 +60,14 @@ public class PetPhotosActivity extends IPetChatNavigationActivity implements
 	// pet photo upload
 	private static final int CAPTURE_PHOTO = 800;
 	private static final int SELECT_PHOTO = 801;
+	private static final int ADD_NEW_PHOTO = 803;
+
+	// more menu ids
+	private static final int ADD_NEWPHOTO_MENU = 20;
+	private static final int SETASALBUMCOVER_MENU = 21;
+
+	// more popup menu
+	private CTMenu _mMorePopupMenu;
 
 	// pet photo source select popup window
 	private PetPhotoSourceSelectPopupWindow _mPetPhotoSourceSelectPopupWindow = new PetPhotoSourceSelectPopupWindow(
@@ -65,7 +80,13 @@ public class PetPhotosActivity extends IPetChatNavigationActivity implements
 	// pet photo album photos info list
 	private List<PetPhotoBean> _mPetPhotoAlbumPhotosInfoList;
 
-	private GestureDetector detector;
+	private Integer _mSelectedPetPhotoIndex = null;
+
+	// pet photo load webView
+	private WebView _mPetPhotoLoadWebView;
+
+	// gesture detector
+	private GestureDetector _mGestureDetector;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +98,22 @@ public class PetPhotosActivity extends IPetChatNavigationActivity implements
 		// set title
 		setTitle("相册详情");
 
-		// set add pet photo as right bar button item
+		// init more popup menu
+		_mMorePopupMenu = new CTMenu(this);
+
+		// add menu item
+		_mMorePopupMenu.add(ADD_NEWPHOTO_MENU, "添加照片");
+		_mMorePopupMenu.add(SETASALBUMCOVER_MENU, "设为封面");
+
+		// set more menu on item selected listener
+		_mMorePopupMenu
+				.setMenuOnItemSelectedListener(new MoreMenuOnItemSelectedListener());
+
+		// set right image bar button item, more info image bar button item
 		setRightBarButtonItem(new ImageBarButtonItem(this,
-				android.R.drawable.ic_input_add,
-				new AddPetPhotoBarBtnItemOnClickListener()));
+				R.drawable.img_moremenu_barbuttonitem,
+				BarButtonItemStyle.RIGHT_GO,
+				new MoreMenuImageBarButtonItemOnClickListener()));
 
 		// get the intent extra data
 		final Bundle _data = getIntent().getExtras();
@@ -92,8 +125,22 @@ public class PetPhotosActivity extends IPetChatNavigationActivity implements
 			photoAlbumTitle = _data.getString(PHOTOALBUM_TITLE_KEY);
 		}
 
+		// get pet photo load webView
+		_mPetPhotoLoadWebView = (WebView) findViewById(R.id.pet_photo_webView);
+
 		// init gesture detector
-		detector = new GestureDetector(this, this);
+		_mGestureDetector = new GestureDetector(
+				_mPetPhotoLoadWebView.getContext(),
+				new PetPhotoWebViewOnFlingGestureListener());
+
+		// set pet photo load webView on touch listener
+		_mPetPhotoLoadWebView.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				return _mGestureDetector.onTouchEvent(event);
+			}
+		});
 
 		// get pet photo album photos
 		getPetPhotoAlbumPhotos();
@@ -152,7 +199,13 @@ public class PetPhotosActivity extends IPetChatNavigationActivity implements
 						photoAlbumId);
 
 				// go to leave or reply message activity
-				pushActivity(UploadPetPhotoActivity.class, _extraData);
+				pushActivityForResult(UploadPetPhotoActivity.class, _extraData,
+						ADD_NEW_PHOTO);
+				break;
+
+			case ADD_NEW_PHOTO:
+				// get pet photo album photos
+				getPetPhotoAlbumPhotos();
 				break;
 			}
 		}
@@ -180,40 +233,144 @@ public class PetPhotosActivity extends IPetChatNavigationActivity implements
 						new GetPetPhotoAlbumPhotosHttpRequestListener());
 	}
 
-	// process get pet photo album photos exception
-	private void processGetPetPhotoAlbumPhotosException() {
+	// process exception
+	private void processException() {
 		// show login failed toast
 		Toast.makeText(PetPhotosActivity.this,
 				R.string.toast_request_exception, Toast.LENGTH_LONG).show();
 	}
 
 	// show pet photo
-	private void showPetPhoto(String photoPath, String photoDescription) {
-		// load pet photo by webview
-		((WebView) findViewById(R.id.pet_photo_webView)).loadUrl(getResources()
-				.getString(R.string.server_url)
-				+ getResources().getString(R.string.img_url) + photoPath);
-
-		// get photo description textView
-		TextView _photoDescriptionTextView = (TextView) findViewById(R.id.pet_photo_description_textView);
-
-		// check photo description
-		if (null == photoDescription || "".equalsIgnoreCase(photoDescription)) {
-			_photoDescriptionTextView.setVisibility(View.GONE);
-		} else {
-			_photoDescriptionTextView.setText(photoDescription);
+	private void showPetPhoto(String photoPath, final String photoDescription) {
+		final LinearLayout _loadingLinearLayout = (LinearLayout) findViewById(R.id.pet_photo_loading_linearLayout);
+		if (View.VISIBLE != _loadingLinearLayout.getVisibility()) {
+			_loadingLinearLayout.setVisibility(View.VISIBLE);
 		}
+
+		// get webView setting
+		WebSettings _webViewSetting = _mPetPhotoLoadWebView.getSettings();
+
+		// size fit
+		_webViewSetting.setUseWideViewPort(true);
+		_webViewSetting.setLoadWithOverviewMode(true);
+
+		// define pet photo image html
+		StringBuilder data = new StringBuilder("<html><body>");
+		data.append("<img src = \""
+				+ getResources().getString(R.string.img_url) + photoPath
+				+ "\">");
+		data.append("</body></html>");
+
+		// load pet photo image url
+		_mPetPhotoLoadWebView.loadData(data.toString(), "text/html", "UTF-8");
+
+		// add web chrome client for loading progress changed
+		_mPetPhotoLoadWebView.setWebChromeClient(new WebChromeClient() {
+
+			@Override
+			public void onProgressChanged(WebView view, int newProgress) {
+				super.onProgressChanged(view, newProgress);
+
+				// set pet photo loading progressBar progress
+				((ProgressBar) findViewById(R.id.pet_photo_loading_progressBar))
+						.setProgress(newProgress);
+
+				// set pet photo loading textView text
+				((TextView) findViewById(R.id.pet_photo_loading_textView))
+						.setText(getResources().getString(
+								R.string.petPhotoLoading_textView_textHeader)
+								+ newProgress + "%");
+
+				// check pet photo page loading completed
+				if (Integer.parseInt(getResources().getString(
+						R.string.petPhotoLoading_progressBar_max)) == newProgress) {
+					// pet photo loading completed, remove pet photo loading
+					// linearLayout
+					_loadingLinearLayout.setVisibility(View.GONE);
+
+					// get photo description textView
+					TextView _photoDescriptionTextView = (TextView) findViewById(R.id.pet_photo_description_textView);
+
+					// check photo description
+					if (null == photoDescription
+							|| "".equalsIgnoreCase(photoDescription)) {
+						_photoDescriptionTextView.setVisibility(View.GONE);
+					} else {
+						_photoDescriptionTextView.setText(photoDescription);
+						_photoDescriptionTextView.setVisibility(View.VISIBLE);
+					}
+				}
+			}
+
+		});
 	}
 
 	// inner class
-	// add pet photo bar button item on click listener
-	class AddPetPhotoBarBtnItemOnClickListener implements OnClickListener {
+	// more menu image bar button item on click listener
+	class MoreMenuImageBarButtonItemOnClickListener implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			// show pet photo source select popup window with animation
-			_mPetPhotoSourceSelectPopupWindow.showAtLocationWithAnimation(v,
-					Gravity.CENTER, 0, 0);
+			// show more menu
+			_mMorePopupMenu.showAsDropDown(v);
+		}
+
+	}
+
+	// more menu on item selected listener
+	class MoreMenuOnItemSelectedListener implements
+			CTMenuOnItemSelectedListener {
+
+		@Override
+		public boolean onMenuItemSelected(CTMenu menu, int menuItemId) {
+			// check popup menu
+			if (_mMorePopupMenu == menu) {
+				// more menu dismiss
+				menu.dismiss();
+
+				// check more menu item id
+				switch (menuItemId) {
+				case ADD_NEWPHOTO_MENU:
+					// add new pet photo in the photo album
+					// show pet photo source select popup window with animation
+					_mPetPhotoSourceSelectPopupWindow
+							.showAtLocationWithAnimation(_mPetPhotoLoadWebView,
+									Gravity.CENTER, 0, 0);
+					break;
+
+				case SETASALBUMCOVER_MENU:
+					// check
+					if (null != _mPetPhotoAlbumPhotosInfoList
+							&& _mPetPhotoAlbumPhotosInfoList.size() > 0) {
+						// set as photo album cover
+						// generate set as photo album cover post request param
+						Map<String, String> _setAsPhotoAlbumCoverParam = new HashMap<String, String>();
+						_setAsPhotoAlbumCoverParam.put("galleryid",
+								photoAlbumId.toString());
+						_setAsPhotoAlbumCoverParam.put(
+								"coverurl",
+								_mPetPhotoAlbumPhotosInfoList.get(
+										_mSelectedPetPhotoIndex).getPath());
+
+						// send set as photo album cover post http request
+						HttpUtils
+								.postSignatureRequest(
+										getResources().getString(
+												R.string.server_url)
+												+ getResources()
+														.getString(
+																R.string.setPhotoAlbumCover_url),
+										PostRequestFormat.URLENCODED,
+										_setAsPhotoAlbumCoverParam,
+										null,
+										HttpRequestType.ASYNCHRONOUS,
+										new SetPhotoAlbumCoverHttpRequestListener());
+					}
+					break;
+				}
+			}
+
+			return false;
 		}
 
 	}
@@ -312,8 +469,6 @@ public class PetPhotosActivity extends IPetChatNavigationActivity implements
 			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
 					.getHttpResponseEntityString(response));
 
-			Log.d(LOG_TAG, "_respJsonData = " + _respJsonData);
-
 			// get http response entity string json object result
 			String _result = JSONUtils
 					.getStringFromJSONObject(_respJsonData, getResources()
@@ -341,13 +496,24 @@ public class PetPhotosActivity extends IPetChatNavigationActivity implements
 
 					// show pet photo
 					if (0 < _mPetPhotoAlbumPhotosInfoList.size()) {
-						// get the first pet photo of photo album
-						PetPhotoBean _firstPhoto = _mPetPhotoAlbumPhotosInfoList
-								.get(0);
+						// define pet photo info
+						PetPhotoBean _petPhoto;
+
+						// check selected pet photo
+						if (null == _mSelectedPetPhotoIndex) {
+							// get the first pet photo of photo album
+							_petPhoto = _mPetPhotoAlbumPhotosInfoList
+									.get(_mSelectedPetPhotoIndex = 0);
+						} else {
+							// get the last pet photo of photo album
+							_petPhoto = _mPetPhotoAlbumPhotosInfoList
+									.get(_mSelectedPetPhotoIndex = (_mPetPhotoAlbumPhotosInfoList
+											.size() - 1));
+						}
 
 						// show the first photo
-						showPetPhoto(_firstPhoto.getPath(),
-								_firstPhoto.getDescription());
+						showPetPhoto(_petPhoto.getPath(),
+								_petPhoto.getDescription());
 					} else {
 						Log.d(LOG_TAG, "there is no pet photos in the album");
 
@@ -370,14 +536,14 @@ public class PetPhotosActivity extends IPetChatNavigationActivity implements
 					Log.e(LOG_TAG,
 							"get pet photo album photos info failed, bg_server return result is unrecognized");
 
-					processGetPetPhotoAlbumPhotosException();
+					processException();
 					break;
 				}
 			} else {
 				Log.e(LOG_TAG,
 						"get pet photo album photos info failed, bg_server return result is null");
 
-				processGetPetPhotoAlbumPhotosException();
+				processException();
 			}
 		}
 
@@ -393,56 +559,122 @@ public class PetPhotosActivity extends IPetChatNavigationActivity implements
 
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		return detector.onTouchEvent(event);
-	}
+	class PetPhotoWebViewOnFlingGestureListener extends SimpleOnGestureListener {
 
-	@Override
-	public boolean onDown(MotionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+				float velocityY) {
+			// define consumed result
+			boolean _consumed = true;
 
-	@Override
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-			float velocityY) {
-		if (e1.getX() - e2.getX() > 120) {
-			Log.d(LOG_TAG, "next");
+			// define fling minimum distance and velocity
+			final int FLING_MIN_DISTANCE = 50, FLING_MIN_VELOCITY = 100;
 
-			return true;
-		} else if (e1.getX() - e2.getX() < -120) {
-			Log.d(LOG_TAG, "previous");
+			// compare motion event x position
+			if (e1.getX() == e2.getX()) {
+				_consumed = false;
+			} else {
+				// // get display child index
+				// int _displayedChildIndex = _mInstructionViewFlipper
+				// .getDisplayedChild();
 
-			return true;
+				// check fling direction and strength
+				if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
+						&& Math.abs(velocityX) > FLING_MIN_VELOCITY) {
+					// next
+					if (++_mSelectedPetPhotoIndex < _mPetPhotoAlbumPhotosInfoList
+							.size()) {
+						// get pet next photo
+						PetPhotoBean _nextPhoto = _mPetPhotoAlbumPhotosInfoList
+								.get(_mSelectedPetPhotoIndex);
+
+						// show pet next photo
+						showPetPhoto(_nextPhoto.getPath(),
+								_nextPhoto.getDescription());
+					} else {
+						_mSelectedPetPhotoIndex--;
+					}
+				} else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE
+						&& Math.abs(velocityX) > FLING_MIN_VELOCITY) {
+					// previous
+					if (--_mSelectedPetPhotoIndex >= 0) {
+						// get pet previous photo
+						PetPhotoBean _nextPhoto = _mPetPhotoAlbumPhotosInfoList
+								.get(_mSelectedPetPhotoIndex);
+
+						// show pet previous photo
+						showPetPhoto(_nextPhoto.getPath(),
+								_nextPhoto.getDescription());
+					} else {
+						_mSelectedPetPhotoIndex++;
+					}
+				}
+			}
+
+			return _consumed;
 		}
 
-		return false;
 	}
 
-	@Override
-	public void onLongPress(MotionEvent e) {
-		// TODO Auto-generated method stub
+	// set pet photo album cover http request listener
+	class SetPhotoAlbumCoverHttpRequestListener extends OnHttpRequestListener {
 
-	}
+		@Override
+		public void onFinished(HttpRequest request, HttpResponse response) {
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
 
-	@Override
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-			float distanceY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+			// get http response entity string json object result
+			String _result = JSONUtils
+					.getStringFromJSONObject(_respJsonData, getResources()
+							.getString(R.string.rbgServer_reqResp_result));
 
-	@Override
-	public void onShowPress(MotionEvent e) {
-		// TODO Auto-generated method stub
+			// check an process result
+			if (null != _result) {
+				switch (Integer.parseInt(_result)) {
+				case 0:
+					Log.d(LOG_TAG, "set pet photo album cover successful");
 
-	}
+					// show get user all pets info failed toast
+					Toast.makeText(PetPhotosActivity.this, "成功将此相片设为相册的封面",
+							Toast.LENGTH_LONG).show();
+					break;
 
-	@Override
-	public boolean onSingleTapUp(MotionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
+				case 1:
+				case 2:
+					Log.e(LOG_TAG, "set pet photo album cover failed");
+
+					// show get user all pets info failed toast
+					Toast.makeText(PetPhotosActivity.this, "设置相册封面失败",
+							Toast.LENGTH_LONG).show();
+					break;
+
+				default:
+					Log.e(LOG_TAG,
+							"set pet photo album cover failed, bg_server return result is unrecognized");
+
+					processException();
+					break;
+				}
+			} else {
+				Log.e(LOG_TAG,
+						"set pet photo album cover failed, bg_server return result is null");
+
+				processException();
+			}
+		}
+
+		@Override
+		public void onFailed(HttpRequest request, HttpResponse response) {
+			Log.e(LOG_TAG,
+					"set pet photo album cover failed, send set pet photo album cover post request failed");
+
+			// show get user all pets info failed toast
+			Toast.makeText(PetPhotosActivity.this,
+					R.string.toast_request_exception, Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 }

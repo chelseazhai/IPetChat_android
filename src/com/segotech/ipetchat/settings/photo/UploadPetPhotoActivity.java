@@ -1,6 +1,8 @@
 package com.segotech.ipetchat.settings.photo;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,6 +30,7 @@ import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
 import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
+import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 
 public class UploadPetPhotoActivity extends IPetChatNavigationActivity {
@@ -144,8 +148,16 @@ public class UploadPetPhotoActivity extends IPetChatNavigationActivity {
 	// upload pet photo bar button item on click listener
 	class UploadPetPhotoBarBtnItemOnClickListener implements OnClickListener {
 
+		@SuppressLint("SimpleDateFormat")
 		@Override
 		public void onClick(View v) {
+			// show upload pet photoprocess dialog
+			_mAsyncHttpReqProgressDialog = ProgressDialog
+					.show(UploadPetPhotoActivity.this,
+							null,
+							getString(R.string.asyncHttpRequest_progressDialog_message),
+							true);
+
 			// check pet photo album title
 			if (null == photoAlbumTitle) {
 				// get photo album description
@@ -155,18 +167,12 @@ public class UploadPetPhotoActivity extends IPetChatNavigationActivity {
 				// check photo album description
 				if (null == _photoAlbumDescription
 						|| "".equalsIgnoreCase(_photoAlbumDescription)) {
-					Toast.makeText(UploadPetPhotoActivity.this, "为您的相册添加点描述吧",
-							Toast.LENGTH_SHORT).show();
-
-					return;
+					_photoAlbumDescription = IPCUserExtension.getUserPetInfo(
+							UserManager.getInstance().getUser()).getNickname()
+							+ "的相册创建于"
+							+ new SimpleDateFormat("MM-dd HH:mm")
+									.format(new Date());
 				}
-
-				// show upload pet photoprocess dialog
-				_mAsyncHttpReqProgressDialog = ProgressDialog
-						.show(UploadPetPhotoActivity.this,
-								null,
-								getString(R.string.asyncHttpRequest_progressDialog_message),
-								true);
 
 				// create new photo album
 				// generate create new photo album
@@ -188,7 +194,6 @@ public class UploadPetPhotoActivity extends IPetChatNavigationActivity {
 				uploadPetPhoto2Album();
 			}
 		}
-
 	}
 
 	// create new photo album http request listener
@@ -285,8 +290,12 @@ public class UploadPetPhotoActivity extends IPetChatNavigationActivity {
 			if (null != _result) {
 				switch (Integer.parseInt(_result)) {
 				case 0:
-					// pop upload pet photo activity
-					popActivity();
+					// check photo album title and pop upload pet photo activity
+					if (null == photoAlbumTitle) {
+						popActivity();
+					} else {
+						popActivityWithResult(RESULT_OK, null);
+					}
 					break;
 
 				case 1:

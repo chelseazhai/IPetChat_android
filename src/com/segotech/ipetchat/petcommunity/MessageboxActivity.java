@@ -165,6 +165,14 @@ public class MessageboxActivity extends IPetChatNavigationActivity {
 									BitmapFactory.decodeByteArray(
 											_msgInfo.getAvatar(), 0,
 											_msgInfo.getAvatar().length));
+						} else {
+							if (null != _msgInfo.getAvatarUrl()) {
+								_itemMap.put(
+										MessageboxMessagesAdapter.MESSAGEBOX_MESSAGES_ITEM_LEAVER_AVATAR,
+										getResources().getString(
+												R.string.img_url)
+												+ _msgInfo.getAvatarUrl());
+							}
 						}
 
 						// check leaver nickname

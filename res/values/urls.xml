@@ -5,7 +5,7 @@
     <string name="server_url" translatable="false">http://www.segopet.com/segopet</string>
 
     <!-- pet image resource url -->
-    <string name="img_url" translatable="false">/segoimg/</string>
+    <string name="img_url" translatable="false">http://www.segopet.com/segoimg/</string>
 
     <!-- get phone verification code and verify -->
     <string name="get_phoneVerificationCode_url" translatable="false">/user/getPhoneCode</string>
@@ -41,6 +41,7 @@
     <string name="createAlbum_url" translatable="false">/gallery/creategallery</string>
     <string name="uploadPhoto_url" translatable="false">/gallery/uploadphoto</string>
     <string name="getAlbumPhotos_url" translatable="false">/gallery/getgallery</string>
+    <string name="setPhotoAlbumCover_url" translatable="false">/gallery/setgalleryinfo</string>
 
     <!-- account modify password -->
     <string name="account_modifyPwd_url" translatable="false">/profile/changePwd</string>

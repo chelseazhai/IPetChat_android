@@ -20,6 +20,7 @@ import com.segotech.ipetchat.account.pet.PetBean;
 import com.segotech.ipetchat.account.pet.PetSex;
 import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
+import com.segotech.ipetchat.customwidget.NetLoadImageView;
 
 public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 
@@ -109,6 +110,12 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 						.setImageBitmap(BitmapFactory.decodeByteArray(
 								_petInfo.getAvatar(), 0,
 								_petInfo.getAvatar().length));
+			} else {
+				if (null != _petInfo.getAvatarUrl()) {
+					((NetLoadImageView) findViewById(R.id.pet_avatar_imageView))
+							.loadUrl(getResources().getString(R.string.img_url)
+									+ _petInfo.getAvatarUrl());
+				}
 			}
 
 			// check and set pet nickname

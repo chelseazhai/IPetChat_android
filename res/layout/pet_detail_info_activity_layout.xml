@@ -24,7 +24,7 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/avatar_container_bg" >
 
-                <ImageView
+                <com.segotech.ipetchat.customwidget.NetLoadImageView
                     android:id="@+id/pet_avatar_imageView"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"

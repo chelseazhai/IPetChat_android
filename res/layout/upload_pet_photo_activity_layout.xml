@@ -12,6 +12,7 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/common_edittext_bg"
         android:enabled="false"
+        android:hint="为您的相册添加点描述吧"
         android:inputType="text" />
 
     <LinearLayout

@@ -286,6 +286,8 @@
 
     <!-- pet photos -->
     <string name="title_activity_pet_photos" translatable="false">PetPhotosActivity</string>
+    <string name="petPhotoLoading_progressBar_max" translatable="false">100</string>
+    <string name="petPhotoLoading_textView_textHeader">Loading&#8230;，</string>
 
     <!-- account info -->
     <string name="title_activity_account_info_setting" translatable="false">AccountInfoSettingActivity</string>

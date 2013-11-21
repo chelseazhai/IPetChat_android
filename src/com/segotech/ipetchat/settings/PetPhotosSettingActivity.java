@@ -18,6 +18,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
@@ -28,6 +29,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -76,6 +78,8 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 				R.id.add_new_photoAlbum_layout).findViewById(
 				R.id.pet_photoAlbum_coverPhoto_imageView);
 
+		_addNewPhotoAlbumImageView.setScaleType(ScaleType.CENTER_INSIDE);
+
 		// set add new photo album imageView image resource
 		_addNewPhotoAlbumImageView
 				.setImageResource(R.drawable.img_new_petalbum_cover);
@@ -93,6 +97,14 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 
 		// set pet photo albums listView on item long click listener
 		_petPhotoAlbumsListView.setOnItemLongClickListener(null);
+
+		// test by ares， ？？
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+				.detectDiskReads().detectDiskWrites().detectNetwork()
+				.penaltyLog().build());
+		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+				.detectLeakedSqlLiteObjects().penaltyLog().penaltyDeath()
+				.build());
 	}
 
 	@Override
@@ -326,6 +338,14 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 											_photoAlbumInfo.getCoverImg(),
 											0,
 											_photoAlbumInfo.getCoverImg().length));
+						} else {
+							if (null != _photoAlbumInfo.getCoverUrl()) {
+								_itemMap.put(
+										PetPhotoAlbumsAdapter.PETPHOTO_ALBUMS_ITEM_COVERIMG,
+										getResources().getString(
+												R.string.img_url)
+												+ _photoAlbumInfo.getCoverUrl());
+							}
 						}
 
 						// check description

@@ -23,11 +23,11 @@
         android:layout_toRightOf="@+id/pet_photoAlbum_date_textView"
         android:background="@color/light_middle_gray" >
 
-        <ImageView
+        <com.segotech.ipetchat.customwidget.NetLoadImageView
             android:id="@+id/pet_photoAlbum_coverPhoto_imageView"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:scaleType="centerInside" />
+            android:scaleType="centerCrop" />
     </FrameLayout>
 
     <TextView

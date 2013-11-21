@@ -38,6 +38,7 @@ import com.segotech.ipetchat.account.pet.PetBreed;
 import com.segotech.ipetchat.account.pet.PetSex;
 import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.customwidget.NetLoadImageView;
 import com.segotech.ipetchat.customwidget.PetProfileSettingItem;
 import com.segotech.ipetchat.settings.profile.PetProfileCheckedSettingActivity;
 import com.segotech.ipetchat.settings.profile.PetProfileEditTextSettingActivity;
@@ -161,6 +162,12 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 			if (null != _avatarData) {
 				_mPetProfileAvatarImageView.setImageBitmap(BitmapFactory
 						.decodeByteArray(_avatarData, 0, _avatarData.length));
+			} else {
+				if (null != _mPetInfo.getAvatarUrl()) {
+					((NetLoadImageView) findViewById(R.id.pp_avatar_imageView))
+							.loadUrl(getResources().getString(R.string.img_url)
+									+ _mPetInfo.getAvatarUrl());
+				}
 			}
 
 			// get pet nickname and check

@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Log;
@@ -42,6 +43,7 @@ import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.customwidget.NetLoadImageView;
 import com.segotech.ipetchat.petcommunity.petchat.ChatMsgBean.ChatMsgType;
 
 public class Leave6ReplyMsgActivity extends IPetChatNavigationActivity {
@@ -92,8 +94,7 @@ public class Leave6ReplyMsgActivity extends IPetChatNavigationActivity {
 
 		// set message adapter
 		_mMsgListView.setAdapter(new MessageAdapter(this,
-				new ArrayList<Map<String, ?>>(),
-				R.layout.messages_listview_item_layout, new String[] {
+				new ArrayList<Map<String, ?>>(), new String[] {
 						MessageAdapter.MESSAGE_ITEM_SENDTIME,
 						MessageAdapter.MESSAGE_ITEM_LEAVER_AVATAR,
 						MessageAdapter.MESSAGE_ITEM_LEAVER_NICKNAME,
@@ -141,6 +142,18 @@ public class Leave6ReplyMsgActivity extends IPetChatNavigationActivity {
 						IPCUserExtension.getUserPetInfo(
 								UserManager.getInstance().getUser())
 								.getNickname()) ? "我" : message.getName());
+		if (null != message.getAvatar()) {
+			_ret.put(MessageAdapter.MESSAGE_ITEM_LEAVER_AVATAR, BitmapFactory
+					.decodeByteArray(message.getAvatar(), 0,
+							message.getAvatar().length));
+		} else {
+			if (null != message.getAvatarUrl()) {
+				_ret.put(
+						MessageAdapter.MESSAGE_ITEM_LEAVER_AVATAR,
+						getResources().getString(R.string.img_url)
+								+ message.getAvatarUrl());
+			}
+		}
 		_ret.put(MessageAdapter.MESSAGE_ITEM_SENDTIME, new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss").format(new Date(
 				message.getTimestamp() * 1000)));
@@ -169,10 +182,8 @@ public class Leave6ReplyMsgActivity extends IPetChatNavigationActivity {
 		public static final String MESSAGE_ITEM_TYPE = "message_type";
 
 		public MessageAdapter(Context context, List<Map<String, ?>> data,
-				int itemsLayoutResId, String[] dataKeys,
-				int[] itemsComponentResIds) {
-			super(context, data, itemsLayoutResId, dataKeys,
-					itemsComponentResIds);
+				String[] dataKeys, int[] itemsComponentResIds) {
+			super(context, data, -1, dataKeys, itemsComponentResIds);
 		}
 
 		@Override
@@ -181,46 +192,37 @@ public class Leave6ReplyMsgActivity extends IPetChatNavigationActivity {
 			ViewHolder _viewHolder;
 
 			// check convert view
-			if (null == convertView) {
-				convertView = _mLayoutInflater
-						.inflate(_mItemsLayoutResId, null);
-
-				// define convent view present viewGroup
-				ViewGroup _presentViewGroup = null;
-
+//			if (null == convertView) {
 				// check message type and init convent view present viewGroup
 				switch ((ChatMsgType) _mData.get(position).get(
 						_mDataKeys[_mItemsComponentResIds.length])) {
 				case INCOMING_MSG:
-					_presentViewGroup = (ViewGroup) convertView
-							.findViewById(R.id.incoming_message);
+					convertView = _mLayoutInflater.inflate(
+							R.layout.incoming_msg_layout, null);
 					break;
 
 				case TO_MSG:
 				default:
-					_presentViewGroup = (ViewGroup) convertView
-							.findViewById(R.id.self_message);
+					convertView = _mLayoutInflater.inflate(
+							R.layout.self_msg_layout, null);
 					break;
 				}
-
-				// show the present viewGroup
-				_presentViewGroup.setVisibility(View.VISIBLE);
 
 				// init view holder and set its views for holding
 				_viewHolder = new ViewHolder();
 				// set item component view subViews
 				for (int i = 0; i < _mItemsComponentResIds.length; i++) {
-					_viewHolder.views4Holding.append(_mItemsComponentResIds[i],
-							_presentViewGroup
+					_viewHolder.views4Holding
+							.append(_mItemsComponentResIds[i], convertView
 									.findViewById(_mItemsComponentResIds[i]));
 				}
 
 				// set tag
 				convertView.setTag(_viewHolder);
-			} else {
-				// get view holder
-				_viewHolder = (ViewHolder) convertView.getTag();
-			}
+//			} else {
+//				// get view holder
+//				_viewHolder = (ViewHolder) convertView.getTag();
+//			}
 
 			// set item component view subViews
 			for (int i = 0; i < _mItemsComponentResIds.length; i++) {
@@ -249,6 +251,22 @@ public class Leave6ReplyMsgActivity extends IPetChatNavigationActivity {
 						.setText(null == _itemData ? ""
 								: _itemData instanceof SpannableString ? (SpannableString) _itemData
 										: _itemData.toString());
+			}
+			// net load imageView
+			else if (view instanceof NetLoadImageView) {
+				try {
+					// define item data bitmap and convert item data to bitmap
+					String _itemDataString = (String) _itemData;
+
+					// set net load imageView image url
+					((NetLoadImageView) view).loadUrl(_itemDataString);
+				} catch (Exception e) {
+					e.printStackTrace();
+
+					Log.e(LOG_TAG,
+							"Convert item data to string error, item data = "
+									+ _itemData);
+				}
 			}
 			// imageView
 			else if (view instanceof ImageView) {
@@ -329,6 +347,11 @@ public class Leave6ReplyMsgActivity extends IPetChatNavigationActivity {
 
 			// set its attributes
 			_leaveMsg.setName("我");
+			String _myPetAvatarUrl = IPCUserExtension.getUserPetInfo(
+					UserManager.getInstance().getUser()).getAvatarUrl();
+			if (null != _myPetAvatarUrl) {
+				_leaveMsg.setAvatarUrl(_myPetAvatarUrl);
+			}
 			_leaveMsg.setContent(_content);
 			_leaveMsg.setTimestamp(System.currentTimeMillis() / 1000);
 			_leaveMsg.setType(ChatMsgType.TO_MSG);

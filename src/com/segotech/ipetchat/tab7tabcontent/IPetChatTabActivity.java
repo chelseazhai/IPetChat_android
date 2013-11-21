@@ -7,9 +7,8 @@ import org.json.JSONObject;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.content.res.Resources.NotFoundException;
-import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
@@ -26,7 +25,6 @@ import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.account.pet.PetBean;
 import com.segotech.ipetchat.account.user.IPCUserExtension;
-import com.segotech.ipetchat.utils.IPetChatUtils;
 
 @SuppressWarnings("deprecation")
 public class IPetChatTabActivity extends TabActivity {
@@ -111,6 +109,14 @@ public class IPetChatTabActivity extends TabActivity {
 				PostRequestFormat.URLENCODED, null, null,
 				HttpRequestType.ASYNCHRONOUS,
 				new GetAllPetsInfoHttpRequestListener());
+
+		// test by ares， ？？
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+				.detectDiskReads().detectDiskWrites().detectNetwork()
+				.penaltyLog().build());
+		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+				.detectLeakedSqlLiteObjects().penaltyLog().penaltyDeath()
+				.build());
 	}
 
 	// process get user all pets info exception
@@ -178,56 +184,6 @@ public class IPetChatTabActivity extends TabActivity {
 								} else {
 									// update my pet info
 									_petInfo.updatePetInfo(_petInfoJSONObject);
-								}
-
-								// check pet avatar
-								if (null != _petInfo.getAvatarUrl()) {
-									// get pet avater bitmap
-									Bitmap _petAvatarBitmap = IPetChatUtils
-											.getHttpBitmap(getResources()
-													.getString(
-															R.string.server_url)
-													+ getResources().getString(
-															R.string.img_url)
-													+ _petInfo.getAvatarUrl());
-
-									Log.d(LOG_TAG,
-											"pet avatar url = "
-													+ getResources()
-															.getString(
-																	R.string.server_url)
-													+ getResources().getString(
-															R.string.img_url)
-													+ _petInfo.getAvatarUrl()
-													+ " and _petAvatarBitmap = "
-													+ _petAvatarBitmap);
-
-									try {
-										_petInfo.setAvatar(IPetChatUtils
-												.getImage(getResources()
-														.getString(
-																R.string.server_url)
-														+ getResources()
-																.getString(
-																		R.string.img_url)
-														+ _petInfo
-																.getAvatarUrl()));
-									} catch (NotFoundException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-
-									// ByteArrayOutputStream baos = new
-									// ByteArrayOutputStream();
-									// _petAvatarBitmap.compress(
-									// Bitmap.CompressFormat.PNG, 100,
-									// baos);
-									//
-									// // set pet avatar
-									// _petInfo.setAvatar(baos.toByteArray());
 								}
 
 								Log.d(LOG_TAG, "Got my pet info = " + _petInfo);

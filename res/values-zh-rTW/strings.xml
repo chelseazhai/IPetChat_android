@@ -237,6 +237,9 @@
     <!-- upload pet photo -->
     <string name="upload_pet_photo_nav_title">上传照片</string>
 
+    <!-- pet photos -->
+    <string name="petPhotoLoading_textView_textHeader">正在加载&#8230;，</string>
+
     <!-- account info -->
     <string name="account_info_setting_nav_title">账号</string>
     <string name="account_info_username_item_label">赛果号</string>

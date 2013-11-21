@@ -4,21 +4,49 @@
     android:layout_height="match_parent"
     tools:context=".settings.photo.PetPhotosActivity" >
 
-    <WebView
-        android:id="@+id/pet_photo_webView"
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent" >
+
+        <WebView
+            android:id="@+id/pet_photo_webView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <LinearLayout
+            android:id="@+id/pet_photo_loading_linearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/pet_photo_loading_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ProgressBar
+                android:id="@+id/pet_photo_loading_progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:max="@string/petPhotoLoading_progressBar_max"
+                android:progress="0" />
+        </LinearLayout>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/pet_photo_description_textView"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/popupwindow_mask_transparent"
         android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:singleLine="true"
+        android:gravity="center"
+        android:maxLines="2"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
 </RelativeLayout>

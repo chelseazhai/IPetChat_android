@@ -33,6 +33,7 @@ import com.segotech.ipetchat.account.pet.PetBean;
 import com.segotech.ipetchat.account.pet.PetSex;
 import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
+import com.segotech.ipetchat.customwidget.NetLoadImageView;
 import com.segotech.ipetchat.petcommunity.petchat.Leave6ReplyMsgActivity;
 
 public class PetDetailInfoActivity extends IPetChatNavigationActivity {
@@ -101,6 +102,12 @@ public class PetDetailInfoActivity extends IPetChatNavigationActivity {
 						.setImageBitmap(BitmapFactory.decodeByteArray(
 								_mPetDetailInfo.getAvatar(), 0,
 								_mPetDetailInfo.getAvatar().length));
+			} else {
+				if (null != _mPetDetailInfo.getAvatarUrl()) {
+					((NetLoadImageView) findViewById(R.id.pet_avatar_imageView))
+							.loadUrl(getResources().getString(R.string.img_url)
+									+ _mPetDetailInfo.getAvatarUrl());
+				}
 			}
 
 			// check and set pet nickname

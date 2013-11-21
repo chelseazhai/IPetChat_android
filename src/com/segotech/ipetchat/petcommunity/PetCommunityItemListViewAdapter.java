@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
 import com.segotech.ipetchat.R;
+import com.segotech.ipetchat.customwidget.NetLoadImageView;
 
 public class PetCommunityItemListViewAdapter extends CTListAdapter {
 
@@ -64,6 +65,22 @@ public class PetCommunityItemListViewAdapter extends CTListAdapter {
 					.equalsIgnoreCase(view.getTag().toString()))
 					&& "".equalsIgnoreCase((String) ((TextView) view).getText()) ? View.GONE
 					: View.VISIBLE);
+		}
+		// net load imageView
+		else if (view instanceof NetLoadImageView) {
+			try {
+				// define item data bitmap and convert item data to bitmap
+				String _itemDataString = (String) _itemData;
+
+				// set net load imageView image url
+				((NetLoadImageView) view).loadUrl(_itemDataString);
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				Log.e(LOG_TAG,
+						"Convert item data to string error, item data = "
+								+ _itemData);
+			}
 		}
 		// imageView
 		else if (view instanceof ImageView) {
