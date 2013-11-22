@@ -204,17 +204,26 @@ public class AccountLoginActivity extends IPetChatNavigationActivity {
 					popActivityWithResult(RESULT_OK, null);
 					break;
 
+				// case 1:
+				// Log.d(LOG_TAG, "account login failed, user not existed");
+				//
+				// Toast.makeText(AccountLoginActivity.this,
+				// R.string.toast_al_user_notExisted,
+				// Toast.LENGTH_SHORT).show();
+				// break;
+				//
+				// case 2:
+				// Log.d(LOG_TAG,
+				// "account login failed, user login password is wrong");
+				//
+				// Toast.makeText(AccountLoginActivity.this,
+				// R.string.toast_al_loginPwd_wrong,
+				// Toast.LENGTH_SHORT).show();
+				// break;
+
 				case 1:
-					Log.d(LOG_TAG, "account login failed, user not existed");
-
-					Toast.makeText(AccountLoginActivity.this,
-							R.string.toast_al_user_notExisted,
-							Toast.LENGTH_SHORT).show();
-					break;
-
-				case 2:
 					Log.d(LOG_TAG,
-							"account login failed, user login password is wrong");
+							"account login failed, user login name or password is wrong");
 
 					Toast.makeText(AccountLoginActivity.this,
 							R.string.toast_al_loginPwd_wrong,

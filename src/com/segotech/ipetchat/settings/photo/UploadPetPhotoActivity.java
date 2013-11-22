@@ -70,8 +70,33 @@ public class UploadPetPhotoActivity extends IPetChatNavigationActivity {
 		// check the data bundle
 		if (null != _data) {
 			// get id of pet left msg for
-			selectedPhotoBitmap = BitmapFactory.decodeFile(_data
-					.getString(SELECT_PHOTOPATH_KEY));
+			// selectedPhotoBitmap = BitmapFactory.decodeFile(_data
+			// .getString(SELECT_PHOTOPATH_KEY));
+
+			// test by ares
+			try {
+				selectedPhotoBitmap = BitmapFactory.decodeFile(_data
+						.getString(SELECT_PHOTOPATH_KEY));
+			} catch (OutOfMemoryError e) {
+				e.printStackTrace();
+
+				System.gc();
+
+				BitmapFactory.Options options = new BitmapFactory.Options();
+				options.inSampleSize = 2;
+				try {
+					selectedPhotoBitmap = BitmapFactory.decodeFile(
+							_data.getString(SELECT_PHOTOPATH_KEY), options);
+				} catch (OutOfMemoryError e2) {
+					e2.printStackTrace();
+
+					System.gc();
+
+					options.inSampleSize = 4;
+					selectedPhotoBitmap = BitmapFactory.decodeFile(
+							_data.getString(SELECT_PHOTOPATH_KEY), options);
+				}
+			}
 
 			photoAlbumTitle = _data.getString(PHOTOALBUM_TITLE_KEY);
 			photoAlbumId = _data.getLong(PHOTOALBUM_ID_KEY);

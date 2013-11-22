@@ -34,7 +34,9 @@ public class IPetChatUtils {
 			conn.setDoInput(true);
 			conn.connect();
 			InputStream is = conn.getInputStream();
-			bitmap = BitmapFactory.decodeStream(is);
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inPreferredConfig = Config.RGB_565;
+			bitmap = BitmapFactory.decodeStream(is, null, options);
 			is.close();
 
 			Log.i(LOG_TAG, "image download finished." + imageUri);
