@@ -20,7 +20,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
+import com.richitec.commontoolkit.utils.DataStorageUtils;
 import com.segotech.ipetchat.R;
+import com.segotech.ipetchat.account.user.IPCUserExtension.ComUserLocalStorageAttributes;
 import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
 import com.segotech.ipetchat.petcommunity.BlackListActivity;
 import com.segotech.ipetchat.settings.AccountInfoSettingActivity;
@@ -148,6 +150,11 @@ public class SettingsTabContentActivity extends IPetChatRootNavigationActivity {
 								@Override
 								public void onClick(DialogInterface dialog,
 										int which) {
+									DataStorageUtils
+											.putObject(
+													ComUserLocalStorageAttributes.LOGIN_USERKEY
+															.name(), "");
+
 									// exit pet chat project
 									System.exit(0);
 								}
