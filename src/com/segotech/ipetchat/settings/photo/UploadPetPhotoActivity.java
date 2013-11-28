@@ -317,7 +317,28 @@ public class UploadPetPhotoActivity extends IPetChatNavigationActivity {
 				case 0:
 					// check photo album title and pop upload pet photo activity
 					if (null == photoAlbumTitle) {
-						popActivity();
+						// set the photo as photo album cover
+						// generate set the photo as photo album cover post
+						// request param
+						Map<String, String> _setAsPhotoAlbumCoverParam = new HashMap<String, String>();
+						_setAsPhotoAlbumCoverParam.put("galleryid",
+								photoAlbumId.toString());
+						_setAsPhotoAlbumCoverParam.put("coverurl",
+								new PetPhotoBean(_respJsonData).getPath());
+
+						// send set as photo album cover post http request
+						HttpUtils
+								.postSignatureRequest(
+										getResources().getString(
+												R.string.server_url)
+												+ getResources()
+														.getString(
+																R.string.setPhotoAlbumCover_url),
+										PostRequestFormat.URLENCODED,
+										_setAsPhotoAlbumCoverParam,
+										null,
+										HttpRequestType.ASYNCHRONOUS,
+										new SetPhotoAlbumCoverHttpRequestListener());
 					} else {
 						popActivityWithResult(RESULT_OK, null);
 					}
@@ -356,6 +377,66 @@ public class UploadPetPhotoActivity extends IPetChatNavigationActivity {
 
 			Log.e(LOG_TAG,
 					"upload new photo failed, send upload new photo post request failed");
+
+			// show get user all pets info failed toast
+			Toast.makeText(UploadPetPhotoActivity.this,
+					R.string.toast_request_exception, Toast.LENGTH_LONG).show();
+		}
+
+	}
+
+	// set pet photo album cover http request listener
+	class SetPhotoAlbumCoverHttpRequestListener extends OnHttpRequestListener {
+
+		@Override
+		public void onFinished(HttpRequest request, HttpResponse response) {
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
+
+			// get http response entity string json object result
+			String _result = JSONUtils
+					.getStringFromJSONObject(_respJsonData, getResources()
+							.getString(R.string.rbgServer_reqResp_result));
+
+			// check an process result
+			if (null != _result) {
+				switch (Integer.parseInt(_result)) {
+				case 0:
+					Log.d(LOG_TAG,
+							"set the upload photo as pet photo album cover successful");
+
+					popActivity();
+					break;
+
+				case 1:
+				case 2:
+					Log.e(LOG_TAG, "set pet photo album cover failed");
+
+					// show get user all pets info failed toast
+					Toast.makeText(UploadPetPhotoActivity.this, "设置相册封面失败",
+							Toast.LENGTH_LONG).show();
+					break;
+
+				default:
+					Log.e(LOG_TAG,
+							"set pet photo album cover failed, bg_server return result is unrecognized");
+
+					processException();
+					break;
+				}
+			} else {
+				Log.e(LOG_TAG,
+						"set pet photo album cover failed, bg_server return result is null");
+
+				processException();
+			}
+		}
+
+		@Override
+		public void onFailed(HttpRequest request, HttpResponse response) {
+			Log.e(LOG_TAG,
+					"set pet photo album cover failed, send set pet photo album cover post request failed");
 
 			// show get user all pets info failed toast
 			Toast.makeText(UploadPetPhotoActivity.this,

@@ -66,6 +66,7 @@ public class PetPhotosActivity extends IPetChatNavigationActivity {
 	// more menu ids
 	private static final int ADD_NEWPHOTO_MENU = 20;
 	private static final int SETASALBUMCOVER_MENU = 21;
+	private static final int DELETEPHOTO_MENU = 22;
 
 	// more popup menu
 	private CTMenu _mMorePopupMenu;
@@ -105,8 +106,9 @@ public class PetPhotosActivity extends IPetChatNavigationActivity {
 		_mMorePopupMenu = new CTMenu(this);
 
 		// add menu item
-		_mMorePopupMenu.add(ADD_NEWPHOTO_MENU, "添加照片");
 		_mMorePopupMenu.add(SETASALBUMCOVER_MENU, "设为封面");
+		_mMorePopupMenu.add(ADD_NEWPHOTO_MENU, "添加照片");
+		_mMorePopupMenu.add(DELETEPHOTO_MENU, "删除照片");
 
 		// set more menu on item selected listener
 		_mMorePopupMenu
@@ -371,6 +373,31 @@ public class PetPhotosActivity extends IPetChatNavigationActivity {
 										null,
 										HttpRequestType.ASYNCHRONOUS,
 										new SetPhotoAlbumCoverHttpRequestListener());
+					}
+					break;
+
+				case DELETEPHOTO_MENU:
+					// check
+					if (null != _mPetPhotoAlbumPhotosInfoList
+							&& _mPetPhotoAlbumPhotosInfoList.size() > 0) {
+						// delete the photo
+						// generate delete the photo post request param
+						Map<String, String> _deletePhotoParam = new HashMap<String, String>();
+						_deletePhotoParam.put(
+								"photoid",
+								_mPetPhotoAlbumPhotosInfoList
+										.get(_mSelectedPetPhotoIndex).getId()
+										.toString());
+
+						// send delete photo post http request
+						HttpUtils.postSignatureRequest(
+								getResources().getString(R.string.server_url)
+										+ getResources().getString(
+												R.string.deletePhoto_url),
+								PostRequestFormat.URLENCODED,
+								_deletePhotoParam, null,
+								HttpRequestType.ASYNCHRONOUS,
+								new DeletePhotoHttpRequestListener());
 					}
 					break;
 				}
@@ -675,6 +702,90 @@ public class PetPhotosActivity extends IPetChatNavigationActivity {
 		public void onFailed(HttpRequest request, HttpResponse response) {
 			Log.e(LOG_TAG,
 					"set pet photo album cover failed, send set pet photo album cover post request failed");
+
+			// show get user all pets info failed toast
+			Toast.makeText(PetPhotosActivity.this,
+					R.string.toast_request_exception, Toast.LENGTH_LONG).show();
+		}
+
+	}
+
+	// delete photo http request listener
+	class DeletePhotoHttpRequestListener extends OnHttpRequestListener {
+
+		@Override
+		public void onFinished(HttpRequest request, HttpResponse response) {
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
+
+			// get http response entity string json object result
+			String _result = JSONUtils
+					.getStringFromJSONObject(_respJsonData, getResources()
+							.getString(R.string.rbgServer_reqResp_result));
+
+			// check an process result
+			if (null != _result) {
+				switch (Integer.parseInt(_result)) {
+				case 0:
+					Log.d(LOG_TAG, "delete photo successful");
+
+					// check pet photo album photos info list
+					if (0 == _mPetPhotoAlbumPhotosInfoList.size() - 1) {
+						// only one, pop pet photos activity
+						popActivity();
+					} else {
+						// more than one
+						// remove the delete photo
+						_mPetPhotoAlbumPhotosInfoList
+								.remove(_mSelectedPetPhotoIndex.intValue());
+
+						if (0 == _mSelectedPetPhotoIndex) {
+							// show next photo
+							// get the next photo and show
+							PetPhotoBean _nextPhotoBean = _mPetPhotoAlbumPhotosInfoList
+									.get(_mSelectedPetPhotoIndex);
+							showPetPhoto(_nextPhotoBean.getPath(),
+									_nextPhotoBean.getDescription());
+						} else {
+							// show the previous photo
+							// get the previous photo and show
+							PetPhotoBean _previousPhotoBean = _mPetPhotoAlbumPhotosInfoList
+									.get(--_mSelectedPetPhotoIndex);
+							showPetPhoto(_previousPhotoBean.getPath(),
+									_previousPhotoBean.getDescription());
+						}
+					}
+					break;
+
+				case 1:
+				case 2:
+					Log.e(LOG_TAG, "delete photo failed");
+
+					// show get user all pets info failed toast
+					Toast.makeText(PetPhotosActivity.this, "删除照片失败",
+							Toast.LENGTH_LONG).show();
+					break;
+
+				default:
+					Log.e(LOG_TAG,
+							"delete photo failed, bg_server return result is unrecognized");
+
+					processException();
+					break;
+				}
+			} else {
+				Log.e(LOG_TAG,
+						"delete photo failed, bg_server return result is null");
+
+				processException();
+			}
+		}
+
+		@Override
+		public void onFailed(HttpRequest request, HttpResponse response) {
+			Log.e(LOG_TAG,
+					"delete photo failed, send delete photo post request failed");
 
 			// show get user all pets info failed toast
 			Toast.makeText(PetPhotosActivity.this,
