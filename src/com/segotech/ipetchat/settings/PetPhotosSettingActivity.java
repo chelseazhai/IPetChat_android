@@ -21,7 +21,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
@@ -105,14 +104,6 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 		// set pet photo albums listView on item long click listener
 		_petPhotoAlbumsListView
 				.setOnItemLongClickListener(new PetPhotoAlbumsListViewOnItemLongClickListener());
-
-		// test by ares， ？？
-		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-				.detectDiskReads().detectDiskWrites().detectNetwork()
-				.penaltyLog().build());
-		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-				.detectLeakedSqlLiteObjects().penaltyLog().penaltyDeath()
-				.build());
 	}
 
 	@Override

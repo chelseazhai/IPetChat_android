@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
@@ -109,14 +108,6 @@ public class IPetChatTabActivity extends TabActivity {
 				PostRequestFormat.URLENCODED, null, null,
 				HttpRequestType.ASYNCHRONOUS,
 				new GetAllPetsInfoHttpRequestListener());
-
-		// test by ares， ？？
-		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-				.detectDiskReads().detectDiskWrites().detectNetwork()
-				.penaltyLog().build());
-		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-				.detectLeakedSqlLiteObjects().penaltyLog().penaltyDeath()
-				.build());
 	}
 
 	// process get user all pets info exception

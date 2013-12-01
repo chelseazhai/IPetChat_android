@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -91,14 +90,6 @@ public class PetPhotoAlbumActivity extends IPetChatNavigationActivity {
 				PostRequestFormat.URLENCODED, _getPetPhotoAlbumParam, null,
 				HttpRequestType.ASYNCHRONOUS,
 				new GetPetPhotoAlbumHttpRequestListener());
-
-		// test by ares， ？？
-		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-				.detectDiskReads().detectDiskWrites().detectNetwork()
-				.penaltyLog().build());
-		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-				.detectLeakedSqlLiteObjects().penaltyLog().penaltyDeath()
-				.build());
 	}
 
 	// process get pet photo albums exception
