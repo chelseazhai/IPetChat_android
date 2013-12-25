@@ -46,6 +46,11 @@
     <string name="al_forgetLoginPwd_button_title">Forget Pwd</string>
     <string name="al_confirmLogin_button_title">Login</string>
 
+    <!-- sina weibo oAuth -->
+    <string name="al_sinaWeiboOAuth_appKey" translatable="false">3809471856</string>
+    <string name="al_sinaWeiboOAuth_redirectUrl" translatable="false">https://api.weibo.com/oauth2/default.html</string>
+    <string name="al_sinaWeiboOAuth_scope" translatable="false">email</string>
+
     <!-- account retrieve password -->
     <string name="title_activity_account_retrieve_pwd" translatable="false">AccountRetrievePwdActivity</string>
     <string name="account_retrieve_password_nav_title">Retrieve password</string>

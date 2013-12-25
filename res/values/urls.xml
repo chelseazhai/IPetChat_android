@@ -17,6 +17,9 @@
     <!-- account login -->
     <string name="account_login_url" translatable="false">/user/login</string>
 
+    <!-- thirdParty oAuth login -->
+    <string name="thirdParty_oAuth_login_url" translatable="false">/user/thirdlogin</string>
+
     <!-- account retrieve password -->
     <string name="account_resetPwd_url" translatable="false">/user/resetpwd</string>
 
