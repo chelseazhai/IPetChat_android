@@ -20,8 +20,8 @@
     <string name="rbgServer_al_confirmLoginReqResp_userKey" translatable="false">userkey</string>
 
     <!-- thirdParty oAuth login -->
-    <string name="rbgServer_al_thirdPartyOAuthLoginReqParam_identifier" translatable="false">identifier</string>
-    <string name="rbgServer_al_thirdPartyOAuthLoginReqResp_userName" translatable="false">username</string>
+    <string name="rbgServer_thirdPartyOAuthLoginReqParam_identifier" translatable="false">identifier</string>
+    <string name="rbgServer_thirdPartyOAuthLoginReqResp_userName" translatable="false">username</string>
 
     <!-- account retrieve password -->
     <string name="rbgServer_arp_getRetrievePwdPhoneVerificationCodeReqParam_type" translatable="false">resetpwd</string>

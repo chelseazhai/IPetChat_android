@@ -47,9 +47,17 @@
     <string name="al_confirmLogin_button_title">Login</string>
 
     <!-- sina weibo oAuth -->
-    <string name="al_sinaWeiboOAuth_appKey" translatable="false">3809471856</string>
-    <string name="al_sinaWeiboOAuth_redirectUrl" translatable="false">https://api.weibo.com/oauth2/default.html</string>
-    <string name="al_sinaWeiboOAuth_scope" translatable="false">email</string>
+    <string name="thirdPartyOAuthLogin_sinaWeiboOAuth_appKey" translatable="false">3809471856</string>
+    <string name="thirdPartyOAuthLogin_sinaWeiboOAuth_redirectUrl" translatable="false">https://api.weibo.com/oauth2/default.html</string>
+    <string name="thirdPartyOAuthLogin_sinaWeiboOAuth_scope" translatable="false">email</string>
+
+    <!-- qq connect oAuth -->
+    <string name="thirdPartyOAuthLogin_qqConnectOAuth_appId" translatable="false">100585565</string>
+    <string name="thirdPartyOAuthLogin_qqConnectOAuth_scope" translatable="false">all</string>
+    <string name="thirdPartyOAuthLogin_qqConnectOAuth_respJson_result" translatable="false">ret</string>
+    <string name="thirdPartyOAuthLogin_qqConnectOAuth_respJson_openId" translatable="false">openid</string>
+    <string name="thirdPartyOAuthLogin_qqConnectOAuth_respJson_accessToken" translatable="false">access_token</string>
+    <string name="thirdPartyOAuthLogin_qqConnectOAuth_respJson_message" translatable="false">msg</string>
 
     <!-- account retrieve password -->
     <string name="title_activity_account_retrieve_pwd" translatable="false">AccountRetrievePwdActivity</string>

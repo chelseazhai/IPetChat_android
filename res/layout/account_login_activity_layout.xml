@@ -61,14 +61,6 @@
             android:background="@drawable/plane_gray_btn_bg"
             android:text="@string/al_confirmLogin_button_title"
             android:textColor="@android:color/white" />
-
-        <Button
-            android:id="@+id/al_sinaWeiboOAuthLogin_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/sina_weibo_oauth_login_btn_bg" />
     </LinearLayout>
 
 </FrameLayout>

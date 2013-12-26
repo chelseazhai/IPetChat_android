@@ -47,6 +47,31 @@
             android:text="@string/as4f_accountLogin_button_title"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/as4f_accountLogin_button"
+            android:layout_marginTop="20dp" >
+
+            <Button
+                android:id="@+id/as4f_sinaWeiboOAuthLogin_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/sina_weibo_oauth_login_btn_bg" />
+
+            <Button
+                android:id="@+id/as4f_qqConnectOAuthLogin_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/qq_connect_oauth_login_btn_bg" />
+        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>

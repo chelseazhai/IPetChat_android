@@ -27,7 +27,7 @@
     <string name="toast_al_loginPwd_wrong">User login password is wrong</string>
 
     <!-- thirdParty oAuth login -->
-    <string name="toast_al_sinaWeiboOAuth_failed">Sina weibo oAuth login failed</string>
+    <string name="toast_thirdPartyOAuthLogin_loginFailed">Sina weibo or QQ connect oAuth login failed</string>
 
     <!-- account retrieve password -->
     <string name="toast_arp_accountWithPhoneNumber_notExisted">User not existed, please register first</string>
