@@ -45,6 +45,9 @@ public class AccountSetting4FirstActivity extends NavigationActivity {
 	private static final int ACCOUNT_REGISTER_REQCODE = 100;
 	private static final int ACCOUNT_LOGIN_REQCODE = 101;
 
+	// qq connect oAuth
+	private Tencent _mQQConnectOAuth;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -102,6 +105,11 @@ public class AccountSetting4FirstActivity extends NavigationActivity {
 		}
 
 		super.onActivityResult(requestCode, resultCode, data);
+
+		// check qq connect oAuth
+		if (null != _mQQConnectOAuth) {
+			// _mQQConnectOAuth.
+		}
 	}
 
 	// process third party oAuth login exception
@@ -227,7 +235,7 @@ public class AccountSetting4FirstActivity extends NavigationActivity {
 		@Override
 		public void onClick(View v) {
 			// new qq connect oAuth
-			Tencent _qqConnectOAuth = Tencent
+			_mQQConnectOAuth = Tencent
 					.createInstance(
 							getResources()
 									.getString(
@@ -236,8 +244,8 @@ public class AccountSetting4FirstActivity extends NavigationActivity {
 									.getApplicationContext());
 
 			// oAuth
-			if (!_qqConnectOAuth.isSessionValid()) {
-				_qqConnectOAuth
+			if (!_mQQConnectOAuth.isSessionValid()) {
+				_mQQConnectOAuth
 						.login(AccountSetting4FirstActivity.this,
 								getResources()
 										.getString(

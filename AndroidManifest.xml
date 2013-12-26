@@ -72,6 +72,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
             android:name=".tab7tabcontent.IPetChatTabActivity"
             android:label="@string/title_activity_ipet_chat_tab"
             android:screenOrientation="portrait"

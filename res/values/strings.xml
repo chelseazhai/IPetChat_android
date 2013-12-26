@@ -53,7 +53,7 @@
 
     <!-- qq connect oAuth -->
     <string name="thirdPartyOAuthLogin_qqConnectOAuth_appId" translatable="false">100585565</string>
-    <string name="thirdPartyOAuthLogin_qqConnectOAuth_scope" translatable="false">all</string>
+    <string name="thirdPartyOAuthLogin_qqConnectOAuth_scope" translatable="false">get_simple_userinfo</string>
     <string name="thirdPartyOAuthLogin_qqConnectOAuth_respJson_result" translatable="false">ret</string>
     <string name="thirdPartyOAuthLogin_qqConnectOAuth_respJson_openId" translatable="false">openid</string>
     <string name="thirdPartyOAuthLogin_qqConnectOAuth_respJson_accessToken" translatable="false">access_token</string>
