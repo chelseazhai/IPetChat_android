@@ -260,7 +260,7 @@
 
     <!-- pet device bind -->
     <string name="pet_device_bind_setting_nav_title">绑定硬件设备</string>
-    <string name="pet_device_bind_setting_not_implement">绑定硬件设备暂未实现</string>
+    <string name="pdb_bind_button_title">绑定</string>
 
     <!-- pet chat exit -->
     <string name="iPetChat_exitAlertDialog_title">赛果提醒</string>

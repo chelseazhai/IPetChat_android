@@ -153,6 +153,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".settings.profile.PetProfileBirthdaySettingActivity"
+            android:label="@string/title_activity_pet_profile_birthday_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".settings.profile.PetProfileDistrictSettingActivity"
             android:label="@string/title_activity_pet_profile_district_setting"
             android:screenOrientation="portrait" >

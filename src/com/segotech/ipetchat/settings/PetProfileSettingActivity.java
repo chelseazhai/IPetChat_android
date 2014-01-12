@@ -40,6 +40,7 @@ import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 import com.segotech.ipetchat.customwidget.NetLoadImageView;
 import com.segotech.ipetchat.customwidget.PetProfileSettingItem;
+import com.segotech.ipetchat.settings.profile.PetProfileBirthdaySettingActivity;
 import com.segotech.ipetchat.settings.profile.PetProfileCheckedSettingActivity;
 import com.segotech.ipetchat.settings.profile.PetProfileEditTextSettingActivity;
 
@@ -93,6 +94,9 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 	// pet profile checked setting item on click listener
 	private PetProfileCheckedSettingItemOnClickListener _mPetProfileCheckedSettingItemOnClickListener = new PetProfileCheckedSettingItemOnClickListener();
 
+	// pet profile birthday setting item on click listener
+	private PetProfileBirthdaySettingItemOnClickListener _mPetProfileBirthdaySettingItemOnClickListener = new PetProfileBirthdaySettingItemOnClickListener();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -129,7 +133,7 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 		// age
 		_mPetProfileAgeSettingItem = (PetProfileSettingItem) findViewById(R.id.pp_age_setting_item);
 		_mPetProfileAgeSettingItem
-				.setOnClickListener(_mPetProfileEditTextSettingItemOnClickListener);
+				.setOnClickListener(_mPetProfileBirthdaySettingItemOnClickListener);
 
 		// height
 		_mPetProfileHeightSettingItem = (PetProfileSettingItem) findViewById(R.id.pp_height_setting_item);
@@ -440,6 +444,13 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 						.put(getResources().getString(
 								R.string.rbgServer_setPetInfoReqParam_petBreed),
 								_mPetInfo.getBreed().getValue().toString());
+			}
+			if (null != _mPetInfo.getBirthday()) {
+				_setPetInfoParam
+						.put(getResources()
+								.getString(
+										R.string.rbgServer_setPetInfoReqParam_petBirthday),
+								_mPetInfo.getBirthday().toString());
 			}
 			if (null != _mPetInfo.getAge()) {
 				_setPetInfoParam.put(
@@ -771,6 +782,36 @@ public class PetProfileSettingActivity extends IPetChatNavigationActivity {
 			pushActivityForResult(PetProfileCheckedSettingActivity.class,
 					_extraData, _requestCode);
 		}
+	}
+
+	// pet profile birthday setting item on click listener
+	class PetProfileBirthdaySettingItemOnClickListener implements
+			OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			// define pet profile birthday setting pet birthday and request code
+			Long _petProfileBirthdaySettingPetBirthday = _mPetInfo
+					.getBirthday();
+			int _requestCode = PET_PROFILE_AGE_EDITTEXT_SETTING_REQCODE;
+
+			// define extra data
+			Map<String, Object> _extraData = new HashMap<String, Object>();
+
+			// check pet profile birthday setting pet birthday and set extra
+			// data
+			if (null != _petProfileBirthdaySettingPetBirthday) {
+				// put pet profile birthday setting pet birthday in extra data
+				_extraData
+						.put(PetProfileBirthdaySettingActivity.PET_PROFILE_BIRTHDAY_KEY,
+								_petProfileBirthdaySettingPetBirthday);
+			}
+
+			// go to target activity
+			pushActivityForResult(PetProfileBirthdaySettingActivity.class,
+					_extraData, _requestCode);
+		}
+
 	}
 
 	// pet profile district setting item on click listener

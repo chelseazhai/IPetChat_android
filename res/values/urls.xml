@@ -51,4 +51,7 @@
     <!-- account modify password -->
     <string name="account_modifyPwd_url" translatable="false">/profile/changePwd</string>
 
+    <!-- pet device bind -->
+    <string name="petDevice_bind_url" translatable="false">/petinfo/binddevice</string>
+
 </resources>

@@ -1,6 +1,8 @@
 package com.segotech.ipetchat.account.pet;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Locale;
 
 import org.json.JSONObject;
 
@@ -33,6 +35,8 @@ public class PetBean implements Serializable {
 	private PetSex sex;
 	// pet breed
 	private PetBreed breed;
+	// pet birthday
+	private Long birthday;
 	// pet age
 	private Integer age;
 	// pet height
@@ -100,6 +104,17 @@ public class PetBean implements Serializable {
 
 	public void setBreed(PetBreed breed) {
 		this.breed = breed;
+	}
+
+	public Long getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Long birthday) {
+		this.birthday = birthday;
+
+		// update pet age
+		age = getPetAge();
 	}
 
 	public Integer getAge() {
@@ -195,11 +210,14 @@ public class PetBean implements Serializable {
 				breed = PetBreed.getBreed(_breedValue);
 			}
 
-			// age
-			age = JSONUtils.getIntegerFromJSONObject(
+			// birthday
+			birthday = JSONUtils.getLongFromJSONObject(
 					petJSONInfo,
 					_appContext.getResources().getString(
-							R.string.rbgServer_getAllPetsReqResp_pet_age));
+							R.string.rbgServer_getAllPetsReqResp_pet_birthday));
+
+			// age
+			age = getPetAge();
 
 			// height
 			height = JSONUtils.getDoubleFromJSONObject(
@@ -270,6 +288,21 @@ public class PetBean implements Serializable {
 				.append("\n");
 
 		return _petDescription.toString();
+	}
+
+	// get pet age
+	private Integer getPetAge() {
+		// get current calendar and birthday calendar
+		Calendar _currentCalendar = Calendar.getInstance(Locale.getDefault());
+		Calendar _birthdayCalendar = Calendar.getInstance(Locale.getDefault());
+		_birthdayCalendar.setTimeInMillis(birthday);
+
+		// return pet age
+		return (_currentCalendar.get(Calendar.YEAR) - _birthdayCalendar
+				.get(Calendar.YEAR))
+				* 12
+				+ _currentCalendar.get(Calendar.MONTH)
+				- _birthdayCalendar.get(Calendar.MONTH);
 	}
 
 }

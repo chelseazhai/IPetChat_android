@@ -17,7 +17,7 @@ import com.segotech.ipetchat.customwidget.IPetChatNavigationActivity;
 public class PetProfileEditTextSettingActivity extends
 		IPetChatNavigationActivity {
 
-	// pet profile editText title, hint, text, input type key and comment
+	// pet profile editText title, hint, text, input type and comment key
 	public static final String PET_PROFILE_EDITTEXT_TITLE_KEY = "pet_profile_edittext_title_key";
 	public static final String PET_PROFILE_EDITTEXT_HINT_KEY = "pet_profile_edittext_hint_key";
 	public static final String PET_PROFILE_EDITTEXT_TEXT_KEY = "pet_profile_edittext_text_key";

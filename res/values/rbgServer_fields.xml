@@ -36,7 +36,7 @@
     <string name="rbgServer_getAllPetsReqResp_pet_nickname" translatable="false">nickname</string>
     <string name="rbgServer_getAllPetsReqResp_pet_sex" translatable="false">sex</string>
     <string name="rbgServer_getAllPetsReqResp_pet_breed" translatable="false">breed</string>
-    <string name="rbgServer_getAllPetsReqResp_pet_age" translatable="false">age</string>
+    <string name="rbgServer_getAllPetsReqResp_pet_birthday" translatable="false">birthday</string>
     <string name="rbgServer_getAllPetsReqResp_pet_height" translatable="false">height</string>
     <string name="rbgServer_getAllPetsReqResp_pet_weight" translatable="false">weight</string>
     <string name="rbgServer_getAllPetsReqResp_pet_district" translatable="false">district</string>
@@ -47,6 +47,7 @@
     <string name="rbgServer_setPetInfoReqParam_petNickname" translatable="false">nickname</string>
     <string name="rbgServer_setPetInfoReqParam_petSex" translatable="false">sex</string>
     <string name="rbgServer_setPetInfoReqParam_petBreed" translatable="false">breed</string>
+    <string name="rbgServer_setPetInfoReqParam_petBirthday" translatable="false">birthday</string>
     <string name="rbgServer_setPetInfoReqParam_petAge" translatable="false">age</string>
     <string name="rbgServer_setPetInfoReqParam_petHeight" translatable="false">height</string>
     <string name="rbgServer_setPetInfoReqParam_petWeight" translatable="false">weight</string>

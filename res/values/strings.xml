@@ -235,6 +235,9 @@
     <!-- pet profile checked -->
     <string name="title_activity_pet_profile_checked_setting" translatable="false">PetProfileCheckedSettingActivity</string>
 
+    <!-- pet profile birthday -->
+    <string name="title_activity_pet_profile_birthday_setting" translatable="false">PetProfileBirthdaySettingActivity</string>
+
     <!-- pet profile district -->
     <string name="title_activity_pet_profile_district_setting" translatable="false">PetProfileDistrictSettingActivity</string>
     <string name="pet_profile_district_setting_nav_title">District</string>
@@ -329,7 +332,7 @@
     <!-- pet device bind -->
     <string name="title_activity_pet_device_bind" translatable="false">PetDeviceBindActivity</string>
     <string name="pet_device_bind_setting_nav_title">Bind pet device</string>
-    <string name="pet_device_bind_setting_not_implement">pet device bind not implement</string>
+    <string name="pdb_bind_button_title">Bind</string>
 
     <!-- pet chat exit -->
     <string name="iPetChat_exitAlertDialog_title">Sego remind</string>

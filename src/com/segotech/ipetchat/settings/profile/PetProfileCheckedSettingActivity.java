@@ -36,19 +36,22 @@ public class PetProfileCheckedSettingActivity extends
 		// set content view
 		setContentView(R.layout.pet_profile_selected6checked_setting_activity_layout);
 
-		// define pet profile checked setting name
+		// define pet profile checked setting name and checked index
 		String _checkedSettingName = "";
+		Integer _checkedIndex = 0;
 
 		// get the intent extra data
 		final Bundle _data = getIntent().getExtras();
 
 		// check the data bundle
 		if (null != _data) {
-			// get checked setting name and sub items
+			// get checked setting name, sub items and checked index
 			_checkedSettingName = _data
 					.getString(PET_PROFILE_CHECKED_SETTING_NAME_KEY);
 			_mPetProfileCheckedSettingSubItemArray = _data
 					.getStringArray(PET_PROFILE_CHECKED_SETTING_SUBITEMS_KEY);
+			_checkedIndex = _data
+					.getInt(PET_PROFILE_CHECKED_SETTING_CHECKED_INDEX_KEY);
 		}
 
 		// set title
@@ -60,8 +63,16 @@ public class PetProfileCheckedSettingActivity extends
 		// set pet profile checked setting item adapter
 		_petProfileCheckedSettingItemListView
 				.setAdapter(new ArrayAdapter<String>(this,
-						android.R.layout.simple_list_item_checked,
+						android.R.layout.simple_list_item_single_choice,
 						_mPetProfileCheckedSettingSubItemArray));
+
+		// set its choice mode
+		_petProfileCheckedSettingItemListView
+				.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+		// set checked item
+		_petProfileCheckedSettingItemListView.setItemChecked(_checkedIndex,
+				true);
 
 		// set pet profile checked setting item listView on item click listener
 		_petProfileCheckedSettingItemListView
