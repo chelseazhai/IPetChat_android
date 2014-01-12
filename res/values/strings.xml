@@ -110,6 +110,10 @@
     <!-- home tab map content view -->
     <string name="pet_info_button_title">Info</string>
 
+    <!-- pet location activity -->
+    <string name="title_activity_pet_location" translatable="false">PetLocationActivity</string>
+    <string name="pet_location_nav_title_format">%s location</string>
+
     <!-- sports and health tab content activity -->
     <string name="title_activity_sports_health_tab_content" translatable="false">SportsHealthTabContentActivity</string>
     <string name="sports_and_health_tab_tag" translatable="false">sports and health tab</string>

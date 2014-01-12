@@ -86,6 +86,11 @@
             android:label="@string/title_activity_home_tab_content" >
         </activity>
         <activity
+            android:name=".tab7tabcontent.PetLocationActivity"
+            android:label="@string/title_activity_pet_location"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".tab7tabcontent.SportsHealthTabContentActivity"
             android:label="@string/title_activity_sports_health_tab_content" >
         </activity>

@@ -86,6 +86,9 @@
     <!-- home tab map content view -->
     <string name="pet_info_button_title">宠物信息</string>
 
+    <!-- pet location activity -->
+    <string name="pet_location_nav_title_format">%s 的位置</string>
+
     <!-- sports and health tab content activity -->
     <string name="sports_and_health_tab7nav_title">运动健康</string>
     <string name="pet_breed_label">品种</string>
