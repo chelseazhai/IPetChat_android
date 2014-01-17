@@ -77,24 +77,37 @@ public class UploadPetPhotoActivity extends IPetChatNavigationActivity {
 			try {
 				selectedPhotoBitmap = BitmapFactory.decodeFile(_data
 						.getString(SELECT_PHOTOPATH_KEY));
+				int nh = (int) (selectedPhotoBitmap.getHeight() * (1024.0 / selectedPhotoBitmap
+						.getWidth()));
+				selectedPhotoBitmap = Bitmap.createScaledBitmap(
+						selectedPhotoBitmap, 1024, nh, true);
 			} catch (OutOfMemoryError e) {
 				e.printStackTrace();
 
 				System.gc();
 
 				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inSampleSize = 2;
+				options.inSampleSize = 3;
+
 				try {
 					selectedPhotoBitmap = BitmapFactory.decodeFile(
 							_data.getString(SELECT_PHOTOPATH_KEY), options);
+					int nh = (int) (selectedPhotoBitmap.getHeight() * (1024.0 / selectedPhotoBitmap
+							.getWidth()));
+					selectedPhotoBitmap = Bitmap.createScaledBitmap(
+							selectedPhotoBitmap, 1024, nh, true);
 				} catch (OutOfMemoryError e2) {
 					e2.printStackTrace();
 
 					System.gc();
 
-					options.inSampleSize = 4;
+					options.inSampleSize = 6;
 					selectedPhotoBitmap = BitmapFactory.decodeFile(
 							_data.getString(SELECT_PHOTOPATH_KEY), options);
+					int nh = (int) (selectedPhotoBitmap.getHeight() * (1024.0 / selectedPhotoBitmap
+							.getWidth()));
+					selectedPhotoBitmap = Bitmap.createScaledBitmap(
+							selectedPhotoBitmap, 1024, nh, true);
 				}
 			}
 

@@ -1,5 +1,6 @@
 package com.segotech.ipetchat.settings;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -136,9 +138,37 @@ public class PetPhotosSettingActivity extends IPetChatNavigationActivity {
 						if (null != bundle) {
 							// get bitmap
 							Bitmap capturePhoto = (Bitmap) bundle.get("data");
+							Log.d(LOG_TAG,
+									"capturePhoto = " + capturePhoto
+											+ ", width = "
+											+ capturePhoto.getWidth()
+											+ " and height = "
+											+ capturePhoto.getHeight());
 
-							Log.d(LOG_TAG, "capturePhoto = " + capturePhoto);
-							return;
+							String fileName = Long.toString(System
+									.currentTimeMillis()) + ".jpg";
+
+							FileOutputStream fos = null;
+							try {
+								fos = openFileOutput(fileName,
+										Context.MODE_PRIVATE);
+
+								capturePhoto.compress(CompressFormat.JPEG, 100,
+										fos);
+								fos.flush();
+								fos.close();
+
+								picturePath = getFileStreamPath(fileName)
+										.getAbsolutePath();
+							} catch (Exception e) {
+								Log.e(LOG_TAG,
+										"get photo error, exception message = "
+												+ e.getMessage());
+
+								e.printStackTrace();
+
+								return;
+							}
 						} else {
 							Toast.makeText(this, "获取照片出错", Toast.LENGTH_SHORT)
 									.show();

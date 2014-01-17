@@ -140,7 +140,8 @@
         <activity
             android:name=".petcommunity.petchat.Leave6ReplyMsgActivity"
             android:label="@string/title_activity_leave6reply_msg"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustResize" >
         </activity>
         <activity
             android:name=".settings.PetProfileSettingActivity"
