@@ -42,6 +42,12 @@
     <string name="toast_set_petInfo_error">Set pet info error</string>
     <string name="toast_no_pet">There is no pet info</string>
 
+    <!-- pet location -->
+    <string name="toast_autoNaviMap_reGeo_noResult">Sprry, no result searched!</string>
+    <string name="toast_autoNaviMap_reGeo_error_network">Research failed, please check your network connection!</string>
+    <string name="toast_autoNaviMap_reGeo_error_key">Key verify invalid!</string>
+    <string name="toast_autoNaviMap_reGeo_error_other">Unknown error, please retry again later!</string>
+
     <!-- account modify password -->
     <string name="toast_accountOriginPassword_null">Account origin password mustn\'t null</string>
     <string name="toast_accountRestNewPassword_null">Account new reset password mustn\'t null</string>

@@ -127,6 +127,10 @@
     <string name="pet_weight_value_format">%.2fkg</string>
     <string name="pet_sportsinfo_today_segment_title">Today</string>
     <string name="pet_sportsinfo_history_segment_title">History</string>
+    <string name="pet_sportsinfo_rest_tip">Rest</string>
+    <string name="pet_sportsinfo_walk_tip">Walk</string>
+    <string name="pet_sportsinfo_run_tip">Run</string>
+    <string name="pet_sportsinfo_strenuousExercise_tip">Strenuous Exercise</string>
 
     <!-- community tab content activity -->
     <string name="title_activity_community_tab_content" translatable="false">CommunityTabContentActivity</string>

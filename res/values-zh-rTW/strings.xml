@@ -100,6 +100,10 @@
     <string name="pet_weight_value_format">%.2f公斤</string>
     <string name="pet_sportsinfo_today_segment_title">今天</string>
     <string name="pet_sportsinfo_history_segment_title">历史</string>
+    <string name="pet_sportsinfo_rest_tip">休息</string>
+    <string name="pet_sportsinfo_walk_tip">走动</string>
+    <string name="pet_sportsinfo_run_tip">轻微跑跳</string>
+    <string name="pet_sportsinfo_strenuousExercise_tip">剧烈运动</string>
 
     <!-- community tab content activity -->
     <string name="community_tab7nav_title">社区</string>

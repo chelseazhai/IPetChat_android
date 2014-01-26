@@ -177,7 +177,31 @@ public class IPetChatTabActivity extends TabActivity {
 									_petInfo.updatePetInfo(_petInfoJSONObject);
 								}
 
-								Log.d(LOG_TAG, "Got my pet info = " + _petInfo);
+								// get remote background server return pet bind
+								// device id, access password and update my pet
+								// bind device id, access password
+								Long _retPetBindDeviceId = JSONUtils
+										.getLongFromJSONObject(
+												_petInfoJSONObject,
+												getResources()
+														.getString(
+																R.string.rbgServer_getAllPetsReqResp_pet_bindDeviceId));
+								String _retPetBindDeviceAccessPwd = JSONUtils
+										.getStringFromJSONObject(
+												_petInfoJSONObject,
+												getResources()
+														.getString(
+																R.string.rbgServer_getAllPetsReqResp_pet_bindDeviceAccessPwd));
+								IPCUserExtension.setUserPetBindDeviceId(_user,
+										_retPetBindDeviceId);
+								IPCUserExtension.setUserPetBindDeviceAcessPwd(
+										_user, _retPetBindDeviceAccessPwd);
+
+								Log.d(LOG_TAG, "Got my pet info = " + _petInfo
+										+ ", bind device id = "
+										+ _retPetBindDeviceId
+										+ " and access password = "
+										+ _retPetBindDeviceAccessPwd);
 
 								// test by ares
 								// set current tab, work around

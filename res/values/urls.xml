@@ -54,4 +54,13 @@
     <!-- pet device bind -->
     <string name="petDevice_bind_url" translatable="false">/petinfo/binddevice</string>
 
+    <!-- device server url -->
+    <string name="deviceServer_url" translatable="false">http://61.190.30.170:8090</string>
+
+    <!-- device server get time url -->
+    <string name="deviceServer_getTime_url" translatable="false">/rest/time</string>
+
+    <!-- device server operate url -->
+    <string name="deviceServer_operate_url" translatable="false">/rest/operate</string>
+
 </resources>

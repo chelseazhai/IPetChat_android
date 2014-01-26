@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.richitec.commontoolkit.customcomponent.BarButtonItem;
+import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
@@ -131,8 +132,6 @@ public class PetDeviceBindActivity extends IPetChatNavigationActivity {
 					.getStringFromJSONObject(_respJsonData, getResources()
 							.getString(R.string.rbgServer_reqResp_result));
 
-			Log.d(LOG_TAG, "@@ = " + _respJsonData);
-
 			// check an process result
 			if (null != _result) {
 				switch (Integer.parseInt(_result)) {
@@ -147,7 +146,19 @@ public class PetDeviceBindActivity extends IPetChatNavigationActivity {
 									+ _deviceId + " and password = "
 									+ _devicePwd);
 
-					//
+					// get the user
+					UserBean _user = UserManager.getInstance().getUser();
+
+					// update my pet bind device id and access password
+					IPCUserExtension.setUserPetBindDeviceId(_user, _deviceId);
+					IPCUserExtension.setUserPetBindDeviceAcessPwd(_user,
+							_devicePwd);
+
+					Toast.makeText(PetDeviceBindActivity.this, "设备绑定成功",
+							Toast.LENGTH_SHORT).show();
+
+					// finish pet device bind activity
+					finish();
 					break;
 
 				case 1:

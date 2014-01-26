@@ -42,6 +42,12 @@
     <string name="toast_set_petInfo_error">设置宠物宠物信息失败</string>
     <string name="toast_no_pet">没有找到此账号</string>
 
+    <!-- pet location -->
+    <string name="toast_autoNaviMap_reGeo_noResult">对不起，没有搜索到相关数据！</string>
+    <string name="toast_autoNaviMap_reGeo_error_network">搜索失败，请检查网络连接！</string>
+    <string name="toast_autoNaviMap_reGeo_error_key">key验证无效！</string>
+    <string name="toast_autoNaviMap_reGeo_error_other">未知错误，请稍后重试！</string>
+
     <!-- account modify password -->
     <string name="toast_accountOriginPassword_null">用户原始密码不能为空</string>
     <string name="toast_accountRestNewPassword_null">用户新设置的密码不能为空</string>

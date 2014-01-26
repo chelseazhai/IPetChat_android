@@ -41,6 +41,8 @@
     <string name="rbgServer_getAllPetsReqResp_pet_weight" translatable="false">weight</string>
     <string name="rbgServer_getAllPetsReqResp_pet_district" translatable="false">district</string>
     <string name="rbgServer_getAllPetsReqResp_pet_placeUsed2Go" translatable="false">placeoftengo</string>
+    <string name="rbgServer_getAllPetsReqResp_pet_bindDeviceId" translatable="false">deviceid</string>
+    <string name="rbgServer_getAllPetsReqResp_pet_bindDeviceAccessPwd" translatable="false">devicepwd</string>
 
     <!-- set pet info -->
     <string name="rbgServer_setPetInfoReqParam_petId" translatable="false">petid</string>

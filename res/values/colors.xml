@@ -23,4 +23,10 @@
     <color name="light_light_gray">#efeff0</color>
     <color name="light_light_light_gray">#f3f3f3</color>
 
+    <!-- pet sports info -->
+    <color name="pet_rest">#25abde</color>
+    <color name="pet_walk">#a6ce39</color>
+    <color name="pet_run">#fdc10f</color>
+    <color name="pet_strenuousExercise">#f37e19</color>
+
 </resources>
