@@ -5,11 +5,12 @@
     android:background="@drawable/pet_sportsinfo_chart_parentlayout_bg"
     android:padding="4dp" >
 
-    <View
-        android:id="@+id/pet_history_sportsInfo_view"
+    <FrameLayout
+        android:id="@+id/pet_history_sportsInfo_barChart_frameLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="8dp"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent" >
+    </FrameLayout>
 
 </FrameLayout>

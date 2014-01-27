@@ -1,7 +1,19 @@
 package com.segotech.ipetchat.tab7tabcontent;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
+
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -10,16 +22,26 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.richitec.commontoolkit.user.UserManager;
+import com.richitec.commontoolkit.utils.HttpUtils;
+import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
+import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
+import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
+import com.richitec.commontoolkit.utils.JSONUtils;
 import com.segotech.ipetchat.R;
 import com.segotech.ipetchat.account.pet.PetBean;
 import com.segotech.ipetchat.account.pet.PetSex;
 import com.segotech.ipetchat.account.user.IPCUserExtension;
 import com.segotech.ipetchat.customwidget.IPetChatRootNavigationActivity;
 import com.segotech.ipetchat.customwidget.NetLoadImageView;
+import com.segotech.ipetchat.utils.DeviceServerHttpReqParamUtils;
 
 public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
+
+	private static final String LOG_TAG = HomeTabContentActivity.class
+			.getCanonicalName();
 
 	// // pet location view
 	// private View _mPetLocationView;
@@ -187,15 +209,18 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 		((TextView) findViewById(R.id.pet_deviceBattery_textView))
 				.setText(String.format("%d%%", _petDeviceBatteryProgress));
 
-		// test by ares
-		// get pet sports score progress
-		int _petSportsScoreProgress = (int) (100 * 200.0 / 500);
-
-		// set pet sports score
-		((ProgressBar) findViewById(R.id.pet_sportsScore_progressBar))
-				.setProgress(_petSportsScoreProgress);
-		((TextView) findViewById(R.id.pet_sportsScore_textView))
-				.setText("" + 200.0);
+		// check pet device bind info
+		if (null != IPCUserExtension.getUserPetBindDeviceId(UserManager
+				.getInstance().getUser())) {
+			// get pet today sports info values
+			// first get device server system time
+			HttpUtils.getRequest(
+					getResources().getString(R.string.deviceServer_url)
+							+ getResources().getString(
+									R.string.deviceServer_getTime_url), null,
+					null, HttpRequestType.ASYNCHRONOUS,
+					new GetDeviceServerSystemTimeHttpRequestListener());
+		}
 
 		// // autoNavi mapView pause
 		// if (null != _mAutoNaviMapView) {
@@ -204,6 +229,215 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 	}
 
 	// inner class
+	// get device server system time http request listener
+	class GetDeviceServerSystemTimeHttpRequestListener extends
+			OnHttpRequestListener {
+
+		@Override
+		public void onFinished(HttpRequest request, HttpResponse response) {
+			// get and check http response entity string
+			String _respEntityString = HttpUtils
+					.getHttpResponseEntityString(response);
+			if (null != _respEntityString) {
+				// get device server system time
+				Long _deviceServerSystemTime = Long
+						.parseLong(_respEntityString);
+
+				// get pet today sports info value
+				// define get pet today sports info value operation
+				JSONObject _getPetTodaySportsInfoValueOperation = new JSONObject();
+				try {
+					// set get pet today sports info value operation command
+					// type
+					_getPetTodaySportsInfoValueOperation.put("cmdtype",
+							"ARCHIVE_OPERATION");
+
+					// define get pet today sports info value operation archive
+					// operation
+					JSONObject _getPetTodaySportsInfoValueOperationArchiveOperation = new JSONObject();
+
+					// set get pet today sports info value operation archive
+					// operation table name, operation and fields
+					_getPetTodaySportsInfoValueOperationArchiveOperation.put(
+							"tablename", "dailysummary");
+					_getPetTodaySportsInfoValueOperationArchiveOperation.put(
+							"operation", "QUERY");
+					_getPetTodaySportsInfoValueOperationArchiveOperation.put(
+							"field", new String[] { "id", "termid", "daytime",
+									"type", "alarmsize", "criticalarm",
+									"distance0", "distanceN", "vitality10",
+									"vitality1N", "vitality20", "vitality2N",
+									"vitality30", "vitality3N", "vitality40",
+									"vitality4N" });
+
+					// define get pet today sports info value operation archive
+					// operation wherecond
+					JSONArray _getPetTodaySportsInfoValueOperationArchiveOperationWherecond = new JSONArray();
+
+					// define get pet today sports info value operation archive
+					// operation wherecond begin and end time
+					JSONObject _getPetTodaySportsInfoValueOperationArchiveOperationWherecondBeginTime = new JSONObject();
+					_getPetTodaySportsInfoValueOperationArchiveOperationWherecondBeginTime
+							.put("name", "begintime");
+					_getPetTodaySportsInfoValueOperationArchiveOperationWherecondBeginTime
+							.put("value", new SimpleDateFormat("yyyy-MM-dd",
+									Locale.getDefault()).format(new Date()));
+					JSONObject _getPetTodaySportsInfoValueOperationArchiveOperationWherecondEndTime = new JSONObject();
+					_getPetTodaySportsInfoValueOperationArchiveOperationWherecondEndTime
+							.put("name", "endtime");
+					_getPetTodaySportsInfoValueOperationArchiveOperationWherecondEndTime
+							.put("value", new SimpleDateFormat("yyyy-MM-dd",
+									Locale.getDefault()).format(new Date()));
+
+					// add get pet today sports info value operation archive
+					// operation wherecond begin and end time
+					_getPetTodaySportsInfoValueOperationArchiveOperationWherecond
+							.put(_getPetTodaySportsInfoValueOperationArchiveOperationWherecondBeginTime);
+					_getPetTodaySportsInfoValueOperationArchiveOperationWherecond
+							.put(_getPetTodaySportsInfoValueOperationArchiveOperationWherecondEndTime);
+
+					// set get pet today sports info value operation archive
+					// operation whereconds
+					_getPetTodaySportsInfoValueOperationArchiveOperation
+							.put("wherecond",
+									_getPetTodaySportsInfoValueOperationArchiveOperationWherecond);
+
+					// set get pet today sports info value pet device operation
+					// archive operation
+					_getPetTodaySportsInfoValueOperation
+							.put("archive_operation",
+									_getPetTodaySportsInfoValueOperationArchiveOperation);
+				} catch (JSONException e) {
+					Log.e(LOG_TAG,
+							"get pet today sports info value operation error, exception message = "
+									+ e.getMessage());
+
+					e.printStackTrace();
+				}
+
+				// generate get pet today sports info value param
+				Map<String, String> _getPetTodaySportsInfoParam = DeviceServerHttpReqParamUtils
+						.generatePetDeviceOperateParam(_deviceServerSystemTime,
+								_getPetTodaySportsInfoValueOperation.toString());
+
+				// send get pet pet today sports info value http request
+				HttpUtils.postRequest(
+						getResources().getString(R.string.deviceServer_url)
+								+ getResources().getString(
+										R.string.deviceServer_operate_url),
+						PostRequestFormat.URLENCODED,
+						_getPetTodaySportsInfoParam, null,
+						HttpRequestType.ASYNCHRONOUS,
+						new GetPetTodaySportsInfoValuesHttpRequestListener());
+			}
+		}
+
+		@Override
+		public void onFailed(HttpRequest request, HttpResponse response) {
+			// nothing to do
+		}
+
+	}
+
+	// get device server pet today sports info values http request listener
+	class GetPetTodaySportsInfoValuesHttpRequestListener extends
+			OnHttpRequestListener {
+
+		@Override
+		public void onFinished(HttpRequest request, HttpResponse response) {
+			// get http response entity string json data
+			JSONObject _respJsonData = JSONUtils.toJSONObject(HttpUtils
+					.getHttpResponseEntityString(response));
+
+			// get http response entity string json object status
+			String _status = JSONUtils.getStringFromJSONObject(_respJsonData,
+					"status");
+			// check an process result
+			if (null != _status && "SUCCESS".equalsIgnoreCase(_status)) {
+				// get and check pet today sports info value operation return
+				// archive operation
+				JSONObject _getPetTodaySportsInfoValueOperationRetArchiveOperation = JSONUtils
+						.getJSONObjectFromJSONObject(_respJsonData,
+								"archive_operation");
+				if (null != _getPetTodaySportsInfoValueOperationRetArchiveOperation) {
+					// get and check pet today sports info value operation
+					// return archive operation daily summary
+					JSONArray _getPetTodaySportsInfoValueOperationRetArchiveOperationDailySummary = JSONUtils
+							.getJSONArrayFromJSONObject(
+									_getPetTodaySportsInfoValueOperationRetArchiveOperation,
+									"daily_summary");
+					if (null != _getPetTodaySportsInfoValueOperationRetArchiveOperationDailySummary
+							&& 0 < _getPetTodaySportsInfoValueOperationRetArchiveOperationDailySummary
+									.length()) {
+						// get and check pet today sports info value operation
+						// return archive operation today summary
+						JSONObject _getPetTodaySportsInfoValueOperationRetArchiveOperationTodaySummary = JSONUtils
+								.getJSONObjectFromJSONArray(
+										_getPetTodaySportsInfoValueOperationRetArchiveOperationDailySummary,
+										_getPetTodaySportsInfoValueOperationRetArchiveOperationDailySummary
+												.length() - 1);
+
+						// get pet today sports info rest, walk, run and
+						// strenuousExercise value
+						Double _rest = JSONUtils
+								.getDoubleFromJSONObject(
+										_getPetTodaySportsInfoValueOperationRetArchiveOperationTodaySummary,
+										"vitality1N")
+								- JSONUtils
+										.getDoubleFromJSONObject(
+												_getPetTodaySportsInfoValueOperationRetArchiveOperationTodaySummary,
+												"vitality10");
+						Double _walk = JSONUtils
+								.getDoubleFromJSONObject(
+										_getPetTodaySportsInfoValueOperationRetArchiveOperationTodaySummary,
+										"vitality2N")
+								- JSONUtils
+										.getDoubleFromJSONObject(
+												_getPetTodaySportsInfoValueOperationRetArchiveOperationTodaySummary,
+												"vitality20");
+						Double _run = JSONUtils
+								.getDoubleFromJSONObject(
+										_getPetTodaySportsInfoValueOperationRetArchiveOperationTodaySummary,
+										"vitality3N")
+								- JSONUtils
+										.getDoubleFromJSONObject(
+												_getPetTodaySportsInfoValueOperationRetArchiveOperationTodaySummary,
+												"vitality30");
+						Double _strenuousExercise = JSONUtils
+								.getDoubleFromJSONObject(
+										_getPetTodaySportsInfoValueOperationRetArchiveOperationTodaySummary,
+										"vitality4N")
+								- JSONUtils
+										.getDoubleFromJSONObject(
+												_getPetTodaySportsInfoValueOperationRetArchiveOperationTodaySummary,
+												"vitality40");
+
+						// get total
+						Double _total = (_rest + _walk + _run + _strenuousExercise) / 100;
+
+						// define pet sports score
+						Double _petSportsScore = 100 * 2 * (0.9
+								* (_rest / _total) / 100 + 1.2
+								* (_walk / _total) / 100 + 1.6
+								* (_run / _total) / 100 + 1.8 * (_strenuousExercise / _total) / 100);
+
+						// set pet sports score
+						((ProgressBar) findViewById(R.id.pet_sportsScore_progressBar))
+								.setProgress((int) (100 * _petSportsScore / 360));
+						((TextView) findViewById(R.id.pet_sportsScore_textView))
+								.setText(_petSportsScore.toString());
+					}
+				}
+			}
+		}
+
+		@Override
+		public void onFailed(HttpRequest request, HttpResponse response) {
+			// nothing to do
+		}
+
+	}
+
 	// pet location button on click listener
 	class PetLocationBtnOnClickListener implements OnClickListener {
 
@@ -240,8 +474,15 @@ public class HomeTabContentActivity extends IPetChatRootNavigationActivity {
 			// }
 			// }
 
-			// go to my pet location activity
-			pushActivity(PetLocationActivity.class);
+			// check pet bind device id
+			if (null != IPCUserExtension.getUserPetBindDeviceId(UserManager
+					.getInstance().getUser())) {
+				// go to my pet location activity
+				pushActivity(PetLocationActivity.class);
+			} else {
+				Toast.makeText(HomeTabContentActivity.this,
+						"您的宠物未绑定便携设备，请先绑定宠物便携设备", Toast.LENGTH_SHORT).show();
+			}
 		}
 
 	}
